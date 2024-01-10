@@ -226,4 +226,15 @@
       opacity: 1;
     }
   }
+
+  .addRoom-btn:hover {
+    cursor: pointer;
+
+    .text-12 {
+      color: white;
+    }
+    .text-15 {
+      color: white;
+    }
+  }
 }

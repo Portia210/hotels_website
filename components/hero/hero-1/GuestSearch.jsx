@@ -1,75 +1,105 @@
+"use client";
 
-'use client'
+import { useState } from "react";
 
-import React, { useState } from "react";
-const counters = [
-  { name: "Adults", defaultValue: 2 },
-  { name: "Children", defaultValue: 1 },
-  { name: "Rooms", defaultValue: 1 },
-];
+const ADULTS = "Adults";
+const CHILDRENS = "Children";
 
-const Counter = ({ name, defaultValue, onCounterChange }) => {
-  const [count, setCount] = useState(defaultValue);
-  const incrementCount = () => {
-    setCount(count + 1);
-    onCounterChange(name, count + 1);
-  };
-  const decrementCount = () => {
-    if (count > 0) {
-      setCount(count - 1);
-      onCounterChange(name, count - 1);
+const roomProperties = [ADULTS, CHILDRENS];
+
+const RoomInfo = ({ room, index, onChange }) => {
+  const incrementCount = (name) => {
+    console.log("incrementCount", name);
+    if (name === CHILDRENS) {
+      onChange(name, room.childrens.length + 1, index);
+      return;
     }
+    onChange(name, room.adults + 1, index);
+  };
+  const decrementCount = (name) => {
+    console.log("decrementCount", name);
+    if (name === CHILDRENS) {
+      onChange(name, room.childrens.length - 1, index);
+      return;
+    }
+    onChange(name, roomadults - 1, index);
   };
 
   return (
     <>
-      <div className="row y-gap-10 justify-between items-center">
-        <div className="col-auto">
-          <div className="text-15 lh-12 fw-500">{name}</div>
-          {name === "Children" && (
-            <div className="text-14 lh-12 text-light-1 mt-5">Ages 0 - 17</div>
-          )}
-        </div>
-        {/* End .col-auto */}
-        <div className="col-auto">
-          <div className="d-flex items-center js-counter">
-            <button
-              className="button -outline-blue-1 text-blue-1 size-38 rounded-4 js-down"
-              onClick={decrementCount}
-            >
-              <i className="icon-minus text-12" />
-            </button>
-            {/* decrement button */}
-            <div className="flex-center size-20 ml-15 mr-15">
-              <div className="text-15 js-count">{count}</div>
+      {roomProperties.map((name) => {
+        return (
+          <div className="row y-gap-10 justify-between items-center">
+            <div className="col-auto">
+              <div className="text-15 lh-12 fw-500">{name}</div>
+              {name === "Children" && (
+                <div className="text-14 lh-12 text-light-1 mt-5">
+                  Ages 0 - 17
+                </div>
+              )}
             </div>
-            {/* counter text  */}
-            <button
-              className="button -outline-blue-1 text-blue-1 size-38 rounded-4 js-up"
-              onClick={incrementCount}
-            >
-              <i className="icon-plus text-12" />
-            </button>
-            {/* increment button */}
+            {/* End .col-auto */}
+            <div className="col-auto">
+              <div className="d-flex items-center js-counter">
+                <button
+                  className="button -outline-blue-1 text-blue-1 size-38 rounded-4 js-down"
+                  onClick={() => decrementCount(name)}
+                >
+                  <i className="icon-minus text-12" />
+                </button>
+                {/* decrement button */}
+                <div className="flex-center size-20 ml-15 mr-15">
+                  <div className="text-15 js-count">
+                    {name === "Children" ? room.childrens.length : room.adults}
+                  </div>
+                </div>
+                {/* counter text  */}
+                <button
+                  className="button -outline-blue-1 text-blue-1 size-38 rounded-4 js-up"
+                  onClick={() => incrementCount(name)}
+                >
+                  <i className="icon-plus text-12" />
+                </button>
+                {/* increment button */}
+              </div>
+            </div>
+            {/* End .col-auto */}
+            <div className="border-top-light mt-24" />
+            {/* End .row */}
           </div>
-        </div>
-        {/* End .col-auto */}
-      </div>
-      {/* End .row */}
-      <div className="border-top-light mt-24 mb-24" />
+        );
+      })}
     </>
   );
 };
 
 const GuestSearch = () => {
+  const [rooms, setRooms] = useState([{ adults: 1, childrens: [] }]);
   const [guestCounts, setGuestCounts] = useState({
     Adults: 2,
     Children: 1,
     Rooms: 1,
   });
-  const handleCounterChange = (name, value) => {
-    setGuestCounts((prevState) => ({ ...prevState, [name]: value }));
+
+  const handleRoomInfoChange = (name, value, index) => {
+    console.log("handleCounterChange", name, value, index);
+    if (name === CHILDRENS) {
+      const newRooms = [...rooms];
+      newRooms[index].childrens = value;
+      setRooms(newRooms);
+      return;
+    } else {
+      const newRooms = [...rooms];
+      newRooms[index].adults = value;
+      setRooms(newRooms);
+      return;
+    }
   };
+
+  const handleAddRoom = () => {
+    console.log("handleAddRoom");
+  };
+
   return (
     <div className="searchMenu-guests px-30 lg:py-20 lg:px-0 js-form-dd js-form-counters position-relative">
       <div
@@ -90,14 +120,26 @@ const GuestSearch = () => {
 
       <div className="shadow-2 dropdown-menu min-width-400">
         <div className="bg-white px-30 py-30 rounded-4 counter-box">
-          {counters.map((counter) => (
-            <Counter
-              key={counter.name}
-              name={counter.name}
-              defaultValue={counter.defaultValue}
-              onCounterChange={handleCounterChange}
-            />
-          ))}
+          {rooms.map((room, index) => {
+            return (
+              <RoomInfo
+                room={room}
+                index={index}
+                onChange={(name, value, index) =>
+                  handleRoomInfoChange(name, value, index)
+                }
+              />
+            );
+          })}
+        </div>
+        <div
+          onClick={handleAddRoom}
+          className="addRoom-btn button w-full d-flex justify-center items-center -outline-blue-1 "
+        >
+          <div className="text-15 lh-12 fw-500 text-blue-1">Add Room</div>
+          <button className="button text-blue-1 size-38 rounded-4 ">
+            <i className="icon-plus text-12" />
+          </button>
         </div>
       </div>
     </div>
