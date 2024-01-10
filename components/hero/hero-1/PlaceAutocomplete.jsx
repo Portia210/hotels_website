@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
+    getGeocode,
+    getLatLng,
 } from "use-places-autocomplete";
 
 export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
@@ -23,8 +23,19 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
     onChange({ placeId, destination: address, lat, lng });
   };
 
+  const handleInput = useCallback(
+    (input) => {
+      if (!input) {
+        clearSuggestions();
+      } else {
+        setValue(input);
+      }
+    },
+    [input]
+  );
+
   useEffect(() => {
-    setValue(input);
+    handleInput(input);
   }, [input]);
 
   if (!ready) return null;
