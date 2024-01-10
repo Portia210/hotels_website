@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect } from "react";
 import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
+  getGeocode,
+  getLatLng,
 } from "use-places-autocomplete";
 
 export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
@@ -71,6 +71,11 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
                   </div>
                 </li>
               ))}
+            {!input && (
+              <li className="text-15 lh-12 fw-500 js-search-option-target">
+                Enter a location
+              </li>
+            )}
             {status === "ZERO_RESULTS" && (
               <li className="text-15 lh-12 fw-500 js-search-option-target">
                 No results found

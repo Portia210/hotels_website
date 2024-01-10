@@ -28,9 +28,12 @@ const RoomInfo = ({ room, index, onChange }) => {
 
   return (
     <>
-      {roomProperties.map((name) => {
+      {roomProperties.map((name, index) => {
         return (
-          <div className="row y-gap-10 justify-between items-center mt-1">
+          <div
+            key={index}
+            className="row y-gap-10 justify-between items-center mt-1"
+          >
             <div className="col-auto">
               <div className="text-15 lh-12 fw-500">{name}</div>
               {name === "Children" && (
@@ -108,6 +111,14 @@ const GuestSearch = () => {
     setRooms((prev) => [...prev, { adults: 1, childrens: [] }]);
   };
 
+  const handleDeleteRoom = (index) => {
+    setRooms((prev) => {
+      const cloneRooms = cloneDeep(prev);
+      cloneRooms.splice(index, 1);
+      return cloneRooms;
+    });
+  };
+
   return (
     <div className="searchMenu-guests px-30 lg:py-20 lg:px-0 js-form-dd js-form-counters position-relative">
       <div
@@ -130,11 +141,18 @@ const GuestSearch = () => {
         <div className="bg-white px-30 py-30 rounded-4 counter-box">
           {rooms.map((room, index) => {
             return (
-              <>
-                <div className="d-flex justify-between items-center text-14 lh-12 text-light-1">
-                  <div>Room {index + 1}</div>
-                  <div className="text-red-1">Remove</div>
-                </div>
+              <div key={index}>
+                {index > 0 && (
+                  <div className="d-flex justify-between items-center text-14 lh-12 text-light-1">
+                    <div>Room {index + 1}</div>
+                    <div
+                      onClick={() => handleDeleteRoom(index)}
+                      className="cursor-pointer text-red-1"
+                    >
+                      Remove
+                    </div>
+                  </div>
+                )}
                 <RoomInfo
                   room={room}
                   index={index}
@@ -143,7 +161,7 @@ const GuestSearch = () => {
                   }
                 />
                 <div className="border-top-light mt-24 mb-24" />
-              </>
+              </div>
             );
           })}
         </div>

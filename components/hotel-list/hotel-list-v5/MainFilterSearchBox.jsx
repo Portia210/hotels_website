@@ -1,6 +1,6 @@
+import GuestSearch from "@/components/hero/hero-1/GuestSearch";
 import DateSearch from "../common/DateSearch";
-import GuestSearch from "../common/GuestSearch";
-import LocationSearch from "./LocationSearch";
+import LocationSearch from "@/components/hero/hero-1/LocationSearch";
 
 const MainFilterSearchBox = () => {
   return (
