@@ -2,33 +2,37 @@
 
 import cloneDeep from "lodash/cloneDeep";
 import { useEffect, useState } from "react";
+import ChildAgeDropDown from "./ChildAgeDropdown";
 
 const ADULTS = "Adults";
 const CHILDRENS = "Children";
+const INCREMENT = "Increment";
+const DECREMENT = "Decrement";
 
-const roomProperties = [ADULTS, CHILDRENS];
-
-const RoomInfo = ({ room, index, onChange }) => {
+const RoomInfo = ({ room, index, onChange, onChildAgeChange }) => {
   const incrementCount = (name) => {
-    console.log("incrementCount", name);
     if (name === CHILDRENS) {
-      onChange(name, room.childrens, index);
+      onChange(INCREMENT, name, room.childrens, index);
       return;
     }
-    onChange(name, room.adults + 1, index);
+    onChange(INCREMENT, name, room.adults + 1, index);
   };
+
   const decrementCount = (name) => {
-    console.log("decrementCount", name);
     if (name === CHILDRENS) {
-      onChange(name, room.childrens.length - 1, index);
+      onChange(DECREMENT, name, room.childrens.length - 1, index);
       return;
     }
-    onChange(name, roomadults - 1, index);
+    onChange(DECREMENT, name, room.adults - 1, index);
+  };
+
+  const handleChildAgeChange = (value, childIndex) => {
+    onChildAgeChange(value, index, childIndex);
   };
 
   return (
     <>
-      {roomProperties.map((name, index) => {
+      {[ADULTS, CHILDRENS].map((name, index) => {
         return (
           <div
             key={index}
@@ -69,6 +73,27 @@ const RoomInfo = ({ room, index, onChange }) => {
                 {/* increment button */}
               </div>
             </div>
+            <div className="row gy-2">
+              {name === CHILDRENS && (
+                <>
+                  {room.childrens.map((childAge, childIndex) => {
+                    return (
+                      <div className="col-3">
+                        <ChildAgeDropDown
+                          index={childIndex}
+                          key={childIndex}
+                          value={childAge}
+                          onSelect={(value) => {
+                            handleChildAgeChange(value, childIndex);
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </>
+              )}
+            </div>
+
             {/* End .col-auto */}
           </div>
         );
@@ -86,25 +111,54 @@ const GuestSearch = () => {
     Rooms: 1,
   });
 
-  const handleRoomInfoChange = (name, value, index) => {
-    console.log("handleCounterChange", name, value, index);
+  const handleRoomInfoChange = (action, name, value, index) => {
     if (name === CHILDRENS) {
-      setRooms((prev) => {
-        const cloneRooms = cloneDeep(prev);
-        const room = cloneRooms[index];
-        room.childrens.push(10);
-        cloneRooms[index] = room;
-        return cloneRooms;
-      });
-    } else {
+      if (action === INCREMENT) {
+        setRooms((prev) => {
+          const cloneRooms = cloneDeep(prev);
+          const room = cloneRooms[index];
+          room.childrens.push(10);
+          cloneRooms[index] = room;
+          return cloneRooms;
+        });
+      } else {
+        setRooms((prev) => {
+          const cloneRooms = cloneDeep(prev);
+          const room = cloneRooms[index];
+          room.childrens.pop();
+          cloneRooms[index] = room;
+          return cloneRooms;
+        });
+      }
+    } else if (name === ADULTS) {
       const newRooms = [...rooms];
       newRooms[index].adults = value;
       setRooms(newRooms);
     }
   };
 
+  const handleChildAgeChange = (value, roomIndex, childIndex) => {
+    setRooms((prev) => {
+      const cloneRooms = cloneDeep(prev);
+      const room = cloneRooms[roomIndex];
+      room.childrens[childIndex] = value;
+      cloneRooms[roomIndex] = room;
+      return cloneRooms;
+    });
+  };
+
+  const caculateGuestCounts = () => {
+    const Adults = rooms.reduce((acc, room) => acc + room.adults, 0);
+    const Children = rooms.reduce(
+      (acc, room) => acc + room.childrens.length,
+      0
+    );
+    const Rooms = rooms.length;
+    setGuestCounts({ Adults, Children, Rooms });
+  };
+
   useEffect(() => {
-    console.log("rooms", rooms);
+    caculateGuestCounts();
   }, [rooms]);
 
   const handleAddRoom = () => {
@@ -142,25 +196,28 @@ const GuestSearch = () => {
           {rooms.map((room, index) => {
             return (
               <div key={index}>
-                {index > 0 && (
-                  <div className="d-flex justify-between items-center text-14 lh-12 text-light-1">
-                    <div>Room {index + 1}</div>
+                <div className="d-flex justify-between items-center text-14 lh-12 text-light-1">
+                  <div>Room {index + 1}</div>
+                  {index > 0 && (
                     <div
                       onClick={() => handleDeleteRoom(index)}
                       className="cursor-pointer text-red-1"
                     >
                       Remove
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
                 <RoomInfo
                   room={room}
                   index={index}
-                  onChange={(name, value, index) =>
-                    handleRoomInfoChange(name, value, index)
+                  onChange={(action, name, value, index) =>
+                    handleRoomInfoChange(action, name, value, index)
+                  }
+                  onChildAgeChange={(value, index, childIndex) =>
+                    handleChildAgeChange(value, index, childIndex)
                   }
                 />
-                <div className="border-top-light mt-24 mb-24" />
+                <div className="border-top-light mt-24 mb-10" />
               </div>
             );
           })}
