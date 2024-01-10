@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import cloneDeep from "lodash/cloneDeep";
+import { useEffect, useState } from "react";
 
 const ADULTS = "Adults";
 const CHILDRENS = "Children";
@@ -11,7 +12,7 @@ const RoomInfo = ({ room, index, onChange }) => {
   const incrementCount = (name) => {
     console.log("incrementCount", name);
     if (name === CHILDRENS) {
-      onChange(name, room.childrens.length + 1, index);
+      onChange(name, room.childrens, index);
       return;
     }
     onChange(name, room.adults + 1, index);
@@ -29,7 +30,7 @@ const RoomInfo = ({ room, index, onChange }) => {
     <>
       {roomProperties.map((name) => {
         return (
-          <div className="row y-gap-10 justify-between items-center">
+          <div className="row y-gap-10 justify-between items-center mt-1">
             <div className="col-auto">
               <div className="text-15 lh-12 fw-500">{name}</div>
               {name === "Children" && (
@@ -50,7 +51,9 @@ const RoomInfo = ({ room, index, onChange }) => {
                 {/* decrement button */}
                 <div className="flex-center size-20 ml-15 mr-15">
                   <div className="text-15 js-count">
-                    {name === "Children" ? room.childrens.length : room.adults}
+                    {name === "Children"
+                      ? room?.childrens?.length || 0
+                      : room.adults}
                   </div>
                 </div>
                 {/* counter text  */}
@@ -64,8 +67,6 @@ const RoomInfo = ({ room, index, onChange }) => {
               </div>
             </div>
             {/* End .col-auto */}
-            <div className="border-top-light mt-24" />
-            {/* End .row */}
           </div>
         );
       })}
@@ -75,6 +76,7 @@ const RoomInfo = ({ room, index, onChange }) => {
 
 const GuestSearch = () => {
   const [rooms, setRooms] = useState([{ adults: 1, childrens: [] }]);
+
   const [guestCounts, setGuestCounts] = useState({
     Adults: 2,
     Children: 1,
@@ -84,20 +86,26 @@ const GuestSearch = () => {
   const handleRoomInfoChange = (name, value, index) => {
     console.log("handleCounterChange", name, value, index);
     if (name === CHILDRENS) {
-      const newRooms = [...rooms];
-      newRooms[index].childrens = value;
-      setRooms(newRooms);
-      return;
+      setRooms((prev) => {
+        const cloneRooms = cloneDeep(prev);
+        const room = cloneRooms[index];
+        room.childrens.push(10);
+        cloneRooms[index] = room;
+        return cloneRooms;
+      });
     } else {
       const newRooms = [...rooms];
       newRooms[index].adults = value;
       setRooms(newRooms);
-      return;
     }
   };
 
+  useEffect(() => {
+    console.log("rooms", rooms);
+  }, [rooms]);
+
   const handleAddRoom = () => {
-    console.log("handleAddRoom");
+    setRooms((prev) => [...prev, { adults: 1, childrens: [] }]);
   };
 
   return (
@@ -122,19 +130,26 @@ const GuestSearch = () => {
         <div className="bg-white px-30 py-30 rounded-4 counter-box">
           {rooms.map((room, index) => {
             return (
-              <RoomInfo
-                room={room}
-                index={index}
-                onChange={(name, value, index) =>
-                  handleRoomInfoChange(name, value, index)
-                }
-              />
+              <>
+                <div className="d-flex justify-between items-center text-14 lh-12 text-light-1">
+                  <div>Room {index + 1}</div>
+                  <div className="text-red-1">Remove</div>
+                </div>
+                <RoomInfo
+                  room={room}
+                  index={index}
+                  onChange={(name, value, index) =>
+                    handleRoomInfoChange(name, value, index)
+                  }
+                />
+                <div className="border-top-light mt-24 mb-24" />
+              </>
             );
           })}
         </div>
         <div
           onClick={handleAddRoom}
-          className="addRoom-btn button w-full d-flex justify-center items-center -outline-blue-1 "
+          className="addRoom-btn button w-full d-flex justify-center items-center -outline-blue-1"
         >
           <div className="text-15 lh-12 fw-500 text-blue-1">Add Room</div>
           <button className="button text-blue-1 size-38 rounded-4 ">
