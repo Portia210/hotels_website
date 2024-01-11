@@ -69,6 +69,7 @@ const SearchBar = () => {
           <h4 className="text-15 fw-500 ls-2 lh-16">Location</h4>
           <div className="text-15 text-light-1 ls-2 lh-16">
             <input
+              id="destinationInput"
               autoComplete="off"
               type="search"
               placeholder="Where are you going?"
@@ -79,7 +80,7 @@ const SearchBar = () => {
               disabled={!isLoaded}
               onChange={(e) => setSearchValue(e.target.value)}
             />
-            <div className="invalid-feedback" />
+            <div className="invalid-feedback" >Enter your location</div>
           </div>
         </div>
       </div>

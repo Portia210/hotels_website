@@ -1,13 +1,16 @@
 import useSearchStore from "@/store/useSearchStore";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const useSearchBar = () => {
+  const pathName = usePathname();
   const searchStore = useSearchStore();
   const Router = useRouter();
 
   const handleSearch = (path) => {
     if (!path) throw Error("handleSearch: path is required");
-    if (!searchStore?.searchInput?.destination) {
+    const destinationInput =
+      document.getElementById("destinationInput").value;
+    if (!destinationInput) {
       searchStore.setSearchInputValidation({
         destination: false,
       });
@@ -15,7 +18,7 @@ const useSearchBar = () => {
         searchStore.setSearchInputValidation({
           destination: true,
         });
-      }, 2000);
+      }, 2500);
     } else {
       searchStore.setSearchInputValidation({
         destination: true,
