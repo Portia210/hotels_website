@@ -1,29 +1,12 @@
 "use client";
 
 import DateSearch from "@/components/hotel-list/common/DateSearch";
+import useSearchBar from "@/hooks/useSearchBar";
 import GuestSearch from "./GuestSearch";
 import LocationSearch from "./LocationSearch";
-import { useRouter } from "next/navigation";
-import useSearchStore from "@/store/useSearchStore";
 
 const MainFilterSearchBox = () => {
-  const searchStore = useSearchStore();
-  const Router = useRouter();
-
-  const onSearch = () => {
-    console.log("searchStore.searchInput", searchStore.searchInput);
-    if (!searchStore.searchInput.destination) {
-      searchStore.setSearchInputValidation({
-        destination: false,
-      });
-      return;
-    } else {
-      searchStore.setSearchInputValidation({
-        destination: true,
-      });
-      Router.push("/hotel-list");
-    }
-  };
+  const { handleSearch } = useSearchBar();
 
   return (
     <>
@@ -49,7 +32,7 @@ const MainFilterSearchBox = () => {
             <div className="button-item">
               <button
                 className="mainSearch__submit button -dark-1 h-60 px-35 col-12 rounded-100 bg-blue-1 text-white"
-                onClick={() => onSearch()}
+                onClick={() => handleSearch("/hotel-list")}
               >
                 <i className="icon-search text-20 mr-10" />
                 Search
