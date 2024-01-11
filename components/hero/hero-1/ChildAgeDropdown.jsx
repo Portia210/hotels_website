@@ -3,7 +3,6 @@ export default function ChildAgeDropDown({ value, onSelect, index }) {
 
   return (
     <div className="form-group w-full">
-      <label htmlFor="childAge">Child {index + 1}</label>
       <select
         className="form-control"
         id="childAge"

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ChildAgeDropDown from "./ChildAgeDropdown";
 
 const ADULTS = "Adults";
-const CHILDRENS = "Children";
+const CHILDRENS = "Childrens";
 const INCREMENT = "Increment";
 const DECREMENT = "Decrement";
 
@@ -31,74 +31,68 @@ const RoomInfo = ({ room, index, onChange, onChildAgeChange }) => {
   };
 
   return (
-    <>
-      {[ADULTS, CHILDRENS].map((name, index) => {
+    <div className="row">
+      {[ADULTS, CHILDRENS].map((name) => {
         return (
-          <div
-            key={index}
-            className="row y-gap-10 justify-between items-center mt-1"
-          >
-            <div className="col-auto">
-              <div className="text-15 lh-12 fw-500">{name}</div>
-              {name === "Children" && (
-                <div className="text-14 lh-12 text-light-1 mt-5">
-                  Ages 0 - 17
-                </div>
-              )}
-            </div>
-            {/* End .col-auto */}
-            <div className="col-auto">
-              <div className="d-flex items-center js-counter">
-                <button
-                  className="button -outline-blue-1 text-blue-1 size-38 rounded-4 js-down"
-                  onClick={() => decrementCount(name)}
-                >
-                  <i className="icon-minus text-12" />
-                </button>
-                {/* decrement button */}
-                <div className="flex-center size-20 ml-15 mr-15">
-                  <div className="text-15 js-count">
-                    {name === "Children"
-                      ? room?.childrens?.length || 0
-                      : room.adults}
-                  </div>
-                </div>
-                {/* counter text  */}
-                <button
-                  className="button -outline-blue-1 text-blue-1 size-38 rounded-4 js-up"
-                  onClick={() => incrementCount(name)}
-                >
-                  <i className="icon-plus text-12" />
-                </button>
-                {/* increment button */}
+          <div key={name} className="row col-6">
+            <div className="row col-auto y-gap-5 mt-1">
+              <div className="col-auto">
+                <div className="text-15 lh-12 fw-500">{name}</div>
               </div>
+              {/* End .col-auto */}
+              <div className="col-auto">
+                <div className="d-flex items-center js-counter">
+                  <button
+                    className="button -outline-blue-1 text-blue-1 size-38 rounded-4 js-down"
+                    onClick={() => decrementCount(name)}
+                  >
+                    <i className="icon-minus text-12" />
+                  </button>
+                  {/* decrement button */}
+                  <div className="flex-center size-20 ml-15 mr-15">
+                    <div className="text-15 js-count">
+                      {name === CHILDRENS
+                        ? room?.childrens?.length || 0
+                        : room.adults}
+                    </div>
+                  </div>
+                  {/* counter text  */}
+                  <button
+                    className="button -outline-blue-1 text-blue-1 size-38 rounded-4 js-up"
+                    onClick={() => incrementCount(name)}
+                  >
+                    <i className="icon-plus text-12" />
+                  </button>
+                  {/* increment button */}
+                </div>
+              </div>
+              {/* End .col-auto */}
             </div>
-            <div className="row gy-2">
-              {name === CHILDRENS && (
-                <>
-                  {room.childrens.map((childAge, childIndex) => {
-                    return (
-                      <div className="col-3">
-                        <ChildAgeDropDown
-                          index={childIndex}
-                          key={childIndex}
-                          value={childAge}
-                          onSelect={(value) => {
-                            handleChildAgeChange(value, childIndex);
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
-                </>
-              )}
-            </div>
-
-            {/* End .col-auto */}
           </div>
         );
       })}
-    </>
+      <div className="row gy-1">
+        <>
+          {room?.childrens?.length > 0 && (
+            <label htmlFor="childAge">Child Ages</label>
+          )}
+          {room?.childrens?.map((childAge, childIndex) => {
+            return (
+              <div className="col-3">
+                <ChildAgeDropDown
+                  index={childIndex}
+                  key={childIndex}
+                  value={childAge}
+                  onSelect={(value) => {
+                    handleChildAgeChange(value, childIndex);
+                  }}
+                />
+              </div>
+            );
+          })}
+        </>
+      </div>
+    </div>
   );
 };
 
@@ -192,7 +186,7 @@ const GuestSearch = () => {
       {/* End guest */}
 
       <div className="shadow-2 dropdown-menu min-width-400">
-        <div className="bg-white px-30 py-30 rounded-4 counter-box">
+        <div className="bg-white px-30 py-10 rounded-4 counter-box">
           {rooms.map((room, index) => {
             return (
               <div key={index}>
@@ -224,7 +218,7 @@ const GuestSearch = () => {
         </div>
         <div
           onClick={handleAddRoom}
-          className="addRoom-btn button w-full d-flex justify-center items-center -outline-blue-1"
+          className="addRoom-btn button w-full d-flex justify-center items-center -outline-blue-1 m-4 mt-0"
         >
           <div className="text-15 lh-12 fw-500 text-blue-1">Add Room</div>
           <button className="button text-blue-1 size-38 rounded-4 ">
