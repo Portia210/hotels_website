@@ -2,6 +2,7 @@
 
 import { ADULTS, CHILDRENS, DECREMENT, INCREMENT } from "@/constants/searchBar";
 import useSearchStore from "@/store/useSearchStore";
+import { convertRoomInfo } from "@/utils/convertRoomInfo";
 import cloneDeep from "lodash/cloneDeep";
 import { useEffect, useState } from "react";
 import RoomInfo from "./RoomInfo";
@@ -68,12 +69,14 @@ const GuestSearch = () => {
       .map((room) => room.childrens)
       .flat()
       .map((age) => Number(age));
+    const guests = convertRoomInfo(rooms);
     searchInput = {
       ...searchInput,
       rooms: rooms.length,
       adults: guestCounts.Adults,
       children: guestCounts.Children,
       childrenAges,
+      guests,
     };
     searchStore.setSearchInput(searchInput);
   };

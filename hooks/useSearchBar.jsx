@@ -1,5 +1,6 @@
 import useSearchStore from "@/store/useSearchStore";
 import { useRouter } from "next/navigation";
+import { flatten } from 'flat'
 
 const useSearchBar = () => {
   const searchStore = useSearchStore();
@@ -21,7 +22,10 @@ const useSearchBar = () => {
         destination: true,
       });
       console.log("searchStore.searchInput", searchStore.searchInput);
-      Router.push(path);
+      const flattenObj = flatten(searchStore.searchInput);
+      console.log("flattenObj", flattenObj);
+      const params = new URLSearchParams(flattenObj);
+      Router.push(`${path}?${params.toString()}`);
     }
   };
 

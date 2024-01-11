@@ -7,20 +7,20 @@ import { useEffect, useState } from "react";
 import PlaceAutocomplete from "./PlaceAutocomplete";
 
 const SearchBar = () => {
-  const searchStore = useSearchStore();
-  const { searchInputValidation } = searchStore;
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries: ["places"],
     region: "US",
   });
-
+  const searchStore = useSearchStore();
+  const { searchInputValidation } = searchStore;
   const [searchValue, setSearchValue] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handleOptionClick = async (item) => {
     setSelectedItem(item);
     setSearchValue(item.destination);
+    if (!item?.destination) return;
     let searchInput = searchStore.searchInput;
     searchInput = {
       ...searchInput,
@@ -31,6 +31,14 @@ const SearchBar = () => {
     searchStore.setSearchInput(searchInput);
   };
 
+  const loadLocation = async () => {
+    if (searchStore?.searchInput?.destination) {
+      const { destination } = searchStore.searchInput;
+      setSearchValue(destination.destination);
+      setSelectedItem(destination);
+    }
+  };
+
   useEffect(() => {
     if (!searchValue) {
       searchStore.setSearchInput({
@@ -39,6 +47,10 @@ const SearchBar = () => {
       });
     }
   }, [searchValue]);
+
+  useEffect(() => {
+    loadLocation();
+  }, [searchStore?.searchInput?.destination]);
 
   if (!isLoaded) return null;
 

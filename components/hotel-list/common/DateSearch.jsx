@@ -4,8 +4,10 @@ import useSearchStore from "@/store/useSearchStore";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import DatePicker from "react-multi-date-picker";
+import { usePathname } from "next/navigation";
 
 const DateSearch = () => {
+  const pathName = usePathname();
   const searchStore = useSearchStore();
   const [dates, setDates] = useState([
     dayjs().toDate(),
@@ -19,9 +21,31 @@ const DateSearch = () => {
     searchStore.setSearchInput(searchInput);
   };
 
+  const onPropsChange = (dates) => {
+    if (dates.value.length === 2) {
+      setDates(dates.value);
+    }
+  };
+
+  const loadDateSearch = async () => {
+    console.log("pathName", pathName);
+    if (pathName !== "/hotel-list") return;
+    console.log("searchStore?.searchInput hotel", searchStore?.searchInput);
+    if (searchStore?.searchInput?.checkInDate) {
+      const { checkInDate, checkOutDate } = searchStore.searchInput;
+      console.log("checkInDate --->", checkInDate);
+      console.log("checkOutDate --->", checkOutDate);
+      setDates([dayjs(checkInDate).toDate(), dayjs(checkOutDate).toDate()]);
+    }
+  };
+
   useEffect(() => {
     updateSearchInput();
   }, [dates]);
+
+  useEffect(() => {
+    loadDateSearch();
+  }, [pathName]);
 
   return (
     <div className="text-15 text-light-1 ls-2 lh-16 custom_dual_datepicker">
@@ -31,7 +55,7 @@ const DateSearch = () => {
         value={dates}
         highlightToday={false}
         minDate={new Date()}
-        onChange={setDates}
+        onPropsChange={onPropsChange}
         onOpenPickNewDate={false}
         numberOfMonths={2}
         offsetY={10}
