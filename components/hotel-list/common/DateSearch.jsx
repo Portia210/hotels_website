@@ -28,13 +28,11 @@ const DateSearch = () => {
   };
 
   const loadDateSearch = async () => {
-    console.log("pathName", pathName);
     if (pathName !== "/hotel-list") return;
-    console.log("searchStore?.searchInput hotel", searchStore?.searchInput);
-    if (searchStore?.searchInput?.checkInDate) {
-      const { checkInDate, checkOutDate } = searchStore.searchInput;
-      console.log("checkInDate --->", checkInDate);
-      console.log("checkOutDate --->", checkOutDate);
+    const params = new URLSearchParams(window.location.search);
+    const checkInDate = params.get("checkInDate");
+    const checkOutDate = params.get("checkOutDate");
+    if (checkInDate && checkOutDate) {
       setDates([dayjs(checkInDate).toDate(), dayjs(checkOutDate).toDate()]);
     }
   };

@@ -2,12 +2,14 @@
 
 import { ADULTS, CHILDRENS, DECREMENT, INCREMENT } from "@/constants/searchBar";
 import useSearchStore from "@/store/useSearchStore";
-import { convertRoomInfo } from "@/utils/convertRoomInfo";
+import { convertRoomInfo, parseGuestInfo } from "@/utils/convertRoomInfo";
 import cloneDeep from "lodash/cloneDeep";
 import { useEffect, useState } from "react";
 import RoomInfo from "./RoomInfo";
+import { usePathname } from "next/navigation";
 
 const GuestSearch = () => {
+  const pathName = usePathname();
   const searchStore = useSearchStore();
   const [rooms, setRooms] = useState([{ adults: 1, childrens: [] }]);
 
@@ -81,11 +83,6 @@ const GuestSearch = () => {
     searchStore.setSearchInput(searchInput);
   };
 
-  useEffect(() => {
-    caculateGuestCounts();
-    updateSearchInput();
-  }, [rooms]);
-
   const handleAddRoom = () => {
     if (rooms.length > 3) return;
     setRooms((prev) => [...prev, { adults: 1, childrens: [] }]);
@@ -98,6 +95,25 @@ const GuestSearch = () => {
       return cloneRooms;
     });
   };
+
+  const loadRoomInfo = () => {
+    if (pathName !== "/hotel-list") return;
+    const params = new URLSearchParams(window.location.search);
+    const guests = params.get("guests");
+    const rooms = parseGuestInfo(guests);
+    if (rooms) {
+      setRooms(rooms);
+    }
+  };
+
+  useEffect(() => {
+    caculateGuestCounts();
+    updateSearchInput();
+  }, [rooms]);
+
+  useEffect(() => {
+    loadRoomInfo();
+  }, [pathName]);
 
   return (
     <div className="searchMenu-guests px-30 lg:py-20 lg:px-0 js-form-dd js-form-counters position-relative">
