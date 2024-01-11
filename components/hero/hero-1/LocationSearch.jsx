@@ -3,11 +3,12 @@
 import { GOOGLE_MAP_API_KEY } from "@/constants/config";
 import useSearchStore from "@/store/useSearchStore";
 import { useLoadScript } from "@react-google-maps/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlaceAutocomplete from "./PlaceAutocomplete";
 
 const SearchBar = () => {
   const searchStore = useSearchStore();
+  const { searchInputValidation } = searchStore;
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries: ["places"],
@@ -30,6 +31,15 @@ const SearchBar = () => {
     searchStore.setSearchInput(searchInput);
   };
 
+  useEffect(() => {
+    if (!searchValue) {
+      searchStore.setSearchInput({
+        ...searchStore.searchInput,
+        destination: null,
+      });
+    }
+  }, [searchValue]);
+
   if (!isLoaded) return null;
 
   return (
@@ -46,11 +56,14 @@ const SearchBar = () => {
               autoComplete="off"
               type="search"
               placeholder="Where are you going?"
-              className="js-search js-dd-focus"
+              className={`js-search js-dd-focus form-control ${
+                !searchInputValidation.destination ? "is-invalid" : ""
+              }`}
               value={searchValue}
               disabled={!isLoaded}
               onChange={(e) => setSearchValue(e.target.value)}
             />
+            <div className="invalid-feedback" />
           </div>
         </div>
       </div>
