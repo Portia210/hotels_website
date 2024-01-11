@@ -7,7 +7,7 @@ const useSearchBar = () => {
 
   const handleSearch = (path) => {
     if (!path) throw Error("handleSearch: path is required");
-    if (!searchStore.searchInput.destination) {
+    if (!searchStore?.searchInput?.destination) {
       searchStore.setSearchInputValidation({
         destination: false,
       });
@@ -20,6 +20,7 @@ const useSearchBar = () => {
       searchStore.setSearchInputValidation({
         destination: true,
       });
+      console.log("searchStore.searchInput", searchStore.searchInput);
       Router.push(path);
     }
   };

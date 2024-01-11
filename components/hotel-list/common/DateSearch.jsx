@@ -13,11 +13,10 @@ const DateSearch = () => {
   ]);
 
   const updateSearchInput = () => {
-    searchStore.setSearchInput({
-      ...searchStore.searchInput,
-      checkInDate: dayjs(dates[0])?.format("YYYY-MM-DD"),
-      checkOutDate: dayjs(dates[1])?.format("YYYY-MM-DD"),
-    });
+    let searchInput = searchStore.searchInput;
+    searchInput.checkInDate = dayjs(dates[0])?.format("YYYY-MM-DD");
+    searchInput.checkOutDate = dayjs(dates[1])?.format("YYYY-MM-DD");
+    searchStore.setSearchInput(searchInput);
   };
 
   useEffect(() => {
