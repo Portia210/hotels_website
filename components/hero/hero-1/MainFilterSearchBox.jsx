@@ -1,6 +1,6 @@
 'use client'
 
-import DateSearch from "../DateSearch";
+import DateSearch from "@/components/hotel-list/common/DateSearch";
 import GuestSearch from "./GuestSearch";
 import LocationSearch from "./LocationSearch";
 import { useRouter } from "next/navigation";
