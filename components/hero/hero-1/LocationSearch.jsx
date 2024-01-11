@@ -1,11 +1,13 @@
 "use client";
 
 import { GOOGLE_MAP_API_KEY } from "@/constants/config";
+import useSearchStore from "@/store/useSearchStore";
 import { useLoadScript } from "@react-google-maps/api";
 import { useState } from "react";
 import PlaceAutocomplete from "./PlaceAutocomplete";
 
 const SearchBar = () => {
+  const searchStore = useSearchStore();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries: ["places"],
@@ -18,6 +20,14 @@ const SearchBar = () => {
   const handleOptionClick = async (item) => {
     setSelectedItem(item);
     setSearchValue(item.destination);
+    let searchInput = searchStore.searchInput;
+    searchInput = {
+      ...searchInput,
+      destination: {
+        ...item,
+      },
+    };
+    searchStore.setSearchInput(searchInput);
   };
 
   if (!isLoaded) return null;

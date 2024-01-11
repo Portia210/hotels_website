@@ -13,11 +13,11 @@ const RoomInfo = ({ room, index, onChange, onChildAgeChange }) => {
   };
 
   const decrementCount = (name) => {
-    if (name === ADULTS && room.adults === 1) return;
     if (name === CHILDRENS) {
       onChange(DECREMENT, name, room.childrens.length - 1, index);
       return;
     }
+    if (room.adults === 1) return;
     onChange(DECREMENT, name, room.adults - 1, index);
   };
 

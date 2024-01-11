@@ -1,11 +1,13 @@
 "use client";
 
+import { ADULTS, CHILDRENS, DECREMENT, INCREMENT } from "@/constants/searchBar";
+import useSearchStore from "@/store/useSearchStore";
 import cloneDeep from "lodash/cloneDeep";
 import { useEffect, useState } from "react";
-import { ADULTS, CHILDRENS, INCREMENT, DECREMENT } from "@/constants/searchBar";
 import RoomInfo from "./RoomInfo";
 
 const GuestSearch = () => {
+  const searchStore = useSearchStore();
   const [rooms, setRooms] = useState([{ adults: 1, childrens: [] }]);
 
   const [guestCounts, setGuestCounts] = useState({
@@ -60,8 +62,25 @@ const GuestSearch = () => {
     setGuestCounts({ Adults, Children, Rooms });
   };
 
+  const updateSearchInput = () => {
+    let searchInput = searchStore?.searchInput;
+    const childrenAges = rooms
+      .map((room) => room.childrens)
+      .flat()
+      .map((age) => Number(age));
+    searchInput = {
+      ...searchInput,
+      rooms: rooms.length,
+      adults: guestCounts.Adults,
+      children: guestCounts.Children,
+      childrenAges,
+    };
+    searchStore.setSearchInput(searchInput);
+  };
+
   useEffect(() => {
     caculateGuestCounts();
+    updateSearchInput();
   }, [rooms]);
 
   const handleAddRoom = () => {
@@ -89,7 +108,7 @@ const GuestSearch = () => {
         <div className="text-15 text-light-1 ls-2 lh-16">
           <span className="js-count-adult">{guestCounts.Adults}</span> adults -{" "}
           <span className="js-count-child">{guestCounts.Children}</span>{" "}
-          childeren - <span className="js-count-room">{guestCounts.Rooms}</span>{" "}
+          childrens - <span className="js-count-room">{guestCounts.Rooms}</span>{" "}
           room
         </div>
       </div>

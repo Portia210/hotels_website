@@ -1,14 +1,28 @@
 "use client";
 
+import useSearchStore from "@/store/useSearchStore";
 import dayjs from "dayjs";
-import React, { useState } from "react";
-import DatePicker, { DateObject } from "react-multi-date-picker";
+import { useEffect, useState } from "react";
+import DatePicker from "react-multi-date-picker";
 
 const DateSearch = () => {
+  const searchStore = useSearchStore();
   const [dates, setDates] = useState([
-    new DateObject().setDay(5),
-    new DateObject().setDay(14).add(1, "month"),
+    dayjs().toDate(),
+    dayjs().add(30, "day").toDate(),
   ]);
+
+  const updateSearchInput = () => {
+    searchStore.setSearchInput({
+      ...searchStore.searchInput,
+      checkInDate: dayjs(dates[0])?.format("YYYY-MM-DD"),
+      checkOutDate: dayjs(dates[1])?.format("YYYY-MM-DD"),
+    });
+  };
+
+  useEffect(() => {
+    updateSearchInput();
+  }, [dates]);
 
   return (
     <div className="text-15 text-light-1 ls-2 lh-16 custom_dual_datepicker">
@@ -16,9 +30,10 @@ const DateSearch = () => {
         inputClass="custom_input-picker"
         containerClassName="custom_container-picker"
         value={dates}
+        highlightToday={false}
         minDate={new Date()}
-        maxDate={dayjs().add(30, "day").toDate()}
         onChange={setDates}
+        onOpenPickNewDate={false}
         numberOfMonths={2}
         offsetY={10}
         range
