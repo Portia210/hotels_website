@@ -65,6 +65,7 @@ const GuestSearch = () => {
   }, [rooms]);
 
   const handleAddRoom = () => {
+    if (rooms.length > 3) return;
     setRooms((prev) => [...prev, { adults: 1, childrens: [] }]);
   };
 

@@ -1,15 +1,19 @@
 import ChildAgeDropDown from "./ChildAgeDropdown";
 import { ADULTS, CHILDRENS, INCREMENT, DECREMENT } from "@/constants/searchBar";
+
 const RoomInfo = ({ room, index, onChange, onChildAgeChange }) => {
   const incrementCount = (name) => {
-    if (name === CH) {
+    if (name === CHILDRENS) {
+      if (room.childrens.length > 9) return;
       onChange(INCREMENT, name, room.childrens, index);
       return;
     }
+    if (room.adults > 5) return;
     onChange(INCREMENT, name, room.adults + 1, index);
   };
 
   const decrementCount = (name) => {
+    if (name === ADULTS && room.adults === 1) return;
     if (name === CHILDRENS) {
       onChange(DECREMENT, name, room.childrens.length - 1, index);
       return;
@@ -22,10 +26,10 @@ const RoomInfo = ({ room, index, onChange, onChildAgeChange }) => {
   };
 
   return (
-    <div className="row">
-      {[ADULTS, CHILDRENS].map((name) => {
+    <div className="row" key={index}>
+      {[ADULTS, CHILDRENS].map((name, index) => {
         return (
-          <div key={name} className="row col-6">
+          <div key={index} className="row col-6">
             <div className="row col-auto y-gap-5 mt-1">
               <div className="col-auto">
                 <div className="text-15 lh-12 fw-500">{name}</div>
@@ -69,10 +73,9 @@ const RoomInfo = ({ room, index, onChange, onChildAgeChange }) => {
           )}
           {room?.childrens?.map((childAge, childIndex) => {
             return (
-              <div className="col-3">
+              <div className="col-3" key={childIndex}>
                 <ChildAgeDropDown
                   index={childIndex}
-                  key={childIndex}
                   value={childAge}
                   onSelect={(value) => {
                     handleChildAgeChange(value, childIndex);
