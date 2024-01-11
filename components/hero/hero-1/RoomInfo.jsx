@@ -69,7 +69,9 @@ const RoomInfo = ({ room, index, onChange, onChildAgeChange }) => {
       <div className="row gy-1">
         <>
           {room?.childrens?.length > 0 && (
-            <label htmlFor="childAge">Child Ages</label>
+            <label className="text-15 lh-12 fw-500" htmlFor="childAge">
+              Child Ages
+            </label>
           )}
           {room?.childrens?.map((childAge, childIndex) => {
             return (

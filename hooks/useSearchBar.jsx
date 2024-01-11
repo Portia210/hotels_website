@@ -1,5 +1,4 @@
 import useSearchStore from "@/store/useSearchStore";
-import { flatten } from "flat";
 import { useRouter } from "next/navigation";
 
 const useSearchBar = () => {
@@ -22,8 +21,10 @@ const useSearchBar = () => {
         destination: true,
       });
       delete searchStore.searchInput.childrenAges;
-      const flattenObj = flatten(searchStore.searchInput);
-      const params = new URLSearchParams(flattenObj);
+      searchStore.searchInput.destination = JSON.stringify(
+        searchStore.searchInput.destination
+      );
+      const params = new URLSearchParams(searchStore.searchInput);
       Router.push(`${path}?${params.toString()}`);
     }
   };

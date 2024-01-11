@@ -5,8 +5,10 @@ import useSearchStore from "@/store/useSearchStore";
 import { useLoadScript } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import PlaceAutocomplete from "./PlaceAutocomplete";
+import { usePathname } from "next/navigation";
 
 const SearchBar = () => {
+  const pathName = usePathname();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries: ["places"],
@@ -32,8 +34,10 @@ const SearchBar = () => {
   };
 
   const loadLocation = async () => {
-    if (searchStore?.searchInput?.destination) {
-      const { destination } = searchStore.searchInput;
+    if (pathName !== "/hotel-list") return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("destination")) {
+      const destination = JSON.parse(params.get("destination"));
       setSearchValue(destination.destination);
       setSelectedItem(destination);
     }
@@ -50,7 +54,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     loadLocation();
-  }, [searchStore?.searchInput?.destination]);
+  }, [pathName]);
 
   if (!isLoaded) return null;
 
