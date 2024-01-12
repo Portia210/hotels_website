@@ -75,8 +75,8 @@ const GuestSearch = () => {
     searchInput = {
       ...searchInput,
       rooms: rooms.length,
-      adults: guestCounts.Adults,
-      children: guestCounts.Children,
+      adults: rooms.reduce((acc, room) => acc + room.adults, 0),
+      childrens: rooms.reduce((acc, room) => acc + room.childrens.length, 0),
       childrenAges,
       guests,
     };

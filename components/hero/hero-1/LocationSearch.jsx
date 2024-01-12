@@ -3,9 +3,9 @@
 import { GOOGLE_MAP_API_KEY } from "@/constants/config";
 import useSearchStore from "@/store/useSearchStore";
 import { useLoadScript } from "@react-google-maps/api";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import PlaceAutocomplete from "./PlaceAutocomplete";
-import { usePathname } from "next/navigation";
 
 const SearchBar = () => {
   const pathName = usePathname();
@@ -19,18 +19,20 @@ const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
 
+  const updateInputDestination = (destination) => {
+    let searchInput = searchStore.searchInput;
+    searchInput = {
+      ...searchInput,
+      destination,
+    };
+    searchStore.setSearchInput(searchInput);
+  };
+
   const handleOptionClick = async (item) => {
     setSelectedItem(item);
     setSearchValue(item.destination);
     if (!item?.destination) return;
-    let searchInput = searchStore.searchInput;
-    searchInput = {
-      ...searchInput,
-      destination: {
-        ...item,
-      },
-    };
-    searchStore.setSearchInput(searchInput);
+    updateInputDestination(item);
   };
 
   const loadLocation = async () => {
@@ -38,8 +40,11 @@ const SearchBar = () => {
     const params = new URLSearchParams(window.location.search);
     if (params.has("destination")) {
       const destination = JSON.parse(params.get("destination"));
-      setSearchValue(destination.destination);
       setSelectedItem(destination);
+      setSearchValue(destination.destination);
+      setTimeout(() => {
+        updateInputDestination(destination);
+      });
     }
   };
 
@@ -80,7 +85,7 @@ const SearchBar = () => {
               disabled={!isLoaded}
               onChange={(e) => setSearchValue(e.target.value)}
             />
-            <div className="invalid-feedback" >Enter your location</div>
+            <div className="invalid-feedback">Enter your location</div>
           </div>
         </div>
       </div>

@@ -1,0 +1,1 @@
+export const CRAWLERUI_URL = process.env.CRAWLERUI_URL
