@@ -152,6 +152,7 @@ const GuestSearch = () => {
                 <RoomInfo
                   room={room}
                   index={index}
+                  totalChild={guestCounts.Children}
                   onChange={(action, name, value, index) =>
                     handleRoomInfoChange(action, name, value, index)
                   }

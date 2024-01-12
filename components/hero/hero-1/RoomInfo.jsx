@@ -1,10 +1,11 @@
 import ChildAgeDropDown from "./ChildAgeDropdown";
 import { ADULTS, CHILDRENS, INCREMENT, DECREMENT } from "@/constants/searchBar";
 
-const RoomInfo = ({ room, index, onChange, onChildAgeChange }) => {
+const RoomInfo = ({ room, index, totalChild, onChange, onChildAgeChange }) => {
   const incrementCount = (name) => {
     if (name === CHILDRENS) {
-      if (room.childrens.length > 9) return;
+      if (totalChild > 9) return;
+      if (room.childrens.length > 3) return;
       onChange(INCREMENT, name, room.childrens, index);
       return;
     }
