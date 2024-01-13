@@ -48,7 +48,7 @@ export default function ListHotels() {
             {/* End border-top */}
 
             <div className="row y-gap-30">
-              <HotelProperties hotels={hotels} />
+              <HotelProperties hotels={hotels} loading={loading}/>
             </div>
             {/* End .row */}
             <Pagination totalPages={Math.round(hotels.length / 12)} />

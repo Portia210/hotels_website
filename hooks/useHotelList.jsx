@@ -1,4 +1,5 @@
 import useSearchStore from "@/store/useSearchStore";
+import { sleep } from "@/utils/sleep";
 import { SearchInputSchema } from "@/zod/searchInput";
 import axios from "axios";
 import { usePathname } from "next/navigation";
@@ -19,10 +20,22 @@ const useHotelList = () => {
     try {
       const params = new URLSearchParams(window.location.search);
       const sessionId = params.get("sessionId");
-      const response = await axios
-        .get(`/api/hotel-list/session?sessionId=${sessionId}`)
-        .then((res) => res.data);
-      setHotels(response.results);
+      const fetching = async () => {
+        return await axios
+          .get(`/api/hotel-list/session?sessionId=${sessionId}`)
+          .then((res) => res.data);
+      };
+
+      let response = await fetching();
+      do {
+        if (response.status === "FINISHED") {
+          setHotels(response.results);
+          break;
+        }
+        await sleep(2000);
+        response = await fetching();
+      } while (response.status === "RUNNING");
+      setLoading(false);
     } catch (error) {
       console.error("sendCommand error:::", error);
       throw error;

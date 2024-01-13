@@ -5,7 +5,7 @@ import Link from "next/link";
 import Slider from "react-slick";
 import isTextMatched from "../../../utils/isTextMatched";
 
-const HotelProperties = ({ hotels }) => {
+const HotelProperties = ({ hotels, loading }) => {
   var itemSettings = {
     dots: true,
     infinite: true,
@@ -38,12 +38,19 @@ const HotelProperties = ({ hotels }) => {
     );
   }
 
+  if (loading) {
+    return (
+      <>
+        <h3>Loading...</h3>
+      </>
+    );
+  }
   return (
     <>
-      {hotels.slice(0, 12).map((item) => (
+      {hotels.slice(0, 12).map((item, index) => (
         <div
           className="col-lg-3 col-sm-6"
-          key={item?.title}
+          key={index}
           data-aos="fade"
           data-aos-delay={item.delayAnimation}
         >
