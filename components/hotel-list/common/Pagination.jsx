@@ -1,9 +1,8 @@
-
-'use client'
+"use client";
 
 import { useState } from "react";
 
-const Pagination = () => {
+const Pagination = ({ totalPages }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageClick = (pageNumber) => {
@@ -24,7 +23,6 @@ const Pagination = () => {
   };
 
   const renderPages = () => {
-    const totalPages = 5; // Change this to the actual total number of pages
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
@@ -51,7 +49,9 @@ const Pagination = () => {
               <div className="size-40 flex-center rounded-full">...</div>
             </div>
             <div className="col-auto">
-              <div className="size-40 flex-center rounded-full">20</div>
+              <div className="size-40 flex-center rounded-full">
+                {totalPages + 1}
+              </div>
             </div>
           </div>
 

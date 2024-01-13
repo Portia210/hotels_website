@@ -8,12 +8,12 @@ const useHotelList = () => {
   const pathName = usePathname();
   const searchStore = useSearchStore();
   const [loading, setLoading] = useState(true);
-
+  const [hotels, setHotels] = useState([]);
   /**
    * Send command to CrawlerUI
-   * @returns {Promise} 2 jobsId and
+   * @returns {Promise} hotels
    */
-  const sendCommand = async (searchInput) => {
+  const fetchHotelList = async (searchInput) => {
     if (!searchInput) return;
     setLoading(true);
     try {
@@ -22,8 +22,7 @@ const useHotelList = () => {
       const response = await axios
         .get(`/api/hotel-list/session?sessionId=${sessionId}`)
         .then((res) => res.data);
-      console.log(response);
-      return response;
+      setHotels(response.results);
     } catch (error) {
       console.error("sendCommand error:::", error);
       throw error;
@@ -32,23 +31,17 @@ const useHotelList = () => {
     }
   };
 
-  /**
-   *
-   * @param {object} jobs - `bookingJobId` and `travelorJobId`
-   */
-  const fetchHotelList = async (jobs) => {};
-
   useEffect(() => {
     const isVaild = SearchInputSchema.safeParse(searchStore.searchInput);
     if (isVaild.success && pathName === "/hotel-list") {
-      console.log("isVaild.data", isVaild.data);
-      sendCommand(isVaild.data);
+      fetchHotelList(isVaild.data);
     }
   }, [searchStore.searchInput]);
 
   return {
     loading,
-    sendCommand,
+    hotels,
+    fetchHotelList,
   };
 };
 

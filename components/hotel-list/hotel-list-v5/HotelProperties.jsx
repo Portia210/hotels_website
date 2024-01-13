@@ -1,16 +1,11 @@
 "use client";
 
-import useHotelList from "@/hooks/useHotelList";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import Slider from "react-slick";
-import { hotelsData } from "../../../data/hotels";
 import isTextMatched from "../../../utils/isTextMatched";
 
-const HotelProperties = () => {
-  const { sendCommand } = useHotelList();
-
+const HotelProperties = ({ hotels }) => {
   var itemSettings = {
     dots: true,
     infinite: true,
@@ -43,23 +38,16 @@ const HotelProperties = () => {
     );
   }
 
-  useEffect(() => {
-    sendCommand();
-  }, []);
-
   return (
     <>
-      {hotelsData.slice(0, 12).map((item) => (
+      {hotels.slice(0, 12).map((item) => (
         <div
           className="col-lg-3 col-sm-6"
-          key={item?.id}
+          key={item?.title}
           data-aos="fade"
           data-aos-delay={item.delayAnimation}
         >
-          <Link
-            href={`/hotel-single-v2/${item.id}`}
-            className="hotelsCard -type-1 hover-inside-slider"
-          >
+          <div className="hotelsCard -type-1 hover-inside-slider">
             <div className="hotelsCard__image">
               <div className="cardImage inside-slider">
                 <Slider
@@ -68,19 +56,17 @@ const HotelProperties = () => {
                   nextArrow={<ArrowSlick type="next" />}
                   prevArrow={<ArrowSlick type="prev" />}
                 >
-                  {item?.slideImg?.map((slide, i) => (
-                    <div className="cardImage ratio ratio-1:1" key={i}>
-                      <div className="cardImage__content ">
-                        <Image
-                          width={300}
-                          height={300}
-                          className="rounded-4 col-12 js-lazy"
-                          src={slide}
-                          alt="image"
-                        />
-                      </div>
+                  <div className="cardImage ratio ratio-1:1">
+                    <div className="cardImage__content">
+                      <Image
+                        width={300}
+                        height={300}
+                        className="rounded-4 col-12 js-lazy"
+                        src={item?.picture_link}
+                        alt="image"
+                      />
                     </div>
-                  ))}
+                  </div>
                 </Slider>
 
                 <div className="cardImage__wishlist">
@@ -121,27 +107,44 @@ const HotelProperties = () => {
                 <span>{item?.title}</span>
               </h4>
               <p className="text-light-1 lh-14 text-14 mt-5">
-                {item?.location}
+                {item?.distance}
               </p>
               <div className="d-flex items-center mt-20">
                 <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
-                  {item?.ratings}
+                  {item?.stars}
                 </div>
                 <div className="text-14 text-dark-1 fw-500 ml-10">
                   Exceptional
                 </div>
                 <div className="text-14 text-light-1 ml-10">
-                  {item?.numberOfReviews} reviews
+                  {item?.rate} reviews
                 </div>
               </div>
               <div className="mt-5">
-                <div className="fw-500">
-                  Starting from{" "}
-                  <span className="text-blue-1">US${item?.price}</span>
+                <div className="d-flex justify-between fw-500">
+                  <span className="text-blue-1">
+                    <Link target="_blank" href={item.travelorLink}>
+                      To Travelor
+                    </Link>
+                  </span>
+                  <span className="">
+                    {item?.travelorPrice} {""}
+                    {item.travelorCurrency}
+                  </span>
+                </div>
+                <div className="d-flex justify-between fw-500">
+                  <span className="text-blue-1">
+                    <Link target="_blank" href={item.bookingLink}>
+                      To Booking
+                    </Link>
+                  </span>
+                  <span className="">
+                    {item?.bookingPrice} {item.bookingCurrency}
+                  </span>
                 </div>
               </div>
             </div>
-          </Link>
+          </div>
         </div>
       ))}
     </>
