@@ -1,18 +1,14 @@
 "use client";
 
 import useHotelList from "@/hooks/useHotelList";
-import useSearchStore from "@/store/useSearchStore";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import Slider from "react-slick";
 import { hotelsData } from "../../../data/hotels";
 import isTextMatched from "../../../utils/isTextMatched";
 
 const HotelProperties = () => {
-  const searchStore = useSearchStore();
-  const pathName = usePathname();
   const { sendCommand } = useHotelList();
 
   var itemSettings = {

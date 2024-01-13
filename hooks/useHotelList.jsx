@@ -1,6 +1,6 @@
-import hotelService from "@/service/HotelService";
 import useSearchStore from "@/store/useSearchStore";
 import { SearchInputSchema } from "@/zod/searchInput";
+import axios from "axios";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -10,14 +10,6 @@ const useHotelList = () => {
   const [loading, setLoading] = useState(true);
 
   /**
-   * Get session like Travelor, will be vaild in 1 hour
-   * @param {string} url
-   * @param {object} options
-   * @returns {Promise}
-   */
-  const getSession = async () => {};
-
-  /**
    * Send command to CrawlerUI
    * @returns {Promise} 2 jobsId and
    */
@@ -25,7 +17,11 @@ const useHotelList = () => {
     if (!searchInput) return;
     setLoading(true);
     try {
-      const response = await hotelService.sendCommand(searchInput);
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get("sessionId");
+      const response = await axios
+        .get(`/api/hotel-list/session?sessionId=${sessionId}`)
+        .then((res) => res.data);
       console.log(response);
       return response;
     } catch (error) {
@@ -44,8 +40,10 @@ const useHotelList = () => {
 
   useEffect(() => {
     const isVaild = SearchInputSchema.safeParse(searchStore.searchInput);
-    if (isVaild.success && pathName === "/hotel-list")
+    if (isVaild.success && pathName === "/hotel-list") {
+      console.log("isVaild.data", isVaild.data);
       sendCommand(isVaild.data);
+    }
   }, [searchStore.searchInput]);
 
   return {

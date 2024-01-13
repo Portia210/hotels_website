@@ -1,14 +1,28 @@
 import useSearchStore from "@/store/useSearchStore";
+import axios from "axios";
 import { cloneDeep } from "lodash";
-import { usePathname, useRouter } from "next/navigation";
 
 const useSearchBar = () => {
-  const pathName = usePathname();
   const searchStore = useSearchStore();
-  const Router = useRouter();
 
-  const handleSearch = (path) => {
-    if (!path) throw Error("handleSearch: path is required");
+  /**
+   * Get sessionid will be vaild in 1 hour
+   * @returns {Promise}
+   */
+  const getSession = async (searchInput) => {
+    try {
+      const sessionId = await axios
+        .post("/api/hotel-list/session", searchInput)
+        .then((res) => res.data);
+      return sessionId;
+    } catch (error) {
+      console.error("getSession error:::", error);
+      throw error;
+    }
+  };
+
+  const handleSearch = async (path) => {
+    if (!path) throw Error("search path is required");
     const destinationInput = document.getElementById("destinationInput").value;
     if (!destinationInput) {
       searchStore.setSearchInputValidation({
@@ -23,11 +37,13 @@ const useSearchBar = () => {
       searchStore.setSearchInputValidation({
         destination: true,
       });
-      const searchInput = cloneDeep(searchStore.searchInput);
+      const sessionId = await getSession(searchStore.searchInput);
+      let searchInput = cloneDeep(searchStore.searchInput);
       delete searchInput.childrenAges;
+      searchInput.sessionId = sessionId;
       searchInput.destination = JSON.stringify(searchInput.destination);
       const params = new URLSearchParams(searchInput);
-      Router.push(`${path}?${params.toString()}`);
+      window.location.href = `${path}?${params.toString()}`;
     }
   };
 
