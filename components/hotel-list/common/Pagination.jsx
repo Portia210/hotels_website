@@ -1,6 +1,6 @@
 "use client";
 
-const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
+const Pagination = ({ pagination, currentPage, setCurrentPage }) => {
   const handlePageClick = (pageNumber) => {
     setTimeout(() => {
       window.scrollTo({ top: 100, behavior: "smooth" });
@@ -23,7 +23,7 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
 
   const renderPages = () => {
     const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= pagination.totalPages; i++) {
       pageNumbers.push(i);
     }
     const pages = pageNumbers.map((pageNumber) =>
@@ -49,7 +49,7 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
             </div>
             <div className="col-auto">
               <div className="size-40 flex-center rounded-full">
-                {totalPages}
+                {pagination.totalPages}
               </div>
             </div>
           </div>
@@ -60,7 +60,8 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
 
           <div className="text-center mt-30 md:mt-10">
             <div className="text-14 text-light-1">
-              1 – 20 of 300+ properties found
+              {pagination.offset} – {pagination.offset + pagination.limit} of{" "}
+              {pagination.totalResults}+ hotels found
             </div>
           </div>
         </div>

@@ -13,11 +13,23 @@ export default function ListHotels() {
     page: 1,
     limit: 36,
     totalPages: 1,
+    totalResults: 1,
+    offset: 0,
   });
 
   const calcPagination = () => {
+    const offset = (pagination.page - 1) * pagination.limit;
     const totalPages = Math.ceil(hotels.length / pagination.limit);
-    setPagination((prev) => ({ ...prev, totalPages }));
+    const totalResults = hotels.length;
+    setPagination((prev) => ({ ...prev, totalPages, totalResults, offset }));
+  };
+
+  const calcHotelData = () => {
+    const data = hotels.slice(
+      pagination.offset,
+      pagination.offset + pagination.limit
+    );
+    setData(data);
   };
 
   useEffect(() => {
@@ -33,9 +45,7 @@ export default function ListHotels() {
   }, [hotels]);
 
   useEffect(() => {
-    const offset = (pagination.page - 1) * pagination.limit;
-    const data = hotels.slice(offset, offset + pagination.limit);
-    setData(data);
+    calcHotelData();
   }, [pagination]);
 
   return (
@@ -78,7 +88,7 @@ export default function ListHotels() {
             </div>
             {/* End .row */}
             <Pagination
-              totalPages={pagination?.totalPages}
+              pagination={pagination}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
