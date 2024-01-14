@@ -2,7 +2,7 @@
 import DropdownSelelctBar from "@/components/hotel-list/common/DropdownSelelctBar";
 import Pagination from "@/components/hotel-list/common/Pagination";
 import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
-import { PriceFilter } from "@/constants/priceFilter";
+import { PriceFilter } from "@/constants/searchFilter";
 import useHotelList from "@/hooks/useHotelList";
 import { cloneDeep } from "lodash";
 import { useEffect, useState } from "react";
@@ -11,6 +11,8 @@ export default function ListHotels() {
   const { hotels, fetchHotelList, loading } = useHotelList();
   const [data, setData] = useState(hotels.slice(0, 36));
   const [priceFilter, setPriceFilter] = useState(PriceFilter.HTL);
+  const [ratingFilter, setRatingFilter] = useState([6]);
+  const [starFilter, setStarFilter] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -42,6 +44,15 @@ export default function ListHotels() {
     setData(data);
   };
 
+  const handleRatingFilterChange = (value) => {
+    setRatingFilter((prev) => {
+      if (prev.includes(value)) {
+        return prev.filter((rating) => rating !== value);
+      }
+      return [...prev, value];
+    });
+  };
+
   const filterHotelByPrice = () => {
     const cloneHotels = cloneDeep(hotels);
     if (priceFilter === PriceFilter.HTL) {
@@ -49,7 +60,29 @@ export default function ListHotels() {
     } else {
       cloneHotels.sort((a, b) => a.travelorPrice - b.travelorPrice);
     }
-    calcHotelData(cloneHotels)
+    calcHotelData(cloneHotels);
+  };
+
+  const filterHotelByRating = () => {
+    const cloneHotels = cloneDeep(hotels);
+    const filterHotels = cloneHotels.filter(
+      (hotel) => hotel.rate >= ratingFilter
+    );
+    calcHotelData(filterHotels);
+  };
+
+  const filterHotelByStar = () => {
+    const cloneHotels = cloneDeep(hotels);
+    const filterHotels = cloneHotels.filter(
+      (hotel) => hotel.stars >= starFilter
+    );
+    calcHotelData(filterHotels);
+  };
+
+  const filterByBiggestPriceGap = () => {
+    const cloneHotels = cloneDeep(hotels);
+    cloneHotels.sort((a, b) => b.price_difference - a.price_difference);
+    calcHotelData(cloneHotels);
   };
 
   useEffect(() => {
@@ -73,6 +106,14 @@ export default function ListHotels() {
     filterHotelByPrice();
   }, [priceFilter]);
 
+  useEffect(() => {
+    filterHotelByRating();
+  }, [ratingFilter]);
+
+  useEffect(() => {
+    filterHotelByStar();
+  }, [starFilter]);
+
   return (
     <>
       {/* Top SearchBanner */}
@@ -91,6 +132,10 @@ export default function ListHotels() {
                     <DropdownSelelctBar
                       priceFilter={priceFilter}
                       setPriceFilter={setPriceFilter}
+                      ratingFilter={ratingFilter}
+                      setRatingFilter={handleRatingFilterChange}
+                      starFilter={starFilter}
+                      setStarFilter={setStarFilter}
                     />
                   </div>
                 </div>
@@ -101,7 +146,10 @@ export default function ListHotels() {
             {/* End col-auto */}
 
             <div className="col-auto">
-              <button className="button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1">
+              <button
+                onClick={filterByBiggestPriceGap}
+                className="button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1"
+              >
                 <i className="icon-up-down text-14 mr-10"></i>
                 Top picks for your search
               </button>

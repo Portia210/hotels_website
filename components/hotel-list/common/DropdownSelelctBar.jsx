@@ -1,9 +1,16 @@
 "use client";
 
-import { PriceFilter } from "@/constants/priceFilter";
+import { PriceFilter } from "@/constants/searchFilter";
 import RatingFilter from "./RatingFilter";
 
-const DropdownSelelctBar = ({ priceFilter, setPriceFilter }) => {
+const DropdownSelelctBar = ({
+  priceFilter,
+  setPriceFilter,
+  ratingFilter,
+  setRatingFilter,
+  starFilter,
+  setStarFilter,
+}) => {
   const dropdowns = [
     {
       title: PriceFilter.HTL,
@@ -52,7 +59,12 @@ const DropdownSelelctBar = ({ priceFilter, setPriceFilter }) => {
         </div>
       ))}
 
-      <RatingFilter />
+      <RatingFilter
+        ratingFilter={ratingFilter}
+        setRatingFilter={setRatingFilter}
+        starFilter={starFilter}
+        setStarFilter={setStarFilter}
+      />
 
       {/* End  ratings */}
 

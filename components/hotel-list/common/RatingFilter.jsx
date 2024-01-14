@@ -1,20 +1,12 @@
 "use client";
 
-import { useState } from "react";
 
-const RatingFilter = () => {
-  // for start and guest rating code
-  const [activeRating, setActiveRating] = useState(0);
-
-  const handleRatingClick = (rating) => {
-    setActiveRating(rating);
-  };
-  const [guestRating, setGuestRating] = useState(0);
-
-  const handleGuestRatingClick = (rating) => {
-    setGuestRating(rating);
-  };
-
+const RatingFilter = ({
+  ratingFilter,
+  setRatingFilter,
+  starFilter,
+  setStarFilter,
+}) => {
   return (
     <>
       <div className="col-auto">
@@ -38,9 +30,9 @@ const RatingFilter = () => {
                   <div className="col-auto" key={rating}>
                     <button
                       className={`button -blue-1 bg-blue-1-05 text-blue-1 py-10 px-20 rounded-100 ${
-                        activeRating === rating ? "active" : ""
+                        ratingFilter.includes(rating) ? "active" : ""
                       }`}
-                      onClick={() => handleRatingClick(rating)}
+                      onClick={() => setRatingFilter(rating)}
                     >
                       {rating} +
                     </button>
@@ -70,15 +62,15 @@ const RatingFilter = () => {
             <div className="px-20 py-20 rounded-4 bg-white border-light">
               <h5 className="text-18 fw-500 mb-10">Stars</h5>
               <div className="row x-gap-10 y-gap-10 pt-10">
-                {[3, 4, 5].map((rating) => (
-                  <div className="col-auto" key={rating}>
+                {[3, 4, 5].map((star) => (
+                  <div className="col-auto" key={star}>
                     <button
                       className={`button -blue-1 bg-blue-1-05 text-blue-1 py-10 px-20 rounded-100 ${
-                        guestRating === rating ? "active" : ""
+                        starFilter === star ? "active" : ""
                       }`}
-                      onClick={() => handleGuestRatingClick(rating)}
+                      onClick={() => setStarFilter(star)}
                     >
-                      {rating}
+                      {star}
                     </button>
                   </div>
                 ))}
