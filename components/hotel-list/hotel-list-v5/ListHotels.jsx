@@ -2,12 +2,15 @@
 import DropdownSelelctBar from "@/components/hotel-list/common/DropdownSelelctBar";
 import Pagination from "@/components/hotel-list/common/Pagination";
 import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
+import { PriceFilter } from "@/constants/priceFilter";
 import useHotelList from "@/hooks/useHotelList";
+import { cloneDeep } from "lodash";
 import { useEffect, useState } from "react";
 
 export default function ListHotels() {
   const { hotels, fetchHotelList, loading } = useHotelList();
   const [data, setData] = useState(hotels.slice(0, 36));
+  const [priceFilter, setPriceFilter] = useState(PriceFilter.HTL);
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -18,18 +21,35 @@ export default function ListHotels() {
   });
 
   const calcPagination = () => {
-    const offset = (pagination.page - 1) * pagination.limit;
     const totalPages = Math.ceil(hotels.length / pagination.limit);
     const totalResults = hotels.length;
-    setPagination((prev) => ({ ...prev, totalPages, totalResults, offset }));
+    setPagination((prev) => ({ ...prev, totalPages, totalResults }));
   };
 
-  const calcHotelData = () => {
-    const data = hotels.slice(
-      pagination.offset,
-      pagination.offset + pagination.limit
-    );
+  const calcHotelData = (hotelData) => {
+    let data = [];
+    if (!hotelData) {
+      data = hotels.slice(
+        pagination.offset,
+        pagination.offset + pagination.limit
+      );
+    } else {
+      data = hotelData.slice(
+        pagination.offset,
+        pagination.offset + pagination.limit
+      );
+    }
     setData(data);
+  };
+
+  const filterHotelByPrice = () => {
+    const cloneHotels = cloneDeep(hotels);
+    if (priceFilter === PriceFilter.HTL) {
+      cloneHotels.sort((a, b) => b.travelorPrice - a.travelorPrice);
+    } else {
+      cloneHotels.sort((a, b) => a.travelorPrice - b.travelorPrice);
+    }
+    calcHotelData(cloneHotels)
   };
 
   useEffect(() => {
@@ -37,7 +57,8 @@ export default function ListHotels() {
   }, []);
 
   useEffect(() => {
-    setPagination((prev) => ({ ...prev, page: currentPage }));
+    const offset = (currentPage - 1) * pagination.limit;
+    setPagination((prev) => ({ ...prev, page: currentPage, offset }));
   }, [currentPage]);
 
   useEffect(() => {
@@ -47,6 +68,10 @@ export default function ListHotels() {
   useEffect(() => {
     calcHotelData();
   }, [pagination]);
+
+  useEffect(() => {
+    filterHotelByPrice();
+  }, [priceFilter]);
 
   return (
     <>
@@ -63,7 +88,10 @@ export default function ListHotels() {
 
                 <div className="col-auto">
                   <div className="row x-gap-15 y-gap-15">
-                    <DropdownSelelctBar />
+                    <DropdownSelelctBar
+                      priceFilter={priceFilter}
+                      setPriceFilter={setPriceFilter}
+                    />
                   </div>
                 </div>
                 {/* End .col-auto */}

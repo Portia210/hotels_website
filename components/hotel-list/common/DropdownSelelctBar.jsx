@@ -1,21 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { PriceFilter } from "@/constants/priceFilter";
 import RatingFilter from "./RatingFilter";
 
-const DropdownSelelctBar = () => {
-  const [priceValue, setPriceValue] = useState("Price");
-
-  const handlePriceValueChange = (value) => {
-    setPriceValue(value);
-  };
-
+const DropdownSelelctBar = ({ priceFilter, setPriceFilter }) => {
   const dropdowns = [
     {
-      title: "Price",
-      value: priceValue,
-      options: ["Highest to lowest", "Lowest to highest"],
-      onChange: handlePriceValueChange,
+      title: PriceFilter.HTL,
+      value: priceFilter,
+      options: [PriceFilter.HTL, PriceFilter.LTH],
+      onChange: setPriceFilter,
     },
   ];
 
