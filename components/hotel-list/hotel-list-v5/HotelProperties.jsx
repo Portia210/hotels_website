@@ -66,8 +66,8 @@ const HotelProperties = ({ hotels, loading }) => {
                   <div className="cardImage ratio ratio-1:1">
                     <div className="cardImage__content">
                       <Image
-                        width={300}
-                        height={300}
+                        width={600}
+                        height={400}
                         className="rounded-4 col-12 js-lazy"
                         src={item?.picture_link}
                         alt="image"
@@ -116,37 +116,41 @@ const HotelProperties = ({ hotels, loading }) => {
               <p className="text-light-1 lh-14 text-14 mt-5">
                 {item?.distance}
               </p>
-              <div className="d-flex items-center mt-20">
-                <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
-                  {item?.stars}
-                </div>
-                <div className="text-14 text-dark-1 fw-500 ml-10">
-                  Exceptional
-                </div>
-                <div className="text-14 text-light-1 ml-10">
-                  {item?.rate} reviews
+              <div className="d-flex items-center mt-20 w-full">
+                <div className="d-flex justify-between align-items-center w-full ">
+                  <div className="flex-center">
+                    {Array.from(Array(item?.stars).keys()).map((_, index) => (
+                      <i
+                        className="icon-star text-16 text-warning"
+                        key={index}
+                      />
+                    ))}
+                  </div>
+                  <div className="text-14 text-light-1 ml-10">
+                    guests review: {item?.rate}
+                  </div>
                 </div>
               </div>
               <div className="mt-5">
                 <div className="d-flex justify-between fw-500">
+                  <span className="">
+                    {item?.travelorPrice} {""}
+                    {item.travelorCurrency}
+                  </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.travelorLink}>
                       To Travelor
                     </Link>
                   </span>
-                  <span className="">
-                    {item?.travelorPrice} {""}
-                    {item.travelorCurrency}
-                  </span>
                 </div>
                 <div className="d-flex justify-between fw-500">
+                  <span className="">
+                    {item?.bookingPrice} {item.bookingCurrency}
+                  </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.bookingLink}>
                       To Booking
                     </Link>
-                  </span>
-                  <span className="">
-                    {item?.bookingPrice} {item.bookingCurrency}
                   </span>
                 </div>
               </div>

@@ -16,6 +16,7 @@
     }
 
     &__title {
+      min-height: 56px;
       span {
         background-image: linear-gradient(transparent 24px, black 20px);
         background-size: 0;
