@@ -47,7 +47,7 @@ const HotelProperties = ({ hotels, loading }) => {
   }
   return (
     <>
-      {hotels.slice(0, 12).map((item, index) => (
+      {hotels.map((item, index) => (
         <div
           className="col-lg-3 col-sm-6"
           key={index}
@@ -63,13 +63,13 @@ const HotelProperties = ({ hotels, loading }) => {
                   nextArrow={<ArrowSlick type="next" />}
                   prevArrow={<ArrowSlick type="prev" />}
                 >
-                  <div className="cardImage ratio ratio-1:1">
-                    <div className="cardImage__content">
+                  <div className="cardImage">
+                    <div className="cardImage__content_4-3">
                       <Image
                         width={600}
                         height={400}
                         className="rounded-4 col-12 js-lazy"
-                        src={item?.picture_link}
+                        src={item?.picture_link || "/img/hotels/1.png"}
                         alt="image"
                       />
                     </div>

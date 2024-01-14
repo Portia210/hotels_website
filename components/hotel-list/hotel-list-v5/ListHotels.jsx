@@ -3,14 +3,40 @@ import DropdownSelelctBar from "@/components/hotel-list/common/DropdownSelelctBa
 import Pagination from "@/components/hotel-list/common/Pagination";
 import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
 import useHotelList from "@/hooks/useHotelList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ListHotels() {
   const { hotels, fetchHotelList, loading } = useHotelList();
+  const [data, setData] = useState(hotels.slice(0, 36));
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 36,
+    totalPages: 1,
+  });
+
+  const calcPagination = () => {
+    const totalPages = Math.ceil(hotels.length / pagination.limit);
+    setPagination((prev) => ({ ...prev, totalPages }));
+  };
 
   useEffect(() => {
     fetchHotelList();
   }, []);
+
+  useEffect(() => {
+    setPagination((prev) => ({ ...prev, page: currentPage }));
+  }, [currentPage]);
+
+  useEffect(() => {
+    calcPagination();
+  }, [hotels]);
+
+  useEffect(() => {
+    const offset = (pagination.page - 1) * pagination.limit;
+    const data = hotels.slice(offset, offset + pagination.limit);
+    setData(data);
+  }, [pagination]);
 
   return (
     <>
@@ -48,10 +74,14 @@ export default function ListHotels() {
             {/* End border-top */}
 
             <div className="row y-gap-30">
-              <HotelProperties hotels={hotels} loading={loading}/>
+              <HotelProperties hotels={data} loading={loading} />
             </div>
             {/* End .row */}
-            <Pagination totalPages={Math.round(hotels.length / 12)} />
+            <Pagination
+              totalPages={pagination?.totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </div>
           {/* End .row */}
         </div>

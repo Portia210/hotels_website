@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
-
-const Pagination = ({ totalPages }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-
+const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
   const handlePageClick = (pageNumber) => {
+    setTimeout(() => {
+      window.scrollTo({ top: 100, behavior: "smooth" });
+    }, 500);
     setCurrentPage(pageNumber);
   };
 
@@ -50,7 +49,7 @@ const Pagination = ({ totalPages }) => {
             </div>
             <div className="col-auto">
               <div className="size-40 flex-center rounded-full">
-                {totalPages + 1}
+                {totalPages}
               </div>
             </div>
           </div>
