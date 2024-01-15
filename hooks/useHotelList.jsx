@@ -21,17 +21,17 @@ const useHotelList = () => {
       const params = new URLSearchParams(window.location.search);
       const sessionId = params.get("sessionId");
       const fetching = async () => {
-        return await axios
+        const data = await axios
           .get(`/api/hotel-list/session?sessionId=${sessionId}`)
           .then((res) => res.data);
+        const hotels = data.results;
+        setHotels(hotels);
+        return data;
       };
 
       let response = await fetching();
       do {
-        if (response.status === "FINISHED") {
-          setHotels(response.results);
-          break;
-        }
+        if (response.status === "FINISHED") break;
         await sleep(2000);
         response = await fetching();
       } while (response.status === "RUNNING");

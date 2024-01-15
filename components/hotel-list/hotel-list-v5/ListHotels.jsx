@@ -91,6 +91,10 @@ export default function ListHotels() {
   }, []);
 
   useEffect(() => {
+    setData(hotels);
+  }, [hotels]);
+
+  useEffect(() => {
     const offset = (currentPage - 1) * pagination.limit;
     setPagination((prev) => ({ ...prev, page: currentPage, offset }));
   }, [currentPage]);

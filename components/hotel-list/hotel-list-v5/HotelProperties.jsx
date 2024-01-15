@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
-import isTextMatched from "../../../utils/isTextMatched";
 
 const HotelProperties = ({ hotels, loading }) => {
   var itemSettings = {
