@@ -40,6 +40,7 @@ const HotelProperties = ({ hotels, loading }) => {
   return (
     <>
       {loading && <h3>Loading...</h3>}
+      {!loading && hotels?.length === 0 && <h3>No hotels found</h3>}
       {hotels.map((item, index) => (
         <div
           className="col-lg-3 col-sm-6"
