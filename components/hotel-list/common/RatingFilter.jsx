@@ -1,6 +1,5 @@
 "use client";
 
-
 const RatingFilter = ({
   ratingFilter,
   setRatingFilter,
@@ -30,7 +29,7 @@ const RatingFilter = ({
                   <div className="col-auto" key={rating}>
                     <button
                       className={`button -blue-1 bg-blue-1-05 text-blue-1 py-10 px-20 rounded-100 ${
-                        ratingFilter.includes(rating) ? "active" : ""
+                        rating === ratingFilter ? "active" : ""
                       }`}
                       onClick={() => setRatingFilter(rating)}
                     >
@@ -66,7 +65,7 @@ const RatingFilter = ({
                   <div className="col-auto" key={star}>
                     <button
                       className={`button -blue-1 bg-blue-1-05 text-blue-1 py-10 px-20 rounded-100 ${
-                        starFilter === star ? "active" : ""
+                        starFilter.includes(star) ? "active" : ""
                       }`}
                       onClick={() => setStarFilter(star)}
                     >

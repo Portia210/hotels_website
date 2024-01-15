@@ -11,8 +11,8 @@ export default function ListHotels() {
   const { hotels, fetchHotelList, loading } = useHotelList();
   const [data, setData] = useState(hotels.slice(0, 36));
   const [priceFilter, setPriceFilter] = useState(PriceFilter.HTL);
-  const [ratingFilter, setRatingFilter] = useState([6]);
-  const [starFilter, setStarFilter] = useState(3);
+  const [ratingFilter, setRatingFilter] = useState(6);
+  const [starFilter, setStarFilter] = useState([3]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -44,10 +44,10 @@ export default function ListHotels() {
     setData(data);
   };
 
-  const handleRatingFilterChange = (value) => {
-    setRatingFilter((prev) => {
+  const handleStarFilterChange = (value) => {
+    setStarFilter((prev) => {
       if (prev.includes(value)) {
-        return prev.filter((rating) => rating !== value);
+        return prev.filter((star) => star !== value);
       }
       return [...prev, value];
     });
@@ -73,9 +73,10 @@ export default function ListHotels() {
 
   const filterHotelByStar = () => {
     const cloneHotels = cloneDeep(hotels);
-    const filterHotels = cloneHotels.filter(
-      (hotel) => hotel.stars >= starFilter
-    );
+    const filterHotels = cloneHotels.filter((hotel) => {
+      if (starFilter.length === 0) return true;
+      return starFilter.includes(hotel.stars);
+    });
     calcHotelData(filterHotels);
   };
 
@@ -133,9 +134,9 @@ export default function ListHotels() {
                       priceFilter={priceFilter}
                       setPriceFilter={setPriceFilter}
                       ratingFilter={ratingFilter}
-                      setRatingFilter={handleRatingFilterChange}
+                      setRatingFilter={setRatingFilter}
                       starFilter={starFilter}
-                      setStarFilter={setStarFilter}
+                      setStarFilter={handleStarFilterChange}
                     />
                   </div>
                 </div>
