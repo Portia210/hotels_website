@@ -64,7 +64,7 @@ const HotelProperties = ({ hotels, loading }) => {
                   prevArrow={<ArrowSlick type="prev" />}
                 >
                   <div className="cardImage">
-                    <div className="cardImage__content_4-3">
+                    <div className="cardImage__content_3-2">
                       <Image
                         width={600}
                         height={400}
@@ -90,18 +90,25 @@ const HotelProperties = ({ hotels, loading }) => {
               <p className="text-light-1 lh-14 text-14 mt-5">
                 {item?.distance}
               </p>
-              <div className="d-flex items-center mt-20 w-full">
-                <div className="d-flex justify-between align-items-center w-full ">
-                  <div className="flex-center">
-                    {Array.from(Array(item?.stars).keys()).map((_, index) => (
-                      <i
-                        className="icon-star text-16 text-warning"
-                        key={index}
-                      />
-                    ))}
+              <div className="d-flex items-center mt-20">
+                <div className="d-flex justify-between align-items-center w-100">
+                  <div className="d-flex text-14 text-light-1">
+                    <p>Guests review</p>
+                    <span className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white ml-10">
+                      {item?.rate}
+                    </span>
                   </div>
-                  <div className="text-14 text-light-1 ml-10">
-                    guests review: {item?.rate}
+                  <div className="flex-center">
+                    {!item?.stars || item?.stars === 0 ? (
+                      <i class="bi bi-hand-thumbs-up"></i>
+                    ) : (
+                      Array.from(Array(item?.stars).keys()).map((_, index) => (
+                        <i
+                          className="icon-star text-16 text-warning"
+                          key={index}
+                        />
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
