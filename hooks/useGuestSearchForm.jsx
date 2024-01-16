@@ -1,6 +1,7 @@
 import { ADULTS, CHILDRENS, DECREMENT, INCREMENT } from "@/constants/searchBar";
 import useSearchStore from "@/store/useSearchStore";
-import { convertRoomInfo, parseGuestInfo } from "@/utils/convertRoomInfo";
+import { convertRoomInfo } from "@/utils/convertRoomInfo";
+import { loadRoomInfo } from "@/utils/searchFormLoader";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -60,22 +61,8 @@ const useGuestSearchForm = () => {
     setGuestCounts({ Adults, Children, Rooms });
   };
 
-  const updateSearchInput = () => {
-    let searchInput = searchStore?.searchInput;
-    const childrenAges = rooms
-      .map((room) => room.childrens)
-      .flat()
-      .map((age) => Number(age));
-    const guests = convertRoomInfo(rooms);
-    searchInput = {
-      ...searchInput,
-      rooms: rooms.length,
-      adults: rooms.reduce((acc, room) => acc + room.adults, 0),
-      childrens: rooms.reduce((acc, room) => acc + room.childrens.length, 0),
-      childrenAges,
-      guests,
-    };
-    searchStore.setSearchInput(searchInput);
+  const updateSearchInput = () => { 
+   searchStore.setGuestInfo(rooms)
   };
 
   const handleAddRoom = () => {
@@ -91,14 +78,10 @@ const useGuestSearchForm = () => {
     });
   };
 
-  const loadRoomInfo = () => {
-    if (pathName !== "/hotel-list") return;
-    const params = new URLSearchParams(window.location.search);
-    const guests = params.get("guests");
-    const rooms = parseGuestInfo(guests);
-    if (rooms) {
-      setRooms(rooms);
-    }
+  const onLoadRoomInfo = () => {
+    const rooms = loadRoomInfo();
+    if (pathName !== "/hotel-list" || !rooms) return;
+    setRooms(rooms);
   };
 
   useEffect(() => {
@@ -107,7 +90,7 @@ const useGuestSearchForm = () => {
   }, [rooms]);
 
   useEffect(() => {
-    loadRoomInfo();
+    onLoadRoomInfo();
   }, [pathName]);
 
   return {

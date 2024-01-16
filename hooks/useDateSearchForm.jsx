@@ -1,4 +1,5 @@
 import useSearchStore from "@/store/useSearchStore";
+import { loadDateSearch } from "@/utils/searchFormLoader";
 import dayjs from "dayjs";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,10 +13,7 @@ const useDateSearchForm = () => {
   ]);
 
   const updateSearchInput = () => {
-    let searchInput = searchStore.searchInput;
-    searchInput.checkInDate = dayjs(dates[0])?.format("YYYY-MM-DD");
-    searchInput.checkOutDate = dayjs(dates[1])?.format("YYYY-MM-DD");
-    searchStore.setSearchInput(searchInput);
+    searchStore.setDateSearch(dates);
   };
 
   const onPropsChange = (dates) => {
@@ -24,11 +22,9 @@ const useDateSearchForm = () => {
     }
   };
 
-  const loadDateSearch = async () => {
+  const onLoadDateSearch = async () => {
     if (pathName !== "/hotel-list") return;
-    const params = new URLSearchParams(window.location.search);
-    const checkInDate = params.get("checkInDate");
-    const checkOutDate = params.get("checkOutDate");
+    const { checkInDate, checkOutDate } = loadDateSearch();
     if (checkInDate && checkOutDate) {
       setDates([dayjs(checkInDate).toDate(), dayjs(checkOutDate).toDate()]);
     }
@@ -39,7 +35,7 @@ const useDateSearchForm = () => {
   }, [dates]);
 
   useEffect(() => {
-    loadDateSearch();
+    onLoadDateSearch();
   }, [pathName]);
 
   return {

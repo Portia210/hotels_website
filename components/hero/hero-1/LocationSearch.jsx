@@ -16,14 +16,8 @@ const SearchBar = () => {
     selectedLocation,
     searchInputValidation,
     setLocationInput,
-    setLocation,
-    updateInputDestination,
+    handleSelectLocation,
   } = useLocationSearchForm();
-
-  const handleOptionClick = async (destination) => {
-    setLocation(destination);
-    updateInputDestination(destination);
-  };
 
   if (!isLoaded) return null;
   return (
@@ -55,7 +49,7 @@ const SearchBar = () => {
       <PlaceAutocomplete
         input={locationInput}
         selectedItem={selectedLocation}
-        onChange={(destination) => handleOptionClick(destination)}
+        onChange={(destination) => handleSelectLocation(destination)}
       />
     </>
   );

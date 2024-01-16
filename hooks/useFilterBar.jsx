@@ -35,7 +35,7 @@ const useFilterBar = () => {
   const calcHotelData = (hotelData) => {
     let data = [];
     if (!hotelData) {
-      data = hotels.slice(
+      data = memoizedHotels.slice(
         pagination.offset,
         pagination.offset + pagination.limit
       );
@@ -95,7 +95,7 @@ const useFilterBar = () => {
     setRatingFilter(defaultFilter.ratingFilter);
     setStarFilter(defaultFilter.starFilter);
     setPagination(defaultFilter.pagination);
-    calcHotelData(memoizedHotels);
+    calcHotelData();
   };
 
   useEffect(() => {

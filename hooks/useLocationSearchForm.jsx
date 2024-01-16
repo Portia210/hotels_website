@@ -1,4 +1,5 @@
 import useSearchStore from "@/store/useSearchStore";
+import { loadLocation } from "@/utils/searchFormLoader";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -13,50 +14,33 @@ const useLocationSearchForm = () => {
     setLocationInput(destination.destination);
   };
 
-  const updateInputDestination = (destination) => {
-    if (!destination?.destination) return;
-    let searchInput = searchStore.searchInput;
-    searchInput = {
-      ...searchInput,
-      destination,
-    };
-    searchStore.setSearchInput(searchInput);
+  const handleSelectLocation = (destination) => {
+    setLocation(destination);
+    setTimeout(() => {
+      searchStore.setDestination(destination);
+    });
   };
 
-  const loadLocation = async () => {
+  const onLoadLocation = async () => {
     if (pathName !== "/hotel-list") return;
-    const params = new URLSearchParams(window.location.search);
-    if (params.has("destination")) {
-      const destination = JSON.parse(params.get("destination"));
-      setLocation(destination);
-      setTimeout(() => {
-        updateInputDestination(destination);
-      });
-      return destination;
-    }
+    const destination = loadLocation();
+    handleSelectLocation(destination);
   };
 
   useEffect(() => {
-    loadLocation();
+    onLoadLocation();
   }, [pathName]);
 
-
   useEffect(() => {
-    if (!locationInput) {
-      searchStore.setSearchInput({
-        ...searchStore.searchInput,
-        destination: null,
-      });
-    }
+    if (!locationInput) searchStore.setDestination(null);
   }, [locationInput]);
-  
+
   return {
     locationInput,
     selectedLocation,
     searchInputValidation: searchStore.searchInputValidation,
-    setLocation,
     setLocationInput,
-    updateInputDestination,
+    handleSelectLocation,
   };
 };
 export default useLocationSearchForm;
