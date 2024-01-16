@@ -94,7 +94,7 @@ const HotelProperties = ({ hotels, loading }) => {
                   </div>
                   <div className="flex-center">
                     {!item?.stars || item?.stars === 0 ? (
-                      <i class="bi bi-hand-thumbs-up"></i>
+                      <i className="bi bi-hand-thumbs-up"></i>
                     ) : (
                       Array.from(Array(item?.stars).keys()).map((_, index) => (
                         <i
