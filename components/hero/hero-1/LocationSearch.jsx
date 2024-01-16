@@ -1,68 +1,31 @@
 "use client";
 
 import { GOOGLE_MAP_API_KEY } from "@/constants/config";
-import useSearchStore from "@/store/useSearchStore";
 import { useLoadScript } from "@react-google-maps/api";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import PlaceAutocomplete from "./PlaceAutocomplete";
+import useLocationSearchForm from "@/hooks/useLocationSearchForm";
 
 const SearchBar = () => {
-  const pathName = usePathname();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries: ["places"],
     region: "US",
   });
-  const searchStore = useSearchStore();
-  const { searchInputValidation } = searchStore;
-  const [searchValue, setSearchValue] = useState("");
-  const [selectedItem, setSelectedItem] = useState(null);
+  const {
+    locationInput,
+    selectedLocation,
+    searchInputValidation,
+    setLocationInput,
+    setLocation,
+    updateInputDestination,
+  } = useLocationSearchForm();
 
-  const updateInputDestination = (destination) => {
-    let searchInput = searchStore.searchInput;
-    searchInput = {
-      ...searchInput,
-      destination,
-    };
-    searchStore.setSearchInput(searchInput);
+  const handleOptionClick = async (destination) => {
+    setLocation(destination);
+    updateInputDestination(destination);
   };
-
-  const handleOptionClick = async (item) => {
-    setSelectedItem(item);
-    setSearchValue(item.destination);
-    if (!item?.destination) return;
-    updateInputDestination(item);
-  };
-
-  const loadLocation = async () => {
-    if (pathName !== "/hotel-list") return;
-    const params = new URLSearchParams(window.location.search);
-    if (params.has("destination")) {
-      const destination = JSON.parse(params.get("destination"));
-      setSelectedItem(destination);
-      setSearchValue(destination.destination);
-      setTimeout(() => {
-        updateInputDestination(destination);
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (!searchValue) {
-      searchStore.setSearchInput({
-        ...searchStore.searchInput,
-        destination: null,
-      });
-    }
-  }, [searchValue]);
-
-  useEffect(() => {
-    loadLocation();
-  }, [pathName]);
 
   if (!isLoaded) return null;
-
   return (
     <>
       <div
@@ -81,18 +44,18 @@ const SearchBar = () => {
               className={`js-search js-dd-focus form-control ${
                 !searchInputValidation.destination ? "is-invalid" : ""
               }`}
-              value={searchValue}
+              value={locationInput}
               disabled={!isLoaded}
-              onChange={(e) => setSearchValue(e.target.value)}
+              onChange={(e) => setLocationInput(e.target.value)}
             />
             <div className="invalid-feedback">Enter your location</div>
           </div>
         </div>
       </div>
       <PlaceAutocomplete
-        input={searchValue}
-        selectedItem={selectedItem}
-        onChange={(item) => handleOptionClick(item)}
+        input={locationInput}
+        selectedItem={selectedLocation}
+        onChange={(destination) => handleOptionClick(destination)}
       />
     </>
   );
