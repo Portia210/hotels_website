@@ -23,8 +23,7 @@ const useDateSearchForm = () => {
   };
 
   const onLoadDateSearch = async () => {
-    if (pathName !== "/hotel-list") return;
-    const { checkInDate, checkOutDate } = loadDateSearch();
+    const { checkInDate, checkOutDate } = loadDateSearch(pathName);
     if (checkInDate && checkOutDate) {
       setDates([dayjs(checkInDate).toDate(), dayjs(checkOutDate).toDate()]);
     }

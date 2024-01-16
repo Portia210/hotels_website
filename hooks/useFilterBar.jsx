@@ -1,5 +1,4 @@
 import { PriceFilter } from "@/constants/searchFilter";
-import useHotelList from "@/hooks/useHotelList";
 import { cloneDeep } from "lodash";
 import { useEffect, useMemo, useState } from "react";
 
@@ -16,8 +15,7 @@ const defaultFilter = {
   },
 };
 
-const useFilterBar = () => {
-  const { hotels, fetchHotelList, loading } = useHotelList();
+const useFilterBar = (hotels) => {
   const [data, setData] = useState(hotels.slice(0, 36));
   const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
   const [ratingFilter, setRatingFilter] = useState(defaultFilter.ratingFilter);
@@ -99,10 +97,6 @@ const useFilterBar = () => {
   };
 
   useEffect(() => {
-    fetchHotelList();
-  }, []);
-
-  useEffect(() => {
     const offset = (currentPage - 1) * pagination.limit;
     setPagination((prev) => ({ ...prev, page: currentPage, offset }));
   }, [currentPage]);
@@ -131,7 +125,6 @@ const useFilterBar = () => {
 
   return {
     data,
-    loading,
     priceFilter,
     ratingFilter,
     starFilter,

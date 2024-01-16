@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { parseGuestInfo } from "./convertRoomInfo";
 
 const loadLocation = () => {
@@ -8,19 +9,37 @@ const loadLocation = () => {
   }
 };
 
-const loadDateSearch = () => {
-  const params = new URLSearchParams(window.location.search);
-  const checkInDate = params.get("checkInDate");
-  const checkOutDate = params.get("checkOutDate");
+const loadDateSearch = (pathName) => {
+  let checkInDate = null;
+  let checkOutDate = null;
+  if (pathName === "/hotel-list") {
+    const params = new URLSearchParams(window.location.search);
+    checkInDate = params.get("checkInDate");
+    checkOutDate = params.get("checkOutDate");
+  } else if (pathName === "/") {
+    const searchInput = JSON.parse(Cookies.get("searchInput") || "{}");
+    if (searchInput) {
+      checkInDate = searchInput.checkInDate;
+      checkOutDate = searchInput.checkOutDate;
+    }
+  }
+
   return {
     checkInDate,
     checkOutDate,
   };
 };
 
-const loadRoomInfo = () => {
-  const params = new URLSearchParams(window.location.search);
-  const guests = params.get("guests");
+const loadRoomInfo = (pathName) => {
+  let guests = "";
+  if (pathName === "/hotel-list") {
+    const params = new URLSearchParams(window.location.search);
+    guests = params.get("guests");
+  } else if (pathName === "/") {
+    const searchInput = JSON.parse(Cookies.get("searchInput") || "{}");
+    console.log("searchInput", searchInput);
+    if (searchInput) guests = searchInput.guests;
+  }
   return parseGuestInfo(guests);
 };
 

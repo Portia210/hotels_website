@@ -3,11 +3,13 @@ import DropdownSelelctBar from "@/components/hotel-list/common/DropdownSelelctBa
 import Pagination from "@/components/hotel-list/common/Pagination";
 import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
 import useFilterBar from "@/hooks/useFilterBar";
+import useHotelList from "@/hooks/useHotelList";
+import { useEffect } from "react";
 
 export default function ListHotels() {
+  const { hotels, fetchHotelList, loading } = useHotelList();
   const {
     data,
-    loading,
     filterByBiggestPriceGap,
     pagination,
     currentPage,
@@ -19,7 +21,13 @@ export default function ListHotels() {
     starFilter,
     handleStarFilterChange,
     resetFilter,
-  } = useFilterBar();
+  } = useFilterBar(hotels);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetchHotelList();
+    }, 50);
+  }, []);
 
   return (
     <>

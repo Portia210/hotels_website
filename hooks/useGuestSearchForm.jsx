@@ -1,7 +1,7 @@
 import { ADULTS, CHILDRENS, DECREMENT, INCREMENT } from "@/constants/searchBar";
 import useSearchStore from "@/store/useSearchStore";
-import { convertRoomInfo } from "@/utils/convertRoomInfo";
 import { loadRoomInfo } from "@/utils/searchFormLoader";
+import { cloneDeep } from "lodash";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -61,8 +61,8 @@ const useGuestSearchForm = () => {
     setGuestCounts({ Adults, Children, Rooms });
   };
 
-  const updateSearchInput = () => { 
-   searchStore.setGuestInfo(rooms)
+  const updateSearchInput = () => {
+    searchStore.setGuestInfo(rooms);
   };
 
   const handleAddRoom = () => {
@@ -79,8 +79,8 @@ const useGuestSearchForm = () => {
   };
 
   const onLoadRoomInfo = () => {
-    const rooms = loadRoomInfo();
-    if (pathName !== "/hotel-list" || !rooms) return;
+    const rooms = loadRoomInfo(pathName);
+    if (!rooms) return;
     setRooms(rooms);
   };
 

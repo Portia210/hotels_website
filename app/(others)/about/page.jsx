@@ -1,12 +1,10 @@
 import Block1 from "@/components/about/Block1";
-import WhyChoose from "@/components/block/BlockGuide";
 import Brand from "@/components/brand/Brand";
 import Counter from "@/components/counter/Counter";
 import Counter2 from "@/components/counter/Counter2";
 import DefaultFooter from "@/components/footer/default";
 import DefaultHeader from "@/components/header/default-header";
 import Team1 from "@/components/team/Team1";
-import Testimonial from "@/components/testimonial/Testimonial";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 
@@ -65,11 +63,6 @@ const About = () => {
                 </p>
               </div>
             </div>
-          </div>
-          {/* End .row */}
-
-          <div className="row y-gap-40 justify-between pt-50">
-            <WhyChoose />
           </div>
           {/* End .row */}
         </div>
@@ -138,13 +131,6 @@ const About = () => {
             </div>
           </div>
           {/* End .row */}
-
-          <div className="overflow-hidden pt-80 js-section-slider">
-            <div className="item_gap-x30">
-              <Testimonial />
-            </div>
-          </div>
-          {/* End .overflow-hidden */}
 
           <div className="row y-gap-30 items-center pt-40 sm:pt-20">
             <div className="col-xl-4">

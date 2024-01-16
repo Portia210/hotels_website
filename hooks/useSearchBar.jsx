@@ -1,5 +1,6 @@
 import useSearchStore from "@/store/useSearchStore";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { cloneDeep } from "lodash";
 
 const useSearchBar = () => {
@@ -39,6 +40,9 @@ const useSearchBar = () => {
       });
       const sessionId = await getSession(searchStore.searchInput);
       let searchInput = cloneDeep(searchStore.searchInput);
+      Cookies.set("searchInput", JSON.stringify(searchInput), {
+        expires: 7,
+      });
       delete searchInput.childrenAges;
       searchInput.sessionId = sessionId;
       searchInput.destination = JSON.stringify(searchInput.destination);
