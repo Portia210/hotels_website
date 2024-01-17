@@ -41,7 +41,7 @@ const useSearchBar = () => {
       const sessionId = await getSession(searchStore.searchInput);
       let searchInput = cloneDeep(searchStore.searchInput);
       Cookies.set("searchInput", JSON.stringify(searchInput), {
-        expires: 7,
+        expires: 1,
       });
       delete searchInput.childrenAges;
       searchInput.sessionId = sessionId;

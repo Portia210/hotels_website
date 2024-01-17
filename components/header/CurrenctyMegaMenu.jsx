@@ -1,41 +1,15 @@
+"use client";
 
-'use client'
-
-import { useState } from "react";
+import useCurrency from "@/hooks/useCurrency";
 
 const CurrenctyMegaMenu = ({ textClass }) => {
-  const [click, setClick] = useState(false);
-  const handleCurrency = () => setClick((prevState) => !prevState);
-
-  const currencyContent = [
-    { id: 1, name: "United States dollar", currency: "USD", symbol: "$" },
-    { id: 2, name: "Australian dollar", currency: "AUD", symbol: "$" },
-    { id: 3, name: "Brazilian real", currency: "BRL", symbol: "R$" },
-    { id: 4, name: "Bulgarian lev", currency: "BGN", symbol: "лв." },
-    { id: 5, name: "Canadian dollar", currency: "CAD", symbol: "$" },
-    { id: 6, name: "Bangladeshi Taka", currency: "BDT", symbol: "৳" },
-    { id: 7, name: "Azerbaijan Manat", currency: "AZN", symbol: "₼" },
-    { id: 8, name: "Colombia Peso", currency: "COP", symbol: "$" },
-    { id: 9, name: "Oman Rial", currency: "OMR", symbol: "﷼" },
-    { id: 10, name: "India Rupee", currency: "INR", symbol: "₹" },
-    { id: 11, name: "Iran Rial", currency: "IRR", symbol: "﷼" },
-    { id: 12, name: "Japan Yen", currency: "JPY", symbol: "£" },
-    { id: 13, name: "Jersey Pound", currency: "JEP", symbol: "£" },
-    { id: 14, name: "Korea (South) Won", currency: "KRW", symbol: "	₩" },
-    { id: 15, name: "Lebanon Pound", currency: "LBP", symbol: "$" },
-    { id: 16, name: "Liberia Dollar", currency: "LRD", symbol: "$" },
-    { id: 17, name: "Malaysia Ringgit", currency: "MYR", symbol: "$" },
-    { id: 18, name: "Mexico Peso", currency: "MXN", symbol: "$" },
-    { id: 19, name: "Namibia Dollar", currency: "NAD", symbol: "R$" },
-    { id: 20, name: "Nepal Rupee", currency: "NPR", symbol: "Nepal Rupee" },
-  ];
-
-  const [selectedCurrency, setSelectedCurrency] = useState(currencyContent[0]);
-
-  const handleItemClick = (item) => {
-    setSelectedCurrency(item);
-    setClick(false);
-  };
+  const {
+    handleCurrency,
+    currencies,
+    selectedCurrency,
+    handleItemClick,
+    click,
+  } = useCurrency();
 
   return (
     <>
@@ -46,7 +20,7 @@ const CurrenctyMegaMenu = ({ textClass }) => {
           onClick={handleCurrency}
         >
           <span className="js-currencyMenu-mainTitle">
-            {selectedCurrency.currency}
+            {selectedCurrency?.currency}
           </span>
           <i className="icon-chevron-sm-down text-7 ml-10" />
         </button>
@@ -69,12 +43,12 @@ const CurrenctyMegaMenu = ({ textClass }) => {
           </div>
           {/* End flex wrapper */}
           <ul className="modalGrid px-30 py-30 sm:px-15 sm:py-15">
-            {currencyContent.map((item) => (
+            {currencies.map((item) => (
               <li
                 className={`modalGrid__item js-item ${
-                  selectedCurrency.currency === item.currency ? "active" : ""
+                  selectedCurrency?.currency === item.currency ? "active" : ""
                 }`}
-                key={item.id}
+                key={item.currency}
                 onClick={() => handleItemClick(item)}
               >
                 <div className="py-10 px-15 sm:px-5 sm:py-5">
@@ -82,8 +56,7 @@ const CurrenctyMegaMenu = ({ textClass }) => {
                     {item.name}
                   </div>
                   <div className="text-14 lh-15 mt-5">
-                    <span className="js-title">{item.currency}</span>-{" "}
-                    {item.symbol}
+                    {item.currency}
                   </div>
                 </div>
               </li>
