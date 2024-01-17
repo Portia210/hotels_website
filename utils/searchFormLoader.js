@@ -37,7 +37,6 @@ const loadRoomInfo = (pathName) => {
     guests = params.get("guests");
   } else if (pathName === "/") {
     const searchInput = JSON.parse(Cookies.get("searchInput") || "{}");
-    console.log("searchInput", searchInput);
     if (searchInput) guests = searchInput.guests;
   }
   return parseGuestInfo(guests);

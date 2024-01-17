@@ -2,7 +2,7 @@ import useCurrencyStore from "@/store/useCurrencyStore";
 import { loadDefaultCurrency } from "@/utils/currencyConverter";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useCurrency = () => {
   const currencyStore = useCurrencyStore();
@@ -30,12 +30,13 @@ const useCurrency = () => {
 
   const onLoadCurrency = () => {
     const currency = loadDefaultCurrency(currencies);
+    if (!currency) return;
     currencyStore.setCurrency(currency);
   };
 
   useEffect(() => {
     onLoadCurrency();
-  }, [selectedCurrency]);
+  }, [selectedCurrency, currencies]);
 
   return {
     handleCurrency,
