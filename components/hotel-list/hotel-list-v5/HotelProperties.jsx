@@ -1,11 +1,9 @@
 "use client";
 
-import useCurrency from "@/hooks/useCurrency";
 import useCurrencyStore from "@/store/useCurrencyStore";
 import { convertCurrency } from "@/utils/currencyConverter";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import Slider from "react-slick";
 
 const itemSettings = {
