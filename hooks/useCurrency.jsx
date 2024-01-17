@@ -1,7 +1,9 @@
+import useCurrencyStore from "@/store/useCurrencyStore";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const useCurrency = () => {
+  const currencyStore = useCurrencyStore();
   const [click, setClick] = useState(false);
   const handleCurrency = () => setClick((prevState) => !prevState);
   const [currencies, setCurrencies] = useState([]);
@@ -21,6 +23,10 @@ const useCurrency = () => {
   useEffect(() => {
     fetchCurrencies();
   }, []);
+
+  useEffect(() => {
+    currencyStore.setCurrency(selectedCurrency);
+  }, [selectedCurrency]);
 
   return {
     handleCurrency,

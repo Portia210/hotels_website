@@ -1,17 +1,23 @@
 "use client";
 
+import useCurrency from "@/hooks/useCurrency";
+import useCurrencyStore from "@/store/useCurrencyStore";
+import { convertCurrency } from "@/utils/currencyConverter";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import Slider from "react-slick";
 
+const itemSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+};
+
 const HotelProperties = ({ hotels, loading }) => {
-  var itemSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const { currency } = useCurrencyStore();
 
   // custom navigation
   function ArrowSlick(props) {
@@ -109,8 +115,7 @@ const HotelProperties = ({ hotels, loading }) => {
               <div className="mt-5">
                 <div className="d-flex justify-between fw-500">
                   <span className="">
-                    {item?.travelorPrice} {""}
-                    {item.travelorCurrency}
+                    {convertCurrency(item?.travelorPrice, currency)}
                   </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.travelorLink}>
@@ -120,7 +125,7 @@ const HotelProperties = ({ hotels, loading }) => {
                 </div>
                 <div className="d-flex justify-between fw-500">
                   <span className="">
-                    {item?.bookingPrice} {item.bookingCurrency}
+                    {convertCurrency(item?.bookingPrice, currency)}
                   </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.bookingLink}>
