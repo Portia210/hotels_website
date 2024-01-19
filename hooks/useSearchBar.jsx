@@ -12,6 +12,8 @@ const useSearchBar = () => {
    */
   const getSession = async (searchInput) => {
     try {
+      searchInput.children = searchInput.childrens
+      searchInput.adult = searchInput.adults
       const sessionId = await axios
         .post("/api/hotel-list/session", searchInput)
         .then((res) => res.data);
