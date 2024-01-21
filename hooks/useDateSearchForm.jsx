@@ -24,7 +24,12 @@ const useDateSearchForm = () => {
 
   const onLoadDateSearch = async () => {
     const { checkInDate, checkOutDate } = loadDateSearch(pathName);
-    if (checkInDate && checkOutDate) {
+    if (
+      dayjs().isAfter(dayjs(checkInDate)) ||
+      dayjs().isAfter(dayjs(checkOutDate))
+    ) {
+      return setDates([dayjs().toDate(), dayjs().add(30, "day").toDate()]);
+    } else if (checkInDate && checkOutDate) {
       setDates([dayjs(checkInDate).toDate(), dayjs(checkOutDate).toDate()]);
     }
   };

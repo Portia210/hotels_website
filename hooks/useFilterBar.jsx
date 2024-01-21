@@ -2,13 +2,14 @@ import { PriceFilter } from "@/constants/searchFilter";
 import { cloneDeep } from "lodash";
 import { useEffect, useMemo, useState } from "react";
 
+const hotelPerPage = 24;
 const defaultFilter = {
   priceFilter: PriceFilter.HTL,
   ratingFilter: 6,
   starFilter: [3],
   pagination: {
     page: 1,
-    limit: 36,
+    limit: hotelPerPage,
     totalPages: 1,
     totalResults: 1,
     offset: 0,
@@ -16,7 +17,7 @@ const defaultFilter = {
 };
 
 const useFilterBar = (hotels) => {
-  const [data, setData] = useState(hotels.slice(0, 36));
+  const [data, setData] = useState(hotels.slice(0, defaultFilter.hotelPerPage));
   const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
   const [ratingFilter, setRatingFilter] = useState(defaultFilter.ratingFilter);
   const [starFilter, setStarFilter] = useState(defaultFilter.starFilter);

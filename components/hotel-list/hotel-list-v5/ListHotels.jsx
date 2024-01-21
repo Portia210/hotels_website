@@ -5,6 +5,7 @@ import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperti
 import useFilterBar from "@/hooks/useFilterBar";
 import useHotelList from "@/hooks/useHotelList";
 import { useEffect } from "react";
+import ResultHeader from "./ResultHeader";
 
 export default function ListHotels() {
   const { hotels, fetchHotelList, loading } = useHotelList();
@@ -83,6 +84,10 @@ export default function ListHotels() {
             {/* End border-top */}
 
             <div className="row y-gap-30">
+              <ResultHeader
+                loading={loading}
+                totalResult={pagination.totalResults}
+              />
               <HotelProperties hotels={data} loading={loading} />
             </div>
             {/* End .row */}

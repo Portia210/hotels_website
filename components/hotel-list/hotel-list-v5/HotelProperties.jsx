@@ -43,8 +43,6 @@ const HotelProperties = ({ hotels, loading }) => {
 
   return (
     <>
-      {loading && <h3>Loading...</h3>}
-      {!loading && hotels?.length === 0 && <h3>No hotels found</h3>}
       {hotels.map((item, index) => (
         <div
           className="col-lg-3 col-sm-6"
@@ -68,6 +66,7 @@ const HotelProperties = ({ hotels, loading }) => {
                         height={400}
                         className="rounded-4 col-12 js-lazy"
                         src={item?.picture_link || "/img/hotels/1.png"}
+                        loading="lazy"
                         alt="image"
                       />
                     </div>
