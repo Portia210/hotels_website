@@ -18,15 +18,15 @@ export const languageContent = [
 const useLanguageStore = create((set) => ({
   language: languageContent[0],
   isReverse: false,
-  setLanguage: (language) =>
+  setLanguage: (selectedLanguage) =>
     set((state) => {
-      if (language.language === "Hebrew") {
+      if (selectedLanguage.language === "Hebrew") {
         state.isReverse = true;
       } else {
         state.isReverse = false;
       }
-      state.language = language;
-      return language;
+      state.language = selectedLanguage;
+      return state;
     }),
 }));
 export default useLanguageStore;

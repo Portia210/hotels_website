@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 const LanguageMegaMenu = ({ textClass }) => {
   const [click, setClick] = useState(false);
   const { language, setLanguage } = useLanguageStore();
+  const [_, setSelectedLanguage] = useState(language); // workarround to rerender components
 
-  // console.log(language);
   const onClick = () => setClick((prevState) => !prevState);
 
   const handleLanguageClick = (language) => {
@@ -23,6 +23,7 @@ const LanguageMegaMenu = ({ textClass }) => {
     if (language) {
       language = JSON.parse(language);
       setLanguage(language);
+      setSelectedLanguage(language);
     }
   };
 
@@ -41,7 +42,7 @@ const LanguageMegaMenu = ({ textClass }) => {
           <Image
             width={20}
             height={20}
-            src={language?.src || "/img/general/israel.png"}
+            src={language?.src}
             alt="image"
             className="rounded-full mr-10"
           />
@@ -57,7 +58,7 @@ const LanguageMegaMenu = ({ textClass }) => {
           <div className="d-flex items-center justify-between px-30 py-20 sm:px-15 border-bottom-light">
             <div className="text-20 fw-500 lh-15">Select your language</div>
             {/* End title */}
-            <button className="pointer" onClick={handleLanguageClick}>
+            <button className="pointer" onClick={onClick}>
               <i className="icon-close" />
             </button>
             {/* End colse button */}
