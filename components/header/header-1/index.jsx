@@ -74,6 +74,18 @@ const Header1 = () => {
                 </div>
                 {/* End language and currency selector */}
 
+
+                {/* Start btn-group */}
+                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+                  <Link
+                    href="/signup"
+                    className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
+                  >
+                    Sign In / Register
+                  </Link>
+                </div>
+                {/* End btn-group */}
+
                 {/* Start mobile menu icon */}
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-white">
                   <div>
