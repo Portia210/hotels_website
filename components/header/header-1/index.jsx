@@ -8,8 +8,10 @@ import LanguageMegaMenu from "../LanguageMegaMenu";
 import MobileMenu from "../MobileMenu";
 import { isActiveLink } from "@/utils/linkActiveChecker";
 import { usePathname } from "next/navigation";
+import useLanguageStore from "@/store/useLanguageStore";
 
 const Header1 = () => {
+  const { isReverse } = useLanguageStore();
   const pathname = usePathname();
   const [navbar, setNavbar] = useState(false);
 
@@ -23,7 +25,7 @@ const Header1 = () => {
 
   useEffect(() => {
     const isHome = isActiveLink("/", pathname);
-    if (!isHome){
+    if (!isHome) {
       return setNavbar(true);
     } else {
       window.addEventListener("scroll", changeBackground);
@@ -37,10 +39,18 @@ const Header1 = () => {
     <>
       <header className={`header ${navbar ? "bg-dark-1 is-sticky" : ""}`}>
         <div className="header__container px-30 sm:px-20">
-          <div className="row justify-between items-center">
+          <div
+            className={`row justify-between items-center ${
+              isReverse ? "flex-row-reverse" : ""
+            }`}
+          >
             <div className="col-auto">
-              <div className="d-flex items-center">
-                <Link href="/" className="header-logo mr-20">
+              <div
+                className={`d-flex items-center ${
+                  isReverse ? "flex-row-reverse" : ""
+                }`}
+              >
+                <Link href="/" className={`header-logo mr-20`}>
                   <img src="/img/general/logo-light.svg" alt="logo icon" />
                   <img src="/img/general/logo-dark.svg" alt="logo icon" />
                 </Link>
@@ -48,7 +58,9 @@ const Header1 = () => {
 
                 <div className="header-menu">
                   <div className="header-menu__content">
-                    <MainMenu style="text-white" />
+                    <MainMenu
+                      style={`text-white ${true ? "flex-row-reverse" : ""}`}
+                    />
                   </div>
                 </div>
                 {/* End header-menu */}
@@ -58,7 +70,11 @@ const Header1 = () => {
             {/* End col */}
 
             <div className="col-auto">
-              <div className="d-flex items-center">
+              <div
+                className={`d-flex items-center ${
+                  isReverse ? "flex-row-reverse" : ""
+                }`}
+              >
                 <div className="row x-gap-20 items-center xxl:d-none">
                   <CurrenctyMegaMenu textClass="text-white" />
                   {/* End Megamenu for Currencty */}
@@ -74,12 +90,17 @@ const Header1 = () => {
                 </div>
                 {/* End language and currency selector */}
 
-
                 {/* Start btn-group */}
-                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+                <div
+                  className={`d-flex items-center ${
+                    isReverse ? "mr-20" : "ml-20"
+                  } is-menu-opened-hide md:d-none`}
+                >
                   <Link
                     href="/signup"
-                    className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
+                    className={`button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
+                      isReverse ? "mr-20" : "ml-20"
+                    }`}
                   >
                     Sign In / Register
                   </Link>

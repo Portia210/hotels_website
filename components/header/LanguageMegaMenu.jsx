@@ -1,23 +1,35 @@
+"use client";
 
-'use client'
-
+import useLanguageStore, { languageContent } from "@/store/useLanguageStore";
+import Cookies from "js-cookie";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const LanguageMegaMenu = ({ textClass }) => {
   const [click, setClick] = useState(false);
-  const handleCurrency = () => setClick((prevState) => !prevState);
+  const { language, setLanguage } = useLanguageStore();
+  const [_, setSelectedLanguage] = useState(language); // workarround to rerender components
 
-  const languageContent = [
-    { id: 1, language: "English", country: "English" },
-  ];
+  const onClick = () => setClick((prevState) => !prevState);
 
-  const [selectedCurrency, setSelectedCurrency] = useState(languageContent[0]);
-
-  const handleItemClick = (item) => {
-    setSelectedCurrency(item);
+  const handleLanguageClick = (language) => {
+    Cookies.set("language", JSON.stringify(language));
+    setLanguage(language);
     setClick(false);
   };
+
+  const loadLanguage = () => {
+    let language = Cookies.get("language");
+    if (language) {
+      language = JSON.parse(language);
+      setLanguage(language);
+      setSelectedLanguage(language);
+    }
+  };
+
+  useEffect(() => {
+    loadLanguage();
+  }, []);
 
   return (
     <>
@@ -25,31 +37,28 @@ const LanguageMegaMenu = ({ textClass }) => {
       <div className="col-auto">
         <button
           className={`d-flex items-center text-14 ${textClass}`}
-          // onClick={handleCurrency}
+          onClick={() => setClick((prevState) => !prevState)}
         >
           <Image
             width={20}
             height={20}
-            src="/img/general/lang.png"
+            src={language?.src}
             alt="image"
             className="rounded-full mr-10"
           />
-          <span className="js-language-mainTitle">
-            {" "}
-            {selectedCurrency.country}
-          </span>
+          <span className="js-language-mainTitle"> {language?.language}</span>
           {/* <i className="icon-chevron-sm-down text-7 ml-15" /> */}
         </button>
       </div>
       {/* End language currency Selector */}
 
       <div className={`langMenu js-langMenu ${click ? "" : "is-hidden"}`}>
-        <div className="currencyMenu__bg" onClick={handleCurrency}></div>
+        <div className="currencyMenu__bg" onClick={onClick}></div>
         <div className="langMenu__content bg-white rounded-4">
           <div className="d-flex items-center justify-between px-30 py-20 sm:px-15 border-bottom-light">
             <div className="text-20 fw-500 lh-15">Select your language</div>
             {/* End title */}
-            <button className="pointer" onClick={handleCurrency}>
+            <button className="pointer" onClick={onClick}>
               <i className="icon-close" />
             </button>
             {/* End colse button */}
@@ -59,10 +68,11 @@ const LanguageMegaMenu = ({ textClass }) => {
             {languageContent.map((item) => (
               <li
                 className={`modalGrid__item js-item ${
-                  selectedCurrency.country === item.country ? "active" : ""
+                  language?.country === item.country ? "active" : ""
                 }`}
+                style={{ height: "fit-content" }}
                 key={item.id}
-                onClick={() => handleItemClick(item)}
+                onClick={() => handleLanguageClick(item)}
               >
                 <div className="py-10 px-15 sm:px-5 sm:py-5">
                   <div className="text-15 lh-15 fw-500 text-dark-1">
