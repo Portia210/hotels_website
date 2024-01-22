@@ -11,7 +11,9 @@ import { usePathname } from "next/navigation";
 import useLanguageStore from "@/store/useLanguageStore";
 
 const Header1 = () => {
-  const { isReverse } = useLanguageStore();
+  const language = useLanguageStore((state) => state.language);
+  const isReverse = language.language === "Hebrew";
+
   const pathname = usePathname();
   const [navbar, setNavbar] = useState(false);
 

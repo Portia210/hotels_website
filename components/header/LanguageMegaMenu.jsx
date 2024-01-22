@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 const LanguageMegaMenu = ({ textClass }) => {
   const [click, setClick] = useState(false);
   const { language, setLanguage } = useLanguageStore();
-  const [_, setSelectedLanguage] = useState(language); // workarround to rerender components
 
   const onClick = () => setClick((prevState) => !prevState);
 
@@ -22,8 +21,8 @@ const LanguageMegaMenu = ({ textClass }) => {
     let language = Cookies.get("language");
     if (language) {
       language = JSON.parse(language);
+      console.log("language:: set", language);
       setLanguage(language);
-      setSelectedLanguage(language);
     }
   };
 
