@@ -21,7 +21,6 @@ const LanguageMegaMenu = ({ textClass }) => {
     let language = Cookies.get("language");
     if (language) {
       language = JSON.parse(language);
-      console.log("language:: set", language);
       setLanguage(language);
     }
   };

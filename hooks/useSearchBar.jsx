@@ -12,8 +12,8 @@ const useSearchBar = () => {
    */
   const getSession = async (searchInput) => {
     try {
-      searchInput.children = searchInput.childrens
-      searchInput.adult = searchInput.adults
+      searchInput.children = searchInput.childrens;
+      searchInput.adult = searchInput.adults;
       const sessionId = await axios
         .post("/api/hotel-list/session", searchInput)
         .then((res) => res.data);
@@ -27,7 +27,7 @@ const useSearchBar = () => {
   const handleSearch = async (path) => {
     if (!path) throw Error("search path is required");
     const destinationInput = document.getElementById("destinationInput").value;
-    if (!destinationInput) {
+    if (!destinationInput || !searchStore?.searchInput?.destination?.placeId) {
       searchStore.setSearchInputValidation({
         destination: false,
       });
