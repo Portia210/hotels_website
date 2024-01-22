@@ -1,11 +1,4 @@
 import Link from "next/link";
-
-import { homeItems } from "../../data/mainMenuData";
-import {
-  isActiveLink,
-  isActiveParentChaild,
-} from "../../utils/linkActiveChecker";
-
 import { usePathname } from "next/navigation";
 
 const MainMenu = ({ style = "" }) => {
