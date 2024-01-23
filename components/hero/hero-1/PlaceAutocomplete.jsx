@@ -42,12 +42,12 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
   return (
     <>
       <div className="shadow-2 dropdown-menu min-width-400">
-        <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
+        <div className="bg-white px-20 py-20 sm:px-0 rounded-8">
           <ul className="y-gap-5 js-results">
             {status === "OK" &&
               data?.map((item) => (
                 <li
-                  className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
+                  className={`-link d-block col-12 text-left rounded-8 px-20 py-15 js-search-option mb-1 ${
                     selectedItem && selectedItem.place_id === item.place_id
                       ? "active"
                       : ""
@@ -72,12 +72,12 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
                 </li>
               ))}
             {!input && (
-              <li className="text-15 lh-12 fw-500 js-search-option-target">
+              <li className="text-15 lh-12 fw-500 js-search-option-target rounded-8">
                 Enter a location
               </li>
             )}
             {status === "ZERO_RESULTS" && (
-              <li className="text-15 lh-12 fw-500 js-search-option-target">
+              <li className="text-15 text-center lh-12 fw-500 js-search-option-target rounded-8">
                 No results found
               </li>
             )}
