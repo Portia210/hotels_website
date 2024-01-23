@@ -42,7 +42,7 @@ const SearchBar = () => {
               disabled={!isLoaded}
               onChange={(e) => setLocationInput(e.target.value)}
             />
-            <div className="invalid-feedback">Enter your location</div>
+            <div className="invalid-feedback">Please select one of the options</div>
           </div>
         </div>
       </div>

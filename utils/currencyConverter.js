@@ -1,7 +1,8 @@
 import Cookies from "js-cookie";
 
 const convertCurrency = (amount, currencyInput) => {
-  const { rate, currency } = currencyInput;
+  const rate = currencyInput?.rate;
+  const currency = currencyInput?.currency;
   if (!amount || !rate) return amount;
   const convertedPrice = Math.round(amount * rate);
   return `${convertedPrice} ${currency}`;

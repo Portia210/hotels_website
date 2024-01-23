@@ -4,42 +4,18 @@ import useCurrencyStore from "@/store/useCurrencyStore";
 import { convertCurrency } from "@/utils/currencyConverter";
 import Image from "next/image";
 import Link from "next/link";
-import Slider from "react-slick";
-
-const itemSettings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-};
+import { useState } from "react";
+import HotelInfoToast from "../common/HotelInfoToast";
+import HotelStars from "../common/HotelStars";
 
 const HotelProperties = ({ hotels, loading }) => {
+  const [selectedHotel, setSelectedHotel] = useState(null);
   const { currency } = useCurrencyStore();
 
-  // custom navigation
-  function ArrowSlick(props) {
-    let className =
-      props.type === "next"
-        ? "slick_arrow-between slick_arrow -next arrow-md flex-center button -blue-1 bg-white shadow-1 size-30 rounded-full sm:d-none js-next"
-        : "slick_arrow-between slick_arrow -prev arrow-md flex-center button -blue-1 bg-white shadow-1 size-30 rounded-full sm:d-none js-prev";
-    className += " arrow";
-    const char =
-      props.type === "next" ? (
-        <>
-          <i className="icon icon-chevron-right text-12"></i>
-        </>
-      ) : (
-        <>
-          <span className="icon icon-chevron-left text-12"></span>
-        </>
-      );
-    return (
-      <button className={className} onClick={props.onClick}>
-        {char}
-      </button>
-    );
-  }
+  const onShowHotelInfo = (hotelData) => {
+    document.getElementById("liveToast")?.classList?.add("show");
+    setSelectedHotel(hotelData);
+  };
 
   return (
     <>
@@ -53,28 +29,24 @@ const HotelProperties = ({ hotels, loading }) => {
           <div className="hotelsCard -type-1 hover-inside-slider">
             <div className="hotelsCard__image">
               <div className="cardImage inside-slider">
-                <Slider
-                  {...itemSettings}
-                  arrows={true}
-                  nextArrow={<ArrowSlick type="next" />}
-                  prevArrow={<ArrowSlick type="prev" />}
-                >
-                  <div className="cardImage">
-                    <div className="cardImage__content_3-2">
-                      <Image
-                        width={600}
-                        height={400}
-                        className="rounded-4 col-12 js-lazy"
-                        src={item?.picture_link || "/img/hotels/1.png"}
-                        loading="lazy"
-                        alt="image"
-                      />
-                    </div>
+                <div className="cardImage">
+                  <div className="cardImage__content_3-2">
+                    <Image
+                      width={600}
+                      height={400}
+                      className="rounded-4 col-12 js-lazy"
+                      src={item?.picture_link || "/img/hotels/1.png"}
+                      loading="lazy"
+                      alt="image"
+                    />
                   </div>
-                </Slider>
+                </div>
 
                 <div className="cardImage__wishlist">
-                  <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
+                  <button
+                    onClick={() => onShowHotelInfo(item)}
+                    className="button -blue-1 bg-white size-30 rounded-full shadow-2"
+                  >
                     <i className="icon-heart text-12" />
                   </button>
                 </div>
@@ -96,16 +68,7 @@ const HotelProperties = ({ hotels, loading }) => {
                     </span>
                   </div>
                   <div className="flex-center">
-                    {!item?.stars || item?.stars === 0 ? (
-                      <i className="bi bi-hand-thumbs-up"></i>
-                    ) : (
-                      Array.from(Array(item?.stars).keys()).map((_, index) => (
-                        <i
-                          className="icon-star text-16 text-warning"
-                          key={index}
-                        />
-                      ))
-                    )}
+                    <HotelStars stars={item?.stars} />
                   </div>
                 </div>
               </div>
@@ -135,6 +98,10 @@ const HotelProperties = ({ hotels, loading }) => {
           </div>
         </div>
       ))}
+      <HotelInfoToast
+        hotel={selectedHotel}
+        price={convertCurrency(selectedHotel?.travelorPrice, currency)}
+      />
     </>
   );
 };
