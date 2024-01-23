@@ -47,7 +47,7 @@ const HotelProperties = ({ hotels, loading }) => {
                     onClick={() => onShowHotelInfo(item)}
                     className="button -blue-1 bg-white size-30 rounded-full shadow-2"
                   >
-                    <i className="icon-heart text-12" />
+                    <i className="bi bi-card-text"></i>
                   </button>
                 </div>
               </div>

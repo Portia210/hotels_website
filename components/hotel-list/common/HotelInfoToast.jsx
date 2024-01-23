@@ -4,20 +4,37 @@ import dayjs from "dayjs";
 
 export default function HotelInfoToast({ hotel, price }) {
   const searchInput = useSearchStore((state) => state.searchInput);
-  console.log("searchInput", searchInput);
   const hideToast = () => {
     document.getElementById("liveToast")?.classList?.remove("show");
   };
 
   const dateFormat = () => {
     const { checkInDate, checkOutDate } = searchInput;
-    return `${dayjs(checkInDate).format("DD/MM/YYYY")} - ${dayjs(
-      checkOutDate
-    ).format("DD/MM/YYYY")}`;
+    const startDay = dayjs(checkInDate);
+    const endDay = dayjs(checkOutDate);
+    // Check if the start and end dates are in the same month
+    const sameMonth = startDay.isSame(endDay, "month");
+
+    // Format the date range accordingly
+    if (sameMonth) {
+      // Dates are in the same month
+      return `${startDay.format("dddd D.M")} - ${endDay.format("dddd D.M")}`;
+    } else {
+      // Dates span across different months
+      return `${startDay.format("dddd D.M")} - ${endDay.format("dddd D.M")}`;
+    }
   };
 
   const onCopyInfo = () => {
-    const text = `Dates: ${dateFormat()}\nHotel: ${hotel?.title}\nGuest reviews: ${hotel?.rate}\nHotel stars: ${hotel?.stars}\nNumber of guests: ${searchInput?.adults} adults, ${searchInput?.childrens} children\nPrice: ${price}\nTravelor: ${hotel?.travelorLink}\n`;
+    const starIcons = Array.from(Array(hotel?.stars).keys())
+      .map(() => "⭐️") // Use a simple star character
+      .join(" ");
+
+    const text = `Dates: ${dateFormat()}\nHotel: ${
+      hotel?.title
+    }\nNumber of guests: ${searchInput?.adults} adults, ${
+      searchInput?.childrens
+    } children\nPrice: ${price}\nReviews: ${hotel?.rate + " "}${starIcons}`;
     navigator.clipboard.writeText(text);
   };
 
@@ -26,7 +43,7 @@ export default function HotelInfoToast({ hotel, price }) {
       <div className="position-fixed bottom-0 end-0 p-3" style={{ zIndex: 20 }}>
         <div
           id="liveToast"
-          className="toast hide"
+          className="toast hide bg-white"
           role="alert"
           aria-live="assertive"
           aria-atomic="true"
@@ -48,9 +65,7 @@ export default function HotelInfoToast({ hotel, price }) {
             ></button>
           </div>
           <div className="toast-body">
-            <p>
-              Dates: {dateFormat()}
-            </p>
+            <p>Dates: {dateFormat()}</p>
             <div className="d-flex text-14 text-light-1">
               <p>guest reviews</p>
               <span className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white ml-10">
