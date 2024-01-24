@@ -13,6 +13,19 @@ const GuestSearch = () => {
     handleDeleteRoom,
   } = useGuestSearchForm();
 
+  const renderText = (key, value) => {
+    if (key === "Adults") {
+      if (value <= 1) return `adult`;
+      return `adults`;
+    } else if (key === "Childrens") {
+      if (value <= 1) return `child`;
+      return `childrens`;
+    } else {
+      if (value <= 1) return `room`;
+      return `rooms`;
+    }
+  };
+
   return (
     <div className="searchMenu-guests px-30 lg:py-20 lg:px-0 js-form-dd js-form-counters position-relative">
       <div
@@ -23,10 +36,12 @@ const GuestSearch = () => {
       >
         <h4 className="text-15 fw-500 ls-2 lh-16">Guest</h4>
         <div className="text-15 text-light-1 ls-2 lh-16">
-          <span className="js-count-adult">{guestCounts.Adults}</span> adults -{" "}
+          <span className="js-count-adult">{guestCounts.Adults}</span>{" "}
+          {renderText("Adults", guestCounts.Adults)} -{" "}
           <span className="js-count-child">{guestCounts.Children}</span>{" "}
-          childrens - <span className="js-count-room">{guestCounts.Rooms}</span>{" "}
-          room
+          {renderText("Childrens", guestCounts.Children)} -{" "}
+          <span className="js-count-room">{guestCounts.Rooms}</span>{" "}
+          {renderText("Rooms", guestCounts.Rooms)}
         </div>
       </div>
       {/* End guest */}
