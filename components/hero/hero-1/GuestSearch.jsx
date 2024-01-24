@@ -3,7 +3,7 @@
 import useGuestSearchForm from "@/hooks/useGuestSearchForm";
 import RoomInfo from "./RoomInfo";
 
-const GuestSearch = () => {
+const GuestSearch = ({ messages }) => {
   const {
     rooms,
     guestCounts,
@@ -15,14 +15,14 @@ const GuestSearch = () => {
 
   const renderText = (key, value) => {
     if (key === "Adults") {
-      if (value <= 1) return `adult`;
-      return `adults`;
+      if (value <= 1) return messages.adult;
+      return messages.adults;
     } else if (key === "Childrens") {
-      if (value <= 1) return `child`;
-      return `childrens`;
-    } else {
-      if (value <= 1) return `room`;
-      return `rooms`;
+      if (value <= 1) return messages.child;
+      return messages.childrens;
+    } else if (key === "Rooms") {
+      if (value <= 1) return messages.room;
+      return messages.rooms;
     }
   };
 
@@ -34,7 +34,7 @@ const GuestSearch = () => {
         aria-expanded="false"
         data-bs-offset="0,22"
       >
-        <h4 className="text-15 fw-500 ls-2 lh-16">Guest</h4>
+        <h4 className="text-15 fw-500 ls-2 lh-16">{messages.guests}</h4>
         <div className="text-15 text-light-1 ls-2 lh-16">
           <span className="js-count-adult">{guestCounts.Adults}</span>{" "}
           {renderText("Adults", guestCounts.Adults)} -{" "}

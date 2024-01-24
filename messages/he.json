@@ -11,6 +11,14 @@
     "location": "מיקום",
     "checkin": "צ'ק אין",
     "checkout": "צ'ק אאוט",
-    "selectLocation": "אנא בחר אחת מהתוצאות"
+    "selectLocation": "אנא בחר אחת מהתוצאות",
+    "locationPlaceholder": "לאן אתה נוסע?",
+    "guests": "אורחים",
+    "rooms": "חדרים",
+    "room": "חדר",
+    "adult": "מבוגר",
+    "adults": "מבוגרים",
+    "childrens": "ילדים",
+    "child": "ילד"
   }
 }

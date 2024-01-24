@@ -10,8 +10,8 @@ const useGuestSearchForm = () => {
   const searchStore = useSearchStore();
   const [rooms, setRooms] = useState([{ adults: 1, childrens: [] }]);
   const [guestCounts, setGuestCounts] = useState({
-    Adults: 2,
-    Children: 1,
+    Adults: 1,
+    Children: 0,
     Rooms: 1,
   });
 
