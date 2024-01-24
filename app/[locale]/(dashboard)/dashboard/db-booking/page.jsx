@@ -1,8 +1,8 @@
 import React from "react";
-import DashboardPage from "../../../../components/dashboard/dashboard/db-dashboard";
+import DashboardPage from "../../../../../components/dashboard/dashboard/db-booking";
 
 export const metadata = {
-  title: "Dashboard || GoTrip - Travel & Tour React NextJS Template",
+  title: "Booking History || GoTrip - Travel & Tour React NextJS Template",
   description: "GoTrip - Travel & Tour React NextJS Template",
 };
 

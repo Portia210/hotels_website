@@ -8,7 +8,7 @@ const MainMenu = ({ style = "" }) => {
     <nav className="menu js-navList">
       <ul className={`menu__nav ${style} -is-active`}>
         <a href="/">
-          <span className="mr-10">Home</span>
+          <span className="mr-10">{"menu.home"}</span>
         </a>
 
         <li className={pathname === "/destinations" ? "current" : ""}>
