@@ -49,7 +49,7 @@ const RatingFilter = ({
           <button
             className="d-flex items-center px-15 py-5 lh-16 text-14 rounded-100 border-light -dd-button"
             data-bs-toggle="dropdown"
-            data-bs-auto-close="true"
+            data-bs-auto-close="outside"
             aria-expanded="false"
             data-bs-offset="0,10"
           >

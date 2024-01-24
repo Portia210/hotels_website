@@ -11,6 +11,7 @@ export default function ListHotels() {
   const { hotels, fetchHotelList, loading } = useHotelList();
   const {
     data,
+    totalFilter,
     filterByBiggestPriceGap,
     pagination,
     currentPage,
@@ -75,7 +76,7 @@ export default function ListHotels() {
                 className="button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1"
               >
                 <i className="icon-up-down text-14 mr-10"></i>
-                Top picks for your search
+                Biggest hotel gap
               </button>
             </div>
             {/* End col-auto */}
@@ -86,7 +87,7 @@ export default function ListHotels() {
             <div className="row y-gap-30">
               <ResultHeader
                 loading={loading}
-                totalResult={pagination.totalResults}
+                totalResult={totalFilter}
               />
               <HotelProperties hotels={data} loading={loading} />
             </div>
