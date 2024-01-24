@@ -5,5 +5,12 @@
     "destination": "יעדים",
     "register": "התחברות/",
     "signin": "הרשמה"
+  },
+  "SearchBox": {
+    "search": "לחפש",
+    "location": "מיקום",
+    "checkin": "צ'ק אין",
+    "checkout": "צ'ק אאוט",
+    "selectLocation": "אנא בחר אחת מהתוצאות"
   }
 }

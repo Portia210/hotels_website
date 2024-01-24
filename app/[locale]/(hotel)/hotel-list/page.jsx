@@ -2,6 +2,7 @@ import DefaultFooter from "@/components/footer/default";
 import Header1 from "@/components/header/header-1";
 import ListHotels from "@/components/hotel-list/hotel-list-v5/ListHotels";
 import MainFilterSearchBox from "@/components/hotel-list/hotel-list-v5/MainFilterSearchBox";
+import { useMessages } from 'next-intl';
 
 export const metadata = {
   title: "Hotel List v5 || GoTrip - Travel & Tour React NextJS Template",
@@ -9,6 +10,8 @@ export const metadata = {
 };
 
 const index = () => {
+  const messages = useMessages();
+
   return (
     <>
       {/* End Page Title */}
@@ -16,7 +19,7 @@ const index = () => {
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <Header1 />
+      <Header1 messages={messages}/>
       {/* End Header 1 */}
 
       <section className="section-bg pt-40 pb-40 relative z-5">
@@ -38,7 +41,7 @@ const index = () => {
                 </h1>
               </div>
               {/* End text-center */}
-              <MainFilterSearchBox />
+              <MainFilterSearchBox messages={messages}/>
             </div>
             {/* End col-12 */}
           </div>

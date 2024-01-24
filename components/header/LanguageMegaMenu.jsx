@@ -2,6 +2,7 @@
 
 import useLanguageStore, { languageContent } from "@/store/useLanguageStore";
 import Cookies from "js-cookie";
+import Link from 'next/link'
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -72,14 +73,16 @@ const LanguageMegaMenu = ({ textClass }) => {
                 key={item.id}
                 onClick={() => handleLanguageClick(item)}
               >
-                <div className="py-10 px-15 sm:px-5 sm:py-5">
-                  <div className="text-15 lh-15 fw-500 text-dark-1">
-                    {item.language}
+                <Link href={`/${item.code}`} locale={item.code}>
+                  <div className="py-10 px-15 sm:px-5 sm:py-5">
+                    <div className="text-15 lh-15 fw-500 text-dark-1">
+                      {item.language}
+                    </div>
+                    <div className="text-14 lh-15 mt-5 js-title">
+                      {item.country}
+                    </div>
                   </div>
-                  <div className="text-14 lh-15 mt-5 js-title">
-                    {item.country}
-                  </div>
-                </div>
+                </Link>
               </li>
             ))}
           </ul>
