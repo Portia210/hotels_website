@@ -1,9 +1,9 @@
 {
-  "Index": {
-    "menu": {
-      "home": "Home",
-      "about": "About",
-      "contact": "Contact"
-    }
+  "Header": {
+    "home": "Home",
+    "contact": "Contact",
+    "destination": "Destination",
+    "register": "Register",
+    "signin": "Signin"
   }
 }

@@ -2,7 +2,7 @@
 
 import useCurrency from "@/hooks/useCurrency";
 
-const CurrenctyMegaMenu = ({ textClass }) => {
+const CurrencyMegaMenu = ({ textClass }) => {
   const {
     handleCurrency,
     currencies,
@@ -68,4 +68,4 @@ const CurrenctyMegaMenu = ({ textClass }) => {
   );
 };
 
-export default CurrenctyMegaMenu;
+export default CurrencyMegaMenu;

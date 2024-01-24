@@ -1,9 +1,9 @@
 {
-  "Index": {
-    "menu": {
-      "home": "Home",
-      "about": "About",
-      "contact": "Contact"
-    }
+  "Header": {
+    "home": "בית",
+    "contact": "צור קשר",
+    "destination": "יעדים",
+    "register": "התחברות/",
+    "signin": "הרשמה"
   }
 }

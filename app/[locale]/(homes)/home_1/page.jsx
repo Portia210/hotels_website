@@ -4,6 +4,7 @@ import Header1 from "@/components/header/header-1";
 import Hero1 from "@/components/hero/hero-1";
 import Destinations from "@/components/home/home-1/Destinations";
 import dynamic from "next/dynamic";
+import { useMessages } from 'next-intl';
 
 export const metadata = {
   title: "Home-1 || GoTrip - Travel & Tour React NextJS Template",
@@ -11,11 +12,13 @@ export const metadata = {
 };
 
 const Home_1 = () => {
+  const messages = useMessages();
+
   return (
     <>
       {/* End Page Title */}
 
-      <Header1 />
+      <Header1 messages={messages}/>
       {/* End Header 1 */}
 
       <Hero1 />
