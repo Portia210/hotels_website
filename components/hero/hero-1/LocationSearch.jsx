@@ -5,7 +5,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import PlaceAutocomplete from "./PlaceAutocomplete";
 import useLocationSearchForm from "@/hooks/useLocationSearchForm";
 
-const SearchBar = () => {
+const SearchBar = ({ messages }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries: ["places"],
@@ -28,7 +28,7 @@ const SearchBar = () => {
         data-bs-offset="0,22"
       >
         <div className="searchMenu-loc px-30 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
-          <h4 className="text-15 fw-500 ls-2 lh-16">Location</h4>
+          <h4 className="text-15 fw-500 ls-2 lh-16">{messages?.location}</h4>
           <div className="text-15 text-light-1 ls-2 lh-16">
             <input
               id="destinationInput"
@@ -42,7 +42,9 @@ const SearchBar = () => {
               disabled={!isLoaded}
               onChange={(e) => setLocationInput(e.target.value)}
             />
-            <div className="invalid-feedback">Please select one of the options</div>
+            <div className="invalid-feedback">
+              {messages?.selectLocation}
+            </div>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
 import useDateSearchForm from "@/hooks/useDateSearchForm";
 import DatePicker from "react-multi-date-picker";
 
-const DateSearch = () => {
+const DateSearch = ({ messages }) => {
   const { dates, onPropsChange } = useDateSearchForm();
 
   return (

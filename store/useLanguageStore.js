@@ -5,12 +5,14 @@ export const languageContent = [
     id: 1,
     language: "English",
     country: "English",
+    code: "en",
     src: "/img/general/lang.png",
   },
   {
     id: 2,
     language: "Hebrew",
     country: "Israel",
+    code: "he",
     src: "/img/general/israel.png",
   },
 ];

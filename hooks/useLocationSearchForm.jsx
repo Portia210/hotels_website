@@ -22,7 +22,7 @@ const useLocationSearchForm = () => {
   };
 
   const onLoadLocation = async () => {
-    if (pathName !== "/hotel-list") return;
+    if (!pathName.includes("/hotel-list")) return;
     const destination = loadLocation();
     handleSelectLocation(destination);
   };

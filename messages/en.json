@@ -1,0 +1,17 @@
+{
+  "Header": {
+    "home": "Home",
+    "contact": "Contact",
+    "destination": "Destination",
+    "register": "Register",
+    "signin": "Signin"
+  },
+  "SearchBox": {
+    "search": "Search",
+    "location": "Location",
+    "checkin": "Check in",
+    "checkout": "Check out",
+    "selectLocation": "Please select one of the options",
+    "guest": "Guest"
+  }
+}

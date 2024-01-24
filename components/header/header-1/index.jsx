@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
-import CurrenctyMegaMenu from "../CurrenctyMegaMenu";
+import CurrencyMegaMenu from "../CurrencyMegaMenu";
 import LanguageMegaMenu from "../LanguageMegaMenu";
 import MobileMenu from "../MobileMenu";
 import { isActiveLink } from "@/utils/linkActiveChecker";
 import { usePathname } from "next/navigation";
 import useLanguageStore from "@/store/useLanguageStore";
 
-const Header1 = () => {
+const Header1 = ({ messages }) => {
   const language = useLanguageStore((state) => state.language);
   const isReverse = language.language === "Hebrew";
 
@@ -61,6 +61,7 @@ const Header1 = () => {
                 <div className="header-menu">
                   <div className="header-menu__content">
                     <MainMenu
+                      messages={messages?.Header}
                       style={`text-white ${true ? "flex-row-reverse" : ""}`}
                     />
                   </div>
@@ -78,7 +79,7 @@ const Header1 = () => {
                 }`}
               >
                 <div className="row x-gap-20 items-center xxl:d-none">
-                  <CurrenctyMegaMenu textClass="text-white" />
+                  <CurrencyMegaMenu textClass="text-white" />
                   {/* End Megamenu for Currencty */}
 
                   {/* Start vertical devider*/}
@@ -104,7 +105,7 @@ const Header1 = () => {
                       isReverse ? "mr-20" : "ml-20"
                     }`}
                   >
-                    Sign In / Register
+                    {messages?.Header?.signin} / {messages?.Header?.register}
                   </Link>
                 </div>
                 {/* End btn-group */}
@@ -132,7 +133,7 @@ const Header1 = () => {
                       aria-labelledby="offcanvasMenuLabel"
                       data-bs-scroll="true"
                     >
-                      <MobileMenu />
+                      <MobileMenu messages={messages?.Header} />
                       {/* End MobileMenu */}
                     </div>
                   </div>

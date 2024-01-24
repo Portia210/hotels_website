@@ -25,7 +25,7 @@ const AvatarUploader = () => {
       return;
     }
 
-    if (!file.type.startsWith("image/")) {
+    if (!file?.type?.startsWith("image/")) {
       setError("Only image files are allowed.");
       setSuccess(false);
       return;

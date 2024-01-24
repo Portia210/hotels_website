@@ -1,6 +1,9 @@
 import MainFilterSearchBox from "./MainFilterSearchBox";
+import { useMessages } from 'next-intl';
 
 const index = () => {
+  const messages = useMessages();
+
   return (
     <section className="masthead -type-1 z-5">
       <div className="masthead__bg">
@@ -31,7 +34,7 @@ const index = () => {
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <MainFilterSearchBox />
+              <MainFilterSearchBox messages={messages}/>
             </div>
             {/* End tab-filter */}
           </div>
