@@ -84,7 +84,7 @@ export default function ListHotels() {
             <div className="border-top-light mt-30 mb-30"></div>
             {/* End border-top */}
 
-            <div className="row y-gap-30">
+            <div className="row y-gap-30 sm:pr-0">
               <ResultHeader
                 loading={loading}
                 totalResult={totalFilter}
