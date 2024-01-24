@@ -1,10 +1,11 @@
 import useSearchStore from "@/store/useSearchStore";
 import { loadDateSearch } from "@/utils/searchFormLoader";
 import dayjs from "dayjs";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const useDateSearchForm = () => {
+  const router = useRouter();
   const pathName = usePathname();
   const searchStore = useSearchStore();
   const [dates, setDates] = useState([
@@ -24,11 +25,10 @@ const useDateSearchForm = () => {
 
   const onLoadDateSearch = async () => {
     const { checkInDate, checkOutDate } = loadDateSearch(pathName);
-    if (
-      dayjs().isAfter(dayjs(checkInDate)) ||
-      dayjs().isAfter(dayjs(checkOutDate))
-    ) {
-      return setDates([dayjs().toDate(), dayjs().add(30, "day").toDate()]);
+    if (checkInDate && dayjs().isAfter(dayjs(checkInDate))) {
+      console.log("setDefault date");
+      setDates([dayjs().toDate(), dayjs().add(30, "day").toDate()]);
+      router.push("/");
     } else if (checkInDate && checkOutDate) {
       setDates([dayjs(checkInDate).toDate(), dayjs(checkOutDate).toDate()]);
     }

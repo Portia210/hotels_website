@@ -1,5 +1,5 @@
 const gregorian_he_lowercase = {
-  name: "gregorian_h_lowercase",
+  name: "gregorian_he_lowercase",
   months: [
     ["ינואר", "ינו"],
     ["פברואר", "פבר"],

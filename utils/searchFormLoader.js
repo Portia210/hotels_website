@@ -12,7 +12,7 @@ const loadLocation = () => {
 const loadDateSearch = (pathName) => {
   let checkInDate = null;
   let checkOutDate = null;
-  if (pathName === "/hotel-list") {
+  if (pathName.includes("/hotel-list")) {
     const params = new URLSearchParams(window.location.search);
     checkInDate = params.get("checkInDate");
     checkOutDate = params.get("checkOutDate");
