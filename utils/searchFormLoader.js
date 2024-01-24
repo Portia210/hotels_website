@@ -16,7 +16,7 @@ const loadDateSearch = (pathName) => {
     const params = new URLSearchParams(window.location.search);
     checkInDate = params.get("checkInDate");
     checkOutDate = params.get("checkOutDate");
-  } else if (pathName === "/") {
+  } else {
     const searchInput = JSON.parse(Cookies.get("searchInput") || "{}");
     if (searchInput) {
       checkInDate = searchInput.checkInDate;

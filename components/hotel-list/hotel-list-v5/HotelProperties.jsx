@@ -21,7 +21,7 @@ const HotelProperties = ({ hotels, loading }) => {
     <>
       {hotels.map((item, index) => (
         <div
-          className="col-lg-3 col-sm-6"
+          className="col-lg-3 col-sm-6 sm:pr-0"
           key={index}
           data-aos="fade"
           data-aos-delay={item.delayAnimation}

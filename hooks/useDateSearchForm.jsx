@@ -25,7 +25,7 @@ const useDateSearchForm = () => {
 
   const onLoadDateSearch = async () => {
     const { checkInDate, checkOutDate } = loadDateSearch(pathName);
-    if (checkInDate && dayjs().isAfter(dayjs(checkInDate))) {
+    if (checkInDate && dayjs().subtract(1, "day").isAfter(dayjs(checkInDate))) {
       console.log("setDefault date");
       setDates([dayjs().toDate(), dayjs().add(30, "day").toDate()]);
       router.push("/");
