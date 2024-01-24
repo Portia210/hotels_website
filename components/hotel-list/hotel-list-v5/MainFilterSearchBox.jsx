@@ -25,7 +25,7 @@ const MainFilterSearchBox = ({ messages }) => {
           </div>
           {/* End check-in-out */}
 
-          <GuestSearch />
+          <GuestSearch messages={messages?.SearchBox}/>
           {/* End guest */}
 
           <div className="button-item h-full">

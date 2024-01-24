@@ -12,6 +12,13 @@
     "checkin": "Check in",
     "checkout": "Check out",
     "selectLocation": "Please select one of the options",
-    "guest": "Guest"
+    "locationPlaceholder": "Where are you going?",
+    "guests": "Guest",
+    "rooms": "Rooms",
+    "room": "Room",
+    "adults": "adults",
+    "adult": "adult",
+    "childrens": "childrens",
+    "child": "child"
   }
 }

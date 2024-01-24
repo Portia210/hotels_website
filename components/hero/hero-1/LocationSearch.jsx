@@ -34,7 +34,7 @@ const SearchBar = ({ messages }) => {
               id="destinationInput"
               autoComplete="off"
               type="search"
-              placeholder="Where are you going?"
+              placeholder={messages?.locationPlaceholder}
               className={`js-search js-dd-focus form-control ${
                 !searchInputValidation.destination ? "is-invalid" : ""
               }`}
@@ -42,9 +42,7 @@ const SearchBar = ({ messages }) => {
               disabled={!isLoaded}
               onChange={(e) => setLocationInput(e.target.value)}
             />
-            <div className="invalid-feedback">
-              {messages?.selectLocation}
-            </div>
+            <div className="invalid-feedback">{messages?.selectLocation}</div>
           </div>
         </div>
       </div>
