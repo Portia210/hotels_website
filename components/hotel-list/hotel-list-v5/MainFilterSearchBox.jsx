@@ -3,7 +3,7 @@
 import GuestSearch from "@/components/hero/hero-1/GuestSearch";
 import LocationSearch from "@/components/hero/hero-1/LocationSearch";
 import useSearchBar from "@/hooks/useSearchBar";
-import DateSearch from "../common/DateSearch";
+import DateSearch from "../common/DateSearch/DateSearch";
 
 const MainFilterSearchBox = ({ messages }) => {
   const { handleSearch } = useSearchBar();

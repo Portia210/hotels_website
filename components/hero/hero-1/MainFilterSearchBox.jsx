@@ -1,6 +1,6 @@
 "use client";
 
-import DateSearch from "@/components/hotel-list/common/DateSearch";
+import DateSearch from "@/components/hotel-list/common/DateSearch/DateSearch";
 import useSearchBar from "@/hooks/useSearchBar";
 import GuestSearch from "./GuestSearch";
 import LocationSearch from "@/components/hero/hero-1/LocationSearch";
