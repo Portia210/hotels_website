@@ -1,12 +1,14 @@
 "use client";
 
 import useGuestSearchForm from "@/hooks/useGuestSearchForm";
-import RoomInfo from "./RoomInfo";
 import useTransStore from "@/store/useTransStore";
+import { useLocale } from "next-intl";
+import RoomInfo from "./RoomInfo";
 
 const GuestSearch = () => {
+  const locale = useLocale();
   const messages = useTransStore((state) => state.messages);
-  const searchBox = messages?.SearchBox;
+  const searchBoxTrans = messages?.SearchBox;
 
   const {
     rooms,
@@ -19,14 +21,14 @@ const GuestSearch = () => {
 
   const renderText = (key, value) => {
     if (key === "Adults") {
-      if (value <= 1) return searchBox?.adult;
-      return searchBox?.adults;
+      if (value <= 1) return `${value} ${searchBoxTrans?.adult}`;
+      return `${value} ${searchBoxTrans?.adults}`;
     } else if (key === "Childrens") {
-      if (value == 1) return searchBox?.child;
-      return searchBox?.childrens;
+      if (value == 1) return `${value} ${searchBoxTrans?.child}`;
+      return `${value} ${searchBoxTrans?.childrens}`;
     } else if (key === "Rooms") {
-      if (value <= 1) return searchBox?.room;
-      return searchBox?.rooms;
+      if (value <= 1) return `${value} ${searchBoxTrans?.room}`;
+      return `${value} ${searchBoxTrans?.rooms}`;
     }
   };
 
@@ -38,24 +40,27 @@ const GuestSearch = () => {
         aria-expanded="false"
         data-bs-offset="0,22"
       >
-        <h4 className="text-15 fw-500 ls-2 lh-16">{searchBox?.guests}</h4>
+        <h4 className="text-15 fw-500 ls-2 lh-16">{searchBoxTrans?.guests}</h4>
         <div className="d-flex text-15 text-light-1 ls-2 lh-16">
-          <p className="js-count-adult me-1">
-            {guestCounts.Adults +
-              " " +
-              renderText("Adults", guestCounts.Adults) +
-              " - "}
+          <p
+            className="js-count-adult me-1"
+            dir={guestCounts.Adults > 1 ? "rtl" : "ltr"}
+          >
+            {renderText("Adults", guestCounts.Adults)}
           </p>
           {guestCounts.Children > 0 && (
-            <p className="js-count-child me-1">
-              {guestCounts.Children +
-                " " +
-                renderText("Childrens", guestCounts.Children) +
-                " - "}
+            <p
+              className="js-count-child me-1"
+              dir={guestCounts.Children > 1 ? "rtl" : "ltr"}
+            >
+              {renderText("Childrens", guestCounts.Children)}
             </p>
           )}
-          <p className="js-count-room">
-            {guestCounts.Rooms + " " + renderText("Rooms", guestCounts.Rooms)}
+          <p
+            className="js-count-room"
+            dir={guestCounts.Rooms > 1 ? "rtl" : "ltr"}
+          >
+            {renderText("Rooms", guestCounts.Rooms)}
           </p>
         </div>
       </div>
@@ -68,7 +73,7 @@ const GuestSearch = () => {
               <div key={index}>
                 <div className="d-flex justify-between items-center text-14 lh-12 text-light-1">
                   <div>
-                    {searchBox?.room} {index + 1}
+                    {searchBoxTrans?.room} {index + 1}
                   </div>
                   {index > 0 && (
                     <div
