@@ -49,7 +49,7 @@ export default function HotelInfoToast({ hotel, price, locale }) {
     }`;
     const priceText = `${hotelTrans?.price}: ${price}`;
     const reviewsText = `${hotelTrans?.guestReviewsUpper}: ${hotel?.rate} ${starIcons}`;
-    const hotelText = isReverse ? `${hotel?.title} :Hotel` : `Hotel: ${hotel?.title}`;
+    const hotelText = isReverse ? `${hotel?.title} :${hotelTrans.hotel}` : `${hotelTrans.hotel}: ${hotel?.title}`;
     const text = `${dateText}\n${hotelText}\n${guestsText}\n${priceText}\n${reviewsText}`;
     navigator.clipboard.writeText(text);
   };
