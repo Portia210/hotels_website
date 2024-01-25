@@ -32,6 +32,11 @@ const GuestSearch = () => {
     }
   };
 
+  const isReverse = (val) => {
+    if (locale === "he" && val > 1) return "rtl";
+    return "ltr";
+  };
+
   return (
     <div className="searchMenu-guests px-20 lg:py-20 lg:px-0 js-form-dd js-form-counters position-relative">
       <div
@@ -44,22 +49,19 @@ const GuestSearch = () => {
         <div className="d-flex text-15 text-light-1 ls-2 lh-16">
           <p
             className="js-count-adult me-1"
-            dir={guestCounts.Adults > 1 ? "rtl" : "ltr"}
+            dir={isReverse(guestCounts.Adults)}
           >
             {renderText("Adults", guestCounts.Adults)}
           </p>
           {guestCounts.Children > 0 && (
             <p
               className="js-count-child me-1"
-              dir={guestCounts.Children > 1 ? "rtl" : "ltr"}
+              dir={isReverse(guestCounts.Children)}
             >
               {renderText("Childrens", guestCounts.Children)}
             </p>
           )}
-          <p
-            className="js-count-room"
-            dir={guestCounts.Rooms > 1 ? "rtl" : "ltr"}
-          >
+          <p className="js-count-room" dir={isReverse(guestCounts.Rooms)}>
             {renderText("Rooms", guestCounts.Rooms)}
           </p>
         </div>
