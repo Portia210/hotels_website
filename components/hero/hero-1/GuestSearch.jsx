@@ -46,12 +46,14 @@ const GuestSearch = () => {
               renderText("Adults", guestCounts.Adults) +
               " - "}
           </p>
-          <p className="js-count-child">
-            {guestCounts.Children +
-              " " +
-              renderText("Childrens", guestCounts.Children) +
-              " - "}
-          </p>
+          {guestCounts.Children > 0 && (
+            <p className="js-count-child">
+              {guestCounts.Children +
+                " " +
+                renderText("Childrens", guestCounts.Children) +
+                " - "}
+            </p>
+          )}
           <p className="js-count-room">
             {guestCounts.Rooms + " " + renderText("Rooms", guestCounts.Rooms)}
           </p>

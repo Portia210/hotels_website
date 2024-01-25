@@ -22,5 +22,9 @@
     "childrens": "ילדים",
     "child": "ילד",
     "childAges": "גילאי הילד"
+  },
+  "Hotel": {
+    "guestReviews": "ביקורות אורחים",
+    "distance": "מרחק מהמרכז"
   }
 }

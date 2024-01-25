@@ -1,27 +1,32 @@
 "use client";
 
 import useLanguageStore, { languageContent } from "@/store/useLanguageStore";
-import Cookies from "js-cookie";
-import Link from 'next/link'
+import { useLocale } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const LanguageMegaMenu = ({ textClass }) => {
+  const router = useRouter();
+  const locale = useLocale();
   const [click, setClick] = useState(false);
   const { language, setLanguage } = useLanguageStore();
 
   const onClick = () => setClick((prevState) => !prevState);
 
   const handleLanguageClick = (language) => {
-    Cookies.set("language", JSON.stringify(language));
-    setLanguage(language);
-    setClick(false);
+    const url = window.location.href;
+    const newUrl = url.replace(
+      `${window.location.origin}/${locale}`,
+      `${window.location.origin}/${language.code}`
+    );
+    router.replace(newUrl);
   };
 
   const loadLanguage = () => {
-    let language = Cookies.get("language");
+    let language = languageContent.find((item) => item.code === locale);
     if (language) {
-      language = JSON.parse(language);
       setLanguage(language);
     }
   };
@@ -73,7 +78,7 @@ const LanguageMegaMenu = ({ textClass }) => {
                 key={item.id}
                 onClick={() => handleLanguageClick(item)}
               >
-                <Link href={`/${item.code}`} locale={item.code}>
+                <Link href={`#`} locale={item.code}>
                   <div className="py-10 px-15 sm:px-5 sm:py-5">
                     <div className="text-15 lh-15 fw-500 text-dark-1">
                       {item.language}
