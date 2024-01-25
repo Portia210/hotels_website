@@ -44,6 +44,7 @@ const RoomInfo = ({ room, index, totalChild, onChange, onChildAgeChange }) => {
         result = searchBox.childrens;
       }
     }
+    if (!result) return result;
     result = result.charAt(0).toUpperCase() + result.slice(1);
     return result;
   };

@@ -22,8 +22,8 @@ const GuestSearch = () => {
       if (value <= 1) return searchBox?.adult;
       return searchBox?.adults;
     } else if (key === "Childrens") {
-      if (value <= 1) return searchBox?.child;
-      return searchBox.childrens;
+      if (value == 1) return searchBox?.child;
+      return searchBox?.childrens;
     } else if (key === "Rooms") {
       if (value <= 1) return searchBox?.room;
       return searchBox?.rooms;
@@ -39,13 +39,22 @@ const GuestSearch = () => {
         data-bs-offset="0,22"
       >
         <h4 className="text-15 fw-500 ls-2 lh-16">{searchBox?.guests}</h4>
-        <div className="text-15 text-light-1 ls-2 lh-16">
-          <span className="js-count-adult">{guestCounts.Adults}</span>{" "}
-          {renderText("Adults", guestCounts.Adults)} -{" "}
-          <span className="js-count-child">{guestCounts.Children}</span>{" "}
-          {renderText("Childrens", guestCounts.Children)} -{" "}
-          <span className="js-count-room">{guestCounts.Rooms}</span>{" "}
-          {renderText("Rooms", guestCounts.Rooms)}
+        <div className="d-flex x-gap-5 text-15 text-light-1 ls-2 lh-16">
+          <p className="js-count-adult">
+            {guestCounts.Adults +
+              " " +
+              renderText("Adults", guestCounts.Adults) +
+              " - "}
+          </p>
+          <p className="js-count-child">
+            {guestCounts.Children +
+              " " +
+              renderText("Childrens", guestCounts.Children) +
+              " - "}
+          </p>
+          <p className="js-count-room">
+            {guestCounts.Rooms + " " + renderText("Rooms", guestCounts.Rooms)}
+          </p>
         </div>
       </div>
       {/* End guest */}
@@ -56,7 +65,9 @@ const GuestSearch = () => {
             return (
               <div key={index}>
                 <div className="d-flex justify-between items-center text-14 lh-12 text-light-1">
-                  <div>{searchBox?.room} {index + 1}</div>
+                  <div>
+                    {searchBox?.room} {index + 1}
+                  </div>
                   {index > 0 && (
                     <div
                       onClick={() => handleDeleteRoom(index)}
