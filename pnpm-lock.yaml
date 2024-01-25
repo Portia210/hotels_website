@@ -48,6 +48,9 @@ dependencies:
   google-map-react:
     specifier: ^2.2.1
     version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
+  he:
+    specifier: link:dayjs/locale/he
+    version: link:dayjs/locale/he
   js-cookie:
     specifier: ^3.0.5
     version: 3.0.5

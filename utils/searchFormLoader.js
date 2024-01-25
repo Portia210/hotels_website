@@ -32,10 +32,10 @@ const loadDateSearch = (pathName) => {
 
 const loadRoomInfo = (pathName) => {
   let guests = "";
-  if (pathName === "/hotel-list") {
+  if (pathName.includes("/hotel-list")) {
     const params = new URLSearchParams(window.location.search);
     guests = params.get("guests");
-  } else if (pathName === "/") {
+  } else {
     const searchInput = JSON.parse(Cookies.get("searchInput") || "{}");
     if (searchInput) guests = searchInput.guests;
   }

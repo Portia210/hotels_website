@@ -89,7 +89,7 @@ export default function ListHotels() {
                 loading={loading}
                 totalResult={totalFilter}
               />
-              <HotelProperties hotels={data} loading={loading} />
+              <HotelProperties hotels={data} />
             </div>
             {/* End .row */}
             <Pagination

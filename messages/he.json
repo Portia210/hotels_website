@@ -7,8 +7,8 @@
     "signin": "הרשמה"
   },
   "SearchBox": {
-    "search": "לחפש",
-    "location": "מיקום",
+    "search": "חיפוש",
+    "location": "יעד",
     "checkin": "צ'ק אין",
     "checkout": "צ'ק אאוט",
     "selectLocation": "אנא בחר אחת מהתוצאות",
@@ -21,6 +21,15 @@
     "adults": "מבוגרים",
     "childrens": "ילדים",
     "child": "ילד",
-    "childAges": "גילאי הילד"
+    "childAges": "גילאי הילד",
+    "dates": "תאריכים"
+  },
+  "Hotel": {
+    "hotel": "שם המלון",
+    "guestReviews": "ביקורות אורחים",
+    "guestReviewsUpper": "ביקורות אורחים",
+    "distance": "מרחק מהמרכז",
+    "numberOfGuests": "מספר אורחים",
+    "price": "מחיר"
   }
 }

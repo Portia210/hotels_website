@@ -21,6 +21,14 @@
     "adult": "adult",
     "childrens": "children",
     "child": "child",
-    "childAges": "Child Ages"
+    "childAges": "Child Ages",
+    "dates": "Dates"
+  },
+  "Hotel": {
+    "guestReviews": "guest reviews",
+    "guestReviewsUpper": "Guest reviews",
+    "distance": "from center",
+    "numberOfGuests": "Number of guests",
+    "price": "Price"
   }
 }
