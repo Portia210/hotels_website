@@ -2,6 +2,7 @@
 
 import { PriceFilter } from "@/constants/searchFilter";
 import RatingFilter from "./RatingFilter";
+import useTransStore from "@/store/useTransStore";
 
 const DropdownSelelctBar = ({
   priceFilter,
@@ -11,6 +12,8 @@ const DropdownSelelctBar = ({
   starFilter,
   setStarFilter,
 }) => {
+  const messages = useTransStore((state) => state.messages);
+  const filterTrans = messages?.FilterBar;
   const dropdowns = [
     {
       title: PriceFilter.HTL,
@@ -19,6 +22,13 @@ const DropdownSelelctBar = ({
       onChange: setPriceFilter,
     },
   ];
+
+  const renderText = (key) => {
+    if (key === PriceFilter.HTL) {
+      return filterTrans?.htl;
+    }
+    return filterTrans?.lth;
+  };
 
   return (
     <>
@@ -32,7 +42,9 @@ const DropdownSelelctBar = ({
               aria-expanded="false"
               data-bs-offset="0,10"
             >
-              <span className="js-dropdown-title">{dropdown.value}</span>
+              <span className="js-dropdown-title">
+                {renderText(dropdown.value)}
+              </span>
               <i className="icon icon-chevron-sm-down text-7 ml-10" />
             </div>
             {/* End dropdown__button */}
@@ -47,7 +59,7 @@ const DropdownSelelctBar = ({
                       }d-block js-dropdown-link`}
                       onClick={() => dropdown.onChange(item)}
                     >
-                      {item}
+                      {renderText(item)}
                     </button>
                   </div>
                 ))}

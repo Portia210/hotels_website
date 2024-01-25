@@ -24,11 +24,22 @@
     "childAges": "Child Ages",
     "dates": "Dates"
   },
+  "FilterBar": {
+    "filter": "Filter",
+    "reset": "Reset",
+    "htl": "Highest to lowest",
+    "lth": "Lowest to highest",
+    "rating": "Rating",
+    "stars": "Stars",
+    "bHotelGap": "Biggest hotel gap"
+  },
   "Hotel": {
     "guestReviews": "guest reviews",
     "guestReviewsUpper": "Guest reviews",
     "distance": "from center",
     "numberOfGuests": "Number of guests",
-    "price": "Price"
+    "price": "Price",
+    "toTravelor": "To Travelor",
+    "toBooking": "To Booking"
   }
 }

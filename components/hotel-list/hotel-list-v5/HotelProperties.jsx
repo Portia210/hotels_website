@@ -70,7 +70,7 @@ const HotelProperties = ({ hotels }) => {
                 <span>{item?.title}</span>
               </h4>
               <p className="text-light-1 lh-14 text-14 mt-5">
-                {renderText('distance', item?.distance)}
+                {renderText("distance", item?.distance)}
               </p>
               <div className="d-flex items-center mt-20">
                 <div className="d-flex justify-between align-items-center w-100">
@@ -79,7 +79,7 @@ const HotelProperties = ({ hotels }) => {
                       isReverse ? "flex-row-reverse" : ""
                     }`}
                   >
-                    <p>{hotelTrans.guestReviews}</p>
+                    <p>{hotelTrans?.guestReviews}</p>
                     <span
                       className={`flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white ${
                         isReverse ? "mr-10" : "ml-10"
@@ -100,7 +100,7 @@ const HotelProperties = ({ hotels }) => {
                   </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.travelorLink}>
-                      To Travelor
+                      {hotelTrans?.toTravelor}
                     </Link>
                   </span>
                 </div>
@@ -110,7 +110,7 @@ const HotelProperties = ({ hotels }) => {
                   </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.bookingLink}>
-                      To Booking
+                      {hotelTrans?.toBooking}
                     </Link>
                   </span>
                 </div>
