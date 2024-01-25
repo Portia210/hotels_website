@@ -2,8 +2,15 @@ import useSearchStore from "@/store/useSearchStore";
 import HotelStars from "./HotelStars";
 import dayjs from "dayjs";
 import useTransStore from "@/store/useTransStore";
+import "dayjs/locale/he";
 
-export default function HotelInfoToast({ hotel, price, isReverse }) {
+export default function HotelInfoToast({ hotel, price, locale }) {
+  const isReverse = locale === "he";
+  if (locale === "he") {
+    dayjs.locale("he");
+  } else {
+    dayjs.locale("en");
+  }
   const messages = useTransStore((state) => state.messages);
   const searchBox = messages?.SearchBox;
   const hotelTrans = messages?.Hotel;
@@ -17,16 +24,13 @@ export default function HotelInfoToast({ hotel, price, isReverse }) {
     const { checkInDate, checkOutDate } = searchInput;
     const startDay = dayjs(checkInDate);
     const endDay = dayjs(checkOutDate);
-    // Check if the start and end dates are in the same month
+
     const sameMonth = startDay.isSame(endDay, "month");
 
-    // Format the date range accordingly
     if (sameMonth) {
-      // Dates are in the same month
-      return `${startDay.format("dddd D.M")} - ${endDay.format("dddd D.M")}`;
+      return `${startDay.format("ddd D.M")} - ${endDay.format("ddd D.M")}`;
     } else {
-      // Dates span across different months
-      return `${startDay.format("dddd D.M")} - ${endDay.format("dddd D.M")}`;
+      return `${startDay.format("ddd D.M")} - ${endDay.format("ddd D.M")}`;
     }
   };
 
@@ -45,7 +49,10 @@ export default function HotelInfoToast({ hotel, price, isReverse }) {
 
   return (
     <>
-      <div className="position-fixed bottom-0 end-0 p-3" style={{ zIndex: 20 }}>
+      <div
+        className="toast-container position-fixed bottom-0 start-0 p-3 w-fit"
+        style={{ zIndex: 20, width: "fit-content" }}
+      >
         <div
           id="liveToast"
           className="toast hide bg-white"
@@ -90,8 +97,9 @@ export default function HotelInfoToast({ hotel, price, isReverse }) {
             <HotelStars stars={hotel?.stars} />
             <p>
               {hotelTrans?.numberOfGuests}: {searchInput?.adults}{" "}
-              {searchBox?.adults}, {searchInput?.childrens}{" "}
-              {searchBox?.childrens}
+              {searchBox?.adults}
+              {searchInput?.childrens > 0 &&
+                ", " + searchInput?.childrens + " " + searchBox?.childrens}
             </p>
             <div className="d-flex x-gap-5 align-items-center">
               <p>{hotelTrans?.price}:</p>
