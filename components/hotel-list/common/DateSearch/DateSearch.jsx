@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import DatePicker from "react-multi-date-picker";
 import gregorian_he_lowercase from "./heLocale";
 
-const DateSearch = ({ messages }) => {
+const DateSearch = () => {
   const locale = useLocale();
   const { dates, onPropsChange } = useDateSearchForm();
 

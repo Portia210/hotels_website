@@ -1,7 +1,11 @@
+import useTransStore from "@/store/useTransStore";
 import ChildAgeDropDown from "./ChildAgeDropdown";
 import { ADULTS, CHILDRENS, INCREMENT, DECREMENT } from "@/constants/searchBar";
 
 const RoomInfo = ({ room, index, totalChild, onChange, onChildAgeChange }) => {
+  const messages = useTransStore((state) => state.messages);
+  const searchBox = messages?.SearchBox;
+
   const incrementCount = (name) => {
     if (name === CHILDRENS) {
       if (totalChild > 9 || room.childrens.length > 3) return;
@@ -25,6 +29,26 @@ const RoomInfo = ({ room, index, totalChild, onChange, onChildAgeChange }) => {
     onChildAgeChange(value, index, childIndex);
   };
 
+  const renderText = (key) => {
+    let result = "";
+    if (key === "Adults") {
+      if (room.adults <= 1) {
+        result = searchBox?.adult;
+      } else {
+        result = searchBox?.adults;
+      }
+    } else if (key === "Childrens") {
+      if (room.childrens.length <= 1) {
+        result = searchBox?.child;
+      } else {
+        result = searchBox.childrens;
+      }
+    }
+    if (!result) return result;
+    result = result.charAt(0).toUpperCase() + result.slice(1);
+    return result;
+  };
+
   return (
     <div className="row" key={index}>
       {[ADULTS, CHILDRENS].map((name, index) => {
@@ -32,7 +56,7 @@ const RoomInfo = ({ room, index, totalChild, onChange, onChildAgeChange }) => {
           <div key={index} className="row col-6">
             <div className="row col-auto y-gap-5 mt-1">
               <div className="col-auto">
-                <div className="text-15 lh-12 fw-500">{name}</div>
+                <div className="text-15 lh-12 fw-500">{renderText(name)}</div>
               </div>
               {/* End .col-auto */}
               <div className="col-auto">
@@ -70,7 +94,7 @@ const RoomInfo = ({ room, index, totalChild, onChange, onChildAgeChange }) => {
         <>
           {room?.childrens?.length > 0 && (
             <label className="text-15 lh-12 fw-500" htmlFor="childAge">
-              Child Ages
+              {searchBox?.childAges}
             </label>
           )}
           {room?.childrens?.map((childAge, childIndex) => {

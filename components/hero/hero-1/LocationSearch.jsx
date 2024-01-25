@@ -1,11 +1,12 @@
 "use client";
 
 import { GOOGLE_MAP_API_KEY } from "@/constants/config";
+import useLocationSearchForm from "@/hooks/useLocationSearchForm";
+import useTransStore from "@/store/useTransStore";
 import { useLoadScript } from "@react-google-maps/api";
 import PlaceAutocomplete from "./PlaceAutocomplete";
-import useLocationSearchForm from "@/hooks/useLocationSearchForm";
 
-const SearchBar = ({ messages }) => {
+const SearchBar = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries: ["places"],
@@ -18,6 +19,8 @@ const SearchBar = ({ messages }) => {
     setLocationInput,
     handleSelectLocation,
   } = useLocationSearchForm();
+  const messages = useTransStore((state) => state.messages);
+  const searchBox = messages?.SearchBox;
 
   if (!isLoaded) return null;
   return (
@@ -28,13 +31,13 @@ const SearchBar = ({ messages }) => {
         data-bs-offset="0,22"
       >
         <div className="searchMenu-loc px-30 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
-          <h4 className="text-15 fw-500 ls-2 lh-16">{messages?.location}</h4>
+          <h4 className="text-15 fw-500 ls-2 lh-16">{searchBox?.location}</h4>
           <div className="text-15 text-light-1 ls-2 lh-16">
             <input
               id="destinationInput"
               autoComplete="off"
               type="search"
-              placeholder={messages?.locationPlaceholder}
+              placeholder={searchBox?.locationPlaceholder}
               className={`js-search js-dd-focus form-control ${
                 !searchInputValidation.destination ? "is-invalid" : ""
               }`}
@@ -42,7 +45,7 @@ const SearchBar = ({ messages }) => {
               disabled={!isLoaded}
               onChange={(e) => setLocationInput(e.target.value)}
             />
-            <div className="invalid-feedback">{messages?.selectLocation}</div>
+            <div className="invalid-feedback">{searchBox?.selectLocation}</div>
           </div>
         </div>
       </div>

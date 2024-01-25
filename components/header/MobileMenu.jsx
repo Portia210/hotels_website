@@ -12,12 +12,12 @@ import {
   categorieMegaMenuItems,
 } from "../../data/mainMenuData";
 import { isActiveLink } from "../../utils/linkActiveChecker";
-import Social from "../common/social/Social";
-import ContactInfo from "./ContactInfo";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import useTransStore from "@/store/useTransStore";
 
-const MobileMenu = ({ messages }) => {
+const MobileMenu = () => {
+  const messages = useTransStore((state) => state.messages);
   const pathname = usePathname();
 
   const [isActiveParent, setIsActiveParent] = useState(false);

@@ -13,12 +13,14 @@
     "checkout": "Check out",
     "selectLocation": "Please select one of the options",
     "locationPlaceholder": "Where are you going?",
+    "enterLocation": "Enter a Location",
     "guests": "Guest",
     "rooms": "Rooms",
     "room": "Room",
     "adults": "adults",
     "adult": "adult",
-    "childrens": "childrens",
-    "child": "child"
+    "childrens": "children",
+    "child": "child",
+    "childAges": "Child Ages"
   }
 }
