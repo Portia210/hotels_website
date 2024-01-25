@@ -21,10 +21,13 @@
     "adults": "מבוגרים",
     "childrens": "ילדים",
     "child": "ילד",
-    "childAges": "גילאי הילד"
+    "childAges": "גילאי הילד",
+    "dates": "תאריכים"
   },
   "Hotel": {
     "guestReviews": "ביקורות אורחים",
-    "distance": "מרחק מהמרכז"
+    "distance": "מרחק מהמרכז",
+    "numberOfGuests": "מספר אורחים",
+    "price": "מחיר"
   }
 }

@@ -122,6 +122,7 @@ const HotelProperties = ({ hotels }) => {
       <HotelInfoToast
         hotel={selectedHotel}
         price={convertCurrency(selectedHotel?.travelorPrice, currency)}
+        isReverse={isReverse}
       />
     </>
   );
