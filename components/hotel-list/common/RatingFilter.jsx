@@ -49,7 +49,7 @@ const RatingFilter = ({
           <button
             className="d-flex items-center px-15 py-5 lh-16 text-14 rounded-100 border-light -dd-button"
             data-bs-toggle="dropdown"
-            data-bs-auto-close="outside"
+            data-bs-auto-close="true"
             aria-expanded="false"
             data-bs-offset="0,10"
           >
@@ -65,7 +65,7 @@ const RatingFilter = ({
                   <div className="col-auto" key={star}>
                     <button
                       className={`button -blue-1 bg-blue-1-05 text-blue-1 py-10 px-20 rounded-100 ${
-                        starFilter.includes(star) ? "active" : ""
+                        starFilter === star ? "active" : ""
                       }`}
                       onClick={() => setStarFilter(star)}
                     >

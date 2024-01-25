@@ -6,7 +6,7 @@ const hotelPerPage = 24;
 const defaultFilter = {
   priceFilter: PriceFilter.HTL,
   ratingFilter: 6,
-  starFilter: [1, 2, 3, 4, 5],
+  starFilter: 0,
   pagination: {
     page: 1,
     limit: hotelPerPage,
@@ -42,10 +42,10 @@ const useFilterBar = (hotels) => {
 
   const handleStarFilterChange = (value) => {
     setStarFilter((prev) => {
-      if (prev.includes(value)) {
-        return prev.filter((star) => star !== value);
+      if (prev === value) {
+        return 0;
       }
-      return [...prev, value];
+      return value;
     });
   };
 
@@ -69,10 +69,9 @@ const useFilterBar = (hotels) => {
 
   const filterHotelByStar = () => {
     const cloneHotels = [...memoizedHotels];
-    const filterHotels = cloneHotels.filter((hotel) => {
-      if (starFilter.length === 0) return true;
-      return starFilter.includes(hotel.stars);
-    });
+    const filterHotels = cloneHotels.filter(
+      (hotel) => hotel.stars >= starFilter
+    );
     calcHotelData(filterHotels);
   };
 
