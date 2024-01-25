@@ -39,11 +39,18 @@ export default function HotelInfoToast({ hotel, price, locale }) {
       .map(() => "⭐️") // Use a simple star character
       .join(" ");
 
-    const text = `Dates: ${dateFormat()}\nHotel: ${
-      hotel?.title
-    }\nNumber of guests: ${searchInput?.adults} adults, ${
-      searchInput?.childrens
-    } children\nPrice: ${price}\nReviews: ${hotel?.rate + " "}${starIcons}`;
+    const dateText = `${searchBox?.dates}: ${dateFormat()}`;
+    const guestsText = `${hotelTrans?.numberOfGuests}: ${searchInput?.adults} ${
+      searchBox?.adults
+    }${
+      searchInput?.childrens > 0
+        ? `, ${searchInput?.childrens} ${searchBox?.childrens}`
+        : ""
+    }`;
+    const priceText = `${hotelTrans?.price}: ${price}`;
+    const reviewsText = `${hotelTrans?.guestReviewsUpper}: ${hotel?.rate} ${starIcons}`;
+    const hotelText = isReverse ? `${hotel?.title} :Hotel` : `Hotel: ${hotel?.title}`;
+    const text = `${dateText}\n${hotelText}\n${guestsText}\n${priceText}\n${reviewsText}`;
     navigator.clipboard.writeText(text);
   };
 

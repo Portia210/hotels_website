@@ -31,7 +31,7 @@ const GuestSearch = () => {
   };
 
   return (
-    <div className="searchMenu-guests px-30 lg:py-20 lg:px-0 js-form-dd js-form-counters position-relative">
+    <div className="searchMenu-guests px-20 lg:py-20 lg:px-0 js-form-dd js-form-counters position-relative">
       <div
         data-bs-toggle="dropdown"
         data-bs-auto-close="outside"
@@ -39,15 +39,15 @@ const GuestSearch = () => {
         data-bs-offset="0,22"
       >
         <h4 className="text-15 fw-500 ls-2 lh-16">{searchBox?.guests}</h4>
-        <div className="d-flex x-gap-5 text-15 text-light-1 ls-2 lh-16">
-          <p className="js-count-adult">
+        <div className="d-flex text-15 text-light-1 ls-2 lh-16">
+          <p className="js-count-adult me-1">
             {guestCounts.Adults +
               " " +
               renderText("Adults", guestCounts.Adults) +
               " - "}
           </p>
           {guestCounts.Children > 0 && (
-            <p className="js-count-child">
+            <p className="js-count-child me-1">
               {guestCounts.Children +
                 " " +
                 renderText("Childrens", guestCounts.Children) +

@@ -26,6 +26,7 @@
   },
   "Hotel": {
     "guestReviews": "ביקורות אורחים",
+    "guestReviewsUpper": "ביקורות אורחים",
     "distance": "מרחק מהמרכז",
     "numberOfGuests": "מספר אורחים",
     "price": "מחיר"

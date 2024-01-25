@@ -26,6 +26,7 @@
   },
   "Hotel": {
     "guestReviews": "guest reviews",
+    "guestReviewsUpper": "Guest reviews",
     "distance": "from center",
     "numberOfGuests": "Number of guests",
     "price": "Price"
