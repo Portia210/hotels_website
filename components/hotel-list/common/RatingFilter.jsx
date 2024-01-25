@@ -1,11 +1,16 @@
 "use client";
 
+import useTransStore from "@/store/useTransStore";
+
 const RatingFilter = ({
   ratingFilter,
   setRatingFilter,
   starFilter,
   setStarFilter,
 }) => {
+  const messages = useTransStore((state) => state.messages);
+  const filterTrans = messages?.FilterBar;
+
   return (
     <>
       <div className="col-auto">
@@ -17,13 +22,13 @@ const RatingFilter = ({
             aria-expanded="false"
             data-bs-offset="0,10"
           >
-            Rating
+            {filterTrans?.rating}
             <i className="icon icon-chevron-sm-down text-7 ml-15" />
           </button>
 
           <div className="dropRating dropdown-menu">
             <div className="px-20 py-20 rounded-4 bg-white border-light">
-              <h5 className="text-18 fw-500 mb-10">Rating</h5>
+              <h5 className="text-18 fw-500 mb-10">{filterTrans?.rating}</h5>
               <div className="row x-gap-10 y-gap-10 pt-10">
                 {[6, 7, 8, 9].map((rating) => (
                   <div className="col-auto" key={rating}>
@@ -53,13 +58,13 @@ const RatingFilter = ({
             aria-expanded="false"
             data-bs-offset="0,10"
           >
-            Stars
+            {filterTrans?.stars}
             <i className="icon icon-chevron-sm-down text-7 ml-15" />
           </button>
 
           <div className="dropRating dropdown-menu">
             <div className="px-20 py-20 rounded-4 bg-white border-light">
-              <h5 className="text-18 fw-500 mb-10">Stars</h5>
+              <h5 className="text-18 fw-500 mb-10">{filterTrans?.stars}</h5>
               <div className="row x-gap-10 y-gap-10 pt-10">
                 {[3, 4, 5].map((star) => (
                   <div className="col-auto" key={star}>
@@ -69,7 +74,7 @@ const RatingFilter = ({
                       }`}
                       onClick={() => setStarFilter(star)}
                     >
-                      {star}
+                      {star} +
                     </button>
                   </div>
                 ))}

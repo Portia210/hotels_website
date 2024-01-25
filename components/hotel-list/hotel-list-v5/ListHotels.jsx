@@ -6,8 +6,11 @@ import useFilterBar from "@/hooks/useFilterBar";
 import useHotelList from "@/hooks/useHotelList";
 import { useEffect } from "react";
 import ResultHeader from "./ResultHeader";
+import useTransStore from "@/store/useTransStore";
 
 export default function ListHotels() {
+  const messages = useTransStore((state) => state.messages);
+  const filterTrans = messages?.FilterBar;
   const { hotels, fetchHotelList, loading } = useHotelList();
   const {
     data,
@@ -40,7 +43,7 @@ export default function ListHotels() {
             <div className="col-auto">
               <div className="row x-gap-20 y-gap-10 items-center">
                 <div className="col-auto">
-                  <div className="text-18 fw-500">Filter</div>
+                  <div className="text-18 fw-500">{filterTrans?.filter}</div>
                 </div>
                 {/* End .col-auto */}
 
@@ -51,7 +54,9 @@ export default function ListHotels() {
                         onClick={resetFilter}
                         className="button -dark-1 bg-blue-1 text-white text-14 rounded-100 px-15 h-34"
                       >
-                        <i className="bi bi-arrow-clockwise mr-1">Reset</i>
+                        <i className="bi bi-arrow-clockwise mr-1">
+                          {filterTrans?.reset}
+                        </i>
                       </button>
                     </div>
                     <DropdownSelelctBar
@@ -76,7 +81,7 @@ export default function ListHotels() {
                 className="button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1"
               >
                 <i className="icon-up-down text-14 mr-10"></i>
-                Biggest hotel gap
+                {filterTrans?.bHotelGap}
               </button>
             </div>
             {/* End col-auto */}
@@ -85,10 +90,7 @@ export default function ListHotels() {
             {/* End border-top */}
 
             <div className="row y-gap-30 sm:pr-0">
-              <ResultHeader
-                loading={loading}
-                totalResult={totalFilter}
-              />
+              <ResultHeader loading={loading} totalResult={totalFilter} />
               <HotelProperties hotels={data} />
             </div>
             {/* End .row */}

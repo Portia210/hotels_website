@@ -24,12 +24,23 @@
     "childAges": "גילאי הילד",
     "dates": "תאריכים"
   },
+  "FilterBar": {
+    "filter": "פילטרים",
+    "reset": "אִתחוּל",
+    "htl": "מהמחיר הגבוה לנמוך",
+    "lth": "מהמחיר הנמוך לגבוה",
+    "rating": "דירוג",
+    "stars": "כוכבים",
+    "bHotelGap": "ההפרש הכי גבוה"
+  },
   "Hotel": {
     "hotel": "שם המלון",
     "guestReviews": "ביקורות אורחים",
     "guestReviewsUpper": "ביקורות אורחים",
     "distance": "מרחק מהמרכז",
     "numberOfGuests": "מספר אורחים",
-    "price": "מחיר"
+    "price": "מחיר",
+    "toTravelor": "אל טרוולאור",
+    "toBooking": "אל בוקינג"
   }
 }
