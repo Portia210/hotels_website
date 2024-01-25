@@ -1,5 +1,6 @@
 "use client";
 
+import useTransStore from "@/store/useTransStore";
 import { useCallback, useEffect } from "react";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -14,6 +15,8 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
     suggestions: { status, data },
     clearSuggestions,
   } = usePlacesAutocomplete();
+  const messages = useTransStore((state) => state.messages);
+  const searchBox = messages?.SearchBox;
 
   const handleGooglePlaceClick = async (placeId, address) => {
     console.log("placeId, address", placeId, address);
@@ -75,7 +78,7 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
               ))}
             {!input && (
               <li className="text-15 lh-12 fw-500 js-search-option-target rounded-8">
-                Enter a location
+                {searchBox?.enterLocation}
               </li>
             )}
             {status === "ZERO_RESULTS" && (

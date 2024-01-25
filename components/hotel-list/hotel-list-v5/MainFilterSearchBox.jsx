@@ -4,9 +4,11 @@ import GuestSearch from "@/components/hero/hero-1/GuestSearch";
 import LocationSearch from "@/components/hero/hero-1/LocationSearch";
 import useSearchBar from "@/hooks/useSearchBar";
 import DateSearch from "../common/DateSearch/DateSearch";
+import useTransStore from "@/store/useTransStore";
 
-const MainFilterSearchBox = ({ messages }) => {
+const MainFilterSearchBox = () => {
   const { handleSearch } = useSearchBar();
+  const messages = useTransStore((state) => state.messages);
 
   return (
     <>
@@ -25,7 +27,7 @@ const MainFilterSearchBox = ({ messages }) => {
           </div>
           {/* End check-in-out */}
 
-          <GuestSearch messages={messages?.SearchBox}/>
+          <GuestSearch />
           {/* End guest */}
 
           <div className="button-item h-full">
@@ -34,7 +36,7 @@ const MainFilterSearchBox = ({ messages }) => {
               className="button -dark-1 py-15 px-40 h-full col-12 rounded-0 bg-blue-1 text-white"
             >
               <i className="icon-search text-20 mr-10" />
-                { messages?.SearchBox?.search }
+              {messages?.SearchBox?.search}
             </button>
           </div>
           {/* End search button_item */}

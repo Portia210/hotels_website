@@ -2,8 +2,12 @@
 
 import useGuestSearchForm from "@/hooks/useGuestSearchForm";
 import RoomInfo from "./RoomInfo";
+import useTransStore from "@/store/useTransStore";
 
-const GuestSearch = ({ messages }) => {
+const GuestSearch = () => {
+  const messages = useTransStore((state) => state.messages);
+  const searchBox = messages?.SearchBox;
+
   const {
     rooms,
     guestCounts,
@@ -15,14 +19,14 @@ const GuestSearch = ({ messages }) => {
 
   const renderText = (key, value) => {
     if (key === "Adults") {
-      if (value <= 1) return messages.adult;
-      return messages.adults;
+      if (value <= 1) return searchBox?.adult;
+      return searchBox?.adults;
     } else if (key === "Childrens") {
-      if (value <= 1) return messages.child;
-      return messages.childrens;
+      if (value <= 1) return searchBox?.child;
+      return searchBox.childrens;
     } else if (key === "Rooms") {
-      if (value <= 1) return messages.room;
-      return messages.rooms;
+      if (value <= 1) return searchBox?.room;
+      return searchBox?.rooms;
     }
   };
 
@@ -34,7 +38,7 @@ const GuestSearch = ({ messages }) => {
         aria-expanded="false"
         data-bs-offset="0,22"
       >
-        <h4 className="text-15 fw-500 ls-2 lh-16">{messages.guests}</h4>
+        <h4 className="text-15 fw-500 ls-2 lh-16">{searchBox?.guests}</h4>
         <div className="text-15 text-light-1 ls-2 lh-16">
           <span className="js-count-adult">{guestCounts.Adults}</span>{" "}
           {renderText("Adults", guestCounts.Adults)} -{" "}
@@ -52,7 +56,7 @@ const GuestSearch = ({ messages }) => {
             return (
               <div key={index}>
                 <div className="d-flex justify-between items-center text-14 lh-12 text-light-1">
-                  <div>Room {index + 1}</div>
+                  <div>{searchBox?.room} {index + 1}</div>
                   {index > 0 && (
                     <div
                       onClick={() => handleDeleteRoom(index)}

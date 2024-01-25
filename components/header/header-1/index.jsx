@@ -1,18 +1,20 @@
 "use client";
 
+import useTransStore from "@/store/useTransStore";
+import { isActiveLink } from "@/utils/linkActiveChecker";
+import { useLocale } from "next-intl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import MainMenu from "../MainMenu";
 import CurrencyMegaMenu from "../CurrencyMegaMenu";
 import LanguageMegaMenu from "../LanguageMegaMenu";
+import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
-import { isActiveLink } from "@/utils/linkActiveChecker";
-import { usePathname } from "next/navigation";
-import useLanguageStore from "@/store/useLanguageStore";
 
 const Header1 = ({ messages }) => {
-  const language = useLanguageStore((state) => state.language);
-  const isReverse = language.language === "Hebrew";
+  const locale = useLocale();
+  const setMessages = useTransStore().setMessages;
+  const isReverse = locale === "he";
 
   const pathname = usePathname();
   const [navbar, setNavbar] = useState(false);
@@ -26,6 +28,7 @@ const Header1 = ({ messages }) => {
   };
 
   useEffect(() => {
+    setMessages(messages);
     const isHome = isActiveLink("/", pathname);
     if (!isHome) {
       return setNavbar(true);
@@ -133,7 +136,7 @@ const Header1 = ({ messages }) => {
                       aria-labelledby="offcanvasMenuLabel"
                       data-bs-scroll="true"
                     >
-                      <MobileMenu messages={messages?.Header} />
+                      <MobileMenu/>
                       {/* End MobileMenu */}
                     </div>
                   </div>

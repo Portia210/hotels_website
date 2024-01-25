@@ -41,7 +41,7 @@ const index = () => {
                 </h1>
               </div>
               {/* End text-center */}
-              <MainFilterSearchBox messages={messages}/>
+              <MainFilterSearchBox />
             </div>
             {/* End col-12 */}
           </div>

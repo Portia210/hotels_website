@@ -3,7 +3,7 @@
     "home": "בית",
     "contact": "צור קשר",
     "destination": "יעדים",
-    "register": "התחברות/",
+    "register": "התחברות",
     "signin": "הרשמה"
   },
   "SearchBox": {
@@ -13,12 +13,14 @@
     "checkout": "צ'ק אאוט",
     "selectLocation": "אנא בחר אחת מהתוצאות",
     "locationPlaceholder": "לאן אתה נוסע?",
+    "enterLocation": "הכנס יעד",
     "guests": "אורחים",
     "rooms": "חדרים",
     "room": "חדר",
     "adult": "מבוגר",
     "adults": "מבוגרים",
     "childrens": "ילדים",
-    "child": "ילד"
+    "child": "ילד",
+    "childAges": "גילאי הילד"
   }
 }
