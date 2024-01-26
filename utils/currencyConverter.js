@@ -9,7 +9,14 @@ const convertCurrency = (amount, currencyInput) => {
 };
 
 const loadDefaultCurrency = (currencies) => {
-  let currency = Cookies.get("currency");
+  const params = new URLSearchParams(window.location.search);
+  const currencyParam = params.get("currency");
+  let currency = currencies.find((item) => item.currency === currencyParam);
+  if (currency) {
+    Cookies.set("currency", JSON.stringify(currency));
+    return currency;
+  }
+  currency = Cookies.get("currency");
   if (currency) return JSON.parse(currency);
   return currencies[0];
 };
