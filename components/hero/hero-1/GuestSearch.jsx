@@ -53,13 +53,17 @@ const GuestSearch = () => {
           >
             {renderText("Adults", guestCounts.Adults)}
           </p>
+          <span className="text-light-1 me-1"> - </span>
           {guestCounts.Children > 0 && (
-            <p
-              className="js-count-child me-1"
-              dir={isReverse(guestCounts.Children)}
-            >
-              {renderText("Childrens", guestCounts.Children)}
-            </p>
+            <>
+              <p
+                className="js-count-child me-1"
+                dir={isReverse(guestCounts.Children)}
+              >
+                {renderText("Childrens", guestCounts.Children)}
+              </p>
+              <span className="text-light-1 me-1"> - </span>
+            </>
           )}
           <p className="js-count-room" dir={isReverse(guestCounts.Rooms)}>
             {renderText("Rooms", guestCounts.Rooms)}

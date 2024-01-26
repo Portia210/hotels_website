@@ -32,9 +32,9 @@ const DropdownSelelctBar = ({
     <>
       {dropdowns.map((dropdown, index) => (
         <div className="col-auto" key={index}>
-          <div className="dropdown js-dropdown js-amenities-active">
+          <div className="dropdown js-dropdown js-amenities-active pl-2 pr-2">
             <div
-              className="dropdown__button d-flex items-center text-14 rounded-100 border-light px-15 h-34"
+              className="dropdown__button d-flex items-center text-14 rounded-100 border-light px-20 h-34"
               data-bs-toggle="dropdown"
               data-bs-auto-close="true"
               aria-expanded="false"

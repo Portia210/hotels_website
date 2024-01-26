@@ -95,6 +95,7 @@ export default function ListHotels() {
             </div>
             {/* End .row */}
             <Pagination
+              filterTotalResult={totalFilter}
               pagination={pagination}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
