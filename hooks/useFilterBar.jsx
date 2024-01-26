@@ -76,7 +76,7 @@ const useFilterBar = (hotels) => {
   };
 
   const filterByBiggestPriceGap = () => {
-    const cloneHotels = [...memoizedHotels];
+    const cloneHotels = [...filterHotels];
     cloneHotels.sort((a, b) => b.price_difference - a.price_difference);
     calcHotelData(cloneHotels);
   };
