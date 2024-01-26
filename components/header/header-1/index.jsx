@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import CurrencyMegaMenu from "../CurrencyMegaMenu";
 import LanguageMegaMenu from "../LanguageMegaMenu";
 import MainMenu from "../MainMenu";
-import MobileMenu from "../MobileMenu";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 const Header1 = ({ messages }) => {
   const locale = useLocale();

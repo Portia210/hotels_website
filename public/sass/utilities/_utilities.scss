@@ -514,10 +514,10 @@ $_displays: none, inline-block, block, flex;
   left: 0;
   width: 100%;
   height: 100%;
-  padding-top: 120px;
   z-index: 1100;
   pointer-events: auto;
   transition: all 0.4s $easeOutQuart;
+  overflow-y: scroll !important;
 
   &.is-hidden {
     pointer-events: none;
@@ -538,7 +538,6 @@ $_displays: none, inline-block, block, flex;
     position: absolute;
     left: 50%;
     z-index: 1;
-    width: 1070px;
     height: auto;
     transform: translateX(-50%);
   }
