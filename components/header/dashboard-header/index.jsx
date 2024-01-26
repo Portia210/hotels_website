@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
-import MobileMenu from "../MobileMenu";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 const HeaderDashBoard = () => {
   const [navbar, setNavbar] = useState(false);
