@@ -33,7 +33,15 @@ const MobileMenu = ({ isReverse }) => {
       {/* End pro-header */}
 
       <Sidebar width="400" backgroundColor="#fff" rtl={isReverse}>
-        <Menu>
+        <Menu
+          // menuItemStyles={{
+          //   button: ({ level, active, disabled }) => {
+          //     return {
+          //       borderBottom: "solid 1px #eaeaea",
+          //     };
+          //   },
+          // }}
+        >
           <MenuItem onClick={() => router.push("/")}>
             {headerTrans?.home}
           </MenuItem>
