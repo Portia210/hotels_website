@@ -1,6 +1,11 @@
 "use client";
 
-const Pagination = ({ pagination, currentPage, setCurrentPage }) => {
+const Pagination = ({
+  pagination,
+  currentPage,
+  setCurrentPage,
+  filterTotalResult,
+}) => {
   const handlePageClick = (pageNumber) => {
     setTimeout(() => {
       window.scrollTo({ top: 100, behavior: "smooth" });
@@ -81,7 +86,7 @@ const Pagination = ({ pagination, currentPage, setCurrentPage }) => {
           <div className="text-center mt-30 md:mt-10">
             <div className="text-14 text-light-1">
               {pagination.offset} – {pagination.offset + pagination.limit} of{" "}
-              {pagination.totalResults}+ hotels found
+              {filterTotalResult} hotels found
             </div>
           </div>
         </div>
