@@ -2,7 +2,7 @@
 
 import useCurrency from "@/hooks/useCurrency";
 
-const CurrencyMobileMenu = ({ textClass }) => {
+const CurrencyMobileMenu = ({ textClass, textTran, isReverse }) => {
   const {
     handleCurrency,
     currencies,
@@ -14,16 +14,27 @@ const CurrencyMobileMenu = ({ textClass }) => {
   return (
     <>
       {/* Start currencty dropdown wrapper */}
-      <div className="col-auto py-10" style={{ marginLeft: 4 }}>
+      <div
+        className="col-auto py-10"
+        style={isReverse ? { marginLeft: 4 } : { marginRight: 10 }}
+      >
         <button
           className={`d-flex items-center text-16 ${textClass}`}
           onClick={handleCurrency}
         >
           <span className="js-currencyMenu-mainTitle">
-            <span className="ms-3 text-16 me-2">Currency</span>
+            <span
+              className={`${isReverse ? "ms-2 me-3" : "ms-3 me-2"} text-16 `}
+            >
+              {textTran}
+            </span>
             {selectedCurrency?.currency}
           </span>
-          <i className="icon-chevron-sm-down text-7 ml-10" />
+          <i
+            className={`icon-chevron-sm-down text-7 ${
+              isReverse ? "mr-10" : "ml-10"
+            }`}
+          />
         </button>
       </div>
       {/* End currencty dropdown wrapper */}

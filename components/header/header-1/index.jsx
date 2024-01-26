@@ -55,7 +55,10 @@ const Header1 = ({ messages }) => {
                   isReverse ? "flex-row-reverse" : ""
                 }`}
               >
-                <Link href="/" className={`header-logo mr-20`}>
+                <Link
+                  href="/"
+                  className={`header-logo ${isReverse ? "ml-20" : "mr-20"}`}
+                >
                   <img src="/img/general/logo-light.svg" alt="logo icon" />
                   <img src="/img/general/logo-dark.svg" alt="logo icon" />
                 </Link>
@@ -65,7 +68,9 @@ const Header1 = ({ messages }) => {
                   <div className="header-menu__content">
                     <MainMenu
                       messages={messages?.Header}
-                      style={`text-white ${true ? "flex-row-reverse" : ""}`}
+                      style={`text-white ${
+                        isReverse ? "flex-row-reverse" : ""
+                      }`}
                     />
                   </div>
                 </div>
@@ -81,7 +86,7 @@ const Header1 = ({ messages }) => {
                   isReverse ? "flex-row-reverse" : ""
                 }`}
               >
-                <div className="row x-gap-20 items-center xxl:d-none">
+                <div className="row x-gap-20 items-center md:d-none">
                   <CurrencyMegaMenu textClass="text-white" />
                   {/* End Megamenu for Currencty */}
 
@@ -98,7 +103,7 @@ const Header1 = ({ messages }) => {
 
                 {/* Start btn-group */}
                 <div
-                  className={`d-flex items-center ${
+                  className={`d-flex items-center lg:d-none ${
                     isReverse ? "mr-20" : "ml-20"
                   } is-menu-opened-hide md:d-none`}
                 >
@@ -110,14 +115,14 @@ const Header1 = ({ messages }) => {
                   >
                     {messages?.Header?.signin} / {messages?.Header?.register}
                   </Link>
-                  
+
                   <Link
                     href="/login"
                     className={`d-md-none d-xxl-inline-flex button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
                       isReverse ? "mr-20" : "ml-20"
                     }`}
                   >
-                    {messages?.Header?.signin} 
+                    {messages?.Header?.signin}
                   </Link>
                   <Link
                     href="/signup"
@@ -128,11 +133,15 @@ const Header1 = ({ messages }) => {
                     {messages?.Header?.register}
                   </Link>
                 </div>
-                
+
                 {/* End btn-group */}
 
                 {/* Start mobile menu icon */}
-                <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-white">
+                <div
+                  className={`d-none lg:d-flex x-gap-20 items-center text-white ${
+                    isReverse ? "pr-30" : "pl-30"
+                  }`}
+                >
                   <div>
                     <Link
                       href="/login"
@@ -154,7 +163,7 @@ const Header1 = ({ messages }) => {
                       aria-labelledby="offcanvasMenuLabel"
                       data-bs-scroll="true"
                     >
-                      <MobileMenu/>
+                      <MobileMenu isReverse={isReverse} />
                       {/* End MobileMenu */}
                     </div>
                   </div>

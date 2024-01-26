@@ -4,7 +4,9 @@
     "contact": "Contact",
     "destination": "Destination",
     "register": "Register",
-    "signin": "Signin"
+    "signin": "Signin",
+    "language": "Language",
+    "currency": "Currency"
   },
   "SearchBox": {
     "search": "Search",
