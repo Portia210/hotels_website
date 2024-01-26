@@ -34,6 +34,7 @@
     "bHotelGap": "Biggest hotel gap"
   },
   "Hotel": {
+    "hotel": "Hotel",
     "guestReviews": "guest reviews",
     "guestReviewsUpper": "Guest reviews",
     "distance": "from center",

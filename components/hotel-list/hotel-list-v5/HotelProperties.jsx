@@ -66,10 +66,18 @@ const HotelProperties = ({ hotels }) => {
               </div>
             </div>
             <div className="hotelsCard__content mt-10">
-              <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
+              <h4
+                className={`hotelsCard__title text-dark-1 text-18 lh-16 fw-500 ${
+                  isReverse ? "text-end" : ""
+                }`}
+              >
                 <span>{item?.title}</span>
               </h4>
-              <p className="text-light-1 lh-14 text-14 mt-5">
+              <p
+                className={`text-light-1 lh-14 text-14 mt-5 ${
+                  isReverse ? "text-end" : ""
+                }`}
+              >
                 {renderText("distance", item?.distance)}
               </p>
               <div className="d-flex items-center mt-20">
