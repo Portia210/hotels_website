@@ -24,9 +24,7 @@ const DropdownSelelctBar = ({
   ];
 
   const renderText = (key) => {
-    if (key === PriceFilter.HTL) {
-      return filterTrans?.htl;
-    }
+    if (key === PriceFilter.HTL) return filterTrans?.htl;
     return filterTrans?.lth;
   };
 
