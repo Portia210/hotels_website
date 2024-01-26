@@ -2,7 +2,7 @@
 
 import useCurrency from "@/hooks/useCurrency";
 
-const CurrencyMegaMenu = ({ textClass }) => {
+const CurrencyMobileMenu = ({ textClass }) => {
   const {
     handleCurrency,
     currencies,
@@ -14,12 +14,13 @@ const CurrencyMegaMenu = ({ textClass }) => {
   return (
     <>
       {/* Start currencty dropdown wrapper */}
-      <div className="col-auto">
+      <div className="col-auto py-10" style={{ marginLeft: 4 }}>
         <button
-          className={`d-flex items-center text-14 ${textClass}`}
+          className={`d-flex items-center text-16 ${textClass}`}
           onClick={handleCurrency}
         >
           <span className="js-currencyMenu-mainTitle">
+            <span className="ms-3 text-16 me-2">Currency</span>
             {selectedCurrency?.currency}
           </span>
           <i className="icon-chevron-sm-down text-7 ml-10" />
@@ -28,12 +29,12 @@ const CurrencyMegaMenu = ({ textClass }) => {
       {/* End currencty dropdown wrapper */}
 
       <div
-        className={`currencyMenu js-currencyMenu pt-120 ${click ? "" : "is-hidden"}`}
+        className={`currencyMenu js-currencyMenu ${click ? "" : "is-hidden"}`}
       >
         <div className="currencyMenu__bg" onClick={handleCurrency}></div>
         <div
           className="currencyMenu__content bg-white rounded-4"
-          style={{ width: "80%" }}
+          style={{ width: "100%" }}
         >
           <div className="d-flex items-center justify-between px-30 py-20 sm:px-15 border-bottom-light">
             <div className="text-20 fw-500 lh-15">Select your currency</div>
@@ -45,10 +46,10 @@ const CurrencyMegaMenu = ({ textClass }) => {
             {/* End colse button */}
           </div>
           {/* End flex wrapper */}
-          <ul className="modalGrid px-30 py-30 sm:px-15 sm:py-15">
+          <ul className="px-30 py-30 sm:px-15 sm:py-15">
             {currencies.map((item) => (
               <li
-                className={`modalGrid__item js-item ${
+                className={`js-item ${
                   selectedCurrency?.currency === item.currency ? "active" : ""
                 }`}
                 key={item.currency}
@@ -69,4 +70,4 @@ const CurrencyMegaMenu = ({ textClass }) => {
   );
 };
 
-export default CurrencyMegaMenu;
+export default CurrencyMobileMenu;
