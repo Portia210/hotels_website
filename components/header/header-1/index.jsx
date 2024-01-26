@@ -104,13 +104,31 @@ const Header1 = ({ messages }) => {
                 >
                   <Link
                     href="/signup"
-                    className={`button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
+                    className={`d-md-inline-flex d-xxl-none button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
                       isReverse ? "mr-20" : "ml-20"
                     }`}
                   >
                     {messages?.Header?.signin} / {messages?.Header?.register}
                   </Link>
+                  
+                  <Link
+                    href="/login"
+                    className={`d-md-none d-xxl-inline-flex button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
+                      isReverse ? "mr-20" : "ml-20"
+                    }`}
+                  >
+                    {messages?.Header?.signin} 
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className={`d-md-none d-xxl-inline-flex button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
+                      isReverse ? "mr-20" : "ml-20"
+                    }`}
+                  >
+                    {messages?.Header?.register}
+                  </Link>
                 </div>
+                
                 {/* End btn-group */}
 
                 {/* Start mobile menu icon */}
