@@ -4,7 +4,9 @@
     "contact": "צור קשר",
     "destination": "יעדים",
     "register": "התחברות",
-    "signin": "הרשמה"
+    "signin": "הרשמה",
+    "language": "שפה",
+    "currency": "מַטְבֵּעַ"
   },
   "SearchBox": {
     "search": "חיפוש",

@@ -8,8 +8,9 @@ import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import CurrencyMobileMenu from "./CurrencyMobileMenu";
 import LanguageMobileMenu from "./LanguageMobileMenu";
 
-const MobileMenu = () => {
+const MobileMenu = ({ isReverse }) => {
   const messages = useTransStore((state) => state.messages);
+  const headerTrans = messages?.Header;
   const router = useRouter();
 
   return (
@@ -31,13 +32,41 @@ const MobileMenu = () => {
       </div>
       {/* End pro-header */}
 
-      <Sidebar width="400" backgroundColor="#fff">
-        <Menu>
-          <MenuItem onClick={() => router.push("/")}>Home</MenuItem>
-          <MenuItem onClick={() => router.push("/")}>Destinations</MenuItem>
-          <MenuItem component={<CurrencyMobileMenu />}></MenuItem>
-          <MenuItem component={<LanguageMobileMenu />}></MenuItem>
-          <MenuItem onClick={() => router.push("/")}>Contact</MenuItem>
+      <Sidebar width="400" backgroundColor="#fff" rtl={isReverse}>
+        <Menu
+          // menuItemStyles={{
+          //   button: ({ level, active, disabled }) => {
+          //     return {
+          //       borderBottom: "solid 1px #eaeaea",
+          //     };
+          //   },
+          // }}
+        >
+          <MenuItem onClick={() => router.push("/")}>
+            {headerTrans?.home}
+          </MenuItem>
+          <MenuItem onClick={() => router.push("/")}>
+            {headerTrans?.destination}
+          </MenuItem>
+          <MenuItem
+            component={
+              <CurrencyMobileMenu
+                isReverse={isReverse}
+                textTran={headerTrans?.currency}
+              />
+            }
+          ></MenuItem>
+          <MenuItem
+            component={
+              <LanguageMobileMenu
+                isReverse={isReverse}
+                textTran={headerTrans?.language}
+              />
+            }
+          ></MenuItem>
+          <MenuItem onClick={() => router.push("/")}>
+            {headerTrans?.contact}
+          </MenuItem>
         </Menu>
       </Sidebar>
 

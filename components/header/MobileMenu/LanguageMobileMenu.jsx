@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const LanguageMobileMenu = ({ textClass }) => {
+const LanguageMobileMenu = ({ textClass, textTran, isReverse }) => {
   const router = useRouter();
   const locale = useLocale();
   const [click, setClick] = useState(false);
@@ -38,21 +38,26 @@ const LanguageMobileMenu = ({ textClass }) => {
   return (
     <>
       {/* Start language currency Selector */}
-      <div className="col-auto py-10" style={{ marginLeft: 4 }}>
+      <div
+        className="col-auto py-10"
+        style={isReverse ? { marginLeft: 4 } : { marginRight: 10 }}
+      >
         <button
           className={`d-flex items-center text-16 ${textClass}`}
           onClick={() => setClick((prevState) => !prevState)}
         >
-          <span className="ms-3 text-16 me-2">Language</span>
+          <span className={`${isReverse ? "ms-2 me-3" : "ms-3 me-2"} text-16 `}>
+            {textTran}
+          </span>{" "}
           <Image
             width={20}
             height={20}
             src={language?.src}
             alt="image"
-            className="rounded-full mr-10"
+            className={`rounded-full ${isReverse ? "ml-5" : "mr-10"}`}
           />
           <span className="js-language-mainTitle">{language?.language}</span>
-          <i className="icon-chevron-sm-down text-7 ml-15" />
+          <i className={`icon-chevron-sm-down text-7 ${isReverse ? 'mr-10': 'ml-15'}`} />
         </button>
       </div>
       {/* End language currency Selector */}
