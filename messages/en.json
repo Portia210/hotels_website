@@ -44,7 +44,6 @@
     "price": "Price",
     "toTravelor": "To Travelor",
     "toBooking": "To Booking",
-    "tooltipCopy": "Copy",
-    "tooltipCopied": "Copied"
+    "tooltipCopy": "Copy text"
   }
 }
