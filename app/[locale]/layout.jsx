@@ -58,7 +58,7 @@ export default function RootLayout({ children, params }) {
             <SrollTop />
           </main>
         </body>
-      </html>
+      </html>        
     </ClerkProvider>
   );
 }

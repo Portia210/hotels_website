@@ -1,4 +1,4 @@
-import { authMiddleware, getLocaleOrDefault } from "@clerk/nextjs";
+import { authMiddleware } from "@clerk/nextjs";
 import createMiddleware from "next-intl/middleware";
 
 const publicRoutes = ["/","/en", "/he", "/:locale/login", "/:locale/signup"];
@@ -13,7 +13,7 @@ export default authMiddleware({
     // Execute next-intl middleware before Clerk's auth middleware
     return intlMiddleware(req);
   },
-
+  apiRoutes: ["/api(.*)"],
   // Ensure that locale specific sign-in pages are public
   publicRoutes: publicRoutes,
 });
