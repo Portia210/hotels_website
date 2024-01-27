@@ -545,7 +545,8 @@ $_displays: none, inline-block, block, flex;
 
 .modalGrid {
   display: grid;
-  height: 60vh;
+  min-height: 18vh;
+  max-height: 60vh;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 30px;
   overflow-y: scroll;

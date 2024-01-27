@@ -4,12 +4,13 @@ import Pagination from "@/components/hotel-list/common/Pagination";
 import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
 import useFilterBar from "@/hooks/useFilterBar";
 import useHotelList from "@/hooks/useHotelList";
+import useTransStore from "@/store/useTransStore";
 import { useEffect } from "react";
 import ResultHeader from "./ResultHeader";
-import useTransStore from "@/store/useTransStore";
 
 export default function ListHotels() {
   const messages = useTransStore((state) => state.messages);
+  const hotelTrans = messages?.Hotel;
   const filterTrans = messages?.FilterBar;
   const { hotels, fetchHotelList, loading } = useHotelList();
   const {
@@ -33,6 +34,26 @@ export default function ListHotels() {
       fetchHotelList();
     }, 50);
   }, []);
+
+  const renderTooltip = () => {
+    if (!hotelTrans?.tooltipCopy) return;
+    const Tooltip = require("bootstrap/js/dist/tooltip");
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+    [...tooltipTriggerList].map(
+      (tooltipTriggerEl) =>
+        new Tooltip(tooltipTriggerEl, {
+          container: "body",
+          trigger: "hover",
+          title: hotelTrans.tooltipCopy || "",
+        })
+    );
+  };
+
+  useEffect(() => {
+    renderTooltip();
+  }, [hotelTrans?.tooltipCopy]);
 
   return (
     <>

@@ -43,6 +43,8 @@
     "numberOfGuests": "Number of guests",
     "price": "Price",
     "toTravelor": "To Travelor",
-    "toBooking": "To Booking"
+    "toBooking": "To Booking",
+    "tooltipCopy": "Copy",
+    "tooltipCopied": "Copied"
   }
 }
