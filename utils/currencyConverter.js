@@ -2,10 +2,10 @@ import Cookies from "js-cookie";
 
 const convertCurrency = (amount, currencyInput) => {
   const rate = currencyInput?.rate;
-  const currency = currencyInput?.currency;
+  const symbol = currencyInput?.symbol;
   if (!amount || !rate) return amount;
   const convertedPrice = Math.round(amount * rate);
-  return `${convertedPrice} ${currency}`;
+  return `${convertedPrice} ${symbol}`;
 };
 
 const loadDefaultCurrency = (currencies) => {

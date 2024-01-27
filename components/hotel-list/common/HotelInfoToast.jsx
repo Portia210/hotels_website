@@ -1,12 +1,12 @@
 import useSearchStore from "@/store/useSearchStore";
-import HotelStars from "./HotelStars";
-import dayjs from "dayjs";
 import useTransStore from "@/store/useTransStore";
+import dayjs from "dayjs";
 import "dayjs/locale/he";
+import HotelStars from "./HotelStars";
 
 export default function HotelInfoToast({ hotel, price, locale }) {
   const isReverse = locale === "he";
-  if (locale === "he") {
+  if (isReverse) {
     dayjs.locale("he");
   } else {
     dayjs.locale("en");
@@ -14,8 +14,8 @@ export default function HotelInfoToast({ hotel, price, locale }) {
   const messages = useTransStore((state) => state.messages);
   const searchBox = messages?.SearchBox;
   const hotelTrans = messages?.Hotel;
-
   const searchInput = useSearchStore((state) => state.searchInput);
+
   const hideToast = () => {
     document.getElementById("liveToast")?.classList?.remove("show");
   };
@@ -71,6 +71,10 @@ export default function HotelInfoToast({ hotel, price, locale }) {
             <strong className="me-auto">{hotel?.title}</strong>
             <button
               onClick={() => onCopyInfo(hotel)}
+              // trigger="click"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              // title={"Copy"}
               className="button -blue-1 bg-white size-30 rounded-full shadow-2"
             >
               <i className="bi bi-clipboard"></i>

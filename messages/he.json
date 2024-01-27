@@ -3,8 +3,8 @@
     "home": "בית",
     "contact": "צור קשר",
     "destination": "יעדים",
-    "register": "התחברות",
-    "signin": "הרשמה",
+    "register": "הרשמה",
+    "signin": "התחברות",
     "language": "שפה",
     "currency": "מַטְבֵּעַ"
   },
@@ -43,6 +43,7 @@
     "numberOfGuests": "מספר אורחים",
     "price": "מחיר",
     "toTravelor": "אל טרוולאור",
-    "toBooking": "אל בוקינג"
+    "toBooking": "אל בוקינג",
+    "tooltipCopy": "העתק טקסט"
   }
 }
