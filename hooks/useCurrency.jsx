@@ -1,3 +1,4 @@
+import { TOURCOMPARE_BE_URL } from "@/constants/environment";
 import useCurrencyStore from "@/store/useCurrencyStore";
 import { loadDefaultCurrency } from "@/utils/currencyConverter";
 import axios from "axios";
@@ -12,7 +13,7 @@ const useCurrency = () => {
   const [selectedCurrency, setSelectedCurrency] = useState();
 
   const fetchCurrencies = async () => {
-    const data = await axios.post(`/api/currency`).then((res) => res.data);
+    const data = await axios.post(`${TOURCOMPARE_BE_URL}/api/v1/currency`).then((res) => res.data);
     setCurrencies(data.rates);
   };
 

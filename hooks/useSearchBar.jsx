@@ -1,3 +1,4 @@
+import { TOURCOMPARE_BE_URL } from "@/constants/environment";
 import useSearchStore from "@/store/useSearchStore";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -15,7 +16,7 @@ const useSearchBar = () => {
       searchInput.children = searchInput.childrens;
       searchInput.adult = searchInput.adults;
       const sessionId = await axios
-        .post("/api/hotel-list/session", searchInput)
+        .post(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session`, searchInput)
         .then((res) => res.data);
       return sessionId;
     } catch (error) {

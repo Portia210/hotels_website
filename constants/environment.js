@@ -1,1 +1,1 @@
-export const CRAWLERUI_URL = process.env.CRAWLERUI_URL
+export const TOURCOMPARE_BE_URL = process.env.NEXT_PUBLIC_TOURCOMPARE_BE_URL

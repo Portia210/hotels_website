@@ -1,3 +1,4 @@
+import { TOURCOMPARE_BE_URL } from "@/constants/environment";
 import useSearchStore from "@/store/useSearchStore";
 import { sleep } from "@/utils/sleep";
 import { SearchInputSchema } from "@/zod/searchInput";
@@ -22,7 +23,7 @@ const useHotelList = () => {
       const sessionId = params.get("sessionId");
       const fetching = async () => {
         const data = await axios
-          .get(`/api/hotel-list/session?sessionId=${sessionId}`)
+          .get(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`)
           .then((res) => res.data);
         const hotels = data.results;
         setHotels(hotels);
