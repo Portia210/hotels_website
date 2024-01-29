@@ -1,8 +1,44 @@
+"use client";
+import { useSignIn } from "@clerk/nextjs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const LoginForm = () => {
+  const router = useRouter();
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const { signIn, setActive } = useSignIn();
+
+  const onSignIn = async (e) => {
+    e.preventDefault();
+    const data = {};
+    for (const key of e.target) {
+      if (key?.name) data[key.name] = key.value;
+    }
+    await signIn
+      .create({
+        identifier: data.email,
+        password: data.password,
+      })
+      .then((result) => {
+        if (result?.status === "complete") {
+          setActive({ session: result.createdSessionId });
+          router.push("/");
+        } else {
+          console.log(result);
+        }
+      })
+      .catch((err) => {
+        let message = err?.message;
+        if (err?.errors?.length > 0) {
+          message = err?.errors[0]?.longMessage || err;
+        }
+        setErrorMsg(message);
+      });
+  };
   return (
-    <form className="row y-gap-20">
+    <form className="row y-gap-20" onSubmit={onSignIn}>
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
@@ -16,7 +52,7 @@ const LoginForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <input type="text" required />
+          <input type="email" required name="email" />
           <label className="lh-1 text-14 text-light-1">Email</label>
         </div>
       </div>
@@ -24,9 +60,14 @@ const LoginForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <input type="password" required />
+          <input type="password" required name="password" />
           <label className="lh-1 text-14 text-light-1">Password</label>
         </div>
+        {errorMsg && (
+          <div>
+            <p className="text-red-1">{errorMsg}</p>
+          </div>
+        )}
       </div>
       {/* End .col */}
 

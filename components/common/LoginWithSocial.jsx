@@ -29,8 +29,7 @@ const LoginWithSocial = () => {
           type="submit"
           className="button col-12 -outline-red-1 text-red-1 py-15 rounded-8 "
         >
-          <i className="icon-apple text-15 mr-10" />
-          Google
+          <i className="bi bi-google text-15 mr-10"></i> Google
         </button>
       </div>
     </>
