@@ -1,8 +1,12 @@
 "use client";
 
 import useCurrency from "@/hooks/useCurrency";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const CurrencyMegaMenu = ({ textClass }) => {
+  const isMobile = useIsMobile();
+  if (isMobile) return null;
+  
   const {
     handleCurrency,
     currencies,

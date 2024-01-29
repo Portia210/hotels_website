@@ -99,6 +99,9 @@ dependencies:
   react-redux:
     specifier: ^8.1.3
     version: 8.1.3(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+  react-select-country-list:
+    specifier: ^2.2.3
+    version: 2.2.3
   react-slick:
     specifier: ^0.29.0
     version: 0.29.0(react-dom@18.2.0)(react@18.2.0)
@@ -1949,6 +1952,10 @@ packages:
       react-is: 18.2.0
       redux: 4.2.1
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  /react-select-country-list@2.2.3:
+    resolution: {integrity: sha512-eRgXL613dVyJiE99yKDYLvSBKDxvIlhkmvO2DVIjdKVyUQq6kBqoMUV/2zuRIAsbRXgBGmKjeL1dxjf7zTfszg==}
     dev: false
 
   /react-slick@0.29.0(react-dom@18.2.0)(react@18.2.0):

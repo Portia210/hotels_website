@@ -1167,7 +1167,7 @@ $_displays: none, inline-block, block, flex;
   }
 
   textarea,
-  input {
+  input, select {
     border: 1px solid var(--color-border);
     border-radius: 4px;
     padding: 0 15px;

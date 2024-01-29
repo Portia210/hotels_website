@@ -4,10 +4,15 @@ import { useSignUp } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import CountryList from "./CountryList";
+import countryList from "react-select-country-list";
+
+const countries = countryList().getData();
 
 const SignUpForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [pendingForEmailVerified, setPendingForEmailVerified] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState();
   const router = useRouter();
   const { signUp, setActive } = useSignUp();
 
@@ -30,7 +35,7 @@ const SignUpForm = () => {
         unsafeMetadata: {
           primaryPhoneNumber: data?.primaryPhoneNumber,
           agentNumber: data?.agentNumber,
-          country: data?.country,
+          country: selectedCountry,
         },
       })
       .then(async (result) => {
@@ -66,10 +71,13 @@ const SignUpForm = () => {
             </Link>
           </p>
         </div>
-        <p className="text-center fs-4 fw-500">Please check your email to verify your account</p>
+        <p className="text-center fs-4 fw-500">
+          Please check your email to verify your account
+        </p>
       </div>
     );
   }
+
   return (
     <form className="row y-gap-15" onSubmit={handleSubmit}>
       <div className="col-12">
@@ -137,7 +145,7 @@ const SignUpForm = () => {
       {/* End .col */}
 
       <div className="col-6">
-        <div className="form-input ">
+        <div className="form-input">
           <input type="text" name="agentNumber" />
           <label className="lh-1 text-14 text-light-1">Agent Number</label>
         </div>
@@ -146,8 +154,12 @@ const SignUpForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <input type="text" name="country" />
           <label className="lh-1 text-14 text-light-1">Country</label>
+          <CountryList
+            countries={countries}
+            onCountrySelected={setSelectedCountry}
+            selectedItem={selectedCountry}
+          />
         </div>
       </div>
       {/* End .col */}
