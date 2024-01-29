@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-const AvatarUploader = ({ imageUrl }) => {
+const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
   const [image, setImage] = useState(imageUrl);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -35,14 +35,15 @@ const AvatarUploader = ({ imageUrl }) => {
       setSuccess(true);
       setError("");
     };
-
     reader.readAsDataURL(file);
+    updateProfileImage(file);
   };
 
   useEffect(() => {
     if (imageUrl) setImage(imageUrl);
   }, [imageUrl]);
 
+  
   return (
     <div className="row y-gap-30 items-center">
       <div className="col-auto">

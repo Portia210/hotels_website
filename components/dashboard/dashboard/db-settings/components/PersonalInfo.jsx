@@ -2,8 +2,10 @@ import { useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
 import AvatarUploader from "./AvatarUploader";
 import { sleep } from "@/utils/sleep";
+import { useState } from "react";
 
 const PersonalInfo = () => {
+  const [file, setFile] = useState(null);
   const { user } = useUser();
 
   const onUpdateInfo = async (e) => {
@@ -21,6 +23,7 @@ const PersonalInfo = () => {
           data[key.name] = key.value;
         }
       }
+      if (file) await user.setProfileImage({ file });
       await user.update({
         firstName: data?.firstName,
         lastName: data?.lastName,
@@ -32,23 +35,31 @@ const PersonalInfo = () => {
       });
       toast.success("Successfully updated profile", {
         position: "bottom-right",
+        autoClose: 3000,
       });
     } catch (error) {
-      toast.success("Oops something went wrong! That's on us.", {
+      toast.error("Oops something went wrong! That's on us.", {
         position: "bottom-right",
         hideProgressBar: true,
-        });
+        autoClose: 3000,
+      });
       console.error(error);
     } finally {
-      await sleep(1000);
       toast.dismiss(toastId);
     }
+  };
+
+  const onUpdateProfileImage = async (file) => {
+    setFile(file);
   };
 
   return (
     <>
       <form onSubmit={onUpdateInfo}>
-        <AvatarUploader imageUrl={user?.imageUrl} />
+        <AvatarUploader
+          imageUrl={user?.imageUrl}
+          updateProfileImage={onUpdateProfileImage}
+        />
         {/* End AvatarUploader*/}
 
         <div className="border-top-light mt-30 mb-30" />
