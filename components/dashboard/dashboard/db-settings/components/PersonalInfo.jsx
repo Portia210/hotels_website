@@ -29,7 +29,7 @@ const PersonalInfo = () => {
         unsafeMetadata: {
           primaryPhoneNumber: data?.primaryPhoneNumber,
           agentNumber: data?.agentNumber,
-          country: data?.country,
+          country: selectedCountry,
         },
       });
       toast.success("Successfully updated profile", {
