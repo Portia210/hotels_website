@@ -2,10 +2,14 @@ import { useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
 import AvatarUploader from "./AvatarUploader";
 import { useState } from "react";
+import CountryList from "@/components/common/CountryList";
 
 const PersonalInfo = () => {
   const [file, setFile] = useState(null);
   const { user } = useUser();
+  const [selectedCountry, setSelectedCountry] = useState(
+    user?.unsafeMetadata?.country
+  );
 
   const onUpdateInfo = async (e) => {
     const toastId = toast.success("Updating user's profile", {
@@ -129,13 +133,16 @@ const PersonalInfo = () => {
             </div>
             <div className="col-6">
               <div className="form-input">
-                <input
-                  type="text"
-                  name="country"
-                  required
-                  defaultValue={user?.unsafeMetadata?.country}
+                <label
+                  className="position-absolute lh-1 text-16 text-light-1"
+                  style={{ marginTop: -8 }}
+                >
+                  Country
+                </label>
+                <CountryList
+                  onCountrySelected={setSelectedCountry}
+                  selectedItem={selectedCountry}
                 />
-                <label className="lh-1 text-16 text-light-1">Country</label>
               </div>
             </div>
             {/* End col-6 */}

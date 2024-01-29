@@ -5,9 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CountryList from "./CountryList";
-import countryList from "react-select-country-list";
-
-const countries = countryList().getData();
 
 const SignUpForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -154,9 +151,10 @@ const SignUpForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <label className="lh-1 text-14 text-light-1">Country</label>
+          <label className="lh-1 text-14 text-light-1"                   
+            style={{ marginTop: -8 }}
+          >Country</label>
           <CountryList
-            countries={countries}
             onCountrySelected={setSelectedCountry}
             selectedItem={selectedCountry}
           />

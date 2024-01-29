@@ -1,7 +1,8 @@
+'use client';
 import { useState, useEffect } from "react";
 
 const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleResize = () => {
     setIsMobile(window.innerWidth < 768);

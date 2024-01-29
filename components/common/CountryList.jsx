@@ -1,8 +1,11 @@
+import countryList from "react-select-country-list";
+import { useMemo } from "react";
+
 export default function CountryList({
-  countries,
   onCountrySelected,
   selectedItem,
 }) {
+  const countries = useMemo(() => countryList().getData(), [])
   const handleSelectCountry = (value) => {
     const country = countries.find((item) => item.value === value);
     onCountrySelected(country);
@@ -10,7 +13,6 @@ export default function CountryList({
 
   return (
     <select
-      className="mt-2"
       style={{ appearance: "none" }}
       onChange={(e) => handleSelectCountry(e.target.value)}
       value={selectedItem?.value || ""}
