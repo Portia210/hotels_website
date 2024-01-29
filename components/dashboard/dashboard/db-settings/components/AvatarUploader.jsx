@@ -1,11 +1,10 @@
-
-'use client'
+"use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const AvatarUploader = () => {
-  const [image, setImage] = useState("");
+const AvatarUploader = ({ imageUrl }) => {
+  const [image, setImage] = useState(imageUrl);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -39,6 +38,10 @@ const AvatarUploader = () => {
 
     reader.readAsDataURL(file);
   };
+
+  useEffect(() => {
+    if (imageUrl) setImage(imageUrl);
+  }, [imageUrl]);
 
   return (
     <div className="row y-gap-30 items-center">

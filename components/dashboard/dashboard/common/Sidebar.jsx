@@ -1,13 +1,16 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 
 import { isActiveLink } from "@/utils/linkActiveChecker";
-import { usePathname } from "next/navigation";
+import { useClerk } from "@clerk/nextjs";
+import { usePathname, useRouter } from "next/navigation";
 
 const Sidebar = () => {
-const pathname = usePathname()
+  const { signOut } = useClerk();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const sidebarContent = [
     {
@@ -38,9 +41,20 @@ const pathname = usePathname()
       id: 5,
       icon: "/img/dashboard/sidebar/log-out.svg",
       name: " Logout",
-      routePath: "/login",
+      routePath: "#",
     },
   ];
+
+  const onLogout = (id) => {
+    if (id !== 5) return;
+    signOut()
+      .then(() => {
+        router.push("/login");
+      })
+      .catch((err) => {
+        console.error("err -->", err);
+      });
+  };
   return (
     <div className="sidebar -dashboard">
       {sidebarContent.map((item) => (
@@ -52,6 +66,7 @@ const pathname = usePathname()
           >
             <Link
               href={item.routePath}
+              onClick={() => onLogout(item.id)}
               className="d-flex items-center text-15 lh-1 fw-500"
             >
               <Image

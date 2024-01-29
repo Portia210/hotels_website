@@ -1,6 +1,14 @@
+import { useUser } from "@clerk/nextjs";
+
 const PasswordInfo = () => {
+  const { user } = useUser();
+  
+  const onUpdatePassword = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <form className="col-xl-9">
+    <form className="col-xl-9" onSubmit={onUpdatePassword}>
       <div className="row x-gap-20 y-gap-20">
         <div className="col-12">
           <div className="form-input ">

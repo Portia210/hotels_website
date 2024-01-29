@@ -10,6 +10,7 @@ import CurrencyMegaMenu from "../CurrencyMegaMenu";
 import LanguageMegaMenu from "../LanguageMegaMenu";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import LoginBtns from "./LoginBtns";
 
 const Header1 = ({ messages }) => {
   const locale = useLocale();
@@ -102,37 +103,7 @@ const Header1 = ({ messages }) => {
                 {/* End language and currency selector */}
 
                 {/* Start btn-group */}
-                <div
-                  className={`d-flex items-center lg:d-none ${
-                    isReverse ? "mr-20" : "ml-20"
-                  } is-menu-opened-hide md:d-none`}
-                >
-                  <Link
-                    href="/signup"
-                    className={`d-md-inline-flex d-xxl-none button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
-                      isReverse ? "mr-20" : "ml-20"
-                    }`}
-                  >
-                    {messages?.Header?.signin} / {messages?.Header?.register}
-                  </Link>
-
-                  <Link
-                    href="/login"
-                    className={`d-md-none d-xxl-inline-flex button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
-                      isReverse ? "mr-20" : "ml-20"
-                    }`}
-                  >
-                    {messages?.Header?.signin}
-                  </Link>
-                  <Link
-                    href="/signup"
-                    className={`d-md-none d-xxl-inline-flex button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
-                      isReverse ? "mr-20" : "ml-20"
-                    }`}
-                  >
-                    {messages?.Header?.register}
-                  </Link>
-                </div>
+                <LoginBtns isReverse={isReverse} headerTrans={messages?.Header} />
 
                 {/* End btn-group */}
 

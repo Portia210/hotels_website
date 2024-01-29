@@ -10,8 +10,10 @@ import "swiper/css/effect-cards";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { ToastContainer } from "react-toastify";
 import SrollTop from "../../components/common/ScrollTop";
 import "../../styles/index.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -54,11 +56,12 @@ export default function RootLayout({ children, params }) {
         </head>
         <body>
           <main>
+            <ToastContainer />
             {children}
             <SrollTop />
           </main>
         </body>
-      </html>        
+      </html>
     </ClerkProvider>
   );
 }

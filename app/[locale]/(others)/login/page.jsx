@@ -5,6 +5,7 @@ import DefaultFooter from "@/components/footer/default";
 import LoginWithSocial from "@/components/common/LoginWithSocial";
 import LoginForm from "@/components/common/LoginForm";
 import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Login || GoTrip - Travel & Tour React NextJS Template",
