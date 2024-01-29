@@ -1,7 +1,15 @@
 import { authMiddleware } from "@clerk/nextjs";
 import createMiddleware from "next-intl/middleware";
 
-const publicRoutes = ["/","/en", "/he", "/:locale/login", "/:locale/signup"];
+const publicRoutes = [
+  "/",
+  "/en",
+  "/he",
+  "/:locale/sso-callback",
+  "/:locale/login",
+  "/:locale/signup",
+  "/sso-callback",
+];
 
 const intlMiddleware = createMiddleware({
   locales: ["en", "he"],

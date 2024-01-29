@@ -6,19 +6,27 @@ const LoginWithSocial = () => {
 
   if (!isLoaded) return null;
 
-  const signInWith = (strategy) => {
-    return signIn.authenticateWithRedirect({
-      strategy,
-      redirectUrl: "/sso-callback",
-      redirectUrlComplete: "/",
-    });
+  const signInWith = async () => {
+    try {
+      await signIn.authenticateWithRedirect({
+        strategy: "oauth_google",
+        redirectUrl: "/sso-callback",
+        redirectUrlComplete: "/",
+      });
+    } catch (error) {
+      if (error?.errors?.length > 0) {
+        console.error(error?.errors[0].longMessage);
+      } else {
+        console.error(error?.errors);
+      }
+    }
   };
 
   return (
     <>
-      <div className="col-12">
+      <div className="col-12" onClick={signInWith}>
         <button
-          onClick={() => signInWith("oauth_google")}
+          type="submit"
           className="button col-12 -outline-red-1 text-red-1 py-15 rounded-8 "
         >
           <i className="icon-apple text-15 mr-10" />
