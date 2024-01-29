@@ -12,15 +12,11 @@ const PersonalInfo = () => {
       position: "bottom-right",
       isLoading: true,
     });
-
     try {
       e.preventDefault();
-
       const data = {};
       for (const key of e.target) {
-        if (key?.name) {
-          data[key.name] = key.value;
-        }
+        if (key?.name) data[key.name] = key.value;
       }
       if (file) await user.setProfileImage({ file });
       await user.update({
@@ -37,7 +33,7 @@ const PersonalInfo = () => {
         autoClose: 3000,
       });
     } catch (error) {
-      toast.error("Oops something went wrong! That's on us.", {
+      toast.error("Oops something went wrong!", {
         position: "bottom-right",
         hideProgressBar: true,
         autoClose: 3000,

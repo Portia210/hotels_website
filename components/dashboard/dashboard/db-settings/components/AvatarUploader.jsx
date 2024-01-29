@@ -18,8 +18,8 @@ const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
       return;
     }
 
-    if (file.size > 800 * 1024) {
-      setError("Image must be smaller than 800KB.");
+    if (file.size > 1024 * 1024) {
+      setError("Image must be smaller than 1MB.");
       setSuccess(false);
       return;
     }

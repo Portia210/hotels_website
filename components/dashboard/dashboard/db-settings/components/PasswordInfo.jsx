@@ -1,28 +1,64 @@
 import { useUser } from "@clerk/nextjs";
+import { toast } from "react-toastify";
 
 const PasswordInfo = () => {
   const { user } = useUser();
-  
-  const onUpdatePassword = (e) => {
+
+  const onUpdatePassword = async (e) => {
     e.preventDefault();
+    const toastId = toast.success("Updating user's password", {
+      position: "bottom-right",
+      isLoading: true,
+    });
+    try {
+      const data = {};
+      for (const key of e.target) {
+        if (key?.name) data[key.name] = key.value;
+      }
+      if (data.newPassword !== data.newPasswordCheck) {
+        toast.error("Passwords do not match", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      } else {
+        await user.updatePassword({
+          newPassword: data.newPassword,
+          currentPassword: data?.currentPassword,
+        });
+        toast.success("Successfully updated password", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      }
+    } catch (error) {
+      toast.error("Oops something went wrong!", {
+        position: "bottom-right",
+        hideProgressBar: true,
+        autoClose: 3000,
+      });
+    } finally {
+      toast.dismiss(toastId);
+    }
   };
 
   return (
     <form className="col-xl-9" onSubmit={onUpdatePassword}>
       <div className="row x-gap-20 y-gap-20">
-        <div className="col-12">
-          <div className="form-input ">
-            <input type="text" required />
-            <label className="lh-1 text-16 text-light-1">
-              Current Password
-            </label>
+        {user.passwordEnabled && (
+          <div className="col-12">
+            <div className="form-input ">
+              <input type="password" name="currentPassword" required />
+              <label className="lh-1 text-16 text-light-1">
+                Current Password
+              </label>
+            </div>
           </div>
-        </div>
+        )}
         {/* End col-12 */}
 
         <div className="col-12">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="password" name="newPassword" required />
             <label className="lh-1 text-16 text-light-1">New Password</label>
           </div>
         </div>
@@ -30,7 +66,7 @@ const PasswordInfo = () => {
 
         <div className="col-12">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="password" name="newPasswordCheck" required />
             <label className="lh-1 text-16 text-light-1">
               New Password Again
             </label>
