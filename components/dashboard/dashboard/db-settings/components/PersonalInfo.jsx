@@ -1,7 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
 import AvatarUploader from "./AvatarUploader";
-import { sleep } from "@/utils/sleep";
 import { useState } from "react";
 
 const PersonalInfo = () => {
@@ -110,7 +109,7 @@ const PersonalInfo = () => {
                   type="text"
                   required
                   name="primaryPhoneNumber"
-                  defaultValue={user?.primaryPhoneNumber}
+                  defaultValue={user?.unsafeMetadata?.primaryPhoneNumber}
                 />
                 <label className="lh-1 text-16 text-light-1">
                   Phone Number
@@ -121,7 +120,12 @@ const PersonalInfo = () => {
 
             <div className="col-6">
               <div className="form-input ">
-                <input type="text" name="agentNumber" required />
+                <input
+                  type="text"
+                  name="agentNumber"
+                  required
+                  defaultValue={user?.unsafeMetadata?.agentNumber}
+                />
                 <label className="lh-1 text-16 text-light-1">
                   Agent number
                 </label>
@@ -129,7 +133,12 @@ const PersonalInfo = () => {
             </div>
             <div className="col-6">
               <div className="form-input">
-                <input type="text" name="country" required />
+                <input
+                  type="text"
+                  name="country"
+                  required
+                  defaultValue={user?.unsafeMetadata?.country}
+                />
                 <label className="lh-1 text-16 text-light-1">Country</label>
               </div>
             </div>
