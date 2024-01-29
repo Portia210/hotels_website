@@ -1,11 +1,10 @@
-
-'use client'
+"use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const AvatarUploader = () => {
-  const [image, setImage] = useState("");
+const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
+  const [image, setImage] = useState(imageUrl);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -19,8 +18,8 @@ const AvatarUploader = () => {
       return;
     }
 
-    if (file.size > 800 * 1024) {
-      setError("Image must be smaller than 800KB.");
+    if (file.size > 1024 * 1024) {
+      setError("Image must be smaller than 1MB.");
       setSuccess(false);
       return;
     }
@@ -36,10 +35,15 @@ const AvatarUploader = () => {
       setSuccess(true);
       setError("");
     };
-
     reader.readAsDataURL(file);
+    updateProfileImage(file);
   };
 
+  useEffect(() => {
+    if (imageUrl) setImage(imageUrl);
+  }, [imageUrl]);
+
+  
   return (
     <div className="row y-gap-30 items-center">
       <div className="col-auto">

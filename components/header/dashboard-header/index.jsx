@@ -1,12 +1,14 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import { useUser } from "@clerk/nextjs";
 
 const HeaderDashBoard = () => {
+  const { user } = useUser();
   const [navbar, setNavbar] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -97,9 +99,9 @@ const HeaderDashBoard = () => {
                   <Image
                     width={50}
                     height={50}
-                    src="/img/avatars/3.png"
+                    src={user?.imageUrl || "/img/avatars/3.png"}
                     alt="image"
-                    className="size-50 rounded-22 object-cover"
+                    className="size-40 rounded-22 object-cover"
                   />
                 </div>
 
