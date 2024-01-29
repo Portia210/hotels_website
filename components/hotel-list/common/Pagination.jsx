@@ -50,6 +50,15 @@ const Pagination = ({
     return pages;
   };
 
+  const renderMaxResult = () => {
+    let maxResult = pagination.offset + pagination.limit;
+    if (maxResult > filterTotalResult) maxResult = filterTotalResult;
+    return (
+      <>
+        {pagination.offset} – {maxResult} of{" "}
+      </>
+    );
+  };
   return (
     <div className="border-top-light mt-30 pt-30">
       <div className="row x-gap-10 y-gap-20 justify-between md:justify-center">
@@ -85,7 +94,7 @@ const Pagination = ({
 
           <div className="text-center mt-30 md:mt-10">
             <div className="text-14 text-light-1">
-              {pagination.offset} – {pagination.offset + pagination.limit} of{" "}
+              {renderMaxResult()}
               {filterTotalResult} hotels found
             </div>
           </div>
