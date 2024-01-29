@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const SignUpForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
-  const [pendingForEmailVerified, setPendingForEmailVerified] = useState(true);
+  const [pendingForEmailVerified, setPendingForEmailVerified] = useState(false);
   const router = useRouter();
   const { signUp, setActive } = useSignUp();
 
