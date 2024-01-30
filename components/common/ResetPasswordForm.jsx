@@ -47,8 +47,16 @@ export default function ResetPasswordForm() {
       .catch((err) => {
         let message = err?.message;
         if (err?.errors?.length > 0) {
-          message = err?.errors[0]?.longMessage || err;
-        }
+            if (
+              err?.errors[0]?.message ===
+              "reset_password_email_code is not allowed"
+            ) {
+              message =
+                "We can't reset your password if you use a login method like Google";
+            } else {
+              message = err?.errors[0]?.longMessage || err;
+            }
+          }
         setErrorMsg(message);
       });
   };
