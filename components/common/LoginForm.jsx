@@ -3,20 +3,22 @@ import { useSignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import ResetPasswordForm from "./ResetPasswordForm";
 
 const LoginForm = () => {
   const router = useRouter();
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const { signIn, setActive } = useSignIn();
 
-  const onSignIn = async (e) => {
+  const onSignIn = (e) => {
     e.preventDefault();
     const data = {};
     for (const key of e.target) {
       if (key?.name) data[key.name] = key.value;
     }
-    await signIn
+    signIn
       .create({
         identifier: data.email,
         password: data.password,
@@ -37,6 +39,10 @@ const LoginForm = () => {
         setErrorMsg(message);
       });
   };
+
+  if (isForgotPassword) {
+    return <ResetPasswordForm />;
+  }
   return (
     <form className="row y-gap-20" onSubmit={onSignIn}>
       <div className="col-12">
@@ -71,7 +77,7 @@ const LoginForm = () => {
       </div>
       {/* End .col */}
 
-      <div className="col-12">
+      <div className="col-12" onClick={() => setIsForgotPassword(true)}>
         <a href="#" className="text-14 fw-500 text-blue-1 underline">
           Forgot your password?
         </a>

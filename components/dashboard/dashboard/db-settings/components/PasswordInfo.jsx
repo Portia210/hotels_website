@@ -44,7 +44,7 @@ const PasswordInfo = () => {
   return (
     <form className="col-xl-9" onSubmit={onUpdatePassword}>
       <div className="row x-gap-20 y-gap-20">
-        {user.passwordEnabled && (
+        {user?.passwordEnabled && (
           <div className="col-12">
             <div className="form-input ">
               <input type="password" name="currentPassword" required />
