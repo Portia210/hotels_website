@@ -72,7 +72,10 @@ const GuestSearch = () => {
       </div>
       {/* End guest */}
 
-      <div className="shadow-2 dropdown-menu min-width-400">
+      <div
+        className="shadow-2 dropdown-menu min-width-400"
+        style={{ height: "fit-content" }}
+      >
         <div className="bg-white px-30 py-10 rounded-4 counter-box">
           {rooms.map((room, index) => {
             return (
