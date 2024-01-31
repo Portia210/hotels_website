@@ -23,7 +23,9 @@ const useHotelList = () => {
       const sessionId = params.get("sessionId");
       const fetching = async () => {
         const data = await axios
-          .get(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`)
+          .get(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`, {
+            withCredentials: true,
+          })
           .then((res) => res.data);
         const hotels = data.results;
         setHotels(hotels);

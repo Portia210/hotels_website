@@ -35,7 +35,7 @@ export default function RootLayout({ children, params }) {
   }, []);
 
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
       <html lang={locale}>
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />

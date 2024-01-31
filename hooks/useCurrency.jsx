@@ -13,7 +13,11 @@ const useCurrency = () => {
   const [selectedCurrency, setSelectedCurrency] = useState();
 
   const fetchCurrencies = async () => {
-    const data = await axios.post(`${TOURCOMPARE_BE_URL}/api/v1/currency`).then((res) => res.data);
+    const data = await axios
+      .post(`${TOURCOMPARE_BE_URL}/api/v1/currency`, null, {
+        withCredentials: true,
+      })
+      .then((res) => res.data);
     setCurrencies(data.rates);
   };
 
