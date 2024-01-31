@@ -17,6 +17,7 @@ const useHotelList = () => {
    * @returns {Promise} hotels
    */
   const fetchHotelList = async () => {
+    const token = await getToken();
     const isVaild = SearchInputSchema.safeParse(searchStore.searchInput);
     if (!isVaild.success) return;
     setLoading(true);
@@ -27,7 +28,7 @@ const useHotelList = () => {
         const data = await axios
           .get(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`, {
             withCredentials: true,
-            headers: { Authorization: `Bearer ${await getToken()}` }
+            headers: { Authorization: `Bearer ${token}` }
           })
           .then((res) => res.data);
         const hotels = data.results;
