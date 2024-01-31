@@ -13,7 +13,7 @@ export default function LoginBtns({ isReverse, headerTrans }) {
       >
         <Link
           href="/dashboard/db-dashboard"
-          className={`d-md-inline-flex d-xxl-none button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
+          className={`d-md-inline-flex button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
             isReverse ? "mr-20" : "ml-20"
           }`}
         >
