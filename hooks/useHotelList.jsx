@@ -4,8 +4,10 @@ import { sleep } from "@/utils/sleep";
 import { SearchInputSchema } from "@/zod/searchInput";
 import axios from "axios";
 import { useState } from "react";
+import { useAuth } from '@clerk/nextjs';
 
 const useHotelList = () => {
+  const { getToken } = useAuth();
   const searchStore = useSearchStore();
   const [loading, setLoading] = useState(true);
   const [hotels, setHotels] = useState([]);
@@ -25,6 +27,7 @@ const useHotelList = () => {
         const data = await axios
           .get(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`, {
             withCredentials: true,
+            headers: { Authorization: `Bearer ${await getToken()}` }
           })
           .then((res) => res.data);
         const hotels = data.results;

@@ -3,8 +3,10 @@ import useSearchStore from "@/store/useSearchStore";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { cloneDeep } from "lodash";
+import { useAuth } from '@clerk/nextjs';
 
 const useSearchBar = () => {
+  const { getToken } = useAuth();
   const searchStore = useSearchStore();
 
   /**
@@ -15,10 +17,10 @@ const useSearchBar = () => {
     try {
       searchInput.children = searchInput.childrens;
       searchInput.adult = searchInput.adults;
-      console.log("document.cookie :::", document.cookie);
       const sessionId = await axios
         .post(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session`, searchInput, {
           withCredentials: true,
+          headers: { Authorization: `Bearer ${await getToken()}` }
         })
         .then((res) => res.data);
       return sessionId;
