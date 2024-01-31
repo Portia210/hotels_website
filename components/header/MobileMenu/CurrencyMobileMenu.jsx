@@ -1,12 +1,9 @@
 "use client";
 
 import useCurrency from "@/hooks/useCurrency";
-import useIsMobile from "@/hooks/useIsMobile";
 
 const CurrencyMobileMenu = ({ textClass, textTran, isReverse }) => {
-  const isMobile = useIsMobile();
-  if (!isMobile) return null;
-  
+
   const {
     handleCurrency,
     currencies,
@@ -28,7 +25,7 @@ const CurrencyMobileMenu = ({ textClass, textTran, isReverse }) => {
         >
           <span className="js-currencyMenu-mainTitle">
             <span
-              className={`${isReverse ? "ms-2 me-3" : "ms-3 me-2"} text-16 `}
+              className={`${isReverse ? "ms-2 me-3" : "ms-3 me-2"} text-18 `}
             >
               {textTran}
             </span>

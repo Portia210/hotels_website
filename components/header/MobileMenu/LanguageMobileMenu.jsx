@@ -40,13 +40,12 @@ const LanguageMobileMenu = ({ textClass, textTran, isReverse }) => {
       {/* Start language currency Selector */}
       <div
         className="col-auto py-10"
-        style={isReverse ? { marginLeft: 4 } : { marginRight: 10 }}
-      >
+        style={isReverse ? { marginLeft: 4 } : { marginRight: 8 }}      >
         <button
           className={`d-flex items-center text-16 ${textClass}`}
           onClick={() => setClick((prevState) => !prevState)}
         >
-          <span className={`${isReverse ? "ms-2 me-3" : "ms-3 me-2"} text-16 `}>
+          <span className={`${isReverse ? "ms-2 me-3" : "ms-3 me-2"} text-18 `}>
             {textTran}
           </span>{" "}
           <Image
