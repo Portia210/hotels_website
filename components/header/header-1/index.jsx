@@ -11,8 +11,10 @@ import LanguageMegaMenu from "../LanguageMegaMenu";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import LoginBtns from "./LoginBtns";
+import { useUser } from "@clerk/nextjs";
 
 const Header1 = ({ messages }) => {
+  const { isSignedIn } = useUser();
   const locale = useLocale();
   const setMessages = useTransStore().setMessages;
   const isReverse = locale === "he";
@@ -87,7 +89,11 @@ const Header1 = ({ messages }) => {
                   isReverse ? "flex-row-reverse" : ""
                 }`}
               >
-                <div className="row x-gap-20 items-center md:d-none">
+                <div
+                  className={`row x-gap-20 items-center ${
+                    isReverse ? "flex-row-reverse" : ""
+                  } md:d-none`}
+                >
                   <CurrencyMegaMenu textClass="text-white" />
                   {/* End Megamenu for Currencty */}
 
@@ -103,22 +109,27 @@ const Header1 = ({ messages }) => {
                 {/* End language and currency selector */}
 
                 {/* Start btn-group */}
-                <LoginBtns isReverse={isReverse} headerTrans={messages?.Header} />
+                <LoginBtns
+                  isReverse={isReverse}
+                  headerTrans={messages?.Header}
+                />
 
                 {/* End btn-group */}
 
                 {/* Start mobile menu icon */}
                 <div
                   className={`d-none lg:d-flex x-gap-20 items-center text-white ${
-                    isReverse ? "pr-30" : "pl-30"
+                    isReverse ? "flex-row-reverse pr-30" : "pl-30"
                   }`}
                 >
-                  <div>
-                    <Link
-                      href="/login"
-                      className="d-flex items-center icon-user text-inherit text-22"
-                    />
-                  </div>
+                  {!isSignedIn && (
+                    <div>
+                      <Link
+                        href="/login"
+                        className="d-flex items-center icon-user text-inherit text-22"
+                      />
+                    </div>
+                  )}
                   <div>
                     <button
                       className="d-flex items-center icon-menu text-inherit text-20"
