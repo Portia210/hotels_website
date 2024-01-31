@@ -15,6 +15,7 @@ const useSearchBar = () => {
     try {
       searchInput.children = searchInput.childrens;
       searchInput.adult = searchInput.adults;
+      console.log("document.cookie :::", document.cookie);
       const sessionId = await axios
         .post(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session`, searchInput, {
           withCredentials: true,
