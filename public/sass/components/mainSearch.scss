@@ -237,4 +237,10 @@
       color: white;
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    .dropdown-menu {
+      transform: translate3d(0px, 91.5px, 0px) !important;
+    }
+  }
 }
