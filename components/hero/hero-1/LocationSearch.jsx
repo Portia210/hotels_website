@@ -24,6 +24,15 @@ const SearchBar = () => {
   const searchBox = messages?.SearchBox;
 
   if (!isLoaded) return null;
+
+  const onLocationChange = (value) => {
+    setLocationInput(value);
+    const dropDown = document.getElementById("placeAutoCompleteDropDown");
+    if (value && !dropDown.classList.contains("show")) {
+      document.getElementById("destinationInput").click();
+    }
+  };
+
   return (
     <>
       <div
@@ -39,12 +48,12 @@ const SearchBar = () => {
               autoComplete="off"
               type="search"
               placeholder={searchBox?.locationPlaceholder}
-              className={`js-search js-dd-focus form-control ${
+              className={`js-search form-control ${
                 !searchInputValidation.destination ? "is-invalid" : ""
               }`}
               value={locationInput}
               disabled={!isLoaded}
-              onChange={(e) => setLocationInput(e.target.value)}
+              onChange={(e) => onLocationChange(e.target.value)}
             />
             <div className="invalid-feedback">{searchBox?.selectLocation}</div>
           </div>

@@ -4,10 +4,14 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { cloneDeep } from "lodash";
 import { useAuth } from '@clerk/nextjs';
+import { useRouter } from "next/navigation";
+import {useState} from "react";
 
 const useSearchBar = () => {
-  const { getToken } = useAuth();
+  const router = useRouter();
+  const { getToken, isSignedIn } = useAuth();
   const searchStore = useSearchStore();
+  const [loading, setLoading] = useState(false);
 
   /**
    * Get sessionid will be vaild in 1 hour
@@ -32,6 +36,7 @@ const useSearchBar = () => {
   };
 
   const handleSearch = async (path) => {
+    if (!isSignedIn) return router.push("/login");
     if (!path) throw Error("search path is required");
     const destinationInput = document.getElementById("destinationInput").value;
     if (!destinationInput || !searchStore?.searchInput?.destination?.placeId) {
@@ -44,6 +49,8 @@ const useSearchBar = () => {
         });
       }, 2500);
     } else {
+      if (loading) return;
+      setLoading(true);
       searchStore.setSearchInputValidation({
         destination: true,
       });
@@ -52,6 +59,9 @@ const useSearchBar = () => {
       Cookies.set("searchInput", JSON.stringify(searchInput), {
         expires: 1,
       });
+      setTimeout(()=>{
+        setLoading(false);
+      }, 2000)
       delete searchInput.childrenAges;
       searchInput.sessionId = sessionId;
       searchInput.destination = JSON.stringify(searchInput.destination);

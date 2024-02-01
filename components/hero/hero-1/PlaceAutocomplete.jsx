@@ -43,7 +43,7 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
   if (!ready) return null;
   return (
     <>
-      <div className="shadow-2 dropdown-menu min-width-400">
+      <div className="shadow-2 dropdown-menu min-width-400" id="placeAutoCompleteDropDown">
         <div className="bg-white px-20 py-20 sm:px-0 rounded-8">
           <ul className="y-gap-5 js-results">
             {status === "OK" &&
