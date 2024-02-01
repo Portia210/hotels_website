@@ -65,6 +65,7 @@ const useSearchBar = () => {
       delete searchInput.childrenAges;
       searchInput.sessionId = sessionId;
       searchInput.destination = JSON.stringify(searchInput.destination);
+      console.log("searchInput", searchInput);
       const params = new URLSearchParams(searchInput);
       window.location.href = `${path}?${params.toString()}`;
     }

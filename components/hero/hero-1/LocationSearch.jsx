@@ -10,7 +10,7 @@ const SearchBar = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries: ["places"],
-    language: "en",
+    language: "English",
     region: "US",
   });
   const {

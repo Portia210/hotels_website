@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
 import AvatarUploader from "./AvatarUploader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CountryList from "@/components/common/CountryList";
 
 const PersonalInfo = () => {
@@ -52,6 +52,11 @@ const PersonalInfo = () => {
     setFile(file);
   };
 
+  useEffect(() => {
+    if (user?.unsafeMetadata?.country)
+      setSelectedCountry(user?.unsafeMetadata?.country);
+  }, [user?.unsafeMetadata?.country]);
+  
   return (
     <>
       <form onSubmit={onUpdateInfo}>
