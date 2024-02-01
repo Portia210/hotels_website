@@ -1,7 +1,7 @@
 "use client";
 
 import useTransStore from "@/store/useTransStore";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -28,16 +28,13 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
     onChange({ placeId, destination: address, lat, lng });
   };
 
-  const handleInput = useCallback(
-    (input) => {
-      if (!input) {
-        clearSuggestions();
-      } else {
-        setValue(input);
-      }
-    },
-    [input]
-  );
+  const handleInput = (input) => {
+    if (!input) {
+      clearSuggestions();
+    } else {
+      setValue(input);
+    }
+  };
 
   useEffect(() => {
     handleInput(input);

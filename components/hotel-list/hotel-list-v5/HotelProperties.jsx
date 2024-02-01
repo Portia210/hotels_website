@@ -24,7 +24,7 @@ const HotelProperties = ({ hotels }) => {
   };
 
   const renderText = (key, value) => {
-    if (key === "distance") {
+    if (key === "distance" && value) {
       value = value.replace("from center", hotelTrans[key]);
     }
     return value;
