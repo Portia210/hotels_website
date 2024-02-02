@@ -189,7 +189,7 @@
 }
 
 .header .header-menu {
-  @include media-above(xl) {
+  @include media-above(lg) {
     &__content {
     }
 
@@ -360,7 +360,7 @@
     }
   }
 
-  @include media-below(xl) {
+  @include media-below(lg) {
     position: fixed;
     bottom: 0;
     left: 0;
