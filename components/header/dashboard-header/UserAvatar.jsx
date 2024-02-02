@@ -2,8 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
+import { useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function UserAvatar({ user }) {
+  const router = useRouter();
+  const { signOut } = useClerk();
+
   const renderPopover = () => {
     const Popover = require("bootstrap/js/dist/popover");
     const popoverTriggerList = document.querySelectorAll(

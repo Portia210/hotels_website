@@ -4,8 +4,10 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function LoginBtns({ isReverse, headerTrans }) {
+  const router = useRouter();
   const { isSignedIn, isLoaded, user } = useUser();
   const { signOut } = useClerk();
 
