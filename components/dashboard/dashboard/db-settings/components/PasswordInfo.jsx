@@ -1,25 +1,20 @@
 import { useUser } from "@clerk/nextjs";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const PasswordInfo = () => {
   const { user } = useUser();
+  const [errorMsg, setErrorMsg] = useState("");
 
   const onUpdatePassword = async (e) => {
     e.preventDefault();
-    const toastId = toast.success("Updating user's password", {
-      position: "bottom-right",
-      isLoading: true,
-    });
     try {
       const data = {};
       for (const key of e.target) {
         if (key?.name) data[key.name] = key.value;
       }
       if (data.newPassword !== data.newPasswordCheck) {
-        toast.error("Passwords do not match", {
-          position: "bottom-right",
-          autoClose: 3000,
-        });
+        setErrorMsg(`Passwords doesn’t match`);
       } else {
         await user.updatePassword({
           newPassword: data.newPassword,
@@ -31,19 +26,22 @@ const PasswordInfo = () => {
         });
       }
     } catch (error) {
-      toast.error("Oops something went wrong!", {
-        position: "bottom-right",
-        hideProgressBar: true,
-        autoClose: 3000,
-      });
-    } finally {
-      toast.dismiss(toastId);
+      let message = `Current Passwords doesn’t correct`;
+      if (error?.errors[0]?.longMessage) {
+        message = error.errors[0].longMessage;
+      }
+      setErrorMsg(message);
     }
   };
 
   return (
     <form className="col-xl-9" onSubmit={onUpdatePassword}>
       <div className="row x-gap-20 y-gap-20">
+        {!user?.passwordEnabled && (
+          <div>
+            <h4 className="text-20 fw-600 lh-1 mb-20">Set Password</h4>
+          </div>
+        )}
         {user?.passwordEnabled && (
           <div className="col-12">
             <div className="form-input ">
@@ -73,7 +71,11 @@ const PasswordInfo = () => {
           </div>
         </div>
         {/* End col-12 */}
-
+        {errorMsg && (
+          <div>
+            <p className="text-red-1">{errorMsg}</p>
+          </div>
+        )}
         <div className="col-12">
           <div className="row x-gap-10 y-gap-10">
             <div className="col-auto">

@@ -20,18 +20,6 @@ const Sidebar = () => {
       routePath: "/dashboard/db-dashboard",
     },
     {
-      id: 2,
-      icon: "/img/dashboard/sidebar/booking.svg",
-      name: " Booking History",
-      routePath: "/dashboard/db-booking",
-    },
-    {
-      id: 3,
-      icon: "/img/dashboard/sidebar/bookmark.svg",
-      name: "Wishlist",
-      routePath: "/dashboard/db-wishlist",
-    },
-    {
       id: 4,
       icon: "/img/dashboard/sidebar/gear.svg",
       name: " Settings",
