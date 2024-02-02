@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { useUser } from "@clerk/nextjs";
+import UserAvatar from "./UserAvatar";
 
 const HeaderDashBoard = () => {
   const { user } = useUser();
@@ -96,13 +97,7 @@ const HeaderDashBoard = () => {
                 {/* End .row */}
 
                 <div className="pl-15">
-                  <Image
-                    width={50}
-                    height={50}
-                    src={user?.imageUrl || "/img/avatars/3.png"}
-                    alt="image"
-                    className="size-40 rounded-22 object-cover"
-                  />
+                  <UserAvatar user={user} />
                 </div>
 
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-20">
