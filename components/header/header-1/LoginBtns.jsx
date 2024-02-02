@@ -94,7 +94,7 @@ export default function LoginBtns({ isReverse, headerTrans }) {
             height={100}
             src={user?.imageUrl || "/img/avatars/3.png"}
             alt="image"
-            className="size-40 rounded object-cover bg-light"
+            className="size-40 rounded object-cover bg-light mt-4"
           />
         </button>
       </div>
