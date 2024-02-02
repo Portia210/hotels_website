@@ -4,8 +4,9 @@ const convertCurrency = (amount, currencyInput) => {
   const rate = currencyInput?.rate;
   const symbol = currencyInput?.symbol;
   if (!amount || !rate) return amount;
-  const convertedPrice = Math.round(amount * rate);
-  return `${convertedPrice} ${symbol}`;
+  const convertedPrice = Math.round(amount * rate)
+  const formattedNumber = convertedPrice.toLocaleString(undefined, { useGrouping: true });
+  return `${formattedNumber} ${symbol}`;
 };
 
 const loadDefaultCurrency = (currencies) => {
