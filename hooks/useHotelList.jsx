@@ -4,7 +4,7 @@ import { sleep } from "@/utils/sleep";
 import { SearchInputSchema } from "@/zod/searchInput";
 import axios from "axios";
 import { useState } from "react";
-import { useAuth } from '@clerk/nextjs';
+import { useAuth } from "@clerk/nextjs";
 
 const useHotelList = () => {
   const { getToken } = useAuth();
@@ -26,13 +26,28 @@ const useHotelList = () => {
       const sessionId = params.get("sessionId");
       const fetching = async () => {
         const data = await axios
-          .get(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`, {
-            withCredentials: true,
-            headers: { Authorization: `Bearer ${token}` }
-          })
+          .get(
+            `${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`,
+            {
+              withCredentials: true,
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          )
           .then((res) => res.data);
         const hotels = data.results;
-        setHotels(hotels);
+        setHotels((prevHotels) => {
+          const updatedHotels = [...prevHotels];
+          for (const newHotel of hotels) {
+            if (
+              !updatedHotels.find(
+                (oldHotel) => oldHotel.travelorLink === newHotel.travelorLink
+              )
+            ) {
+              updatedHotels.push(newHotel);
+            }
+          }
+          return updatedHotels;
+        });
         return data;
       };
 
