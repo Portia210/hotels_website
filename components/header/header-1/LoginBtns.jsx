@@ -83,8 +83,8 @@ export default function LoginBtns({ isReverse, headerTrans }) {
           html="true"
           data-bs-container="body"
           data-bs-toggle="popover"
-          data-bs-placement={isReverse ? "right" : "left"}
-          data-bs-trigger=" focus"
+          data-bs-placement="bottom"
+          data-bs-trigger="hover focus"
           className={`d-md-inline-flex px-10 z-5 h-50 text-white ${
             isReverse ? "mr-20" : "ml-20"
           }`}
