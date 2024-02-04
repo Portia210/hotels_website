@@ -3,6 +3,7 @@ import useSearchStore from "@/store/useSearchStore";
 import useTransStore from "@/store/useTransStore";
 import HotelStars from "./HotelStars";
 import { useEffect, useState } from "react";
+import { renderGuestText } from "@/utils/convertRoomInfo";
 
 export default function HotelInfoToast({ hotel, price, locale }) {
   const isReverse = locale === "he";
@@ -99,10 +100,8 @@ export default function HotelInfoToast({ hotel, price, locale }) {
             </div>
             <HotelStars stars={hotel?.stars} />
             <p>
-              {hotelTrans?.numberOfGuests}: {searchInput?.adults}{" "}
-              {searchBox?.adults}
-              {searchInput?.childrens > 0 &&
-                ", " + searchInput?.childrens + " " + searchBox?.childrens}
+              {renderGuestText(searchBox, "Adults", searchInput?.adults)} {" "}
+              {renderGuestText(searchBox, "Childrens", searchInput?.childrens)}
             </p>
             <div className="d-flex x-gap-5 align-items-center">
               <p>{hotelTrans?.price}:</p>

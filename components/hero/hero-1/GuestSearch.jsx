@@ -4,6 +4,7 @@ import useGuestSearchForm from "@/hooks/useGuestSearchForm";
 import useTransStore from "@/store/useTransStore";
 import { useLocale } from "next-intl";
 import RoomInfo from "./RoomInfo";
+import { renderGuestText } from "@/utils/convertRoomInfo";
 
 const GuestSearch = () => {
   const locale = useLocale();
@@ -20,16 +21,7 @@ const GuestSearch = () => {
   } = useGuestSearchForm();
 
   const renderText = (key, value) => {
-    if (key === "Adults") {
-      if (value <= 1) return `${value} ${searchBoxTrans?.adult}`;
-      return `${value} ${searchBoxTrans?.adults}`;
-    } else if (key === "Childrens") {
-      if (value == 1) return `${value} ${searchBoxTrans?.child}`;
-      return `${value} ${searchBoxTrans?.childrens}`;
-    } else if (key === "Rooms") {
-      if (value <= 1) return `${value} ${searchBoxTrans?.room}`;
-      return `${value} ${searchBoxTrans?.rooms}`;
-    }
+    return renderGuestText(searchBoxTrans, key, value);
   };
 
   const isReverse = (val) => {

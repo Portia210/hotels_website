@@ -1,4 +1,5 @@
 import { TOURCOMPARE_BE_URL } from "@/constants/environment";
+import { renderGuestText } from "@/utils/convertRoomInfo";
 import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -41,13 +42,9 @@ const useHotelInfoToast = (isReverse) => {
       .join(" ");
 
     const dateText = `${searchBox?.dates}: ${dateFormat(searchInput)}`;
-    const guestsText = `${hotelTrans?.numberOfGuests}: ${searchInput?.adults} ${
-      searchBox?.adults
-    }${
-      searchInput?.childrens > 0
-        ? `, ${searchInput?.childrens} ${searchBox?.childrens}`
-        : ""
-    }`;
+    const adultText = renderGuestText(searchBox, "Adults", searchInput?.adults);
+    const childrenText = renderGuestText(searchBox, "Childrens", searchInput?.childrens);
+    const guestsText = `${adultText} ${childrenText}`
     const priceText = `${hotelTrans?.price}: ${price}`;
     const reviewsText = `${hotelTrans?.guestReviewsUpper}: ${hotel?.rate} ${starIcons}`;
     const hotelText = `${hotelTrans.hotel}: ${hotel?.title}`;

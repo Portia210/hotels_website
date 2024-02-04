@@ -43,4 +43,18 @@ const parseGuestInfo = (guest) => {
   return result;
 };
 
-export { convertRoomInfo, parseGuestInfo };
+const renderGuestText = (searchBoxTrans, key, value) => {
+  if (key === "Adults") {
+    if (value <= 1) return `${value} ${searchBoxTrans?.adult}`;
+    return `${value} ${searchBoxTrans?.adults}`;
+  } else if (key === "Childrens") {
+    if (!value || value === 0) return "";
+    if (value == 1) return `${value} ${searchBoxTrans?.child}`;
+    return `${value} ${searchBoxTrans?.childrens}`;
+  } else if (key === "Rooms") {
+    if (value <= 1) return `${value} ${searchBoxTrans?.room}`;
+    return `${value} ${searchBoxTrans?.rooms}`;
+  }
+};
+
+export { convertRoomInfo, parseGuestInfo, renderGuestText };
