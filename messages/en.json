@@ -6,7 +6,8 @@
     "register": "Register",
     "signin": "Signin",
     "language": "Language",
-    "currency": "Currency"
+    "currency": "Currency",
+    "dashboard": "Dashboard"
   },
   "SearchBox": {
     "search": "Search",

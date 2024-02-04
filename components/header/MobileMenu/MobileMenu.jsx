@@ -62,7 +62,7 @@ const MobileMenu = ({ isReverse }) => {
         <div className="border-bottom mb-20 mt-20"></div>
         <Menu>
           <MenuItem onClick={() => router.push("/dashboard/db-dashboard")}>
-            Dashboard
+            {headerTrans?.dashboard}
           </MenuItem>
           <MenuItem onClick={() => router.push("/")}>
             {headerTrans?.home}

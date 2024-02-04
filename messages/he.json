@@ -6,7 +6,8 @@
     "register": "הרשמה",
     "signin": "התחברות",
     "language": "שפה",
-    "currency": "מַטְבֵּעַ"
+    "currency": "מטבע",
+    "dashboard": "דשבורד"
   },
   "SearchBox": {
     "search": "חיפוש",

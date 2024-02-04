@@ -16,8 +16,9 @@ export default function HotelInfoToast({ hotel, price, locale }) {
     useHotelInfoToast(isReverse);
 
   const handleShortenLink = async (hotel) => {
-    const shorLink = await shortenLink(hotel.travelorLink);
-    setShortLink(shorLink);
+    if (shortLink) return;
+    const link = await shortenLink(hotel.travelorLink);
+    setShortLink(link);
   };
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function HotelInfoToast({ hotel, price, locale }) {
     <>
       <div
         className="toast-container position-fixed bottom-0 start-0 p-3 w-fit"
-        style={{ zIndex: 20, width: "fit-content" }}
+        style={{ zIndex: 20, width: "fit-content", minHeight: 250 }}
       >
         <div
           id="liveToast"

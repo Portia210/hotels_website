@@ -12,7 +12,7 @@ const RoomInfo = ({ room, index, totalChild, onChange, onChildAgeChange }) => {
       onChange(INCREMENT, name, room.childrens, index);
       return;
     }
-    if (room.adults > 5) return;
+    if (room.adults >= 4) return;
     onChange(INCREMENT, name, room.adults + 1, index);
   };
 
