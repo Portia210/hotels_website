@@ -1,58 +1,28 @@
+import useHotelInfoToast from "@/hooks/useHotelInfoToast";
 import useSearchStore from "@/store/useSearchStore";
 import useTransStore from "@/store/useTransStore";
-import dayjs from "dayjs";
-import "dayjs/locale/he";
 import HotelStars from "./HotelStars";
+import { useEffect, useState } from "react";
 
 export default function HotelInfoToast({ hotel, price, locale }) {
   const isReverse = locale === "he";
-  if (isReverse) {
-    dayjs.locale("he");
-  } else {
-    dayjs.locale("en");
-  }
   const messages = useTransStore((state) => state.messages);
   const searchBox = messages?.SearchBox;
   const hotelTrans = messages?.Hotel;
   const searchInput = useSearchStore((state) => state.searchInput);
+  const [shortLink, setShortLink] = useState(null);
 
-  const hideToast = () => {
-    document.getElementById("liveToast")?.classList?.remove("show");
+  const { hideToast, dateFormat, shortenLink, onCopyInfo } =
+    useHotelInfoToast(isReverse);
+
+  const handleShortenLink = async (hotel) => {
+    const shorLink = await shortenLink(hotel.travelorLink);
+    setShortLink(shorLink);
   };
 
-  const dateFormat = () => {
-    const { checkInDate, checkOutDate } = searchInput;
-    const startDay = dayjs(checkInDate);
-    const endDay = dayjs(checkOutDate);
-
-    const sameMonth = startDay.isSame(endDay, "month");
-
-    if (sameMonth) {
-      return `${startDay.format("ddd D.M")} - ${endDay.format("ddd D.M")}`;
-    } else {
-      return `${startDay.format("ddd D.M")} - ${endDay.format("ddd D.M")}`;
-    }
-  };
-
-  const onCopyInfo = () => {
-    const starIcons = Array.from(Array(hotel?.stars).keys())
-      .map(() => "⭐️") // Use a simple star character
-      .join(" ");
-
-    const dateText = `${searchBox?.dates}: ${dateFormat()}`;
-    const guestsText = `${hotelTrans?.numberOfGuests}: ${searchInput?.adults} ${
-      searchBox?.adults
-    }${
-      searchInput?.childrens > 0
-        ? `, ${searchInput?.childrens} ${searchBox?.childrens}`
-        : ""
-    }`;
-    const priceText = `${hotelTrans?.price}: ${price}`;
-    const reviewsText = `${hotelTrans?.guestReviewsUpper}: ${hotel?.rate} ${starIcons}`;
-    const hotelText = `${hotelTrans.hotel}: ${hotel?.title}`;
-    const text = `${dateText}\n${hotelText}\n${guestsText}\n${priceText}\n${reviewsText}`;
-    navigator.clipboard.writeText(text);
-  };
+  useEffect(() => {
+    if (hotel?.travelorLink) setShortLink(null);
+  }, [hotel?.travelorLink]);
 
   return (
     <>
@@ -70,11 +40,28 @@ export default function HotelInfoToast({ hotel, price, locale }) {
           <div className="toast-header">
             <strong className="me-auto">{hotel?.title}</strong>
             <button
-              onClick={() => onCopyInfo(hotel)}
-              // trigger="click"
+              id="shortenLinkTooltip"
+              onClick={() => handleShortenLink(hotel)}
               data-bs-toggle="tooltip"
               data-bs-placement="top"
-              // title={"Copy"}
+              className="button -blue-1 bg-white size-30 rounded-full shadow-2 me-2"
+            >
+              <i className="bi bi-link-45deg"></i>
+            </button>
+            <button
+              id="copyHotelInfoTooltip"
+              onClick={() =>
+                onCopyInfo(
+                  hotel,
+                  price,
+                  searchInput,
+                  hotelTrans,
+                  searchBox,
+                  shortLink
+                )
+              }
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
               className="button -blue-1 bg-white size-30 rounded-full shadow-2"
             >
               <i className="bi bi-clipboard"></i>
@@ -93,7 +80,7 @@ export default function HotelInfoToast({ hotel, price, locale }) {
             }`}
           >
             <p>
-              {searchBox?.dates}: {dateFormat()}
+              {searchBox?.dates}: {dateFormat(searchInput)}
             </p>
             <div
               className={`d-flex text-14 text-light-1 ${
@@ -120,6 +107,14 @@ export default function HotelInfoToast({ hotel, price, locale }) {
               <p>{hotelTrans?.price}:</p>
               <p>{price}</p>
             </div>
+            {shortLink && (
+              <div className="d-flex x-gap-5 align-items-center">
+                <p>Link:</p>
+                <a href={shortLink} target="_blank">
+                  <p className="text-primary">{shortLink}</p>
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>

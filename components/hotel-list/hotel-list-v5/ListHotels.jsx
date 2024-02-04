@@ -38,17 +38,18 @@ export default function ListHotels() {
   const renderTooltip = () => {
     if (!hotelTrans?.tooltipCopy) return;
     const Tooltip = require("bootstrap/js/dist/tooltip");
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-    [...tooltipTriggerList].map(
-      (tooltipTriggerEl) =>
-        new Tooltip(tooltipTriggerEl, {
-          container: "body",
-          trigger: "hover",
-          title: hotelTrans.tooltipCopy || "",
-        })
-    );
+    const copyHotelToolTip = document.getElementById("copyHotelInfoTooltip");
+    const shortenLinkToolTip = document.getElementById("shortenLinkTooltip");
+    new Tooltip(shortenLinkToolTip, {
+      container: "body",
+      trigger: "hover",
+      title: "Generate Link",
+    });
+    new Tooltip(copyHotelToolTip, {
+      container: "body",
+      trigger: "hover",
+      title: hotelTrans.tooltipCopy || "",
+    });
   };
 
   useEffect(() => {
