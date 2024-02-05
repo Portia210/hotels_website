@@ -5,10 +5,11 @@ import useHotelPagination from "./hotelFilters/useHotelPagination";
 import usePriceFilter from "./hotelFilters/usePriceFilter";
 import useRatingFilter from "./hotelFilters/useRatingFilter";
 import useStarFilter from "./hotelFilters/useStarFilter";
+import useHotelFilterStore from "@/store/useHotelFilterStore";
 
 const useFilterBar = (hotels) => {
+  const { setGapActive } = useHotelFilterStore();
   const [filterHotels, setFilterHotels] = useState(hotels);
-
   const {
     currentPage,
     pagination,
@@ -39,6 +40,7 @@ const useFilterBar = (hotels) => {
     setStarFilter(defaultFilter.starFilter);
     setPagination(defaultFilter.pagination);
     setFilterHotels(hotels);
+    setGapActive(false);
   };
 
   useEffect(() => {

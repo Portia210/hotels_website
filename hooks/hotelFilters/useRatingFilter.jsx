@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { defaultFilter } from ".";
 
 const useRatingFilter = (hotels, setFilterHotels) => {
-  const [active, setActive] = useState(false);
   const [ratingFilter, setRatingFilter] = useState(defaultFilter.ratingFilter);
 
   const filterHotelByRating = () => {
@@ -15,9 +14,7 @@ const useRatingFilter = (hotels, setFilterHotels) => {
   }, [ratingFilter]);
 
   return {
-    active,
     ratingFilter,
-    setActive,
     setRatingFilter,
     filterHotelByRating,
   };

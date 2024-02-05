@@ -1,7 +1,8 @@
-import { useState } from "react";
+import useHotelFilterStore from "@/store/useHotelFilterStore";
+import { useEffect } from "react";
 
 const useHotelGapFilter = (hotels, setFilterHotels) => {
-  const [active, setActive] = useState(false);
+  const gapActive = useHotelFilterStore((state) => state.gapActive);
 
   const filterByBiggestPriceGap = () => {
     const results = hotels.sort(
@@ -10,9 +11,11 @@ const useHotelGapFilter = (hotels, setFilterHotels) => {
     setFilterHotels(results);
   };
 
+  useEffect(() => {
+    if (gapActive) filterByBiggestPriceGap();
+  }, [hotels.length]);
+
   return {
-    active,
-    setActive,
     filterByBiggestPriceGap,
   };
 };

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { defaultFilter } from ".";
 
 const useStarFilter = (hotels, setFilterHotels) => {
-  const [active, setActive] = useState(false);
   const [starFilter, setStarFilter] = useState(defaultFilter.starFilter);
 
   const handleStarFilterChange = (value) => {
@@ -24,9 +23,7 @@ const useStarFilter = (hotels, setFilterHotels) => {
   }, [starFilter]);
 
   return {
-    active,
     starFilter,
-    setActive,
     setStarFilter,
     filterHotelByStar,
     handleStarFilterChange,
