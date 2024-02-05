@@ -1,6 +1,5 @@
 import { PriceFilter } from "@/constants/searchFilter";
-import { cloneDeep } from "lodash";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import useHotelGapFilter from "./hotelFilters/useHotelGapFilter";
 import useHotelPagination from "./hotelFilters/useHotelPagination";
 import usePriceFilter from "./hotelFilters/usePriceFilter";
@@ -23,7 +22,6 @@ export const defaultFilter = {
 
 const useFilterBar = (hotels) => {
   const [filterHotels, setFilterHotels] = useState(hotels);
-  const memoizedHotels = useMemo(() => cloneDeep(filterHotels), [hotels]);
 
   const {
     currentPage,
@@ -33,26 +31,21 @@ const useFilterBar = (hotels) => {
     calcPagination,
   } = useHotelPagination(hotelPerPage);
   const { filterByBiggestPriceGap } = useHotelGapFilter(
-    memoizedHotels,
+    [...filterHotels],
     setFilterHotels
   );
   const { priceFilter, setPriceFilter } = usePriceFilter(
-    memoizedHotels,
+    [...filterHotels],
     setFilterHotels
   );
-  const { ratingFilter, setRatingFilter } =
-    useRatingFilter(memoizedHotels, setFilterHotels);
-  const {
-    starFilter,
-    setStarFilter,
-    handleStarFilterChange,
-  } = useStarFilter(memoizedHotels, setFilterHotels);
-
-  const calcHotelData = (hotelData) => {
-    console.log("calcHotelData");
-    if (!hotelData) return setFilterHotels(hotels);
-    setFilterHotels(hotelData);
-  };
+  const { ratingFilter, setRatingFilter } = useRatingFilter(
+    [...filterHotels],
+    setFilterHotels
+  );
+  const { starFilter, setStarFilter, handleStarFilterChange } = useStarFilter(
+    [...filterHotels],
+    setFilterHotels
+  );
 
   const resetFilter = () => {
     setPriceFilter(defaultFilter.priceFilter);
@@ -63,18 +56,12 @@ const useFilterBar = (hotels) => {
   };
 
   useEffect(() => {
-    // calcHotelData();
     setFilterHotels(hotels);
   }, [hotels.length]);
 
   useEffect(() => {
     calcPagination(filterHotels.length);
-    // calcHotelData();
   }, [filterHotels]);
-
-  useEffect(() => {
-    // calcHotelData();
-  }, [pagination]);
 
   return {
     data: filterHotels.slice(

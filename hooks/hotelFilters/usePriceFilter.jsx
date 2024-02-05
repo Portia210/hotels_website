@@ -7,22 +7,22 @@ const usePriceFilter = (hotels, setFilterHotels) => {
   const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
 
   const filterHotelByPrice = () => {
+    let results = [];
     if (priceFilter === PriceFilter.HTL) {
-      hotels.sort((a, b) => b.travelorPrice - a.travelorPrice);
+      results = hotels.sort((a, b) => b.travelorPrice - a.travelorPrice);
     } else {
-      hotels.sort((a, b) => a.travelorPrice - b.travelorPrice);
+      results = hotels.sort((a, b) => a.travelorPrice - b.travelorPrice);
     }
-    setFilterHotels(hotels);
+    setFilterHotels(results);
   };
 
   useEffect(() => {
-    console.log("priceFilter -->", priceFilter);
     filterHotelByPrice();
   }, [priceFilter]);
 
   return {
     active,
-    setActive,
+    priceFilter,
     setActive,
     setPriceFilter,
     filterHotelByPrice,

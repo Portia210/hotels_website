@@ -6,8 +6,8 @@ const useRatingFilter = (hotels, setFilterHotels) => {
   const [ratingFilter, setRatingFilter] = useState(defaultFilter.ratingFilter);
 
   const filterHotelByRating = () => {
-    hotels.filter((hotel) => hotel.rate >= ratingFilter);
-    setFilterHotels(hotels);
+    const results = hotels.filter((hotel) => hotel.rate >= ratingFilter);
+    setFilterHotels(results);
   };
 
   useEffect(() => {

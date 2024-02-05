@@ -15,8 +15,8 @@ const useStarFilter = (hotels, setFilterHotels) => {
   };
 
   const filterHotelByStar = () => {
-    hotels.filter((hotel) => hotel.stars >= starFilter);
-    setFilterHotels(hotels);
+    const results = hotels.filter((hotel) => hotel.stars >= starFilter);
+    setFilterHotels(results);
   };
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const useStarFilter = (hotels, setFilterHotels) => {
 
   return {
     active,
+    starFilter,
     setActive,
     setStarFilter,
     filterHotelByStar,
