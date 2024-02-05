@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { defaultFilter } from "../useFilterBar";
+import { defaultFilter } from ".";
 import { PriceFilter } from "@/constants/searchFilter";
 
 const usePriceFilter = (hotels, setFilterHotels) => {

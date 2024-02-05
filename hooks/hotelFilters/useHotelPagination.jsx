@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { defaultFilter } from "../useFilterBar";
+import { defaultFilter, hotelPerPage } from ".";
 
-const useHotelPagination = (hotelPerPage) => {
+const useHotelPagination = () => {
   const [active, setActive] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState(defaultFilter.pagination);

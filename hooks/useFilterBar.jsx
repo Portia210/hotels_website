@@ -1,24 +1,10 @@
-import { PriceFilter } from "@/constants/searchFilter";
 import { useEffect, useState } from "react";
+import { defaultFilter } from "./hotelFilters";
 import useHotelGapFilter from "./hotelFilters/useHotelGapFilter";
 import useHotelPagination from "./hotelFilters/useHotelPagination";
 import usePriceFilter from "./hotelFilters/usePriceFilter";
 import useRatingFilter from "./hotelFilters/useRatingFilter";
 import useStarFilter from "./hotelFilters/useStarFilter";
-
-const hotelPerPage = 24;
-export const defaultFilter = {
-  priceFilter: PriceFilter.HTL,
-  ratingFilter: 6,
-  starFilter: 0,
-  pagination: {
-    page: 1,
-    limit: hotelPerPage,
-    totalPages: 1,
-    totalResults: 1,
-    offset: 0,
-  },
-};
 
 const useFilterBar = (hotels) => {
   const [filterHotels, setFilterHotels] = useState(hotels);
@@ -29,7 +15,7 @@ const useFilterBar = (hotels) => {
     setPagination,
     setCurrentPage,
     calcPagination,
-  } = useHotelPagination(hotelPerPage);
+  } = useHotelPagination();
   const { filterByBiggestPriceGap } = useHotelGapFilter(
     [...filterHotels],
     setFilterHotels

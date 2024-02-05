@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { defaultFilter } from "../useFilterBar";
+import { defaultFilter } from ".";
 
 const useStarFilter = (hotels, setFilterHotels) => {
   const [active, setActive] = useState(false);
