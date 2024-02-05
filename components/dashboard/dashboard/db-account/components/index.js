@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import PasswordInfo from "./PasswordInfo";
+import PersonalInfo from "./PersonalInfo";
 
 const Index = () => {
   const tabs = [
     {
-      label: "Change Password",
-      content: <PasswordInfo />,
+      label: "Personal Information",
+      content: <PersonalInfo />,
     },
   ];
 

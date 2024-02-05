@@ -5,17 +5,17 @@ export default function UserPopoverContent({ onLogout }) {
   return (
     <div className="y-gap-20">
       <Link
-        href="/dashboard/db-dashboard"
+        href="/"
         className="d-flex items-center text-15 lh-1 fw-500"
       >
         <Image
           width={20}
           height={20}
-          src="/img/dashboard/sidebar/compass.svg"
+          src="/img/dashboard/sidebar/map.svg"
           alt="image"
           className="mr-15"
         />
-        Dashboard
+        Home
       </Link>
       <Link
         href="#"

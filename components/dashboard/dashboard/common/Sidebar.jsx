@@ -20,9 +20,15 @@ const Sidebar = () => {
       routePath: "/dashboard/db-dashboard",
     },
     {
+      id: 3,
+      icon: "/img/dashboard/sidebar/account.svg",
+      name: " Account",
+      routePath: "/dashboard/db-account",
+    },
+    {
       id: 4,
       icon: "/img/dashboard/sidebar/gear.svg",
-      name: " Settings",
+      name: " Change Password",
       routePath: "/dashboard/db-settings",
     },
     {
