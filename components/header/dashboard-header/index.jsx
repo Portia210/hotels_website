@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { useUser } from "@clerk/nextjs";
-import UserAvatar from "./UserAvatar";
+import UserAvatar from "./UserAvartar/UserAvatar";
 
 const HeaderDashBoard = () => {
   const { user } = useUser();

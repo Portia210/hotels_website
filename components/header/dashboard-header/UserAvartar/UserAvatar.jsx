@@ -24,7 +24,14 @@ export default function UserAvatar({ user }) {
 
     new Popover(popoverTriggerEl, {
       html: true,
-      container: "body",
+      title: `Hello ${
+        user?.fullName || user?.primaryEmailAddress?.emailAddress
+      }`,
+      popperConfig: () => {
+        return {
+          placement: "bottom-end",
+        };
+      },
       content: () => {
         const container = document.createElement("div");
         const root = createRoot(container);
@@ -36,15 +43,14 @@ export default function UserAvatar({ user }) {
 
   useEffect(() => {
     renderPopover();
-  }, []);
+  }, [user]);
 
   return (
     <button
       id="userAvatarPopover"
       data-bs-container="body"
       data-bs-toggle="popover"
-      data-bs-placement="bottom"
-      data-bs-trigger="hover focus"
+      data-bs-trigger="focus"
     >
       <Image
         width={50}

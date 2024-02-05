@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardPage from "../../../../../components/dashboard/dashboard/db-settings";
+import DashboardPage from "@/components/dashboard/dashboard/db-settings";
 
 export const metadata = {
   title: "Settings || GoTrip - Travel & Tour React NextJS Template",
