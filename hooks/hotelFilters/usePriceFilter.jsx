@@ -3,7 +3,6 @@ import { defaultFilter } from ".";
 import { PriceFilter } from "@/constants/searchFilter";
 
 const usePriceFilter = (hotels, setFilterHotels) => {
-  const [active, setActive] = useState(false);
   const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
 
   const filterHotelByPrice = () => {
@@ -21,9 +20,7 @@ const usePriceFilter = (hotels, setFilterHotels) => {
   }, [priceFilter]);
 
   return {
-    active,
     priceFilter,
-    setActive,
     setPriceFilter,
     filterHotelByPrice,
   };
