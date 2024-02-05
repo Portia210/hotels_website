@@ -58,8 +58,16 @@ export default function LoginBtns({ isReverse, headerTrans }) {
 
       return new Popover(popoverTriggerEl, {
         html: true,
+        title: `Hello ${
+          user?.fullName || user?.primaryEmailAddress?.emailAddress
+        }`,
+        popperConfig: () => {
+          return {
+            placement: "bottom-end",
+          };
+        },
         content: () => {
-          const container = document.createElement("span");
+          const container = document.createElement("div");
           const root = createRoot(container);
           root.render(popoverContent);
           return container;
@@ -83,8 +91,7 @@ export default function LoginBtns({ isReverse, headerTrans }) {
           html="true"
           data-bs-container="body"
           data-bs-toggle="popover"
-          data-bs-placement="bottom"
-          data-bs-trigger="hover focus"
+          data-bs-trigger="focus"
           className={`d-md-inline-flex px-10 z-5 h-50 text-white ${
             isReverse ? "mr-20" : "ml-20"
           }`}
