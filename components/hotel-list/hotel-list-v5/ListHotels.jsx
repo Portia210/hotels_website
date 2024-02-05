@@ -56,6 +56,13 @@ export default function ListHotels() {
     renderTooltip();
   }, [hotelTrans?.tooltipCopy]);
 
+  // useEffect(() => {
+  //   if (!loading){
+  //     console.log("hotfilterByBiggestPriceGapels");
+  //     filterByBiggestPriceGap(hotels);
+  //   }
+  // }, [loading]);
+
   return (
     <>
       {/* Top SearchBanner */}
@@ -99,7 +106,7 @@ export default function ListHotels() {
 
             <div className="col-auto">
               <button
-                onClick={filterByBiggestPriceGap}
+                onClick={() => filterByBiggestPriceGap()}
                 className="button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1"
               >
                 <i className="icon-up-down text-14 mr-10"></i>
