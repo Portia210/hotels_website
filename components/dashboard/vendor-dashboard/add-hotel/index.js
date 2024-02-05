@@ -1,6 +1,6 @@
 
 import Sidebar from "../common/Sidebar";
-import Header from "../../../../components/header/dashboard-header";
+import Header from "@/components/header/dashboard-header";
 import SettingsTabs from "./components/index";
 import Footer from "../common/Footer";
 

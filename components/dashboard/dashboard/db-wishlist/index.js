@@ -1,6 +1,6 @@
 
 import Sidebar from "../common/Sidebar";
-import Header from "../../../../components/header/dashboard-header";
+import Header from "@/components/header/dashboard-header";
 import Footer from "../common/Footer";
 import WishlistTable from "./components/WishlistTable";
 
