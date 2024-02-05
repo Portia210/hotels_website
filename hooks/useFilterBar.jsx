@@ -1,9 +1,14 @@
 import { PriceFilter } from "@/constants/searchFilter";
 import { cloneDeep } from "lodash";
 import { useEffect, useMemo, useState } from "react";
+import useHotelGapFilter from "./hotelFilters/useHotelGapFilter";
+import useHotelPagination from "./hotelFilters/useHotelPagination";
+import usePriceFilter from "./hotelFilters/usePriceFilter";
+import useRatingFilter from "./hotelFilters/useRatingFilter";
+import useStarFilter from "./hotelFilters/useStarFilter";
 
 const hotelPerPage = 24;
-const defaultFilter = {
+export const defaultFilter = {
   priceFilter: PriceFilter.HTL,
   ratingFilter: 6,
   starFilter: 0,
@@ -18,67 +23,35 @@ const defaultFilter = {
 
 const useFilterBar = (hotels) => {
   const [filterHotels, setFilterHotels] = useState(hotels);
-  const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
-  const [ratingFilter, setRatingFilter] = useState(defaultFilter.ratingFilter);
-  const [starFilter, setStarFilter] = useState(defaultFilter.starFilter);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pagination, setPagination] = useState(defaultFilter.pagination);
-  const memoizedHotels = useMemo(() => cloneDeep(hotels), [hotels]);
+  const memoizedHotels = useMemo(() => cloneDeep(filterHotels), [hotels]);
 
-  const calcPagination = (hotelLength) => {
-    const totalPages = Math.ceil(hotelLength / pagination.limit);
-    const totalResults = hotelLength;
-    if (totalResults < hotelPerPage) {
-      setPagination(() => ({ ...defaultFilter.pagination }));
-    } else {
-      setPagination((prev) => ({ ...prev, totalPages, totalResults }));
-    }
-  };
+  const {
+    currentPage,
+    pagination,
+    setPagination,
+    setCurrentPage,
+    calcPagination,
+  } = useHotelPagination(hotelPerPage);
+  const { filterByBiggestPriceGap } = useHotelGapFilter(
+    memoizedHotels,
+    setFilterHotels
+  );
+  const { priceFilter, setPriceFilter } = usePriceFilter(
+    memoizedHotels,
+    setFilterHotels
+  );
+  const { ratingFilter, setRatingFilter } =
+    useRatingFilter(memoizedHotels, setFilterHotels);
+  const {
+    starFilter,
+    setStarFilter,
+    handleStarFilterChange,
+  } = useStarFilter(memoizedHotels, setFilterHotels);
 
   const calcHotelData = (hotelData) => {
-    if (!hotelData) return;
+    console.log("calcHotelData");
+    if (!hotelData) return setFilterHotels(hotels);
     setFilterHotels(hotelData);
-  };
-
-  const handleStarFilterChange = (value) => {
-    setStarFilter((prev) => {
-      if (prev === value) {
-        return 0;
-      }
-      return value;
-    });
-  };
-
-  const filterHotelByPrice = () => {
-    const cloneHotels = [...memoizedHotels];
-    if (priceFilter === PriceFilter.HTL) {
-      cloneHotels.sort((a, b) => b.travelorPrice - a.travelorPrice);
-    } else {
-      cloneHotels.sort((a, b) => a.travelorPrice - b.travelorPrice);
-    }
-    calcHotelData(cloneHotels);
-  };
-
-  const filterHotelByRating = () => {
-    const cloneHotels = [...memoizedHotels];
-    const filterHotels = cloneHotels.filter(
-      (hotel) => hotel.rate >= ratingFilter
-    );
-    calcHotelData(filterHotels);
-  };
-
-  const filterHotelByStar = () => {
-    const cloneHotels = [...memoizedHotels];
-    const filterHotels = cloneHotels.filter(
-      (hotel) => hotel.stars >= starFilter
-    );
-    calcHotelData(filterHotels);
-  };
-
-  const filterByBiggestPriceGap = () => {
-    const cloneHotels = [...filterHotels];
-    cloneHotels.sort((a, b) => b.price_difference - a.price_difference);
-    calcHotelData(cloneHotels);
   };
 
   const resetFilter = () => {
@@ -86,39 +59,22 @@ const useFilterBar = (hotels) => {
     setRatingFilter(defaultFilter.ratingFilter);
     setStarFilter(defaultFilter.starFilter);
     setPagination(defaultFilter.pagination);
-    calcHotelData();
+    setFilterHotels(hotels);
   };
 
   useEffect(() => {
-    const offset = (currentPage - 1) * pagination.limit;
-    setPagination((prev) => ({ ...prev, page: currentPage, offset }));
-  }, [currentPage]);
-
-  useEffect(() => {
-    calcHotelData();
+    // calcHotelData();
     setFilterHotels(hotels);
   }, [hotels.length]);
 
   useEffect(() => {
     calcPagination(filterHotels.length);
-    calcHotelData();
+    // calcHotelData();
   }, [filterHotels]);
 
   useEffect(() => {
-    calcHotelData();
+    // calcHotelData();
   }, [pagination]);
-
-  useEffect(() => {
-    filterHotelByPrice();
-  }, [priceFilter]);
-
-  useEffect(() => {
-    filterHotelByRating();
-  }, [ratingFilter]);
-
-  useEffect(() => {
-    filterHotelByStar();
-  }, [starFilter]);
 
   return {
     data: filterHotels.slice(
