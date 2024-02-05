@@ -4,10 +4,10 @@ import Pagination from "@/components/hotel-list/common/Pagination";
 import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
 import useFilterBar from "@/hooks/useFilterBar";
 import useHotelList from "@/hooks/useHotelList";
+import useHotelFilterStore from "@/store/useHotelFilterStore";
 import useTransStore from "@/store/useTransStore";
 import { useEffect } from "react";
 import ResultHeader from "./ResultHeader";
-import useHotelFilterStore from "@/store/useHotelFilterStore";
 
 export default function ListHotels() {
   const { gapActive, setGapActive } = useHotelFilterStore();
@@ -45,7 +45,7 @@ export default function ListHotels() {
     new Tooltip(shortenLinkToolTip, {
       container: "body",
       trigger: "hover",
-      title: "Generate Link",
+      title: "Short link",      
     });
     new Tooltip(copyHotelToolTip, {
       container: "body",

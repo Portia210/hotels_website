@@ -49,7 +49,7 @@ const useHotelInfoToast = (isReverse) => {
     const reviewsText = `${hotelTrans?.guestReviewsUpper}: ${hotel?.rate} ${starIcons}`;
     const hotelText = `${hotelTrans.hotel}: ${hotel?.title}`;
     let text = `${dateText}\n${hotelText}\n${guestsText}\n${priceText}\n${reviewsText}`;
-    if (link) text = text + `\nLink: ${link}`;
+    if (link) text = text + isReverse ? `\n${link}: Link` : `\nLink: ${link}`;
     navigator.clipboard.writeText(text);
   };
 
