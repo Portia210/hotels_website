@@ -2,7 +2,7 @@ import { useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
 import AvatarUploader from "./AvatarUploader";
 import { useEffect, useState } from "react";
-import CountryList from "@/components/common/CountryList";
+import CountryList from "@/components/common/CountryList/CountryList";
 
 const PersonalInfo = () => {
   const [file, setFile] = useState(null);

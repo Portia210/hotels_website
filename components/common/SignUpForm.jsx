@@ -4,7 +4,7 @@ import { useSignUp } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import CountryList from "./CountryList";
+import CountryList from "./CountryList/CountryList";
 
 const SignUpForm = () => {
   const [errorMsg, setErrorMsg] = useState("");

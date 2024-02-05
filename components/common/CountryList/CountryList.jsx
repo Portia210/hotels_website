@@ -1,11 +1,11 @@
-import countryList from "react-select-country-list";
-import { useMemo } from "react";
+import { SUPPORTED_COUNTRIES } from "./countries";
+
+const countries = Array.from(SUPPORTED_COUNTRIES, ([value, label]) => ({ value, label }));
 
 export default function CountryList({
   onCountrySelected,
   selectedItem,
 }) {
-  const countries = useMemo(() => countryList().getData(), [])
   const handleSelectCountry = (value) => {
     const country = countries.find((item) => item.value === value);
     onCountrySelected(country);
