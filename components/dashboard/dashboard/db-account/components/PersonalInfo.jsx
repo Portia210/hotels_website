@@ -1,6 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
-import AvatarUploader from "./AvatarUploader";
+import AvatarUploader from "../../db-settings/components/AvatarUploader";
 import { useEffect, useState } from "react";
 import CountryList from "@/components/common/CountryList/CountryList";
 

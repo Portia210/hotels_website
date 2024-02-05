@@ -27,7 +27,7 @@ export default function LoginBtns({ isReverse, headerTrans }) {
       const popoverContent = (
         <div className="y-gap-20 mr-10">
           <Link
-            href="/dashboard/db-dashboard"
+            href="/dashboard/db-account"
             className="d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
