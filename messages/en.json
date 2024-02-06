@@ -48,5 +48,31 @@
     "tooltipCopy": "Copy text",
     "link": "Link:",
     "shortLink": "Short link"
+  },
+  "Dashboard": {
+    "General": {
+      "saveChanges": "Save Changes",
+      "cancel": "Cancel",
+      "changePassword": "Change Password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "newPasswordAgain": "New password again"
+    },
+    "Sidebar": {
+      "dashboard": "Dashboard",
+      "account": "Account",
+      "setting": "Setting",
+      "logout": "Logout"
+    },
+    "PersonalInfo": {
+      "profilePicture": "Profile Picture",
+      "browser": "Browser",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phoneNumber": "Phone number",
+      "agentNumber": "Agent number",
+      "country": "Country"
+    }
   }
 }

@@ -6,8 +6,10 @@ import Link from "next/link";
 import { isActiveLink } from "@/utils/linkActiveChecker";
 import { useClerk } from "@clerk/nextjs";
 import { usePathname, useRouter } from "next/navigation";
+import useTrans from "@/hooks/useTrans";
 
 const Sidebar = () => {
+  const { t } = useTrans();
   const { signOut } = useClerk();
   const router = useRouter();
   const pathname = usePathname();
@@ -16,25 +18,25 @@ const Sidebar = () => {
     {
       id: 1,
       icon: "/img/dashboard/sidebar/compass.svg",
-      name: "Dashboard",
+      name: t("Dashboard.Sidebar.dashboard"),
       routePath: "/dashboard/db-dashboard",
     },
     {
       id: 3,
       icon: "/img/dashboard/sidebar/account.svg",
-      name: " Account",
+      name: t("Dashboard.Sidebar.account"),
       routePath: "/dashboard/db-account",
     },
     {
       id: 4,
       icon: "/img/dashboard/sidebar/gear.svg",
-      name: " Change Password",
+      name: t("Dashboard.General.changePassword"),
       routePath: "/dashboard/db-settings",
     },
     {
       id: 5,
       icon: "/img/dashboard/sidebar/log-out.svg",
-      name: " Logout",
+      name: t("Dashboard.Sidebar.logout"),
       routePath: "#",
     },
   ];

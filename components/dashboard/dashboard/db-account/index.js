@@ -1,11 +1,12 @@
-
 import Sidebar from "../common/Sidebar";
 import Header from "@/components/header/dashboard-header";
 import SettingsTabs from "./components/index";
 import Footer from "../common/Footer";
-
+import { useMessages } from "next-intl";
 
 const index = () => {
+  const messages = useMessages();
+
   return (
     <>
       {/*  */}
@@ -13,7 +14,7 @@ const index = () => {
 
       <div className="header-margin"></div>
 
-      <Header />
+      <Header messages={messages} />
       {/* End dashboard-header */}
 
       <div className="dashboard">
