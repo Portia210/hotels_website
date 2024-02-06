@@ -12,18 +12,37 @@ export default function HotelInfoToast({ hotel, price, locale }) {
   const hotelTrans = messages?.Hotel;
   const searchInput = useSearchStore((state) => state.searchInput);
   const [shortLink, setShortLink] = useState(null);
+  const [isCopied, setIsCopied] = useState(false);
 
   const { hideToast, dateFormat, shortenLink, onCopyInfo } =
     useHotelInfoToast(isReverse);
+
+  const hideToolTip = (elementId) => {
+    if (!elementId) throw Error("hideToolTip elementId is required");
+    const Tooltip = require("bootstrap/js/dist/tooltip");
+    const toolTipElement = document.getElementById(elementId);
+    const element = Tooltip.getInstance(toolTipElement);
+    element.hide();
+  };
 
   const handleShortenLink = async (hotel) => {
     if (shortLink) return;
     const link = await shortenLink(hotel.travelorLink);
     setShortLink(link);
+    hideToolTip("shortenLinkTooltip");
+  };
+
+  const handleCopyText = () => {
+    onCopyInfo(hotel, price, searchInput, hotelTrans, searchBox, shortLink);
+    setIsCopied(true);
+    hideToolTip("copyHotelInfoTooltip");
   };
 
   useEffect(() => {
-    if (hotel?.travelorLink) setShortLink(null);
+    if (hotel?.travelorLink) {
+      setShortLink(null);
+      setIsCopied(false);
+    }
   }, [hotel?.travelorLink]);
 
   return (
@@ -46,25 +65,20 @@ export default function HotelInfoToast({ hotel, price, locale }) {
               onClick={() => handleShortenLink(hotel)}
               data-bs-toggle="tooltip"
               data-bs-placement="top"
-              className="button -blue-1 bg-white size-30 rounded-full shadow-2 me-2"
+              className={`button -blue-1 bg-white size-30 rounded-full shadow-2 me-2 ${
+                shortLink && "active"
+              }`}
             >
               <i className="bi bi-link-45deg"></i>
             </button>
             <button
               id="copyHotelInfoTooltip"
-              onClick={() =>
-                onCopyInfo(
-                  hotel,
-                  price,
-                  searchInput,
-                  hotelTrans,
-                  searchBox,
-                  shortLink
-                )
-              }
+              onClick={handleCopyText}
               data-bs-toggle="tooltip"
               data-bs-placement="top"
-              className="button -blue-1 bg-white size-30 rounded-full shadow-2"
+              className={`button -blue-1 bg-white size-30 rounded-full shadow-2 ${
+                isCopied && "active"
+              }`}
             >
               <i className="bi bi-clipboard"></i>
             </button>
@@ -100,7 +114,7 @@ export default function HotelInfoToast({ hotel, price, locale }) {
             </div>
             <HotelStars stars={hotel?.stars} />
             <p>
-              {renderGuestText(searchBox, "Adults", searchInput?.adults)} {" "}
+              {renderGuestText(searchBox, "Adults", searchInput?.adults)}{" "}
               {renderGuestText(searchBox, "Childrens", searchInput?.childrens)}
             </p>
             <div className="d-flex x-gap-5 align-items-center">
