@@ -44,7 +44,7 @@ export default function ListHotels() {
     new Tooltip(shortenLinkToolTip, {
       container: "body",
       trigger: "hover",
-      title: "Short link",      
+      title: hotelTrans.shortLink || "",
     });
     new Tooltip(copyHotelToolTip, {
       container: "body",

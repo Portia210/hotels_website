@@ -46,9 +46,9 @@ export default function HotelInfoToast({ hotel, price, locale }) {
   }, [hotel?.travelorLink]);
 
   useEffect(() => {
-    if (isReverse) setIsCopied(false);
-  }, [isReverse]);
-  
+    setIsCopied(false);
+  }, [shortLink]);
+
   return (
     <>
       <div

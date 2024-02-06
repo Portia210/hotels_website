@@ -45,6 +45,8 @@
     "price": "מחיר",
     "toTravelor": "אל טרוולאור",
     "toBooking": "אל בוקינג",
-    "tooltipCopy": "העתק טקסט"
+    "tooltipCopy": "העתק טקסט",
+    "link": "קישור:",
+    "shortLink": "קצר קישור"
   }
 }
