@@ -82,4 +82,5 @@ export const SUPPORTED_COUNTRIES = new Map([
   ["AE", "United Arab Emirates"],
   ["UZ", "Uzbekistan"],
   ["VN", "Vietnam"],
+  ["Il", "Other"],
 ]);

@@ -63,7 +63,7 @@ export default function LoginBtns({ isReverse, headerTrans }) {
         }`,
         popperConfig: () => {
           return {
-            placement: "bottom-end",
+            placement: isReverse ? "bottom-start" : "bottom-end",
           };
         },
         content: () => {

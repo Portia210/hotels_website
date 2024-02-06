@@ -128,7 +128,6 @@ const PersonalInfo = () => {
                 <input
                   type="text"
                   name="agentNumber"
-                  required
                   defaultValue={user?.unsafeMetadata?.agentNumber}
                 />
                 <label className="lh-1 text-16 text-light-1">
