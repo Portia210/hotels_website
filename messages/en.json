@@ -65,6 +65,7 @@
       "logout": "Logout"
     },
     "PersonalInfo": {
+      "personalInfoLabel": "Personal Information",
       "profilePicture": "Profile Picture",
       "browser": "Browser",
       "firstName": "First name",

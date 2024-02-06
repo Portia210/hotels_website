@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const useTrans = () => {
   const locale = useLocale();
-  const [messages, setMessages] = useState();
+  const [messages, setMessages] = useState({});
 
   const loadMessageFromSessionStorage = async (locale) => {
     let trans = sessionStorage.getItem(`trans.${locale}`);
@@ -12,7 +12,6 @@ const useTrans = () => {
       setMessages(JSON.parse(trans));
     } else {
       trans = useTransStore.getState().messages;
-      console.log("trans -->", trans);
       if (trans) {
         sessionStorage.setItem(`trans.${locale}`, JSON.stringify(trans));
         setMessages(trans);

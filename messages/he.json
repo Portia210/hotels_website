@@ -65,6 +65,7 @@
       "logout": "התנתק"
     },
     "PersonalInfo": {
+      "personalInfoLabel": "מידע אישי",
       "profilePicture": "תמונת פרופיל",
       "browser": "העלה",
       "firstName": "שם פרטי",
