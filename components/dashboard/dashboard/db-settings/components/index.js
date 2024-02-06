@@ -3,11 +3,13 @@
 import React, { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import PasswordInfo from "./PasswordInfo";
+import useTrans from "@/hooks/useTrans";
 
 const Index = () => {
+  const { t } = useTrans();
   const tabs = [
     {
-      label: "Change Password",
+      label: t('Dashboard.General.changePassword'),
       content: <PasswordInfo />,
     },
   ];

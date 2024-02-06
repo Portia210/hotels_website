@@ -29,7 +29,7 @@
   },
   "FilterBar": {
     "filter": "פילטרים",
-    "reset": "אִתחוּל",
+    "reset": "אתחול",
     "htl": "מהמחיר הגבוה לנמוך",
     "lth": "מהמחיר הנמוך לגבוה",
     "rating": "דירוג",
@@ -48,5 +48,36 @@
     "tooltipCopy": "העתק טקסט",
     "link": "קישור:",
     "shortLink": "קצר קישור"
+  },
+  "Dashboard": {
+    "General": {
+      "saveChanges": "שמור שינויים",
+      "cancel": "בטל",
+      "changePassword": "שנה סיסמה"
+    },
+    "Sidebar": {
+      "dashboard": "דשבורד",
+      "account": "חשבון",
+      "setting": "הגדרות",
+      "logout": "התנתק"
+    },
+    "PersonalInfo": {
+      "personalInfoLabel": "מידע אישי",
+      "profilePicture": "תמונת פרופיל",
+      "browser": "העלה",
+      "firstName": "שם פרטי",
+      "lastName": "שם משפחה",
+      "email": "אימייל",
+      "phoneNumber": "מס' טלפון",
+      "agentNumber": "מס' סוכן",
+      "country": "מדינה"
+    },
+    "SetPassword": {
+      "setPasswordLabel": "הגדר סיסמה",
+      "changePassword": "שנה סיסמה",
+      "currentPassword": "סיסמא נוכחית",
+      "newPassword": "סיסמה חדשה",
+      "newPasswordAgain": "סיסמה חדשה שוב"
+    }
   }
 }

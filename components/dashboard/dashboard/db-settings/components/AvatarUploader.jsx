@@ -1,9 +1,11 @@
 "use client";
 
+import useTrans from "@/hooks/useTrans";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
+  const { t } = useTrans();
   const [image, setImage] = useState(imageUrl);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -43,7 +45,6 @@ const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
     if (imageUrl) setImage(imageUrl);
   }, [imageUrl]);
 
-  
   return (
     <div className="row y-gap-30 items-center">
       <div className="col-auto">
@@ -84,7 +85,9 @@ const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
       </div>
 
       <div className="col-auto">
-        <h4 className="text-16 fw-500">Your avatar</h4>
+        <h4 className="text-16 fw-500">
+          {t("Dashboard.PersonalInfo.profilePicture")}
+        </h4>
         <div className="text-14 mt-5">
           PNG or JPG no bigger than 800px wide and tall.
         </div>
@@ -95,7 +98,7 @@ const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
             className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
           >
             <i className="icon-upload-file text-20 mr-10" />
-            Browse
+            {t('Dashboard.PersonalInfo.browser')}
           </label>
           <input
             type="file"

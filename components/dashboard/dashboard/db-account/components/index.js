@@ -3,11 +3,13 @@
 import React, { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import PersonalInfo from "./PersonalInfo";
+import useTrans from "@/hooks/useTrans";
 
 const Index = () => {
+  const { t } = useTrans();
   const tabs = [
     {
-      label: "Personal Information",
+      label: t('Dashboard.PersonalInfo.personalInfoLabel'),
       content: <PersonalInfo />,
     },
   ];
