@@ -53,10 +53,7 @@
     "General": {
       "saveChanges": "Save Changes",
       "cancel": "Cancel",
-      "changePassword": "Change Password",
-      "currentPassword": "Current password",
-      "newPassword": "New password",
-      "newPasswordAgain": "New password again"
+      "changePassword": "Change Password"
     },
     "Sidebar": {
       "dashboard": "Dashboard",
@@ -68,12 +65,19 @@
       "personalInfoLabel": "Personal Information",
       "profilePicture": "Profile Picture",
       "browser": "Browser",
-      "firstName": "First name",
-      "lastName": "Last name",
+      "firstName": "First Name",
+      "lastName": "Last Name",
       "email": "Email",
-      "phoneNumber": "Phone number",
-      "agentNumber": "Agent number",
+      "phoneNumber": "Phone Number",
+      "agentNumber": "Agent Number",
       "country": "Country"
+    },
+    "SetPassword": {
+      "setPasswordLabel": "Set Password",
+      "changePassword": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "newPasswordAgain": "New Password Again"
     }
   }
 }

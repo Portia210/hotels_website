@@ -53,10 +53,7 @@
     "General": {
       "saveChanges": "שמור שינויים",
       "cancel": "בטל",
-      "changePassword": "שנה סיסמה",
-      "currentPassword": "סיסמא נוכחית",
-      "newPassword": "סיסמה חדשה",
-      "newPasswordAgain": "סיסמה חדשה שוב"
+      "changePassword": "שנה סיסמה"
     },
     "Sidebar": {
       "dashboard": "דשבורד",
@@ -74,6 +71,13 @@
       "phoneNumber": "מס' טלפון",
       "agentNumber": "מס' סוכן",
       "country": "מדינה"
+    },
+    "SetPassword": {
+      "setPasswordLabel": "הגדר סיסמה",
+      "changePassword": "שנה סיסמה",
+      "currentPassword": "סיסמא נוכחית",
+      "newPassword": "סיסמה חדשה",
+      "newPasswordAgain": "סיסמה חדשה שוב"
     }
   }
 }

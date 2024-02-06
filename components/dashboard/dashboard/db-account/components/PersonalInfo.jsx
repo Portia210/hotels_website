@@ -3,8 +3,10 @@ import { toast } from "react-toastify";
 import AvatarUploader from "../../db-settings/components/AvatarUploader";
 import { useEffect, useState } from "react";
 import CountryList from "@/components/common/CountryList/CountryList";
+import useTrans from "@/hooks/useTrans";
 
 const PersonalInfo = () => {
+  const { t } = useTrans();
   const [file, setFile] = useState(null);
   const { user } = useUser();
   const [selectedCountry, setSelectedCountry] = useState(
@@ -56,7 +58,7 @@ const PersonalInfo = () => {
     if (user?.unsafeMetadata?.country)
       setSelectedCountry(user?.unsafeMetadata?.country);
   }, [user?.unsafeMetadata?.country]);
-  
+
   return (
     <>
       <form onSubmit={onUpdateInfo}>
@@ -78,7 +80,9 @@ const PersonalInfo = () => {
                   required
                   defaultValue={user?.firstName}
                 />
-                <label className="lh-1 text-16 text-light-1">First Name</label>
+                <label className="lh-1 text-16 text-light-1">
+                  {t("Dashboard.PersonalInfo.firstName")}
+                </label>
               </div>
             </div>
             {/* End col-6 */}
@@ -91,7 +95,9 @@ const PersonalInfo = () => {
                   required
                   defaultValue={user?.lastName}
                 />
-                <label className="lh-1 text-16 text-light-1">Last Name</label>
+                <label className="lh-1 text-16 text-light-1">
+                  {t("Dashboard.PersonalInfo.lastName")}
+                </label>
               </div>
             </div>
             {/* End col-6 */}
@@ -103,7 +109,9 @@ const PersonalInfo = () => {
                   name="emailAddress"
                   defaultValue={user?.primaryEmailAddress?.emailAddress}
                 />
-                <label className="lh-1 text-16 text-light-1">Email</label>
+                <label className="lh-1 text-16 text-light-1">
+                  {t("Dashboard.PersonalInfo.email")}
+                </label>
               </div>
             </div>
             {/* End col-6 */}
@@ -117,7 +125,7 @@ const PersonalInfo = () => {
                   defaultValue={user?.unsafeMetadata?.primaryPhoneNumber}
                 />
                 <label className="lh-1 text-16 text-light-1">
-                  Phone Number
+                  {t("Dashboard.PersonalInfo.phoneNumber")}
                 </label>
               </div>
             </div>
@@ -131,7 +139,7 @@ const PersonalInfo = () => {
                   defaultValue={user?.unsafeMetadata?.agentNumber}
                 />
                 <label className="lh-1 text-16 text-light-1">
-                  Agent number
+                  {t("Dashboard.PersonalInfo.agentNumber")}
                 </label>
               </div>
             </div>
@@ -141,7 +149,7 @@ const PersonalInfo = () => {
                   className="position-absolute lh-1 text-16 text-light-1"
                   style={{ marginTop: -8 }}
                 >
-                  Country
+                  {t("Dashboard.PersonalInfo.country")}
                 </label>
                 <CountryList
                   onCountrySelected={setSelectedCountry}
@@ -159,7 +167,8 @@ const PersonalInfo = () => {
             type="submit"
             className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
           >
-            Save Changes <div className="icon-arrow-top-right ml-15" />
+            {t("Dashboard.General.saveChanges")}
+            <div className="icon-arrow-top-right ml-15" />
           </button>
         </div>
       </form>

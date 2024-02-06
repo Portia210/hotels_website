@@ -1,8 +1,10 @@
+import useTrans from "@/hooks/useTrans";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 const PasswordInfo = () => {
+  const { t } = useTrans();
   const { user } = useUser();
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -39,7 +41,9 @@ const PasswordInfo = () => {
       <div className="row x-gap-20 y-gap-20">
         {!user?.passwordEnabled && (
           <div>
-            <h4 className="text-20 fw-600 lh-1 mb-20">Set Password</h4>
+            <h4 className="text-20 fw-600 lh-1 mb-20">
+              {t("Dashboard.SetPassword.setPasswordLabel")}
+            </h4>
           </div>
         )}
         {user?.passwordEnabled && (
@@ -47,7 +51,7 @@ const PasswordInfo = () => {
             <div className="form-input ">
               <input type="password" name="currentPassword" required />
               <label className="lh-1 text-16 text-light-1">
-                Current Password
+                {t("Dashboard.SetPassword.currentPassword")}
               </label>
             </div>
           </div>
@@ -57,7 +61,9 @@ const PasswordInfo = () => {
         <div className="col-12">
           <div className="form-input ">
             <input type="password" name="newPassword" required />
-            <label className="lh-1 text-16 text-light-1">New Password</label>
+            <label className="lh-1 text-16 text-light-1">
+              {t("Dashboard.SetPassword.newPassword")}
+            </label>
           </div>
         </div>
         {/* End col-12 */}
@@ -66,7 +72,7 @@ const PasswordInfo = () => {
           <div className="form-input ">
             <input type="password" name="newPasswordCheck" required />
             <label className="lh-1 text-16 text-light-1">
-              New Password Again
+              {t("Dashboard.SetPassword.newPasswordAgain")}
             </label>
           </div>
         </div>
@@ -83,12 +89,13 @@ const PasswordInfo = () => {
                 type="submit"
                 className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
               >
-                Save Changes <div className="icon-arrow-top-right ml-15" />
+                {t("Dashboard.General.saveChanges")}
+                <div className="icon-arrow-top-right ml-15" />
               </button>
             </div>
             <div className="col-auto">
               <button className="button h-50 px-24 -blue-1 bg-blue-1-05 text-blue-1">
-                Cancel
+                {t("Dashboard.General.cancel")}
               </button>
             </div>
           </div>
