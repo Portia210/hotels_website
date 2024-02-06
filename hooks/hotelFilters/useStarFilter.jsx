@@ -20,7 +20,7 @@ const useStarFilter = (hotels, setFilterHotels) => {
 
   useEffect(() => {
     filterHotelByStar();
-  }, [starFilter]);
+  }, [starFilter, hotels.length]);
 
   return {
     starFilter,

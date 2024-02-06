@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { defaultFilter } from ".";
 import { PriceFilter } from "@/constants/searchFilter";
+import { toast } from "react-toastify";
 
-const usePriceFilter = (hotels, setFilterHotels) => {
+const usePriceFilter = (hotels, setFilterHotels, isActive) => {
   const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
 
   const filterHotelByPrice = () => {
@@ -15,13 +16,25 @@ const usePriceFilter = (hotels, setFilterHotels) => {
     setFilterHotels(results);
   };
 
+  const handleChangePriceFilter = (val) => {
+    if (!isActive) {
+      toast.warn("Please disable Gap filter to use this", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+    } else {
+      setPriceFilter(val);
+    }
+  };
+
   useEffect(() => {
+    if (!isActive) return;
     filterHotelByPrice();
-  }, [priceFilter]);
+  }, [priceFilter, hotels.length]);
 
   return {
     priceFilter,
-    setPriceFilter,
+    setPriceFilter: handleChangePriceFilter,
     filterHotelByPrice,
   };
 };

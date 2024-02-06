@@ -11,7 +11,7 @@ const useRatingFilter = (hotels, setFilterHotels) => {
 
   useEffect(() => {
     filterHotelByRating();
-  }, [ratingFilter]);
+  }, [ratingFilter, hotels.length]);
 
   return {
     ratingFilter,

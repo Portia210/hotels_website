@@ -18,7 +18,6 @@ export default function ListHotels() {
   const {
     data,
     totalFilter,
-    filterByBiggestPriceGap,
     pagination,
     currentPage,
     setCurrentPage,
@@ -102,8 +101,7 @@ export default function ListHotels() {
             <div className="col-auto">
               <button
                 onClick={() => {
-                  if (!gapActive) setGapActive(true);
-                  filterByBiggestPriceGap(gapActive);
+                  setGapActive(!gapActive);
                 }}
                 className={`button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1 ${
                   gapActive && "active"

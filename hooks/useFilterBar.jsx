@@ -8,7 +8,7 @@ import useStarFilter from "./hotelFilters/useStarFilter";
 import useHotelFilterStore from "@/store/useHotelFilterStore";
 
 const useFilterBar = (hotels) => {
-  const { setGapActive } = useHotelFilterStore();
+  const { gapActive, setGapActive } = useHotelFilterStore();
   const [filterHotels, setFilterHotels] = useState(hotels);
   const {
     currentPage,
@@ -17,13 +17,11 @@ const useFilterBar = (hotels) => {
     setCurrentPage,
     calcPagination,
   } = useHotelPagination();
-  const { filterByBiggestPriceGap } = useHotelGapFilter(
-    [...filterHotels],
-    setFilterHotels
-  );
+  useHotelGapFilter([...filterHotels], setFilterHotels);
   const { priceFilter, setPriceFilter } = usePriceFilter(
     [...filterHotels],
-    setFilterHotels
+    setFilterHotels,
+    !gapActive
   );
   const { ratingFilter, setRatingFilter } = useRatingFilter(
     [...filterHotels],
@@ -65,7 +63,6 @@ const useFilterBar = (hotels) => {
     setPriceFilter,
     setRatingFilter,
     setCurrentPage,
-    filterByBiggestPriceGap,
     handleStarFilterChange,
     resetFilter,
   };
