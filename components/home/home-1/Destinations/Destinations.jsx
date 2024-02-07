@@ -1,32 +1,41 @@
-
-'use client'
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { destinations1 } from "../../../data/desinations";
+import { destinations1 } from "../../../../data/desinations";
+import getLangConfig from "./lang";
+import useTrans from "@/hooks/useTrans";
 
 const Destinations = () => {
-  const [filterOption, setFilterOption] = useState("all");
-  const [filteredItems, setFilteredItems] = useState([])
-
+  const { t2 } = useTrans();
+  const [filterOption, setFilterOption] = useState("israelSupporterCountries");
+  const [filteredItems, setFilteredItems] = useState([]);
   const filterOptions = [
-    { label: "All", value: "all" },
-    { label: "Europe", value: "europe" },
-    { label: "Asia", value: "asia" },
-    { label: "North America", value: "north_america" },
+    {
+      label: t2(getLangConfig, "filterOptionLabels.israelSupporter"),
+      value: "israelSupporterCountries",
+    },
+    {
+      label: t2(getLangConfig, "filterOptionLabels.europe"),
+      value: "europe",
+    },
+    { label: t2(getLangConfig, "filterOptionLabels.asia"), value: "asia" },
+    {
+      label: t2(getLangConfig, "filterOptionLabels.other"),
+      value: "other",
+    },
     // add more options as needed
   ];
   useEffect(() => {
-    if (filterOption == 'all') {
-      setFilteredItems(destinations1)
-      
+    if (filterOption == "all") {
+      setFilteredItems(destinations1);
     } else {
-      setFilteredItems(destinations1.filter((elm)=>elm.region == filterOption))
-      
+      setFilteredItems(
+        destinations1.filter((elm) => elm.region == filterOption)
+      );
     }
-   
-  }, [filterOption])
-  
+  }, [filterOption]);
+
   return (
     <>
       <div className="tabs__controls d-flex js-tabs-controls">
