@@ -127,7 +127,7 @@ export default function HotelInfoToast({ hotel, price, locale }) {
             </div>
             {shortLink && (
               <div className="d-flex x-gap-5 align-items-center">
-                <p>Link:</p>
+                <p>{hotelTrans?.link}</p>
                 <a href={shortLink} target="_blank">
                   <p className="text-primary">{shortLink}</p>
                 </a>
