@@ -52,14 +52,13 @@ const Destinations = () => {
     const scrollToTop = document.getElementById("scrollToTopBtn");
     scrollToTop.click();
     const destinationInput = document.getElementById("destinationInput");
-    destinationInput.value = "";
     destinationInput.focus();
     const typeWithDelay = (text, index) => {
       if (index < text.length) {
         destinationInput.value += text.charAt(index);
         const inputEvent = new Event("input", {
           bubbles: true,
-          cancelable: true,
+          cancelable: false,
         });
         destinationInput.dispatchEvent(inputEvent);
         setTimeout(() => {
@@ -68,6 +67,7 @@ const Destinations = () => {
       }
     };
     setTimeout(() => {
+      destinationInput.value = "";
       typeWithDelay(location.label, 0);
     }, 1000);
   };

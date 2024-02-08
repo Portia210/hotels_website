@@ -33,7 +33,6 @@ export const euroCountries = {
   CZ: "Czech Republic",
   GR: "Greece",
   HR: "Croatia",
-  IT: "Italy",
   AT: "Austria",
   IE: "Ireland",
   HU: "Hungary",
