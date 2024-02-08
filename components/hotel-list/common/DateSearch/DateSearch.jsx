@@ -4,9 +4,11 @@ import useDateSearchForm from "@/hooks/useDateSearchForm";
 import { useLocale } from "next-intl";
 import DatePicker from "react-multi-date-picker";
 import gregorian_he_lowercase from "./heLocale";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const DateSearch = () => {
   const locale = useLocale();
+  const isMobile = useIsMobile();
   const { dates, onPropsChange } = useDateSearchForm();
 
   return (
@@ -20,7 +22,7 @@ const DateSearch = () => {
         minDate={new Date()}
         onPropsChange={onPropsChange}
         onOpenPickNewDate={false}
-        numberOfMonths={2}
+        numberOfMonths={isMobile ? 1 : 2}
         offsetY={10}
         range
         rangeHover
