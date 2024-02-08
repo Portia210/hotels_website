@@ -25,7 +25,11 @@ const HotelProperties = ({ hotels }) => {
 
   const renderText = (key, value) => {
     if (key === "distance" && value) {
-      value = value.replace("from center", hotelTrans[key]);
+      if (value.includes("from center")) {
+        value = value.replace("from center", hotelTrans[key]);
+      } else if (value.includes("from map center")) {
+        value = value.replace("from map center", hotelTrans[key]);
+      }
     }
     return value;
   };
