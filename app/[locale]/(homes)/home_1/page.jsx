@@ -2,7 +2,7 @@ import PopularDestinations from "@/components/destinations/PopularDestinations";
 import DefaultFooter from "@/components/footer/default";
 import Header1 from "@/components/header/header-1";
 import Hero1 from "@/components/hero/hero-1";
-import Destinations from "@/components/home/home-1/Destinations";
+import Destinations from "@/components/home/home-1/Destinations/Destinations";
 import dynamic from "next/dynamic";
 import { useMessages } from 'next-intl';
 

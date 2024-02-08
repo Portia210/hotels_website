@@ -35,11 +35,32 @@ const useTrans = () => {
     return null;
   };
 
+  /**
+   * Translate with custom lang object
+   * @param {function} getLangConfig
+   * @param {string} key Trans key
+   */
+  const t2 = (getLangConfig, key) => {
+    if (!key || !getLangConfig) return null;
+    const langConfig = getLangConfig(locale);
+    const keys = key.split(".");
+    const messages = langConfig[keys[0]];
+    let result = messages;
+    for (let i = 1; i < keys.length; i++) {
+      if (result && result[keys[i]]) {
+        result = result[keys[i]];
+      } else {
+        return null;
+      }
+    }
+    return result;
+  };
+
   useEffect(() => {
     loadMessageFromSessionStorage(locale);
   }, []);
 
-  return { t };
+  return { t, t2 };
 };
 
 export default useTrans;
