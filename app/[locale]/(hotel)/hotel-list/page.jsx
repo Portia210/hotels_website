@@ -2,12 +2,18 @@ import DefaultFooter from "@/components/footer/default";
 import Header1 from "@/components/header/header-1";
 import ListHotels from "@/components/hotel-list/hotel-list-v5/ListHotels";
 import MainFilterSearchBox from "@/components/hotel-list/hotel-list-v5/MainFilterSearchBox";
-import { useMessages } from 'next-intl';
+import { useMessages } from "next-intl";
 
-export const metadata = {
-  title: "Hotel List v5 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
-};
+export async function generateMetadata({ searchParams }) {
+  try {
+    const { destination } = JSON.parse(searchParams?.destination || "{}");
+    const title = `GoTrip: Hotels in ${destination}` || "GoTrip: Hotel List";
+    return { title };
+  } catch (error) {
+    console.error("Error when generateMetadata", error);
+    return { title: "GoTrip: Hotel List" };
+  }
+}
 
 const index = () => {
   const messages = useMessages();
@@ -19,7 +25,7 @@ const index = () => {
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <Header1 messages={messages}/>
+      <Header1 messages={messages} />
       {/* End Header 1 */}
 
       <section className="section-bg pt-40 pb-40 relative z-5">
