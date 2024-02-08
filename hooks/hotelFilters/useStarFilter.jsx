@@ -6,9 +6,7 @@ const useStarFilter = (originHotels, hotels, setFilterHotels) => {
 
   const handleStarFilterChange = (value) => {
     setStarFilter((prev) => {
-      if (prev === value) {
-        return 0;
-      }
+      if (prev === value) return prev;
       filterHotelByStar(originHotels, value);
       return value;
     });
