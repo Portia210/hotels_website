@@ -39,16 +39,24 @@ const useHotelInfoToast = (isReverse) => {
   ) => {
     const starIcons = Array.from(Array(hotel?.stars).keys())
       .map(() => "⭐️") // Use a simple star character
-      .join(" ");
+      .join("");
 
     const dateText = `${searchBox?.dates}: ${dateFormat(searchInput)}`;
     const adultText = renderGuestText(searchBox, "Adults", searchInput?.adults);
-    const childrenText = renderGuestText(searchBox, "Childrens", searchInput?.childrens);
-    const guestsText = `${adultText} ${childrenText}`
+    const childrenText = renderGuestText(
+      searchBox,
+      "Childrens",
+      searchInput?.childrens
+    );
+    const guestsText = `${adultText} ${childrenText}`;
     const priceText = `${hotelTrans?.price}: ${price}`;
     const reviewsText = `${hotelTrans?.guestReviewsUpper}: ${hotel?.rate} ${starIcons}`;
     const hotelText = `${hotelTrans.hotel}: ${hotel?.title}`;
-    if (link) link =  `${hotelTrans.link} ${link}`;
+    if (link) {
+      link = `${hotelTrans.link} ${link}`;
+    } else {
+      link = "";
+    }
     let text = `${dateText}\n${hotelText}\n${guestsText}\n${priceText}\n${reviewsText}\n${link}`;
     navigator.clipboard.writeText(text);
   };
