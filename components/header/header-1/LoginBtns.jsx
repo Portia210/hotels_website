@@ -5,8 +5,10 @@ import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import useTrans from "@/hooks/useTrans";
 
 export default function LoginBtns({ isReverse, headerTrans }) {
+  const { t } = useTrans();
   const router = useRouter();
   const { isSignedIn, isLoaded, user } = useUser();
   const { signOut } = useClerk();
@@ -37,7 +39,7 @@ export default function LoginBtns({ isReverse, headerTrans }) {
               alt="image"
               className="mr-15"
             />
-            Dashboard
+            {t("Dashboard.Sidebar.dashboard")}
           </Link>
           <Link
             href="#"
@@ -51,7 +53,7 @@ export default function LoginBtns({ isReverse, headerTrans }) {
               alt="image"
               className="mr-15"
             />
-            Logout
+            {t("Dashboard.Sidebar.logout")}
           </Link>
         </div>
       );

@@ -106,6 +106,7 @@ const Destinations = () => {
                   scroll={false}
                   onClick={() => handleLocationSelect(item)}
                   className="button -blue-1 bg-white p-2"
+                  style={{ justifyContent: "flex-start" }}
                 >
                   <div className="text-15 fw-500">{item.label}</div>
                   <div className="text-14 text-light-1">
