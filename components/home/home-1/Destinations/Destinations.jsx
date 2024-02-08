@@ -1,12 +1,13 @@
 "use client";
 
+import useTrans from "@/hooks/useTrans";
+import { useLocale } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { destinations1 } from "../../../../data/desinations";
 import getLangConfig from "./lang";
-import useTrans from "@/hooks/useTrans";
 
 const Destinations = () => {
+  const locale = useLocale();
   const { t2 } = useTrans();
   const [filterOption, setFilterOption] = useState("israelSupporterCountries");
   const [filteredItems, setFilteredItems] = useState([]);
@@ -26,14 +27,53 @@ const Destinations = () => {
     },
     // add more options as needed
   ];
-  useEffect(() => {
-    if (filterOption == "all") {
-      setFilteredItems(destinations1);
+  const loadCountries = (filterOption) => {
+    let data;
+    const countries = [];
+    if (filterOption == "israelSupporterCountries") {
+      data = getLangConfig(locale).israelSupporterCountries;
+    } else if (filterOption == "europe") {
+      data = getLangConfig(locale).euroCountries;
+    } else if (filterOption == "asia") {
+      data = getLangConfig(locale).asiaCountries;
     } else {
-      setFilteredItems(
-        destinations1.filter((elm) => elm.region == filterOption)
-      );
+      data = getLangConfig(locale).otherCountries;
     }
+    for (const key of Object.keys(data)) {
+      countries.push({
+        value: key,
+        label: data[key],
+      });
+    }
+    setFilteredItems(countries);
+  };
+
+  const handleLocationSelect = (location) => {
+    const scrollToTop = document.getElementById("scrollToTopBtn");
+    scrollToTop.click();
+    const destinationInput = document.getElementById("destinationInput");
+    destinationInput.value = "";
+    destinationInput.focus();
+    const typeWithDelay = (text, index) => {
+      if (index < text.length) {
+        destinationInput.value += text.charAt(index);
+        const inputEvent = new Event("input", {
+          bubbles: true,
+          cancelable: true,
+        });
+        destinationInput.dispatchEvent(inputEvent);
+        setTimeout(() => {
+          typeWithDelay(text, index + 1);
+        }, 100);
+      }
+    };
+    setTimeout(() => {
+      typeWithDelay(location.label, 0);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    loadCountries(filterOption);
   }, [filterOption]);
 
   return (
@@ -57,11 +97,19 @@ const Destinations = () => {
         <div className="tabs__pane -tab-item-1 is-tab-el-active">
           <div className="row y-gap-20">
             {filteredItems.map((item) => (
-              <div className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2" key={item.id}>
-                <Link href="#" className="d-block">
-                  <div className="text-15 fw-500">{item.city}</div>
+              <div
+                className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
+                key={item.value}
+              >
+                <Link
+                  href="#"
+                  scroll={false}
+                  onClick={() => handleLocationSelect(item)}
+                  className="button -blue-1 bg-white p-2"
+                >
+                  <div className="text-15 fw-500">{item.label}</div>
                   <div className="text-14 text-light-1">
-                    {item.properties} properties
+                    {/* {item.value} properties */}
                   </div>
                 </Link>
               </div>

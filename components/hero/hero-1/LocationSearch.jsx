@@ -53,7 +53,7 @@ const SearchBar = () => {
               }`}
               value={locationInput}
               disabled={!isLoaded}
-              onChange={(e) => onLocationChange(e.target.value)}
+              onInput={(e) => onLocationChange(e.target.value)}
             />
             <div className="invalid-feedback">{searchBox?.selectLocation}</div>
           </div>
