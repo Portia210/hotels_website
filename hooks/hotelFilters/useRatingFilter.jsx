@@ -1,22 +1,34 @@
 import { useEffect, useState } from "react";
 import { defaultFilter } from ".";
 
-const useRatingFilter = (hotels, setFilterHotels) => {
+const useRatingFilter = (originHotels, hotels, setFilterHotels) => {
   const [ratingFilter, setRatingFilter] = useState(defaultFilter.ratingFilter);
 
-  const filterHotelByRating = () => {
+  const handleRatingFilterChange = (value) => {
+    setRatingFilter((prev) => {
+      if (prev === value) {
+        return 0;
+      }
+      filterHotelByRating(originHotels, value);
+      return value;
+    });
+  };
+
+  const filterHotelByRating = (hotels, ratingFilter) => {
+    console.log("Filtering by rating...", hotels.length, ratingFilter);
     const results = hotels.filter((hotel) => hotel.rate >= ratingFilter);
     setFilterHotels(results);
   };
 
   useEffect(() => {
-    filterHotelByRating();
+    filterHotelByRating(hotels, ratingFilter);
   }, [ratingFilter, hotels.length]);
 
   return {
     ratingFilter,
     setRatingFilter,
     filterHotelByRating,
+    handleRatingFilterChange,
   };
 };
 

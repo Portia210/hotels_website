@@ -24,7 +24,7 @@ export default function ListHotels() {
     priceFilter,
     setPriceFilter,
     ratingFilter,
-    setRatingFilter,
+    handleRatingFilterChange,
     starFilter,
     handleStarFilterChange,
     resetFilter,
@@ -86,7 +86,7 @@ export default function ListHotels() {
                       priceFilter={priceFilter}
                       setPriceFilter={setPriceFilter}
                       ratingFilter={ratingFilter}
-                      setRatingFilter={setRatingFilter}
+                      setRatingFilter={handleRatingFilterChange}
                       starFilter={starFilter}
                       setStarFilter={handleStarFilterChange}
                     />

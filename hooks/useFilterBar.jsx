@@ -21,17 +21,19 @@ const useFilterBar = (hotels) => {
   const { priceFilter, setPriceFilter } = usePriceFilter(
     [...filterHotels],
     setFilterHotels,
-    !gapActive
+    !gapActive,
+    setGapActive
   );
-  const { ratingFilter, setRatingFilter } = useRatingFilter(
+  const { ratingFilter, setRatingFilter, handleRatingFilterChange } = useRatingFilter(
+    hotels,
     [...filterHotels],
     setFilterHotels
   );
   const { starFilter, setStarFilter, handleStarFilterChange } = useStarFilter(
+    hotels,
     [...filterHotels],
     setFilterHotels
   );
-
   const resetFilter = () => {
     setPriceFilter(defaultFilter.priceFilter);
     setRatingFilter(defaultFilter.ratingFilter);
@@ -61,8 +63,8 @@ const useFilterBar = (hotels) => {
     currentPage,
     pagination,
     setPriceFilter,
-    setRatingFilter,
     setCurrentPage,
+    handleRatingFilterChange,
     handleStarFilterChange,
     resetFilter,
   };
