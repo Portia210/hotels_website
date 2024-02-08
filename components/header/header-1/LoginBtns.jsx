@@ -7,8 +7,8 @@ import { useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import useTrans from "@/hooks/useTrans";
 
-export default function LoginBtns({ isReverse, headerTrans }) {
-  const { t } = useTrans();
+export default function LoginBtns({ headerTrans }) {
+  const { t, isReverse } = useTrans();
   const router = useRouter();
   const { isSignedIn, isLoaded, user } = useUser();
   const { signOut } = useClerk();
@@ -27,42 +27,59 @@ export default function LoginBtns({ isReverse, headerTrans }) {
 
     const popoverList = [...popoverTriggerList].map((popoverTriggerEl) => {
       const popoverContent = (
-        <div className="y-gap-20 mr-10">
+        <div className="y-gap-20">
           <Link
             href="/dashboard/db-account"
-            className="d-flex items-center text-15 lh-1 fw-500"
+            className={`d-flex items-center text-15 lh-1 fw-500 ${
+              isReverse && "justify-content-end"
+            } `}
           >
-            <Image
-              width={20}
-              height={20}
-              src="/img/dashboard/sidebar/compass.svg"
-              alt="image"
-              className="mr-15"
-            />
-            {t("Dashboard.Sidebar.dashboard")}
+            <div className={`d-flex ${isReverse && "flex-row-reverse"}`}>
+              <Image
+                width={20}
+                height={20}
+                src="/img/dashboard/sidebar/compass.svg"
+                alt="image"
+                className={`${isReverse ? "ml-15" : "mr-15"}`}
+              />
+              <p>{t("Dashboard.Sidebar.dashboard")}</p>
+            </div>
           </Link>
           <Link
             href="#"
             onClick={() => onLogout()}
-            className="d-flex items-center text-15 lh-1 fw-500"
+            className={`d-flex items-center text-15 lh-1 fw-500 ${
+              isReverse && "justify-content-end"
+            } `}
           >
-            <Image
-              width={20}
-              height={20}
-              src="/img/dashboard/sidebar/log-out.svg"
-              alt="image"
-              className="mr-15"
-            />
-            {t("Dashboard.Sidebar.logout")}
+            <div className={`d-flex ${isReverse && "flex-row-reverse"}`}>
+              <Image
+                width={20}
+                height={20}
+                src="/img/dashboard/sidebar/log-out.svg"
+                alt="image"
+                className={`${isReverse ? "ml-15" : "mr-15"}`}
+              />
+              <p>{t("Dashboard.Sidebar.logout")}</p>
+            </div>
           </Link>
         </div>
       );
 
       return new Popover(popoverTriggerEl, {
         html: true,
-        title: `Hello ${
-          user?.fullName || user?.primaryEmailAddress?.emailAddress
-        }`,
+        title: () => {
+          const container = document.createElement("div");
+          const root = createRoot(container);
+          root.render(
+            <p dir={`${isReverse && "rtl"}`}>{`${t(
+              "Dashboard.Sidebar.hello"
+            )} ${
+              user?.fullName || user?.primaryEmailAddress?.emailAddress
+            }`}</p>
+          );
+          return container;
+        },
         popperConfig: () => {
           return {
             placement: isReverse ? "bottom-start" : "bottom-end",
@@ -95,7 +112,7 @@ export default function LoginBtns({ isReverse, headerTrans }) {
           data-bs-toggle="popover"
           data-bs-trigger="focus"
           className={`d-md-inline-flex px-10 z-5 h-50 text-white ${
-            isReverse ? "mr-20" : "ml-20"
+            isReverse ? "mr-10" : "ml-10"
           }`}
         >
           <Image

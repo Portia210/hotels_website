@@ -109,10 +109,7 @@ const Header1 = ({ messages }) => {
                 {/* End language and currency selector */}
 
                 {/* Start btn-group */}
-                <LoginBtns
-                  isReverse={isReverse}
-                  headerTrans={messages?.Header}
-                />
+                <LoginBtns headerTrans={messages?.Header} />
 
                 {/* End btn-group */}
 

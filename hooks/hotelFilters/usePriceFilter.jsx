@@ -6,7 +6,6 @@ const usePriceFilter = (hotels, setFilterHotels, isGapActive, setGapActive) => {
   const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
 
   const filterHotelByPrice = () => {
-    console.log("filterHotelByPrice...", hotels.length, priceFilter);
     let results = [];
     if (priceFilter === PriceFilter.HTL) {
       results = hotels.sort((a, b) => b.travelorPrice - a.travelorPrice);

@@ -59,7 +59,8 @@
       "dashboard": "דשבורד",
       "account": "חשבון",
       "setting": "הגדרות",
-      "logout": "התנתק"
+      "logout": "התנתק",
+      "hello": "שלום"
     },
     "PersonalInfo": {
       "personalInfoLabel": "מידע אישי",

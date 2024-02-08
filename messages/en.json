@@ -59,7 +59,8 @@
       "dashboard": "Dashboard",
       "account": "Account",
       "setting": "Setting",
-      "logout": "Logout"
+      "logout": "Logout",
+      "hello": "Hello"
     },
     "PersonalInfo": {
       "personalInfoLabel": "Personal Information",

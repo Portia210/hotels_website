@@ -1,23 +1,11 @@
+"use client";
 import useTransStore from "@/store/useTransStore";
 import { useLocale } from "next-intl";
-import { useEffect, useState } from "react";
 
 const useTrans = () => {
+  const messages = useTransStore((state) => state.messages);
   const locale = useLocale();
-  const [messages, setMessages] = useState({});
-
-  const loadMessageFromSessionStorage = async (locale) => {
-    let trans = sessionStorage.getItem(`trans.${locale}`);
-    if (trans) {
-      setMessages(JSON.parse(trans));
-    } else {
-      trans = useTransStore.getState().messages;
-      if (trans) {
-        sessionStorage.setItem(`trans.${locale}`, JSON.stringify(trans));
-        setMessages(trans);
-      }
-    }
-  };
+  const isReverse = locale === "he";
 
   const t = (key) => {
     if (messages && key) {
@@ -56,11 +44,7 @@ const useTrans = () => {
     return result;
   };
 
-  useEffect(() => {
-    loadMessageFromSessionStorage(locale);
-  }, []);
-
-  return { t, t2 };
+  return { t, t2, isReverse };
 };
 
 export default useTrans;

@@ -15,7 +15,6 @@ const useRatingFilter = (originHotels, hotels, setFilterHotels) => {
   };
 
   const filterHotelByRating = (hotels, ratingFilter) => {
-    console.log("Filtering by rating...", hotels.length, ratingFilter);
     const results = hotels.filter((hotel) => hotel.rate >= ratingFilter);
     setFilterHotels(results);
   };

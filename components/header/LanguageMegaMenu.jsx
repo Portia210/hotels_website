@@ -21,7 +21,7 @@ const LanguageMegaMenu = ({ textClass }) => {
       `${window.location.origin}/${locale}`,
       `${window.location.origin}/${language.code}`
     );
-    router.replace(newUrl);
+    window.location.href = newUrl;
   };
 
   const loadLanguage = () => {

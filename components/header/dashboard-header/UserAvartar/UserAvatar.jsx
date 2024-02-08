@@ -4,8 +4,10 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import UserPopoverContent from "./UserPopoverContent";
+import useTrans from "@/hooks/useTrans";
 
 export default function UserAvatar({ user }) {
+  const { t } = useTrans();
   const router = useRouter();
   const { signOut } = useClerk();
 
@@ -24,7 +26,7 @@ export default function UserAvatar({ user }) {
 
     new Popover(popoverTriggerEl, {
       html: true,
-      title: `Hello ${
+      title: `${t('Dashboard.Sidebar.hello')} ${
         user?.fullName || user?.primaryEmailAddress?.emailAddress
       }`,
       popperConfig: () => {

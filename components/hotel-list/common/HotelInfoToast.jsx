@@ -50,10 +50,9 @@ export default function HotelInfoToast({ hotel, price, locale }) {
 
   useEffect(() => {
     if (isCopied) {
-      console.log("isCopied", isCopied);
       setTimeout(()=>{
         hideToolTip("copyHotelInfoTooltip");
-      }, 800)
+      }, 500)
     }
   }, [isCopied]);
 
