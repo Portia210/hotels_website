@@ -4,8 +4,11 @@ import AvatarUploader from "../../db-settings/components/AvatarUploader";
 import { useEffect, useState } from "react";
 import CountryList from "@/components/common/CountryList/CountryList";
 import useTrans from "@/hooks/useTrans";
+import { useLocale } from "next-intl";
 
 const PersonalInfo = () => {
+  const locale = useLocale();
+  const isReverse = locale === "he";
   const { t } = useTrans();
   const [file, setFile] = useState(null);
   const { user } = useUser();
@@ -71,8 +74,8 @@ const PersonalInfo = () => {
         <div className="border-top-light mt-30 mb-30" />
 
         <div className="col-xl-9">
-          <div className="row x-gap-20 y-gap-20">
-            <div className="col-md-6">
+          <div className="row x-gap-20 y-gap-20 mb-5">
+            <div className={`col-md-6 ${isReverse && "order-2"}`}>
               <div className="form-input ">
                 <input
                   type="text"
@@ -87,7 +90,7 @@ const PersonalInfo = () => {
             </div>
             {/* End col-6 */}
 
-            <div className="col-md-6">
+            <div className={`col-md-6 ${isReverse && "order-1"}`}>
               <div className="form-input ">
                 <input
                   type="text"
@@ -101,7 +104,8 @@ const PersonalInfo = () => {
               </div>
             </div>
             {/* End col-6 */}
-
+          </div>
+          <div className="row x-gap-20 y-gap-20">
             <div className="col-md-6">
               <div className="form-input">
                 <input
