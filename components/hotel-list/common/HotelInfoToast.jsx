@@ -35,7 +35,6 @@ export default function HotelInfoToast({ hotel, price, locale }) {
   const handleCopyText = () => {
     onCopyInfo(hotel, price, searchInput, hotelTrans, searchBox, shortLink);
     setIsCopied(true);
-    hideToolTip("copyHotelInfoTooltip");
   };
 
   useEffect(() => {
@@ -48,6 +47,15 @@ export default function HotelInfoToast({ hotel, price, locale }) {
   useEffect(() => {
     setIsCopied(false);
   }, [shortLink]);
+
+  useEffect(() => {
+    if (isCopied) {
+      console.log("isCopied", isCopied);
+      setTimeout(()=>{
+        hideToolTip("copyHotelInfoTooltip");
+      }, 800)
+    }
+  }, [isCopied]);
 
   return (
     <>
