@@ -48,7 +48,7 @@ const useHotelInfoToast = () => {
       searchInput?.childrens
     );
     const guestsText = `${adultText} ${childrenText}`;
-    const priceText = `${t("Hotel.price")}: ${price}`;
+    const priceText = `${t("Hotel.price")} ${price}`;
     const reviewsText = `${t("Hotel.guestReviewsUpper")}: ${
       hotel?.rate
     } ${starIcons}`;
