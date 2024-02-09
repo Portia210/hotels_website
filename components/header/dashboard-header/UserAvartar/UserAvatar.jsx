@@ -7,7 +7,7 @@ import UserPopoverContent from "./UserPopoverContent";
 import useTrans from "@/hooks/useTrans";
 
 export default function UserAvatar({ user }) {
-  const { t } = useTrans();
+  const { t, isReverse } = useTrans();
   const router = useRouter();
   const { signOut } = useClerk();
 
@@ -22,20 +22,31 @@ export default function UserAvatar({ user }) {
 
     if (!popoverTriggerEl) return;
 
-    const popoverContent = <UserPopoverContent onLogout={onLogout} />;
+    const popoverContent = (
+      <UserPopoverContent t={t} isReverse={isReverse} onLogout={onLogout} />
+    );
 
     new Popover(popoverTriggerEl, {
       html: true,
-      title: `${t('Dashboard.Sidebar.hello')} ${
-        user?.fullName || user?.primaryEmailAddress?.emailAddress
-      }`,
+      title: () => {
+        const container = document.createElement("span");
+        const root = createRoot(container);
+        root.render(
+          <span dir={`${isReverse && "rtl"}`}>{`${t(
+            "Dashboard.Sidebar.hello"
+          )} ${
+            user?.fullName || user?.primaryEmailAddress?.emailAddress
+          }`}</span>
+        );
+        return container;
+      },
       popperConfig: () => {
         return {
           placement: "bottom-end",
         };
       },
       content: () => {
-        const container = document.createElement("div");
+        const container = document.createElement("span");
         const root = createRoot(container);
         root.render(popoverContent);
         return container;
