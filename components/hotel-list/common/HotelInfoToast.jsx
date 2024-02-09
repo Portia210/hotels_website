@@ -1,21 +1,18 @@
 import useHotelInfoToast from "@/hooks/useHotelInfoToast";
+import useTrans from "@/hooks/useTrans";
 import useSearchStore from "@/store/useSearchStore";
-import useTransStore from "@/store/useTransStore";
-import HotelStars from "./HotelStars";
-import { useEffect, useState } from "react";
 import { renderGuestText } from "@/utils/convertRoomInfo";
+import { useEffect, useState } from "react";
+import HotelStars from "./HotelStars";
 
-export default function HotelInfoToast({ hotel, price, locale }) {
-  const isReverse = locale === "he";
-  const messages = useTransStore((state) => state.messages);
-  const searchBox = messages?.SearchBox;
-  const hotelTrans = messages?.Hotel;
+export default function HotelInfoToast({ hotel, price }) {
+  const { t, isReverse } = useTrans();
   const searchInput = useSearchStore((state) => state.searchInput);
   const [shortLink, setShortLink] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
 
   const { hideToast, dateFormat, shortenLink, onCopyInfo } =
-    useHotelInfoToast(isReverse);
+    useHotelInfoToast();
 
   const hideToolTip = (elementId) => {
     if (!elementId) throw Error("hideToolTip elementId is required");
@@ -33,7 +30,7 @@ export default function HotelInfoToast({ hotel, price, locale }) {
   };
 
   const handleCopyText = () => {
-    onCopyInfo(hotel, price, searchInput, hotelTrans, searchBox, shortLink);
+    onCopyInfo(hotel, price, searchInput, shortLink);
     setIsCopied(true);
   };
 
@@ -50,9 +47,9 @@ export default function HotelInfoToast({ hotel, price, locale }) {
 
   useEffect(() => {
     if (isCopied) {
-      setTimeout(()=>{
+      setTimeout(() => {
         hideToolTip("copyHotelInfoTooltip");
-      }, 500)
+      }, 500);
     }
   }, [isCopied]);
 
@@ -107,14 +104,14 @@ export default function HotelInfoToast({ hotel, price, locale }) {
             }`}
           >
             <p>
-              {searchBox?.dates}: {dateFormat(searchInput)}
+              {t('SearchBox.dates')}: {dateFormat(searchInput)}
             </p>
             <div
               className={`d-flex text-14 text-light-1 ${
                 isReverse ? "flex-row-reverse justify-content-end" : ""
               }`}
             >
-              <p>{hotelTrans?.guestReviews}</p>
+              <p>{t("Hotel.guestReviews")}</p>
               <span
                 className={`flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white ${
                   isReverse ? "mr-10" : "ml-10"
@@ -125,16 +122,22 @@ export default function HotelInfoToast({ hotel, price, locale }) {
             </div>
             <HotelStars stars={hotel?.stars} />
             <p>
-              {renderGuestText(searchBox, "Adults", searchInput?.adults)}{" "}
-              {renderGuestText(searchBox, "Childrens", searchInput?.childrens)}
+              {renderGuestText(t('SearchBox'), "Adults", searchInput?.adults)}{" "}
+              {renderGuestText(t('SearchBox'), "Childrens", searchInput?.childrens)}
             </p>
-            <div className="d-flex x-gap-5 align-items-center">
-              <p>{hotelTrans?.price}:</p>
+            <div
+              className="d-flex x-gap-5 align-items-center"
+              dir={`${isReverse && "rtl"}`}
+            >
+              <p>{t("Hotel.price")}</p>
               <p>{price}</p>
             </div>
             {shortLink && (
-              <div className="d-flex x-gap-5 align-items-center">
-                <p>{hotelTrans?.link}</p>
+              <div
+                className="d-flex x-gap-5 align-items-center"
+                dir={`${isReverse && "rtl"}`}
+              >
+                <p>{t("Hotel.link")}</p>
                 <a href={shortLink} target="_blank">
                   <p className="text-primary">{shortLink}</p>
                 </a>
