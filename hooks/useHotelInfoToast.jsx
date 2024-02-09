@@ -4,8 +4,10 @@ import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
 import dayjs from "dayjs";
 import "dayjs/locale/he";
+import useTrans from "./useTrans";
 
-const useHotelInfoToast = (isReverse) => {
+const useHotelInfoToast = () => {
+  const { t, isReverse } = useTrans();
   if (isReverse) dayjs.locale("he");
   else dayjs.locale("en");
 
@@ -29,31 +31,30 @@ const useHotelInfoToast = (isReverse) => {
     }
   };
 
-  const onCopyInfo = (
-    hotel,
-    price,
-    searchInput,
-    hotelTrans,
-    searchBox,
-    link
-  ) => {
+  const onCopyInfo = (hotel, price, searchInput, link) => {
     const starIcons = Array.from(Array(hotel?.stars).keys())
       .map(() => "⭐️") // Use a simple star character
       .join("");
 
-    const dateText = `${searchBox?.dates}: ${dateFormat(searchInput)}`;
-    const adultText = renderGuestText(searchBox, "Adults", searchInput?.adults);
+    const dateText = `${t("SearchBox.dates")}: ${dateFormat(searchInput)}`;
+    const adultText = renderGuestText(
+      t("SearchBox"),
+      "Adults",
+      searchInput?.adults
+    );
     const childrenText = renderGuestText(
-      searchBox,
+      t("SearchBox"),
       "Childrens",
       searchInput?.childrens
     );
     const guestsText = `${adultText} ${childrenText}`;
-    const priceText = `${hotelTrans?.price}: ${price}`;
-    const reviewsText = `${hotelTrans?.guestReviewsUpper}: ${hotel?.rate} ${starIcons}`;
-    const hotelText = `${hotelTrans.hotel}: ${hotel?.title}`;
+    const priceText = `${t("Hotel.price")} ${price}`;
+    const reviewsText = `${t("Hotel.guestReviewsUpper")}: ${
+      hotel?.rate
+    } ${starIcons}`;
+    const hotelText = `${t("Hotel.hotel")}: ${hotel?.title}`;
     if (link) {
-      link = `${hotelTrans.link} ${link}`;
+      link = `${t("Hotel.link")} ${link}`;
     } else {
       link = "";
     }
