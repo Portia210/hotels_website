@@ -44,7 +44,7 @@ const useTrans = () => {
     return result;
   };
 
-  return { t, t2, isReverse };
+  return { t, t2, isReverse, locale };
 };
 
 export default useTrans;

@@ -24,7 +24,6 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
     clearSuggestions();
     const results = await getGeocode({ address });
     const { lat, lng } = getLatLng(results[0]);
-    console.log("lat, lng", lat, lng);
     onChange({ placeId, destination: address, lat, lng });
   };
 
