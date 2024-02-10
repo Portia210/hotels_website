@@ -33,16 +33,22 @@ export default function DestinationGallery() {
     }
   }, [selectedCountry]);
 
-  if (!selectedCountry) return null;
-
   return (
-    <section className="layout-pb-md">
+    <section
+      className="layout-pb-md"
+      id="cityGallery"
+      style={{
+        scrollMarginTop: "180px",
+      }}
+    >
       <div className="container">
         <div className="row y-gap-20 justify-between items-end">
           <div className="col-auto">
             <div className="sectionTitle -md">
               <h2 className="sectionTitle__title">
-                Cities in {selectedCountry?.label}
+                {selectedCountry?.label &&
+                  `Cities in ${selectedCountry?.label}`
+                  }
               </h2>
             </div>
           </div>

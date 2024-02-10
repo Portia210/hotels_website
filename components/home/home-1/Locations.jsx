@@ -1,13 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
 import { destinationAutoTyping } from "@/utils/destinationAutoTyping";
+import Image from "next/image";
 
 const Locations = ({ gallery }) => {
-  const caclDelay = (index) => {
-    const result = (index + 1) * 100;
-    if (result >= 1000) return 1000;
-  };
-
+ 
   const handleCityClick = (city) => {
     if (!city.name) return;
     destinationAutoTyping(city.name);
@@ -20,7 +15,7 @@ const Locations = ({ gallery }) => {
           className="col-xl-3 col-lg-4 col-md-6"
           key={item?.name}
           data-aos="fade"
-          data-aos-delay={caclDelay(index)}
+          data-aos-delay={100}
         >
           <button
             onClick={() => handleCityClick(item)}
