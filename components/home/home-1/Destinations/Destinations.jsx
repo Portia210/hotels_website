@@ -99,7 +99,7 @@ const Destinations = () => {
                   dir={isReverse ? "rtl" : "ltr"}
                 >
                   <div
-                    className={`text-15 ${isReverse ? "fw-600" : "fw-500"}`}
+                    className={`text-15 fw-500`}
                   >
                     {item.label}
                   </div>
