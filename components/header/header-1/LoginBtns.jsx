@@ -42,7 +42,7 @@ export default function LoginBtns({ headerTrans }) {
                 alt="image"
                 className={`${isReverse ? "ml-15" : "mr-15"}`}
               />
-              <p>{t("Dashboard.Sidebar.dashboard")}</p>
+              <span>{t("Dashboard.Sidebar.dashboard")}</span>
             </div>
           </Link>
           <Link
@@ -60,7 +60,7 @@ export default function LoginBtns({ headerTrans }) {
                 alt="image"
                 className={`${isReverse ? "ml-15" : "mr-15"}`}
               />
-              <p>{t("Dashboard.Sidebar.logout")}</p>
+              <span>{t("Dashboard.Sidebar.logout")}</span>
             </div>
           </Link>
         </div>
@@ -69,14 +69,14 @@ export default function LoginBtns({ headerTrans }) {
       return new Popover(popoverTriggerEl, {
         html: true,
         title: () => {
-          const container = document.createElement("div");
+          const container = document.createElement("span");
           const root = createRoot(container);
           root.render(
-            <p dir={`${isReverse && "rtl"}`}>{`${t(
+            <span dir={`${isReverse && "rtl"}`}>{`${t(
               "Dashboard.Sidebar.hello"
             )} ${
               user?.fullName || user?.primaryEmailAddress?.emailAddress
-            }`}</p>
+            }`}</span>
           );
           return container;
         },
@@ -86,7 +86,7 @@ export default function LoginBtns({ headerTrans }) {
           };
         },
         content: () => {
-          const container = document.createElement("div");
+          const container = document.createElement("span");
           const root = createRoot(container);
           root.render(popoverContent);
           return container;

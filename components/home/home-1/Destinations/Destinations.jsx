@@ -1,14 +1,11 @@
 "use client";
 
 import useTrans from "@/hooks/useTrans";
-import { useLocale } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import getLangConfig from "./lang";
-
 const Destinations = () => {
-  const locale = useLocale();
-  const { t2 } = useTrans();
+  const { t2, locale, isReverse } = useTrans();
   const [filterOption, setFilterOption] = useState("israelSupporterCountries");
   const [filteredItems, setFilteredItems] = useState([]);
   const filterOptions = [
@@ -78,7 +75,7 @@ const Destinations = () => {
 
   return (
     <>
-      <div className="tabs__controls d-flex js-tabs-controls">
+      <div className={`tabs__controls d-flex js-tabs-controls ${isReverse && 'flex-row-reverse'}`}>
         {filterOptions.map((option) => (
           <div key={option.value}>
             <button
@@ -107,6 +104,7 @@ const Destinations = () => {
                   onClick={() => handleLocationSelect(item)}
                   className="button -blue-1 bg-white p-2"
                   style={{ justifyContent: "flex-start" }}
+                  dir={isReverse ? "rtl" : "ltr"}
                 >
                   <div className="text-15 fw-500">{item.label}</div>
                   <div className="text-14 text-light-1">

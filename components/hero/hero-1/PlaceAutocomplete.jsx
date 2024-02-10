@@ -19,12 +19,10 @@ export default function PlaceAutocomplete({ input, selectedItem, onChange }) {
   const searchBox = messages?.SearchBox;
 
   const handleGooglePlaceClick = async (placeId, address) => {
-    console.log("placeId, address", placeId, address);
     setValue(address, false);
     clearSuggestions();
     const results = await getGeocode({ address });
     const { lat, lng } = getLatLng(results[0]);
-    console.log("lat, lng", lat, lng);
     onChange({ placeId, destination: address, lat, lng });
   };
 

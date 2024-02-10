@@ -2,19 +2,16 @@ import Sidebar from "../common/Sidebar";
 import Header from "@/components/header/dashboard-header";
 import SettingsTabs from "./components/index";
 import Footer from "../common/Footer";
-import { useMessages } from "next-intl";
 
 const index = () => {
-  const messages = useMessages();
 
   return (
     <>
-      {/*  */}
       {/* End Page Title */}
 
       <div className="header-margin"></div>
 
-      <Header messages={messages} />
+      <Header />
       {/* End dashboard-header */}
 
       <div className="dashboard">
@@ -22,7 +19,7 @@ const index = () => {
           <Sidebar />
           {/* End sidebar */}
         </div>
-        {/* End dashboard__sidebar */}s
+        {/* End dashboard__sidebar */}
 
         <div className="dashboard__main">
           <div className="dashboard__content bg-light-2">
