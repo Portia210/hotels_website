@@ -9,11 +9,15 @@ export default function DestinationGallery() {
   const { selectedCountry, destinationGallery, setDestinationGallery } =
     useDestinationGalleryStore();
 
-  const { fetchCountryCities } = useDestinationGallery();
+  const { fetchCountryCities, loading } = useDestinationGallery();
 
   const getCountryCities = async (country) => {
     const response = await fetchCountryCities(country.label);
-    setDestinationGallery(response.results);
+    const cities = Array.from(
+      new Set(response.results.map((city) => city.name))
+    ).map((name) => response.results.find((city) => city.name === name));
+
+    setDestinationGallery(cities);
   };
 
   const handleLoadMore = () => {
@@ -44,17 +48,24 @@ export default function DestinationGallery() {
           </div>
           {/* End .col */}
 
-          {destinationGallery.length > 8 && (
-            <div className="col-auto">
-              <button
-                onClick={handleLoadMore}
-                className="button -md -blue-1 bg-blue-1-05 text-blue-1"
-              >
-                More <div className="icon-arrow-top-right ml-15" />
-              </button>
-            </div>
-          )}
-          {/* End .col */}
+          <div className="col-auto">
+            {loading ? (
+              <div className="d-flex align-items-center x-gap-10">
+                <div className="spinner-border spinner-border-sm" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            ) : (
+              destinationGallery.length > 8 && (
+                <button
+                  onClick={handleLoadMore}
+                  className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                >
+                  More <div className="icon-arrow-top-right ml-15" />
+                </button>
+              )
+            )}
+          </div>
         </div>
         {/* End .row */}
 
