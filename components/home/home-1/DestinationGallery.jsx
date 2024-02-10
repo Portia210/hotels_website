@@ -73,7 +73,7 @@ export default function DestinationGallery() {
                   onClick={handleLoadMore}
                   className="button -md -blue-1 bg-blue-1-05 text-blue-1"
                 >
-                  More
+                  {maxResult === 8 ? "More" : "Less"}
                   <i
                     className={`bi bi-arrow-${
                       maxResult === 8 ? "down" : "up"

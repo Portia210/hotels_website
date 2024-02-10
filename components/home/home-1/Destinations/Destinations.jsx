@@ -69,7 +69,9 @@ const Destinations = () => {
         {filterOptions.map((option) => (
           <div key={option.value}>
             <button
-              className={`tabs__button fw-500 text-15 px-30 py-15 rounded-4 js-tabs-button ${
+              className={`tabs__button ${
+                isReverse ? "fw-600" : "fw-500"
+              } text-15 px-30 py-15 rounded-4 js-tabs-button ${
                 filterOption === option.value ? "is-tab-el-active" : ""
               }`}
               onClick={() => setFilterOption(option.value)}
@@ -96,9 +98,10 @@ const Destinations = () => {
                   style={{ justifyContent: "flex-start" }}
                   dir={isReverse ? "rtl" : "ltr"}
                 >
-                  <div className="text-15 fw-500">{item.label}</div>
-                  <div className="text-14 text-light-1">
-                    {/* {item.value} properties */}
+                  <div
+                    className={`text-15 ${isReverse ? "fw-600" : "fw-500"}`}
+                  >
+                    {item.label}
                   </div>
                 </Link>
               </div>
