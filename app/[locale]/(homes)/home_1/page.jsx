@@ -1,11 +1,12 @@
+import TransConfig from "@/components/config/TransConfig";
 import PopularDestinations from "@/components/destinations/PopularDestinations";
 import DefaultFooter from "@/components/footer/default";
 import Header1 from "@/components/header/header-1";
 import Hero1 from "@/components/hero/hero-1";
+import DestinationGallery from "@/components/home/home-1/DestinationGallery";
 import Destinations from "@/components/home/home-1/Destinations/Destinations";
-import dynamic from "next/dynamic";
 import { useMessages } from "next-intl";
-import TransConfig from "@/components/config/TransConfig";
+import dynamic from "next/dynamic";
 
 export const metadata = {
   title: "Home-1 || GoTrip - Travel & Tour React NextJS Template",
@@ -64,11 +65,8 @@ const Home_1 = () => {
         <div className="container">
           <div className="row">
             <div className="col-auto">
-              <div className="sectionTitle -md">
+              <div className="sectionTitle -md" dir="">
                 <h2 className="sectionTitle__title">Destinations we love</h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  Interdum et malesuada fames ac ante ipsum
-                </p>
               </div>
             </div>
           </div>
@@ -82,6 +80,10 @@ const Home_1 = () => {
       </section>
       {/* End Destination we love Section */}
 
+      <DestinationGallery />
+      {/* End Destination Gallery Section */}
+
+      {/* Start Footer Section */}
       <DefaultFooter />
       {/* End Footer Section */}
     </>
