@@ -1,10 +1,10 @@
 "use client";
 
 import useDateSearchForm from "@/hooks/useDateSearchForm";
+import useIsMobile from "@/hooks/useIsMobile";
 import { useLocale } from "next-intl";
 import DatePicker from "react-multi-date-picker";
 import gregorian_he_lowercase from "./heLocale";
-import useIsMobile from "@/hooks/useIsMobile";
 
 const DateSearch = () => {
   const locale = useLocale();
@@ -14,6 +14,7 @@ const DateSearch = () => {
   return (
     <div className="text-15 text-light-1 ls-2 lh-16 custom_dual_datepicker">
       <DatePicker
+        id="searchFormDatePicker"
         inputClass="custom_input-picker"
         containerClassName="custom_container-picker"
         locale={locale === "he" ? gregorian_he_lowercase : null}

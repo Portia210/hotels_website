@@ -9,16 +9,27 @@ export default function DestinationGallery() {
   const { selectedCountry, destinationGallery, setDestinationGallery } =
     useDestinationGalleryStore();
 
-  const { fetchCountryCities } = useDestinationGallery();
+  const { fetchCountryCities, loading } = useDestinationGallery();
 
   const getCountryCities = async (country) => {
     const response = await fetchCountryCities(country.label);
-    setDestinationGallery(response.results);
+    const cities = Array.from(
+      new Set(response.results.map((city) => city.name))
+    ).map((name) => response.results.find((city) => city.name === name));
+
+    setDestinationGallery(cities);
   };
 
   const handleLoadMore = () => {
     if (destinationGallery.length > 0) {
-      setMaxResult(destinationGallery.length);
+      setMaxResult((prev) => {
+        if (prev < destinationGallery.length) {
+          return destinationGallery.length;
+        } else if (prev === destinationGallery.length) {
+          return 8;
+        }
+        return prev;
+      });
     }
   };
 
@@ -29,32 +40,49 @@ export default function DestinationGallery() {
     }
   }, [selectedCountry]);
 
-  if (!selectedCountry) return null;
-
   return (
-    <section className="layout-pb-md">
+    <section
+      className="layout-pb-md"
+      id="cityGallery"
+      style={{
+        scrollMarginTop: "180px",
+      }}
+    >
       <div className="container">
         <div className="row y-gap-20 justify-between items-end">
           <div className="col-auto">
             <div className="sectionTitle -md">
               <h2 className="sectionTitle__title">
-                Cities in {selectedCountry?.label}
+                {selectedCountry?.label &&
+                  `Cities in ${selectedCountry?.label}`}
               </h2>
             </div>
           </div>
           {/* End .col */}
 
-          {destinationGallery.length > 8 && (
-            <div className="col-auto">
-              <button
-                onClick={handleLoadMore}
-                className="button -md -blue-1 bg-blue-1-05 text-blue-1"
-              >
-                More <div className="icon-arrow-top-right ml-15" />
-              </button>
-            </div>
-          )}
-          {/* End .col */}
+          <div className="col-auto">
+            {loading ? (
+              <div className="d-flex align-items-center x-gap-10">
+                <div className="spinner-border spinner-border-sm" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            ) : (
+              destinationGallery.length > 8 && (
+                <button
+                  onClick={handleLoadMore}
+                  className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                >
+                  More
+                  <i
+                    className={`bi bi-arrow-${
+                      maxResult === 8 ? "down" : "up"
+                    } ml-10`}
+                  ></i>
+                </button>
+              )
+            )}
+          </div>
         </div>
         {/* End .row */}
 

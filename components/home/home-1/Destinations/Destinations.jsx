@@ -49,6 +49,10 @@ const Destinations = () => {
 
   const handleLocationSelect = (country) => {
     setSelectedCountry(country);
+    const cityGallery = document.getElementById("cityGallery");
+    if (cityGallery) {
+      cityGallery.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   useEffect(() => {
