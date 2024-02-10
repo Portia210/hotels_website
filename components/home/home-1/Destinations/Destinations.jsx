@@ -1,11 +1,13 @@
 "use client";
 
 import useTrans from "@/hooks/useTrans";
+import useDestinationGalleryStore from "@/store/useDestinationGalleryStore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import getLangConfig from "./lang";
 const Destinations = () => {
   const { t2, locale, isReverse } = useTrans();
+  const setSelectedCountry = useDestinationGalleryStore().setSelectedCountry;
   const [filterOption, setFilterOption] = useState("israelSupporterCountries");
   const [filteredItems, setFilteredItems] = useState([]);
   const filterOptions = [
@@ -45,28 +47,8 @@ const Destinations = () => {
     setFilteredItems(countries);
   };
 
-  const handleLocationSelect = (location) => {
-    const scrollToTop = document.getElementById("scrollToTopBtn");
-    scrollToTop.click();
-    const destinationInput = document.getElementById("destinationInput");
-    destinationInput.focus();
-    const typeWithDelay = (text, index) => {
-      if (index < text.length) {
-        destinationInput.value += text.charAt(index);
-        const inputEvent = new Event("input", {
-          bubbles: true,
-          cancelable: false,
-        });
-        destinationInput.dispatchEvent(inputEvent);
-        setTimeout(() => {
-          typeWithDelay(text, index + 1);
-        }, 100);
-      }
-    };
-    setTimeout(() => {
-      destinationInput.value = "";
-      typeWithDelay(location.label, 0);
-    }, 1000);
+  const handleLocationSelect = (country) => {
+    setSelectedCountry(country);
   };
 
   useEffect(() => {
@@ -75,7 +57,11 @@ const Destinations = () => {
 
   return (
     <>
-      <div className={`tabs__controls d-flex js-tabs-controls ${isReverse && 'flex-row-reverse'}`}>
+      <div
+        className={`tabs__controls d-flex js-tabs-controls ${
+          isReverse && "flex-row-reverse"
+        }`}
+      >
         {filterOptions.map((option) => (
           <div key={option.value}>
             <button
