@@ -6,10 +6,8 @@ import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { useUser } from "@clerk/nextjs";
 import UserAvatar from "./UserAvartar/UserAvatar";
-import useTransStore from "@/store/useTransStore";
 
-const HeaderDashBoard = ({ messages }) => {
-  const setMessages = useTransStore().setMessages;
+const HeaderDashBoard = () => {
   const { user } = useUser();
   const [navbar, setNavbar] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +25,6 @@ const HeaderDashBoard = ({ messages }) => {
   };
 
   useEffect(() => {
-    setMessages(messages);
     window.addEventListener("scroll", changeBackground);
     const body = document.querySelector("body");
     if (isOpen) {

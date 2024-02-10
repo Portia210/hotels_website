@@ -1,3 +1,4 @@
+import TransConfig from "@/components/config/TransConfig";
 import DefaultFooter from "@/components/footer/default";
 import Header1 from "@/components/header/header-1";
 import ListHotels from "@/components/hotel-list/hotel-list-v5/ListHotels";
@@ -20,12 +21,13 @@ const index = () => {
 
   return (
     <>
+      <TransConfig messages={messages} />
       {/* End Page Title */}
 
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <Header1 messages={messages} />
+      <Header1 />
       {/* End Header 1 */}
 
       <section className="section-bg pt-40 pb-40 relative z-5">

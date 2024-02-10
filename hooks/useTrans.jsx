@@ -1,9 +1,10 @@
 "use client";
 import useTransStore from "@/store/useTransStore";
 import { useLocale } from "next-intl";
+import { useEffect } from "react";
 
-const useTrans = () => {
-  const messages = useTransStore((state) => state.messages);
+const useTrans = (transData) => {
+  const { messages, setMessages } = useTransStore();
   const locale = useLocale();
   const isReverse = locale === "he";
 
@@ -44,6 +45,10 @@ const useTrans = () => {
     return result;
   };
 
+  useEffect(() => {
+    if (transData) setMessages(transData);
+  }, [transData]);
+  
   return { t, t2, isReverse, locale };
 };
 

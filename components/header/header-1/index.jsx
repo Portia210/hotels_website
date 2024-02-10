@@ -13,10 +13,10 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import LoginBtns from "./LoginBtns";
 import { useUser } from "@clerk/nextjs";
 
-const Header1 = ({ messages }) => {
+const Header1 = () => {
   const { isSignedIn } = useUser();
   const locale = useLocale();
-  const setMessages = useTransStore().setMessages;
+  const messages = useTransStore((state) => state.messages);
   const isReverse = locale === "he";
 
   const pathname = usePathname();
@@ -31,7 +31,6 @@ const Header1 = ({ messages }) => {
   };
 
   useEffect(() => {
-    setMessages(messages);
     const isHome = isActiveLink("/", pathname);
     if (!isHome) {
       return setNavbar(true);
