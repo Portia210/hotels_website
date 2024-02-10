@@ -14,6 +14,12 @@ export const destinationAutoTyping = (locationName) => {
       setTimeout(() => {
         typeWithDelay(text, index + 1);
       }, 100);
+    } else {
+      setTimeout(() => {
+        const datePicker = document.getElementById("searchFormDatePicker");
+        console.log("datePicker click ok",datePicker);
+        datePicker.click();
+      }, 1000);
     }
   };
   setTimeout(() => {

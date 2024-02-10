@@ -1,16 +1,25 @@
+import useSearchStore from "@/store/useSearchStore";
 import { destinationAutoTyping } from "@/utils/destinationAutoTyping";
 import Image from "next/image";
 
 const Locations = ({ gallery }) => {
- 
+  const setDestination = useSearchStore().setDestination;
+
   const handleCityClick = (city) => {
     if (!city.name) return;
     destinationAutoTyping(city.name);
+    const { placeId, name: destination, geoLocation } = city;
+    setDestination({
+      placeId,
+      destination,
+      lat: geoLocation.lat,
+      lng: geoLocation.lng,
+    });
   };
 
   return (
     <>
-      {gallery.map((item, index) => (
+      {gallery.map((item) => (
         <div
           className="col-xl-3 col-lg-4 col-md-6"
           key={item?.name}

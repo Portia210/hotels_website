@@ -23,7 +23,6 @@ export default function DestinationGallery() {
   const handleLoadMore = () => {
     if (destinationGallery.length > 0) {
       setMaxResult((prev) => {
-        console.log("setMaxResult", prev);
         if (prev < destinationGallery.length) {
           return destinationGallery.length;
         } else if (prev === destinationGallery.length) {
