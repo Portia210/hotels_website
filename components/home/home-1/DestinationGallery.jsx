@@ -22,7 +22,15 @@ export default function DestinationGallery() {
 
   const handleLoadMore = () => {
     if (destinationGallery.length > 0) {
-      setMaxResult(destinationGallery.length);
+      setMaxResult((prev) => {
+        console.log("setMaxResult", prev);
+        if (prev < destinationGallery.length) {
+          return destinationGallery.length;
+        } else if (prev === destinationGallery.length) {
+          return 8;
+        }
+        return prev;
+      });
     }
   };
 
@@ -47,8 +55,7 @@ export default function DestinationGallery() {
             <div className="sectionTitle -md">
               <h2 className="sectionTitle__title">
                 {selectedCountry?.label &&
-                  `Cities in ${selectedCountry?.label}`
-                  }
+                  `Cities in ${selectedCountry?.label}`}
               </h2>
             </div>
           </div>
@@ -67,7 +74,12 @@ export default function DestinationGallery() {
                   onClick={handleLoadMore}
                   className="button -md -blue-1 bg-blue-1-05 text-blue-1"
                 >
-                  More <div className="icon-arrow-top-right ml-15" />
+                  More
+                  <i
+                    className={`bi bi-arrow-${
+                      maxResult === 8 ? "down" : "up"
+                    } ml-10`}
+                  ></i>
                 </button>
               )
             )}
