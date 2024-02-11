@@ -46,7 +46,7 @@ const filterHotel = (condition, hotels) => {
   return results;
 };
 
-const useHotelFilterStore = create((set) => ({
+const useHotelFilterStore = create((set, get) => ({
   gapActive: false,
   setGapActive: (gapActive) => set(() => ({ gapActive })),
   hotels: [],
@@ -54,9 +54,17 @@ const useHotelFilterStore = create((set) => ({
   filterHotels: [],
   setFilterHotels: (filterHotels) => set(() => ({ filterHotels })),
   condition: {},
+  onFilterHotel: () => {
+    const condition = useHotelFilterStore.getState().condition;
+    console.log("condition", condition);
+    if (condition.lastAction) {
+      const { type, condition: actionCondition } = condition.lastAction;
+      get().setCondition(type, actionCondition);
+    }
+  },
   setCondition: (type, condition) =>
     set((state) => {
-      let filterHotels = []
+      let filterHotels = [];
       if (type === FILTER_TYPE.RATING) {
         state.condition.ratingFilter = condition;
         filterHotels = filterHotel(state.condition, state.hotels);
@@ -71,8 +79,11 @@ const useHotelFilterStore = create((set) => ({
         state.condition.priceGapFilter = condition;
         filterHotels = filterHotel(state.condition, state.filterHotels);
       }
+      state.condition.lastAction = {
+        type,
+        condition,
+      };
       return { filterHotels, condition: state.condition };
     }),
 }));
-
 export default useHotelFilterStore;
