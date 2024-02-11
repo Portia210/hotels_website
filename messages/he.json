@@ -80,5 +80,9 @@
       "newPassword": "סיסמה חדשה",
       "newPasswordAgain": "סיסמה חדשה שוב"
     }
+  },
+  "DestinationWeLove": {
+    "title": "יעדים מומלצים",
+    "citiesIn": "ערים ב"
   }
 }

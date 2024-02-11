@@ -4,6 +4,7 @@ import Header1 from "@/components/header/header-1";
 import Hero1 from "@/components/hero/hero-1";
 import DestinationGallery from "@/components/home/home-1/DestinationGallery";
 import Destinations from "@/components/home/home-1/Destinations/Destinations";
+import useTransServer from "@/hooks/useTransServer";
 import { useMessages } from "next-intl";
 import dynamic from "next/dynamic";
 
@@ -14,6 +15,7 @@ export const metadata = {
 
 const Home_1 = () => {
   const messages = useMessages();
+  const { t, isReverse } = useTransServer();
 
   return (
     <>
@@ -28,11 +30,11 @@ const Home_1 = () => {
 
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">
-          <div className="row">
-            <div className="col-auto">
-              <div className="sectionTitle -md" dir="">
-                <h2 className="sectionTitle__title">Destinations we love</h2>
-              </div>
+          <div className={`d-flex ${isReverse && "justify-content-end"}`}>
+            <div className="sectionTitle -md">
+              <h2 className="sectionTitle__title">
+                {t("DestinationWeLove.title")}
+              </h2>
             </div>
           </div>
           {/* End .row */}
