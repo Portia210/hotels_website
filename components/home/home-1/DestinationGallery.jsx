@@ -3,8 +3,10 @@ import useDestinationGallery from "@/hooks/useDestinationGallery";
 import useDestinationGalleryStore from "@/store/useDestinationGalleryStore";
 import { useEffect, useState } from "react";
 import Locations from "./Locations";
+import useTrans from "@/hooks/useTrans";
 
 export default function DestinationGallery() {
+  const { t, isReverse } = useTrans();
   const [maxResult, setMaxResult] = useState(8);
   const { selectedCountry, destinationGallery, setDestinationGallery } =
     useDestinationGalleryStore();
@@ -50,11 +52,11 @@ export default function DestinationGallery() {
     >
       <div className="container">
         <div className="row y-gap-20 justify-between items-end">
-          <div className="col-auto">
+          <div className={`col-auto ${isReverse && "order-1"}`}>
             <div className="sectionTitle -md">
               <h2 className="sectionTitle__title">
                 {selectedCountry?.label &&
-                  `Cities in ${selectedCountry?.label}`}
+                  `${t('DestinationWeLove.citiesIn')} ${selectedCountry?.label}`}
               </h2>
             </div>
           </div>

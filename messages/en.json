@@ -80,5 +80,9 @@
       "newPassword": "New Password",
       "newPasswordAgain": "New Password Again"
     }
+  },
+  "DestinationWeLove": {
+    "title": "Destinations we love",
+    "citiesIn": "Cities in"
   }
 }
