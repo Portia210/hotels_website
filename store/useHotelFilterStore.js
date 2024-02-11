@@ -49,22 +49,28 @@ const filterHotel = (condition, hotels) => {
 const useHotelFilterStore = create((set) => ({
   gapActive: false,
   setGapActive: (gapActive) => set(() => ({ gapActive })),
+  hotels: [],
+  setHotels: (hotels) => set(() => ({ hotels })),
   filterHotels: [],
   setFilterHotels: (filterHotels) => set(() => ({ filterHotels })),
   condition: {},
   setCondition: (type, condition) =>
     set((state) => {
+      let filterHotels = []
       if (type === FILTER_TYPE.RATING) {
         state.condition.ratingFilter = condition;
+        filterHotels = filterHotel(state.condition, state.hotels);
       } else if (type === FILTER_TYPE.STARS) {
         state.condition.starFilter = condition;
+        filterHotels = filterHotel(state.condition, state.hotels);
       } else if (type === FILTER_TYPE.PRICE_ORDER) {
         state.condition.priceFilter = condition;
         state.condition.priceGapFilter = false;
+        filterHotels = filterHotel(state.condition, state.filterHotels);
       } else if (type === FILTER_TYPE.PRICE_GAP) {
         state.condition.priceGapFilter = condition;
+        filterHotels = filterHotel(state.condition, state.filterHotels);
       }
-      const filterHotels = filterHotel(state.condition, state.filterHotels);
       return { filterHotels, condition: state.condition };
     }),
 }));

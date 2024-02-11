@@ -7,8 +7,9 @@ import usePriceFilter from "./hotelFilters/usePriceFilter";
 import useRatingFilter from "./hotelFilters/useRatingFilter";
 import useStarFilter from "./hotelFilters/useStarFilter";
 
+// TODO: optimize this hook, reduce the number of re-renders
 const useFilterBar = (hotels) => {
-  const { setGapActive, filterHotels, setFilterHotels } =
+  const { setGapActive, filterHotels, setFilterHotels, setHotels } =
     useHotelFilterStore();
 
   const {
@@ -20,7 +21,6 @@ const useFilterBar = (hotels) => {
   } = useHotelPagination();
 
   const getData = () => {
-    console.log("filterHotels", filterHotels);
     if (Array.isArray(filterHotels)) {
       return filterHotels.slice(
         pagination.offset,
@@ -48,6 +48,7 @@ const useFilterBar = (hotels) => {
 
   useEffect(() => {
     setFilterHotels(hotels);
+    setHotels(hotels);
   }, [hotels.length]);
 
   useEffect(() => {
