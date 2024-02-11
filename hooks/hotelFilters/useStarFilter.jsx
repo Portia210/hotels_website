@@ -1,30 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { defaultFilter } from ".";
+import useHotelFilterStore from "@/store/useHotelFilterStore";
+import { FILTER_TYPE } from "@/hooks/hotelFilters";
 
-const useStarFilter = (originHotels, hotels, setFilterHotels) => {
+const useStarFilter = () => {
   const [starFilter, setStarFilter] = useState(defaultFilter.starFilter);
+  const { setCondition } = useHotelFilterStore();
 
   const handleStarFilterChange = (value) => {
     setStarFilter((prev) => {
-      if (prev === value) return prev;
-      filterHotelByStar(originHotels, value);
+      if (prev === value) {
+        return 0;
+      }
       return value;
     });
+    setCondition(FILTER_TYPE.STARS, value);
   };
-
-  const filterHotelByStar = (hotels, starFilter) => {
-    const results = hotels.filter((hotel) => hotel.stars >= starFilter);
-    setFilterHotels(results);
-  };
-
-  useEffect(() => {
-    filterHotelByStar(hotels, starFilter);
-  }, [starFilter, hotels.length]);
 
   return {
     starFilter,
     setStarFilter,
-    filterHotelByStar,
     handleStarFilterChange,
   };
 };

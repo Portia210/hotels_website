@@ -1,34 +1,20 @@
-import { useEffect, useState } from "react";
-import { defaultFilter } from ".";
-import { PriceFilter } from "@/constants/searchFilter";
+import useHotelFilterStore from "@/store/useHotelFilterStore";
+import { useState } from "react";
+import { FILTER_TYPE, defaultFilter } from ".";
 
-const usePriceFilter = (hotels, setFilterHotels, isGapActive, setGapActive) => {
+const usePriceFilter = () => {
+  const { gapActive, setGapActive, setCondition } = useHotelFilterStore();
   const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
 
-  const filterHotelByPrice = () => {
-    let results = [];
-    if (priceFilter === PriceFilter.HTL) {
-      results = hotels.sort((a, b) => b.travelorPrice - a.travelorPrice);
-    } else {
-      results = hotels.sort((a, b) => a.travelorPrice - b.travelorPrice);
-    }
-    setFilterHotels(results);
-  };
-
   const handleChangePriceFilter = (val) => {
-    if (!isGapActive) setGapActive(false);
+    if (gapActive) setGapActive(false);
     setPriceFilter(val);
+    setCondition(FILTER_TYPE.PRICE_ORDER, val);
   };
-
-  useEffect(() => {
-    if (!isGapActive) return;
-    filterHotelByPrice();
-  }, [priceFilter, hotels.length]);
 
   return {
     priceFilter,
     setPriceFilter: handleChangePriceFilter,
-    filterHotelByPrice,
   };
 };
 
