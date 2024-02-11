@@ -100,7 +100,9 @@ const Destinations = () => {
                   style={{ justifyContent: "flex-start" }}
                   dir={isReverse ? "rtl" : "ltr"}
                 >
-                  <div className={`text-15 fw-500`}>{item.label}</div>
+                  <span className={`text-15 text-nowrap fw-500`}>
+                    {item?.label}
+                  </span>
                 </Link>
               </div>
             ))}
