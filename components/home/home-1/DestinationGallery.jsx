@@ -56,7 +56,7 @@ export default function DestinationGallery() {
             <div className="sectionTitle -md">
               <h2 className="sectionTitle__title">
                 {selectedCountry?.label &&
-                  `${t('DestinationWeLove.citiesIn')} ${selectedCountry?.label}`}
+                  `${t("DestinationWeLove.citiesIn")}${selectedCountry?.label}`}
               </h2>
             </div>
           </div>
@@ -75,7 +75,9 @@ export default function DestinationGallery() {
                   onClick={handleLoadMore}
                   className="button -md -blue-1 bg-blue-1-05 text-blue-1"
                 >
-                  {maxResult === 8 ? "More" : "Less"}
+                  {maxResult === 8
+                    ? `${t("DestinationWeLove.more")}`
+                    : `${t("DestinationWeLove.less")}`}
                   <i
                     className={`bi bi-arrow-${
                       maxResult === 8 ? "down" : "up"
@@ -89,7 +91,10 @@ export default function DestinationGallery() {
         {/* End .row */}
 
         <div className="row y-gap-30 pt-20 sm:pt-20">
-          <Locations gallery={destinationGallery?.slice(0, maxResult)} />
+          <Locations
+            isReverse={isReverse}
+            gallery={destinationGallery?.slice(0, maxResult)}
+          />
         </div>
         {/* End .row */}
       </div>

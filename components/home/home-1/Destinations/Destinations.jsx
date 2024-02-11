@@ -84,7 +84,7 @@ const Destinations = () => {
 
       <div className="tabs__content pt-30 js-tabs-content">
         <div className="tabs__pane -tab-item-1 is-tab-el-active">
-          <div className="row y-gap-20">
+          <div className={`row y-gap-20 ${isReverse && "flex-row-reverse"}`}>
             {filteredItems.map((item) => (
               <div
                 className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"

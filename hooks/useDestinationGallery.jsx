@@ -1,9 +1,11 @@
 import { TOURCOMPARE_BE_URL } from "@/constants/environment";
 import { useAuth } from "@clerk/nextjs";
 import axios, { isAxiosError } from "axios";
+import { useLocale } from "next-intl";
 import { useState } from "react";
 
 const useDestinationGallery = () => {
+  const locale = useLocale();
   const [loading, setLoading] = useState(false);
   const { getToken } = useAuth();
 
@@ -11,8 +13,9 @@ const useDestinationGallery = () => {
     const token = await getToken();
     try {
       setLoading(true);
+      const language = locale === "he" ? "iw" : "en";
       const response = await axios.post(
-        `${TOURCOMPARE_BE_URL}/api/v1/mapapi/popular-destinations`,
+        `${TOURCOMPARE_BE_URL}/api/v1/mapapi/popular-destinations?language=${language}`,
         {
           countries,
         },

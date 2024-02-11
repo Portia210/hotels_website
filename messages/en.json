@@ -83,6 +83,8 @@
   },
   "DestinationWeLove": {
     "title": "Destinations we love",
-    "citiesIn": "Cities in"
+    "citiesIn": "Cities in ",
+    "more": "More",
+    "less": "Less"
   }
 }
