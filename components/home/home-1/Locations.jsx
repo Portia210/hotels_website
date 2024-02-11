@@ -2,7 +2,7 @@ import useSearchStore from "@/store/useSearchStore";
 import { destinationAutoTyping } from "@/utils/destinationAutoTyping";
 import Image from "next/image";
 
-const Locations = ({ gallery }) => {
+const Locations = ({ isReverse, gallery }) => {
   const setDestination = useSearchStore().setDestination;
 
   const handleCityClick = (city) => {
@@ -31,7 +31,7 @@ const Locations = ({ gallery }) => {
             className="destCard -type-1 d-block"
           >
             <div className="row x-gap-10 y-gap-10 items-center">
-              <div className="col-auto">
+              <div className={`col-auto ${isReverse && "order-1"}`}>
                 <div className="destCard__image rounded-4">
                   <Image
                     className="size-100 rounded-4"
@@ -44,7 +44,9 @@ const Locations = ({ gallery }) => {
               </div>
               <div className="col-auto">
                 <div
-                  className="text-start fs-6 fw-500 text-wrap"
+                  className={`fs-6 fw-500 text-wrap ${
+                    isReverse ? "text-end" : "text-start"
+                  }`}
                   style={{ width: "100px" }}
                 >
                   {item?.name}
