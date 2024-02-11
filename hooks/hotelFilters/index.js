@@ -13,3 +13,10 @@ export const defaultFilter = {
     offset: 0,
   },
 };
+
+export const FILTER_TYPE = {
+  RATING: "RATING",
+  STARS: "STARS",
+  PRICE_ORDER: "PRICE_ORDER",
+  PRICE_GAP: "PRICE_GAP",
+};
