@@ -21,7 +21,7 @@ const Locations = ({ isReverse, gallery }) => {
     <>
       {gallery.map((item) => (
         <div
-          className="col-xl-3 col-lg-4 col-md-6"
+          className={`col-xl-3 col-lg-4 col-md-6 d-flex ${isReverse && "justify-content-end"}`}
           key={item?.name}
           data-aos="fade"
           data-aos-delay={100}
