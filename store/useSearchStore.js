@@ -31,17 +31,17 @@ const useSearchStore = create((set) => ({
         .flat()
         .map((age) => Number(age));
       const guests = convertRoomInfo(rooms);
-      let searchInput = state.searchInput;
-      searchInput = {
-        ...searchInput,
+      const searchInput = {
+        ...state.searchInput,
         rooms: rooms.length,
         adults: rooms.reduce((acc, room) => acc + room.adults, 0),
         childrens: rooms.reduce((acc, room) => acc + room.childrens.length, 0),
         childrenAges,
         guests,
       };
-      state.searchInput = searchInput;
-      return state;
+      return {
+        searchInput,
+      };
     }),
 }));
 

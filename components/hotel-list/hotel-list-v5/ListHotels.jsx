@@ -14,7 +14,7 @@ export default function ListHotels() {
   const messages = useTransStore((state) => state.messages);
   const hotelTrans = messages?.Hotel;
   const filterTrans = messages?.FilterBar;
-  const { hotels, fetchHotelList, loading } = useHotelList();
+  const { hotels, loading } = useHotelList();
   const {
     data,
     totalFilter,
@@ -46,12 +46,6 @@ export default function ListHotels() {
       title: hotelTrans.tooltipCopy || "",
     });
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      fetchHotelList();
-    }, 50);
-  }, []);
 
   useEffect(() => {
     renderTooltip();

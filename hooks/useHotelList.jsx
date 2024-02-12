@@ -2,13 +2,14 @@ import { TOURCOMPARE_BE_URL } from "@/constants/environment";
 import useSearchStore from "@/store/useSearchStore";
 import { sleep } from "@/utils/sleep";
 import { SearchInputSchema } from "@/zod/searchInput";
-import axios from "axios";
-import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
 
 const useHotelList = () => {
   const { getToken } = useAuth();
-  const searchStore = useSearchStore();
+  const searchInput = useSearchStore((state) => state.searchInput);
+  const isSearchFormVaild = SearchInputSchema.safeParse(searchInput);
   const [loading, setLoading] = useState(true);
   const [hotels, setHotels] = useState([]);
 
@@ -16,10 +17,8 @@ const useHotelList = () => {
    * Send command to CrawlerUI
    * @returns {Promise} hotels
    */
-  const fetchHotelList = async () => {
+  const fetchHotelList = useCallback(async () => {
     const token = await getToken();
-    const isVaild = SearchInputSchema.safeParse(searchStore.searchInput);
-    if (!isVaild.success) return;
     setLoading(true);
     try {
       const params = new URLSearchParams(window.location.search);
@@ -64,12 +63,15 @@ const useHotelList = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [isSearchFormVaild.success]);
+
+  useEffect(() => {
+    if (isSearchFormVaild.success) fetchHotelList();  
+  }, [isSearchFormVaild.success]);
 
   return {
     loading,
-    hotels,
-    fetchHotelList,
+    hotels
   };
 };
 

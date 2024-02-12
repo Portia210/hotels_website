@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const useGuestSearchForm = () => {
   const pathName = usePathname();
-  const searchStore = useSearchStore();
+  const { setGuestInfo } = useSearchStore();
   const [rooms, setRooms] = useState([{ adults: 1, childrens: [] }]);
   const [guestCounts, setGuestCounts] = useState({
     Adults: 1,
@@ -61,8 +61,8 @@ const useGuestSearchForm = () => {
     setGuestCounts({ Adults, Children, Rooms });
   };
 
-  const updateSearchInput = () => {
-    searchStore.setGuestInfo(rooms);
+  const updateSearchInput = (rooms) => {
+    setGuestInfo(rooms);
   };
 
   const handleAddRoom = () => {
@@ -86,7 +86,7 @@ const useGuestSearchForm = () => {
 
   useEffect(() => {
     caculateGuestCounts();
-    updateSearchInput();
+    updateSearchInput(rooms);
   }, [rooms]);
 
   useEffect(() => {
