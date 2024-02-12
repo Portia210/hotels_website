@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 import { create } from "zustand";
 
 const useSearchStore = create((set) => ({
+  locationInput: "",
+  setLocationInput: (locationInput) => set(() => ({ locationInput })),
   searchInput: {},
   searchInputValidation: {
     destination: true,
