@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import ResultHeader from "./ResultHeader";
 
 export default function ListHotels() {
-  const { gapActive, setGapActive } = useHotelFilterStore();
+  const { gapActive, setGapActive, setHotels } = useHotelFilterStore();
   const messages = useTransStore((state) => state.messages);
   const hotelTrans = messages?.Hotel;
   const filterTrans = messages?.FilterBar;
@@ -30,12 +30,6 @@ export default function ListHotels() {
     resetFilter,
   } = useFilterBar(hotels);
 
-  useEffect(() => {
-    setTimeout(() => {
-      fetchHotelList();
-    }, 50);
-  }, []);
-
   const renderTooltip = () => {
     if (!hotelTrans?.tooltipCopy) return;
     const Tooltip = require("bootstrap/js/dist/tooltip");
@@ -54,8 +48,18 @@ export default function ListHotels() {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      fetchHotelList();
+    }, 50);
+  }, []);
+
+  useEffect(() => {
     renderTooltip();
   }, [hotelTrans?.tooltipCopy]);
+
+  useEffect(() => {
+    setHotels(hotels);
+  }, [hotels.length]);
 
   return (
     <>

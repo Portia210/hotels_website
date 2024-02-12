@@ -5,13 +5,7 @@ const ContactInfo = () => {
       title: "Toll Free Customer Care",
       action: "tel:+(1) 123 456 7890",
       text: "+(1) 123 456 7890",
-    },
-    {
-      id: 2,
-      title: "Need live support?",
-      action: "mailto:xyz@abc.com",
-      text: "hi@gotrip.com",
-    },
+    }
   ];
   return (
     <>
