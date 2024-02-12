@@ -26,23 +26,21 @@ export default function UserAvatar({ user }) {
       <UserPopoverContent t={t} isReverse={isReverse} onLogout={onLogout} />
     );
 
+    let title = `${t("Dashboard.Sidebar.hello")} ${
+      user?.fullName || user?.primaryEmailAddress?.emailAddress
+    }`;
+    if (isReverse) {
+      title = `${
+        user?.fullName || user?.primaryEmailAddress?.emailAddress
+      } ${t("Dashboard.Sidebar.hello")}`;
+    }
     new Popover(popoverTriggerEl, {
       html: true,
-      title: () => {
-        const container = document.createElement("span");
-        const root = createRoot(container);
-        root.render(
-          <span dir={`${isReverse && "rtl"}`}>{`${t(
-            "Dashboard.Sidebar.hello"
-          )} ${
-            user?.fullName || user?.primaryEmailAddress?.emailAddress
-          }`}</span>
-        );
-        return container;
-      },
+      title,
       popperConfig: () => {
         return {
           placement: "bottom-end",
+          strategy: 'fixed'
         };
       },
       content: () => {
