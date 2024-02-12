@@ -124,12 +124,12 @@ const HotelProperties = ({ hotels }) => {
                   </span>
                 </div>
                 {item?.price_difference > 0 && (
-                  <div className={`d-flex x-gap-5 fw-500 ${isReverse && "justify-content-end"}`}>
-                    <span className="text-danger">
-                      {t("Hotel.youSave")}
-                    </span>
-                    <span className="text-danger">
+                  <div className={`d-flex x-gap-5 text-success fw-500 ${isReverse && "justify-content-end"}`}>
+                    <span>
                       {convertCurrency(item?.price_difference, currency)}
+                    </span>
+                    <span>
+                      {t("Hotel.youSave")}
                     </span>
                   </div>
                 )}
