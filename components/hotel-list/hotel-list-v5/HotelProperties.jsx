@@ -1,20 +1,17 @@
 "use client";
 
 import useCurrencyStore from "@/store/useCurrencyStore";
-import useTransStore from "@/store/useTransStore";
 import { convertCurrency } from "@/utils/currencyConverter";
-import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import HotelInfoToast from "../common/HotelInfoToast";
 import HotelStars from "../common/HotelStars";
+import useTrans from "@/hooks/useTrans";
 
 const HotelProperties = ({ hotels }) => {
-  const messages = useTransStore((state) => state.messages);
-  const hotelTrans = messages?.Hotel;
-  const locale = useLocale();
-  const isReverse = locale === "he";
+  const { t, isReverse } = useTrans();
+
   const [selectedHotel, setSelectedHotel] = useState(null);
   const { currency } = useCurrencyStore();
 
@@ -26,9 +23,9 @@ const HotelProperties = ({ hotels }) => {
   const renderText = (key, value) => {
     if (key === "distance" && value) {
       if (value.includes("from center")) {
-        value = value.replace("from center", hotelTrans[key]);
+        value = value.replace("from center", t(`Hotel.${key}`));
       } else if (value.includes("from map center")) {
-        value = value.replace("from map center", hotelTrans[key]);
+        value = value.replace("from map center", t(`Hotel.${key}`));
       }
     }
     return value;
@@ -91,7 +88,7 @@ const HotelProperties = ({ hotels }) => {
                       isReverse ? "flex-row-reverse" : ""
                     }`}
                   >
-                    <p>{hotelTrans?.guestReviews}</p>
+                    <p>{t("Hotel.guestReviews")}</p>
                     <span
                       className={`flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white ${
                         isReverse ? "mr-10" : "ml-10"
@@ -112,7 +109,7 @@ const HotelProperties = ({ hotels }) => {
                   </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.travelorLink}>
-                      {hotelTrans?.toTravelor}
+                      {t("Hotel.toTravelor")}
                     </Link>
                   </span>
                 </div>
@@ -122,10 +119,20 @@ const HotelProperties = ({ hotels }) => {
                   </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.bookingLink}>
-                      {hotelTrans?.toBooking}
+                      {t("Hotel.toBooking")}
                     </Link>
                   </span>
                 </div>
+                {item?.price_difference > 0 && (
+                  <div className={`d-flex x-gap-5 fw-500 ${isReverse && "justify-content-end"}`}>
+                    <span className="text-danger">
+                      {t("Hotel.youSave")}
+                    </span>
+                    <span className="text-danger">
+                      {convertCurrency(item?.price_difference, currency)}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
