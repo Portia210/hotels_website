@@ -1,8 +1,9 @@
 import { PriceFilter } from "@/constants/searchFilter";
 import { FILTER_TYPE } from "@/hooks/hotelFilters";
 import { create } from "zustand";
+import { defaultFilter } from "@/hooks/hotelFilters";
 
-const filterHotelByPrice = (filterType, hotels) => {
+const filterHotelByPrice = (filterType = PriceFilter.HTL, hotels) => {
   let results = [];
   if (filterType === PriceFilter.HTL) {
     results = hotels.sort((a, b) => b.travelorPrice - a.travelorPrice);
@@ -53,11 +54,12 @@ const useHotelFilterStore = create((set, get) => ({
   setHotels: (hotels) => set(() => ({ hotels })),
   filterHotels: [],
   setFilterHotels: (filterHotels) => set(() => ({ filterHotels })),
-  condition: {},
+  condition: {
+    ...defaultFilter,
+  },
   onFilterHotel: () => {
     const condition = useHotelFilterStore.getState().condition;
-    console.log("condition", condition);
-    if (condition.lastAction) {
+    if (condition?.lastAction) {
       const { type, condition: actionCondition } = condition.lastAction;
       get().setCondition(type, actionCondition);
     }
@@ -77,7 +79,11 @@ const useHotelFilterStore = create((set, get) => ({
         filterHotels = filterHotel(state.condition, state.filterHotels);
       } else if (type === FILTER_TYPE.PRICE_GAP) {
         state.condition.priceGapFilter = condition;
-        filterHotels = filterHotel(state.condition, state.filterHotels);
+        const filteredHotelPriceOrder = filterHotelByPrice(
+          state.condition.priceFilter,
+          state.filterHotels
+        );
+        filterHotels = filterHotel(state.condition, filteredHotelPriceOrder);
       }
       state.condition.lastAction = {
         type,

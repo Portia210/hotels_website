@@ -9,7 +9,7 @@ import useStarFilter from "./hotelFilters/useStarFilter";
 
 // TODO: optimize this hook, reduce the number of re-renders
 const useFilterBar = (hotels) => {
-  const { setGapActive, filterHotels, setFilterHotels, setHotels, onFilterHotel } =
+  const { setGapActive, filterHotels, setFilterHotels, onFilterHotel } =
     useHotelFilterStore();
 
   const {
@@ -48,7 +48,6 @@ const useFilterBar = (hotels) => {
 
   useEffect(() => {
     setFilterHotels(hotels);
-    setHotels(hotels);
     onFilterHotel();
   }, [hotels.length]);
 

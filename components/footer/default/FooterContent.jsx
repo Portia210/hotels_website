@@ -5,7 +5,7 @@ const FooterContent = () => {
   return (
     <>
       {footerDataContent.map((item) => (
-        <div className="col-xl-2 col-lg-4 col-sm-6" key={item.id}>
+        <div className="col-xl-4 col-lg-4 col-sm-6" key={item.id}>
           <h5 className="text-16 fw-500 mb-30">{item.title}</h5>
           <div className="d-flex y-gap-10 flex-column">
             {item.menuList.map((menu, i) => (
