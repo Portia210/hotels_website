@@ -3,9 +3,9 @@ import useSearchStore from "@/store/useSearchStore";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { cloneDeep } from "lodash";
-import { useAuth } from '@clerk/nextjs';
+import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import {useState} from "react";
+import { useState } from "react";
 
 const useSearchBar = () => {
   const router = useRouter();
@@ -25,7 +25,7 @@ const useSearchBar = () => {
       const sessionId = await axios
         .post(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session`, searchInput, {
           withCredentials: true,
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => res.data);
       return sessionId;
@@ -59,13 +59,12 @@ const useSearchBar = () => {
       Cookies.set("searchInput", JSON.stringify(searchInput), {
         expires: 1,
       });
-      setTimeout(()=>{
+      setTimeout(() => {
         setLoading(false);
-      }, 2000)
+      }, 2000);
       delete searchInput.childrenAges;
       searchInput.sessionId = sessionId;
       searchInput.destination = JSON.stringify(searchInput.destination);
-      console.log("searchInput", searchInput);
       const params = new URLSearchParams(searchInput);
       window.location.href = `${path}?${params.toString()}`;
     }

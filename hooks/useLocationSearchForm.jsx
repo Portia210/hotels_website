@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 
 const useLocationSearchForm = () => {
   const pathName = usePathname();
-  const searchStore = useSearchStore();
-  const [locationInput, setLocationInput] = useState("");
+  const { setDestination, searchInputValidation, locationInput, setLocationInput } = useSearchStore();
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   const setLocation = (destination) => {
@@ -17,7 +16,7 @@ const useLocationSearchForm = () => {
   const handleSelectLocation = (destination) => {
     setLocation(destination);
     setTimeout(() => {
-      searchStore.setDestination(destination);
+      setDestination(destination);
     });
   };
 
@@ -32,13 +31,13 @@ const useLocationSearchForm = () => {
   }, [pathName]);
 
   useEffect(() => {
-    if (!locationInput) searchStore.setDestination(null);
+    if (!locationInput) setDestination(null);
   }, [locationInput]);
 
   return {
     locationInput,
     selectedLocation,
-    searchInputValidation: searchStore.searchInputValidation,
+    searchInputValidation,
     setLocationInput,
     handleSelectLocation,
   };

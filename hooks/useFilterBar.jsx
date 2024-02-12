@@ -9,8 +9,13 @@ import useStarFilter from "./hotelFilters/useStarFilter";
 
 // TODO: optimize this hook, reduce the number of re-renders
 const useFilterBar = (hotels) => {
-  const { setGapActive, filterHotels, setFilterHotels, onFilterHotel } =
-    useHotelFilterStore();
+  const {
+    setGapActive,
+    filterHotels,
+    setFilterHotels,
+    onFilterHotel,
+    setHotels,
+  } = useHotelFilterStore();
 
   const {
     currentPage,
@@ -43,6 +48,7 @@ const useFilterBar = (hotels) => {
     setStarFilter(defaultFilter.starFilter);
     setPagination(defaultFilter.pagination);
     setFilterHotels(hotels);
+    setHotels(hotels);
     setGapActive(false);
   };
 
