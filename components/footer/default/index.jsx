@@ -9,13 +9,13 @@ const index = () => {
       <div className="container">
         <div className="pt-60 pb-60">
           <div className="row y-gap-40 justify-between xl:justify-start">
-            <div className="col-xl-2 col-lg-4 col-sm-6">
-              <h5 className="text-16 fw-500 mb-30">Contact Us</h5>
+            <div className="col-xl-4 col-lg-4 col-sm-6">
+              <h5 className="text-16 fw-500 mb-30">Contact</h5>
               <ContactInfo />
             </div>
             {/* End col */}
 
-            {/* <FooterContent /> */}
+            <FooterContent />
             {/* End footer menu content */}
           </div>
         </div>

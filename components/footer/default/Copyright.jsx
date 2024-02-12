@@ -1,4 +1,3 @@
-
 const Copyright = () => {
   return (
     <div className="row justify-between items-center y-gap-10">
@@ -8,12 +7,12 @@ const Copyright = () => {
             <div className="d-flex items-center">
               © {new Date().getFullYear()} by
               <a
-                href="https://themeforest.net/user/ib-themes"
+                href="#"
                 className="mx-2"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                ib-themes
+              Gotrip
               </a>
               All rights reserved.
             </div>
