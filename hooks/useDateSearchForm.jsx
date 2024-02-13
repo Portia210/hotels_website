@@ -1,3 +1,4 @@
+import useIsMobile from "@/hooks/useIsMobile";
 import useSearchStore from "@/store/useSearchStore";
 import { loadDateSearch } from "@/utils/searchFormLoader";
 import dayjs from "dayjs";
@@ -5,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const useDateSearchForm = () => {
+  const isMobile = useIsMobile();
   const router = useRouter();
   const pathName = usePathname();
   const searchStore = useSearchStore();
@@ -17,9 +19,19 @@ const useDateSearchForm = () => {
     searchStore.setDateSearch(dates);
   };
 
+  const closeDatePicker = () => {
+    if (!isMobile) return;
+    const clickOutside = document.getElementById("datePickerOutSide");
+    clickOutside.focus();
+    clickOutside.click();
+  };
+
   const onPropsChange = (dates) => {
     if (dates.value.length === 2) {
       setDates(dates.value);
+      setTimeout(() => {
+        closeDatePicker();
+      }, 500);
     }
   };
 

@@ -29,6 +29,7 @@ const DateSearch = () => {
         rangeHover
         format="MMMM DD"
       />
+      <div id="datePickerOutSide"/>
     </div>
   );
 };
