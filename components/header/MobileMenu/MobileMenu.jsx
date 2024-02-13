@@ -61,16 +61,19 @@ const MobileMenu = ({ isReverse }) => {
         </Menu>
         <div className="border-bottom mb-20 mt-20"></div>
         <Menu>
-          <MenuItem onClick={() => router.push("/dashboard/db-dashboard")}>
+          <MenuItem onClick={() => router.push("/dashboard/db-account")}>
             {headerTrans?.dashboard}
           </MenuItem>
           <MenuItem onClick={() => router.push("/")}>
             {headerTrans?.home}
           </MenuItem>
-          <MenuItem onClick={() => router.push("/")}>
+          <MenuItem onClick={() => router.push("/destination")}>
             {headerTrans?.destination}
           </MenuItem>
-          <MenuItem onClick={() => router.push("/")}>
+          <MenuItem onClick={() => router.push("/shorten-link")}>
+            {headerTrans?.shortenLink}
+          </MenuItem>
+          <MenuItem onClick={() => router.push("/contact")}>
             {headerTrans?.contact}
           </MenuItem>
         </Menu>
