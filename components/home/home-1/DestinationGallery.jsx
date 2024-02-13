@@ -90,7 +90,7 @@ export default function DestinationGallery() {
         </div>
         {/* End .row */}
 
-        <div className="row y-gap-30 pt-20 sm:pt-20">
+        <div className={`row y-gap-30 pt-20 sm:pt-20 ${isReverse && "flex-row-reverse"}`}>
           <Locations
             isReverse={isReverse}
             gallery={destinationGallery?.slice(0, maxResult)}
