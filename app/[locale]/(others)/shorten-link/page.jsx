@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 
 export const metadata = {
   title: "GoTrip: Shorten Your Links Easily!",
-  description: "GoTrip - Travel & Tour",
+  description:
+    "Make your web links shorter and easier to share. It's simple, quick, and helps your messages look neat and elegant",
 };
 
 const ShortenLink = () => {

@@ -15,6 +15,10 @@ const MainMenu = ({ style = "", messages }) => {
           <Link href="/destinations">{messages?.destination}</Link>
         </li>
         {/* End Destinatinos single menu */}
+        
+        <li className={pathname === "/shorten-link" ? "current" : ""}>
+          <Link href="/shorten-link">{messages?.shortenLink}</Link>
+        </li>
 
         <li className={pathname === "/contact" ? "current" : ""}>
           <Link href="/contact">{messages?.contact}</Link>
