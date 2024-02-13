@@ -21,6 +21,12 @@ const ShortenLink = () => {
       {/* End Header 1 */}
 
       <section className="layout-pt-lg layout-pb-lg bg-blue-2">
+        <h5 className="text-center mb-3 mb-md-5">
+          Make your web links shorter and easier to share. <br />
+          <span className="d-none d-md-inline">
+            It's simple, quick, and helps your messages look neat and elegant
+          </span>
+        </h5>
         <div className="container">
           <div className="d-flex justify-content-center">
             <ShortLinkInput />
