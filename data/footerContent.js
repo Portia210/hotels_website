@@ -12,9 +12,8 @@ module.exports = [
     id: 2,
     title: "Services",
     menuList: [
-      { name: "Shorten Links", routerPath: "/" },
+      { name: "Shorten Links", routerPath: "/shorten-link" },
       { name: "Cities in Country", routerPath: "/" },
-      { name: "Privacy Policy", routerPath: "/" },
       { name: "Popular Tourist Attractions", routerPath: "/" },
     ],
   }

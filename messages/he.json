@@ -3,7 +3,7 @@
     "home": "בית",
     "contact": "צור קשר",
     "destination": "יעדים",
-    "shortenLink": "הקישורים",
+    "shortenLink": "קיצור קישורים",
     "register": "הרשמה",
     "signin": "התחברות",
     "language": "שפה",
@@ -49,7 +49,7 @@
     "tooltipCopy": "העתק טקסט",
     "link": "קישור:",
     "shortLink": "קצר קישור",
-    "youSave": "הצלת"
+    "youSave": "החיסכון שלך"
   },
   "Dashboard": {
     "General": {

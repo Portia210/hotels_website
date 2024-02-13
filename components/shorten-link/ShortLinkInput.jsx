@@ -1,9 +1,11 @@
 "use client";
 
+import useIsMobile from "@/hooks/useIsMobile";
 import useShortenLink from "@/hooks/useShortenLink";
 import { useEffect, useState } from "react";
 
 export default function ShortLinkInput() {
+  const isMobile = useIsMobile();
   const { shortenLink, isValidURL } = useShortenLink();
   const [linkInput, setLinkInput] = useState("");
   const [result, setResult] = useState("");
@@ -53,7 +55,7 @@ export default function ShortLinkInput() {
   }, []);
 
   return (
-    <div className="d-flex flex-column">
+    <div className="w-100 d-flex flex-column">
       <div
         id="shortenLinkTooltip2"
         type="button"
@@ -62,37 +64,36 @@ export default function ShortLinkInput() {
         onClick={onCopyLink}
         className="text-center text-primary text-25"
       >
-        <span>{result}</span>
+        {result && (
+          <>
+            <span>{result}</span>
+            <span className="ml-10 rounded-full">
+              <i className="bi bi-clipboard"></i>
+            </span>
+          </>
+        )}
       </div>
-      <div className="mainSearch -w-900 bg-white px-10 py-10 lg:px-20 lg:pt-5 lg:pb-20 rounded-100">
-        <div className="d-flex justify-content-between">
+      <div className="bg-white px-10 lg:px-20 lg:pt-5 lg:pb-20 rounded-100 lg:mt-30">
+        <div className="d-flex justify-content-between lh-lg lg:mt-10 lg:lh-sm">
           <input
             type="text"
             id="linkInput"
-            className={`text-success text-truncate`}
+            className={`text-primary text-truncate text-20`}
             required
             value={linkInput}
             placeholder={"Enter long link here"}
             onInput={(e) => setLinkInput(e.target.value)}
           />
-          <div className="button-item">
-            <button
-              onClick={handleShortenLink}
-              disabled={loading}
-              className="mainSearch__submit button -dark-1 h-60 px-20 col-12 rounded-100 bg-blue-1 text-white"
-            >
-              {loading ? (
-                <div className="d-flex align-items-center mr-5">
-                  <div
-                    className="spinner-border spinner-border-sm"
-                    role="status"
-                  />
-                </div>
-              ) : (
-                <i className="bi bi-link-45deg text-20 mr-5"></i>
-              )}
-              Shorten
-            </button>
+          <div
+            onClick={handleShortenLink}
+            className="d-flex align-items-center"
+            style={{ height: isMobile ? 40 : 80 }}
+          >
+            {loading ? (
+              <div className="spinner-border text-primary" role="status" />
+            ) : (
+              <i className="bi bi-arrow-right-circle text-40 text-primary"></i>
+            )}
           </div>
         </div>
       </div>
