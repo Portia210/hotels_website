@@ -46,7 +46,17 @@ const useShortenLink = () => {
       .then((res) => res.data);
   };
 
-  return { shortenLink, isValidURL, getLinkStats };
+  const getShortenLinks = async () => {
+    const token = await getToken();
+    return await axios
+      .get(`${TOURCOMPARE_BE_URL}/api/v1/shortlink/links`, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  };
+
+  return { shortenLink, isValidURL, getLinkStats, getShortenLinks };
 };
 
 export default useShortenLink;
