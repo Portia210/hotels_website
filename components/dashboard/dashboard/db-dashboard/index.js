@@ -5,7 +5,7 @@ import Header from "@/components/header/dashboard-header";
 import ChartSelect from "./components/ChartSelect";
 import ChartMain from "./components/ChartMain";
 import Link from "next/link";
-import RercentBooking from "./components/RercentBooking";
+import RercentShortenLinks from "./components/RecentShortenLinks/RercentShortenLinks";
 import Footer from "../common/Footer";
 
 
@@ -58,7 +58,7 @@ const index = () => {
               <div className="col-xl-5 col-md-6">
                 <div className="py-30 px-30 rounded-4 bg-white shadow-3">
                   <div className="d-flex justify-between items-center">
-                    <h2 className="text-18 lh-1 fw-500">Recent Bookings</h2>
+                    <h2 className="text-18 lh-1 fw-500">Recent shortened links</h2>
                     <div>
                       <Link
                         href="#"
@@ -70,7 +70,7 @@ const index = () => {
                   </div>
                   {/* End d-flex */}
 
-                  <RercentBooking />
+                  <RercentShortenLinks />
                 </div>
                 {/* End py-30 */}
               </div>
