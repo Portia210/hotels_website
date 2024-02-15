@@ -4,6 +4,9 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 
+const activeColor = { color: "blue-1-05", text: "blue-1" };
+const deactiveColor = { color: "red-3", text: "red-2" };
+
 export default function ShortenLinksTable() {
   const [links, setLinks] = useState([]);
   const [pagination, setPagination] = useState({
@@ -41,9 +44,14 @@ export default function ShortenLinksTable() {
 
   return (
     <>
+      {isLoading && (
+        <span className="position-absolute mt-60 sm:mt-70 text-primary">
+          <span className="spinner-border" role="status" />
+        </span>
+      )}
       <table className="table-2 col-12">
         <thead>
-          <tr>
+          <tr className="text-primary">
             <th>#</th>
             <th>Short Link</th>
             <th>Long Link</th>
@@ -61,7 +69,17 @@ export default function ShortenLinksTable() {
                 <td className="fw-500 text-truncate">
                   <input value={row.target} type="textarea" readOnly />
                 </td>
-                <td>{row.banned ? "Deactive" : "Active"}</td>
+                <td>
+                  <div
+                    className={`rounded-100 py-4 text-center col-12 text-14 fw-500 bg-${
+                      row.banned ? deactiveColor.color : activeColor.color
+                    } text-${
+                      row.banned ? deactiveColor.text : activeColor.text
+                    }`}
+                  >
+                    {row.banned ? "Deactive" : "Active"}
+                  </div>
+                </td>
                 <td>
                   <div
                     className={`rounded-100 py-4 text-center col-12 text-14 fw-500`}
