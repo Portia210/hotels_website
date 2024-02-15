@@ -116,12 +116,12 @@ const HotelProperties = ({ hotels }) => {
                   <span>{convertCurrency(item?.travelorPrice, currency)}</span>
                   <span className="text-blue-1">
                     <span
-                      className="d-inline btn"
+                      className="d-inline cursor-pointer"
                       onClick={() =>
                         toTravelorWithoutSession(item.travelorLink)
                       }
                     >
-                      <i className="bi bi-plus-circle text-blue-1"></i>
+                      <i className="bi bi-plus-circle text-blue-1 mr-10"></i>
                     </span>
                     <Link target="_blank" href={item.travelorLink}>
                       {t("Hotel.toTravelor")}
