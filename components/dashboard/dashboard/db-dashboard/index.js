@@ -55,18 +55,10 @@ const index = () => {
               </div>
               {/* End .col */}
 
-              <div className="col-xl-5 col-md-6">
+              <div className="col-12">
                 <div className="py-30 px-30 rounded-4 bg-white shadow-3">
                   <div className="d-flex justify-between items-center">
                     <h2 className="text-18 lh-1 fw-500">Recent shortened links</h2>
-                    <div>
-                      <Link
-                        href="#"
-                        className="text-14 text-blue-1 fw-500 underline"
-                      >
-                        View All
-                      </Link>
-                    </div>
                   </div>
                   {/* End d-flex */}
 
