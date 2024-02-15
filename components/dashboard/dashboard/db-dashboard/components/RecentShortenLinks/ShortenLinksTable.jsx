@@ -11,7 +11,7 @@ export default function ShortenLinksTable() {
   const [links, setLinks] = useState([]);
   const [pagination, setPagination] = useState({
     skip: 0,
-    limit: 20,
+    limit: 10,
     total: 0,
   });
 
@@ -26,6 +26,34 @@ export default function ShortenLinksTable() {
   const onChangePage = (page) => {
     setPagination((prev) => ({ ...prev, skip: page * prev.limit }));
   };
+
+  const renderTooltip = () => {
+    const Tooltip = require("bootstrap/js/dist/tooltip");
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+    [...tooltipTriggerList].map(
+      (tooltipTriggerEl) =>
+        new Tooltip(tooltipTriggerEl, {
+          container: "body",
+          trigger: "hover focus",
+          title: "Copy link",
+        })
+    );
+  };
+
+  const onCopyLink = (result, id) => {
+    if (!result) return;
+    navigator.clipboard.writeText(result);
+    const Tooltip = require("bootstrap/js/dist/tooltip");
+    const toolTipElement = document.getElementById(`shortenLinkTooltip${id}`);
+    const toolTip = Tooltip.getInstance(toolTipElement);
+    toolTip.setContent({ ".tooltip-inner": "Copied!" });
+  };
+
+  useEffect(() => {
+    renderTooltip();
+  }, [links.length]);
 
   useEffect(() => {
     refetch({ skip: pagination.skip, limit: pagination.limit });
@@ -64,9 +92,25 @@ export default function ShortenLinksTable() {
           {Array.isArray(links) &&
             links.map((row, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{row?.link}</td>
-                <td className="fw-500 text-truncate">
+                <td>{index + 1 + pagination.skip}</td>
+                <td className="col-auto">
+                  <div
+                    id={`shortenLinkTooltip${index}`}
+                    type="button"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    onClick={() => onCopyLink(row?.link, index)}
+                    className="text-info"
+                  >
+                    <>
+                      <span> {row?.link}</span>
+                      <span className="ml-5 rounded-full">
+                        <i className="bi bi-clipboard"></i>
+                      </span>
+                    </>
+                  </div>
+                </td>
+                <td className="col-4 fw-500 text-truncate">
                   <input value={row.target} type="textarea" readOnly />
                 </td>
                 <td>
