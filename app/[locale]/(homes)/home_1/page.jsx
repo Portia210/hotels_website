@@ -39,7 +39,13 @@ const Home_1 = () => {
           </div>
           {/* End .row */}
 
-          <div className="tabs -pills pt-40 js-tabs">
+          <div
+            className="tabs -pills pt-40 js-tabs"
+            id="destinationsWeLove"
+            style={{
+              scrollMarginTop: "180px",
+            }}
+          >
             <Destinations />
           </div>
           {/* End tabs */}
