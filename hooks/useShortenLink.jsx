@@ -46,13 +46,17 @@ const useShortenLink = () => {
       .then((res) => res.data);
   };
 
-  const getShortenLinks = async () => {
+  const getShortenLinks = async (skip = 0, limit = 50) => {
     const token = await getToken();
+    const params = new URLSearchParams({ skip, limit });
     return await axios
-      .get(`${TOURCOMPARE_BE_URL}/api/v1/shortlink/links`, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .get(
+        `${TOURCOMPARE_BE_URL}/api/v1/shortlink/links?${params.toString()}`,
+        {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => res.data);
   };
 
