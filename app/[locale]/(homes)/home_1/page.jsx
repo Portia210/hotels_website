@@ -5,6 +5,7 @@ import Hero1 from "@/components/hero/hero-1";
 import DestinationGallery from "@/components/home/home-1/DestinationGallery";
 import Destinations from "@/components/home/home-1/Destinations/Destinations";
 import useTransServer from "@/hooks/useTransServer";
+import { auth } from "@clerk/nextjs";
 import { useMessages } from "next-intl";
 import dynamic from "next/dynamic";
 
@@ -14,6 +15,7 @@ export const metadata = {
 };
 
 const Home_1 = () => {
+  const { userId } = auth();
   const messages = useMessages();
   const { t, isReverse } = useTransServer();
 
@@ -28,29 +30,32 @@ const Home_1 = () => {
       <Hero1 />
       {/* End Hero 1 */}
 
-      <section className="layout-pt-md layout-pb-lg">
-        <div className="container">
-          <div className={`d-flex ${isReverse && "justify-content-end"}`}>
-            <div className="sectionTitle -md">
-              <h2 className="sectionTitle__title">
-                {t("DestinationWeLove.title")}
-              </h2>
+      {userId && (
+        <section className="layout-pt-md layout-pb-lg">
+          <div className="container">
+            <div className={`d-flex ${isReverse && "justify-content-end"}`}>
+              <div className="sectionTitle -md">
+                <h2 className="sectionTitle__title">
+                  {t("DestinationWeLove.title")}
+                </h2>
+              </div>
             </div>
-          </div>
-          {/* End .row */}
+            {/* End .row */}
 
-          <div
-            className="tabs -pills pt-40 js-tabs"
-            id="destinationsWeLove"
-            style={{
-              scrollMarginTop: "180px",
-            }}
-          >
-            <Destinations />
+            <div
+              className="tabs -pills pt-40 js-tabs"
+              id="destinationsWeLove"
+              style={{
+                scrollMarginTop: "180px",
+              }}
+            >
+              <Destinations />
+            </div>
+            {/* End tabs */}
           </div>
-          {/* End tabs */}
-        </div>
-      </section>
+        </section>
+      )}
+
       {/* End Destination we love Section */}
 
       <DestinationGallery />
