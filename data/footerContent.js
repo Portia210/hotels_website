@@ -13,8 +13,8 @@ module.exports = [
     title: "Services",
     menuList: [
       { name: "Shorten Links", routerPath: "/shorten-link" },
-      { name: "Cities in Country", routerPath: "/" },
-      { name: "Popular Tourist Attractions", routerPath: "/" },
+      { name: "Cities in Country", routerPath: "/#destinationsWeLove" },
+      { name: "Popular Tourist Attractions",routerPath: "/#destinationsWeLove" }
     ],
   }
 ];
