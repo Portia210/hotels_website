@@ -31,6 +31,15 @@ const HotelProperties = ({ hotels }) => {
     return value;
   };
 
+  const toTravelorWithoutSession = (url) => {
+    if (!url) return;
+    const searchParams = new URLSearchParams(new URL(url).search);
+    searchParams.delete("session");
+    const updatedUrl = new URL(url);
+    updatedUrl.search = searchParams.toString();
+    window.open(updatedUrl.toString(), "_blank").focus();
+  };
+
   return (
     <>
       {hotels.map((item, index) => (
@@ -104,10 +113,16 @@ const HotelProperties = ({ hotels }) => {
               </div>
               <div className="mt-5">
                 <div className="d-flex justify-between fw-500">
-                  <span className="">
-                    {convertCurrency(item?.travelorPrice, currency)}
-                  </span>
+                  <span>{convertCurrency(item?.travelorPrice, currency)}</span>
                   <span className="text-blue-1">
+                    <span
+                      className="d-inline btn"
+                      onClick={() =>
+                        toTravelorWithoutSession(item.travelorLink)
+                      }
+                    >
+                      <i className="bi bi-plus-circle text-blue-1"></i>
+                    </span>
                     <Link target="_blank" href={item.travelorLink}>
                       {t("Hotel.toTravelor")}
                     </Link>
