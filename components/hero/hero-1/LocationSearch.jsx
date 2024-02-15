@@ -40,7 +40,7 @@ const SearchBar = () => {
         data-bs-auto-close="true"
         data-bs-offset="0,22"
       >
-        <div className="searchMenu-loc px-30 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
+        <div className="searchMenu-loc pl-30 pr-10 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
           <h4 className="text-15 fw-500 ls-2 lh-16">{searchBox?.location}</h4>
           <div className="text-15 text-light-1 ls-2 lh-16">
             <input
