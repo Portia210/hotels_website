@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 const useLocationSearchForm = () => {
   const pathName = usePathname();
   const {
-    destination,
     setDestination,
     searchInputValidation,
     locationInput,
@@ -33,11 +32,7 @@ const useLocationSearchForm = () => {
   useEffect(() => {
     onLoadLocation();
   }, [pathName]);
-
-  useEffect(() => {
-    // if (!locationInput) setDestination(null);
-  }, [locationInput]);
-
+  
   return {
     locationInput,
     selectedLocation,
