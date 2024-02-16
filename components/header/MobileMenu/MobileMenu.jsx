@@ -2,15 +2,14 @@
 
 import Link from "next/link";
 
-import useTransStore from "@/store/useTransStore";
+import useTrans from "@/hooks/useTrans";
 import { useRouter } from "next/navigation";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import CurrencyMobileMenu from "./CurrencyMobileMenu";
 import LanguageMobileMenu from "./LanguageMobileMenu";
 
 const MobileMenu = ({ isReverse }) => {
-  const messages = useTransStore((state) => state.messages);
-  const headerTrans = messages?.Header;
+  const { t } = useTrans();
   const router = useRouter();
 
   return (
@@ -44,7 +43,7 @@ const MobileMenu = ({ isReverse }) => {
             component={
               <CurrencyMobileMenu
                 isReverse={isReverse}
-                textTran={headerTrans?.currency}
+                textTran={t("Header.currency")}
               />
             }
           >
@@ -54,7 +53,7 @@ const MobileMenu = ({ isReverse }) => {
             component={
               <LanguageMobileMenu
                 isReverse={isReverse}
-                textTran={headerTrans?.language}
+                textTran={t("Header.language")}
               />
             }
           />
@@ -62,19 +61,19 @@ const MobileMenu = ({ isReverse }) => {
         <div className="border-bottom mb-20 mt-20"></div>
         <Menu>
           <MenuItem onClick={() => router.push("/dashboard/db-account")}>
-            {headerTrans?.dashboard}
+            {t("Header.dashboard")}
           </MenuItem>
           <MenuItem onClick={() => router.push("/")}>
-            {headerTrans?.home}
+            {t("Header.home")}
           </MenuItem>
-          <MenuItem onClick={() => router.push("/destination")}>
-            {headerTrans?.destination}
+          <MenuItem onClick={() => router.push("/user-guide")}>
+            {t("Header.userGuide")}
           </MenuItem>
           <MenuItem onClick={() => router.push("/shorten-link")}>
-            {headerTrans?.shortenLink}
+            {t("Header.shortenLink")}
           </MenuItem>
           <MenuItem onClick={() => router.push("/contact")}>
-            {headerTrans?.contact}
+            {t("Header.contact")}
           </MenuItem>
         </Menu>
       </Sidebar>

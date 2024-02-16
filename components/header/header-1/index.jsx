@@ -1,8 +1,6 @@
 "use client";
 
-import useTransStore from "@/store/useTransStore";
 import { isActiveLink } from "@/utils/linkActiveChecker";
-import { useLocale } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,12 +10,11 @@ import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import LoginBtns from "./LoginBtns";
 import { useUser } from "@clerk/nextjs";
+import useTrans from "@/hooks/useTrans";
 
 const Header1 = () => {
   const { isSignedIn } = useUser();
-  const locale = useLocale();
-  const messages = useTransStore((state) => state.messages);
-  const isReverse = locale === "he";
+  const { isReverse } = useTrans();
 
   const pathname = usePathname();
   const [navbar, setNavbar] = useState(false);
@@ -69,7 +66,6 @@ const Header1 = () => {
                 <div className="header-menu">
                   <div className="header-menu__content">
                     <MainMenu
-                      messages={messages?.Header}
                       style={`text-white ${
                         isReverse ? "flex-row-reverse" : ""
                       }`}
@@ -108,7 +104,7 @@ const Header1 = () => {
                 {/* End language and currency selector */}
 
                 {/* Start btn-group */}
-                <LoginBtns headerTrans={messages?.Header} />
+                <LoginBtns />
 
                 {/* End btn-group */}
 

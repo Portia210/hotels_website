@@ -7,7 +7,7 @@ import { useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import useTrans from "@/hooks/useTrans";
 
-export default function LoginBtns({ headerTrans }) {
+export default function LoginBtns() {
   const { t, isReverse } = useTrans();
   const router = useRouter();
   const { isSignedIn, isLoaded, user } = useUser();
@@ -136,7 +136,7 @@ export default function LoginBtns({ headerTrans }) {
           isReverse ? "mr-20" : "ml-20"
         }`}
       >
-        {headerTrans?.signin} / {headerTrans?.register}
+        {t("Header.signin")} / {t("Header.register")}
       </Link>
 
       <Link
@@ -145,7 +145,7 @@ export default function LoginBtns({ headerTrans }) {
           isReverse ? "mr-20" : "ml-20"
         }`}
       >
-        {headerTrans?.signin}
+        {t("Header.signin")}
       </Link>
       <Link
         href="/signup"
@@ -153,7 +153,7 @@ export default function LoginBtns({ headerTrans }) {
           isReverse ? "mr-20" : "ml-20"
         }`}
       >
-        {headerTrans?.register}
+        {t("Header.register")}
       </Link>
     </div>
   );
