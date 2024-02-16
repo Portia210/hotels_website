@@ -8,27 +8,22 @@ import { useCallback, useEffect, useState } from "react";
 
 const useHotelList = () => {
   const { getToken } = useAuth();
-  const searchInput = useSearchStore((state) => state.searchInput);
+  const { searchInput, isExpired, setIsExpired } = useSearchStore();
   const isSearchFormVaild = SearchInputSchema.safeParse(searchInput);
   const [loading, setLoading] = useState(true);
   const [hotels, setHotels] = useState([]);
-  const [isCachedSession, setIsCachedSession] = useState(false);
 
   const fetchHotel = async (sessionId, token) => {
     if (!sessionId) throw Error("sessionId is required");
+    const url = `${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`;
+
     const data = await axios
-      .get(
-        `${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`,
-        {
-          withCredentials: true,
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        const isCachedSession = res.headers.get("cache-control") || false;
-        setIsCachedSession(isCachedSession);
-        return res.data;
-      });
+      .get(url, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+    setIsExpired(data.isExpired);
     const hotels = data.results;
     setHotels((prevHotels) => {
       const updatedHotels = [...prevHotels];
@@ -79,7 +74,7 @@ const useHotelList = () => {
   }, [isSearchFormVaild.success]);
 
   return {
-    isCachedSession,
+    isExpired,
     loading,
     hotels,
   };

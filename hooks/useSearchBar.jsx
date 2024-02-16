@@ -23,10 +23,14 @@ const useSearchBar = () => {
       searchInput.children = searchInput.childrens;
       searchInput.adult = searchInput.adults;
       const sessionId = await axios
-        .post(`${TOURCOMPARE_BE_URL}/api/v1/hotels/session`, searchInput, {
-          withCredentials: true,
-          headers: { Authorization: `Bearer ${token}` },
-        })
+        .post(
+          `${TOURCOMPARE_BE_URL}/api/v1/hotels/session?force=${searchStore.isExpired}`,
+          searchInput,
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
         .then((res) => res.data);
       return sessionId;
     } catch (error) {

@@ -1,4 +1,4 @@
-export default function ResultHeader({ loading, isCachedSession, totalResult }) {
+export default function ResultHeader({ loading, isExpired, totalResult }) {
   return (
     <>
       {loading && (
@@ -9,8 +9,8 @@ export default function ResultHeader({ loading, isCachedSession, totalResult }) 
           <h3>Loading</h3>
         </div>
       )}
-      {!loading && totalResult === 0 && !isCachedSession && <h3>No hotels found</h3>}
-      {!loading && totalResult === 0 && isCachedSession && <h3>Results are not updated, please search again</h3>}
+      {!loading && totalResult === 0 && !isExpired && <h3>No hotels found</h3>}
+      {!loading && totalResult === 0 && isExpired && <h3>Results are not updated, please search again</h3>}
       {!loading && totalResult > 0 && (
         <h3 className="text-24 fw-600 text-dark-1">
           {totalResult} Hotels found

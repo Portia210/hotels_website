@@ -14,7 +14,7 @@ export default function ListHotels() {
   const messages = useTransStore((state) => state.messages);
   const hotelTrans = messages?.Hotel;
   const filterTrans = messages?.FilterBar;
-  const { hotels, loading, isCachedSession } = useHotelList();
+  const { hotels, loading, isExpired } = useHotelList();
   const {
     data,
     totalFilter,
@@ -115,7 +115,7 @@ export default function ListHotels() {
             {/* End border-top */}
 
             <div className="row y-gap-30 sm:pr-0">
-              <ResultHeader loading={loading} isCachedSession={isCachedSession} totalResult={totalFilter} />
+              <ResultHeader loading={loading} isExpired={isExpired} totalResult={totalFilter} />
               <HotelProperties hotels={data} />
             </div>
             {/* End .row */}
