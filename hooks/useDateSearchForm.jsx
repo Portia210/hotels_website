@@ -12,7 +12,7 @@ const useDateSearchForm = () => {
   const searchStore = useSearchStore();
   const [dates, setDates] = useState([
     dayjs().toDate(),
-    dayjs().add(30, "day").toDate(),
+    dayjs().add(7, "day").toDate(),
   ]);
 
   const updateSearchInput = () => {
@@ -38,8 +38,7 @@ const useDateSearchForm = () => {
   const onLoadDateSearch = async () => {
     const { checkInDate, checkOutDate } = loadDateSearch(pathName);
     if (checkInDate && dayjs().subtract(1, "day").isAfter(dayjs(checkInDate))) {
-      console.log("setDefault date");
-      setDates([dayjs().toDate(), dayjs().add(30, "day").toDate()]);
+      setDates([dayjs().toDate(), dayjs().add(7, "day").toDate()]);
       router.push("/");
     } else if (checkInDate && checkOutDate) {
       setDates([dayjs(checkInDate).toDate(), dayjs(checkOutDate).toDate()]);
