@@ -1,4 +1,8 @@
 import Wrapper from "@/components/layout/Wrapper";
+import { TOURCOMPARE_BE_URL } from "@/constants/environment";
+import { checkUserStatus } from "@/utils/roleCheck";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 import MainHome from "./(homes)/home_1/page";
 
 export const metadata = {
@@ -6,7 +10,24 @@ export const metadata = {
   description: "GoTrip - Travel & Tour",
 };
 
-export default function Home() {
+export default async function Home() {
+  const isVaildStatus = await checkUserStatus();
+
+  if (isVaildStatus) {
+    const { getToken } = auth();
+    const token = await getToken();
+
+    const res = await fetch(`${TOURCOMPARE_BE_URL}/api/v1/auth/force-logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({}),
+    });
+    if (res.ok) redirect("/404");
+  }
+
   return (
     <>
       <Wrapper>

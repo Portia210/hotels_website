@@ -61,6 +61,7 @@
     "Sidebar": {
       "dashboard": "דשבורד",
       "account": "חשבון",
+      "userManagement": "User Management",
       "setting": "הגדרות",
       "logout": "התנתק",
       "hello": "שלום"
@@ -82,6 +83,9 @@
       "currentPassword": "סיסמא נוכחית",
       "newPassword": "סיסמה חדשה",
       "newPasswordAgain": "סיסמה חדשה שוב"
+    },
+    "UsersTable": {
+      "title": "Users"
     }
   },
   "DestinationWeLove": {

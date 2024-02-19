@@ -7,6 +7,7 @@ import { isActiveLink } from "@/utils/linkActiveChecker";
 import { useClerk } from "@clerk/nextjs";
 import { usePathname, useRouter } from "next/navigation";
 import useTrans from "@/hooks/useTrans";
+import { checkUserRoleClient, UserRoles } from "@/utils/roleCheck";
 
 const Sidebar = () => {
   const { t } = useTrans();
@@ -14,47 +15,64 @@ const Sidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const sidebarContent = [
+  const allowed = checkUserRoleClient([
+    UserRoles.SITE_MANAGER,
+    UserRoles.ADMIN,
+  ]);
+
+  const sidebarContentUser = [
     {
-      id: 1,
+      id: 0,
       icon: "/img/dashboard/sidebar/compass.svg",
       name: t("Dashboard.Sidebar.dashboard"),
       routePath: "/dashboard/db-dashboard",
     },
     {
-      id: 3,
+      id: 1,
       icon: "/img/dashboard/sidebar/account.svg",
       name: t("Dashboard.Sidebar.account"),
       routePath: "/dashboard/db-account",
     },
     {
-      id: 4,
+      id: 3,
       icon: "/img/dashboard/sidebar/gear.svg",
       name: t("Dashboard.General.changePassword"),
       routePath: "/dashboard/db-settings",
     },
     {
-      id: 5,
+      id: 4,
       icon: "/img/dashboard/sidebar/log-out.svg",
       name: t("Dashboard.Sidebar.logout"),
       routePath: "#",
     },
   ];
 
-  const onLogout = (id) => {
-    if (id !== 5) return;
-    signOut()
-      .then(() => {
-        router.push("/login");
-      })
-      .catch((err) => {
-        console.error("err -->", err);
-      });
+  const sidebarContentManager = [
+    {
+      id: 2,
+      icon: "/img/dashboard/sidebar/user_management.svg",
+      name: t("Dashboard.Sidebar.userManagement"),
+      routePath: "/dashboard/db-user-management",
+    },
+  ];
+
+  const sidebarContent = allowed
+    ? sidebarContentUser
+        .concat(sidebarContentManager)
+        .sort((a, b) => a.id - b.id)
+    : sidebarContentUser;
+
+  const onLogout = (routePath) => {
+    if (routePath !== "#") return;
+    signOut().then(() => {
+      router.push("/login");
+    });
   };
+
   return (
     <div className="sidebar -dashboard">
-      {sidebarContent.map((item) => (
-        <div className="sidebar__item" key={item.id}>
+      {sidebarContent.map((item, index) => (
+        <div className="sidebar__item" key={index}>
           <div
             className={`${
               isActiveLink(item.routePath, pathname) ? "-is-active" : ""
@@ -62,7 +80,7 @@ const Sidebar = () => {
           >
             <Link
               href={item.routePath}
-              onClick={() => onLogout(item.id)}
+              onClick={() => onLogout(item.routePath)}
               className="d-flex items-center text-15 lh-1 fw-500"
             >
               <Image
