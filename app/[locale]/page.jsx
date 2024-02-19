@@ -1,28 +1,19 @@
 import Wrapper from "@/components/layout/Wrapper";
 import { TOURCOMPARE_BE_URL } from "@/constants/environment";
-import { auth, currentUser } from "@clerk/nextjs";
-import MainHome from "./(homes)/home_1/page";
+import { checkUserStatus } from "@/utils/roleCheck";
+import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { sleep } from "@/utils/sleep";
+import MainHome from "./(homes)/home_1/page";
 
 export const metadata = {
   title: "GoTrip: Home",
   description: "GoTrip - Travel & Tour",
 };
 
-const UserStatus = {
-  BANNED: "BANNED",
-  DELETED: "DELETED",
-};
-
 export default async function Home() {
-  const user = await currentUser();
-  const publicMetadata = user?.publicMetadata;
+  const isVaildStatus = await checkUserStatus();
 
-  if (
-    (user && publicMetadata?.status === UserStatus.BANNED) ||
-    publicMetadata?.status === UserStatus.DELETED
-  ) {
+  if (isVaildStatus) {
     const { getToken } = auth();
     const token = await getToken();
 
@@ -34,9 +25,7 @@ export default async function Home() {
       },
       body: JSON.stringify({}),
     });
-    if (res.ok) {
-      redirect("/404");
-    }
+    if (res.ok) redirect("/404");
   }
 
   return (

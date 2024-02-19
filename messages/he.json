@@ -61,6 +61,7 @@
     "Sidebar": {
       "dashboard": "דשבורד",
       "account": "חשבון",
+      "userManagement": "User Management",
       "setting": "הגדרות",
       "logout": "התנתק",
       "hello": "שלום"

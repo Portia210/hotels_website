@@ -61,6 +61,7 @@
     "Sidebar": {
       "dashboard": "Dashboard",
       "account": "Account",
+      "userManagement": "User Management",
       "setting": "Setting",
       "logout": "Logout",
       "hello": "Hello"

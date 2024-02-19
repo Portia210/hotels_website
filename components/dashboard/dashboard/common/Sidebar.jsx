@@ -16,45 +16,43 @@ const Sidebar = () => {
 
   const sidebarContent = [
     {
-      id: 1,
       icon: "/img/dashboard/sidebar/compass.svg",
       name: t("Dashboard.Sidebar.dashboard"),
       routePath: "/dashboard/db-dashboard",
     },
     {
-      id: 3,
       icon: "/img/dashboard/sidebar/account.svg",
       name: t("Dashboard.Sidebar.account"),
       routePath: "/dashboard/db-account",
     },
     {
-      id: 4,
+      icon: "/img/dashboard/sidebar/user_management.svg",
+      name: t("Dashboard.Sidebar.userManagement"),
+      routePath: "/dashboard/db-user-management",
+    },
+    {
       icon: "/img/dashboard/sidebar/gear.svg",
       name: t("Dashboard.General.changePassword"),
       routePath: "/dashboard/db-settings",
     },
     {
-      id: 5,
       icon: "/img/dashboard/sidebar/log-out.svg",
       name: t("Dashboard.Sidebar.logout"),
       routePath: "#",
     },
   ];
 
-  const onLogout = (id) => {
-    if (id !== 5) return;
+  const onLogout = (routePath) => {
+    if (routePath !== '#') return;
     signOut()
       .then(() => {
         router.push("/login");
       })
-      .catch((err) => {
-        console.error("err -->", err);
-      });
   };
   return (
     <div className="sidebar -dashboard">
-      {sidebarContent.map((item) => (
-        <div className="sidebar__item" key={item.id}>
+      {sidebarContent.map((item, index) => (
+        <div className="sidebar__item" key={index}>
           <div
             className={`${
               isActiveLink(item.routePath, pathname) ? "-is-active" : ""
@@ -62,7 +60,7 @@ const Sidebar = () => {
           >
             <Link
               href={item.routePath}
-              onClick={() => onLogout(item.id)}
+              onClick={() => onLogout(item.routePath)}
               className="d-flex items-center text-15 lh-1 fw-500"
             >
               <Image
