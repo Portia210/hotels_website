@@ -83,6 +83,9 @@
       "currentPassword": "Current Password",
       "newPassword": "New Password",
       "newPasswordAgain": "New Password Again"
+    },
+    "UsersTable": {
+      "title": "Users"
     }
   },
   "DestinationWeLove": {

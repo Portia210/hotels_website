@@ -83,6 +83,9 @@
       "currentPassword": "סיסמא נוכחית",
       "newPassword": "סיסמה חדשה",
       "newPasswordAgain": "סיסמה חדשה שוב"
+    },
+    "UsersTable": {
+      "title": "Users"
     }
   },
   "DestinationWeLove": {
