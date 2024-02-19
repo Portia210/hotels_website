@@ -1,11 +1,11 @@
-import { currentUser } from "@clerk/nextjs";
+import { currentUser, useUser } from "@clerk/nextjs";
 
-const UserStatus = {
+export const UserStatus = {
   BANNED: "BANNED",
   DELETED: "DELETED",
 };
 
-const UserRoles = {
+export const UserRoles = {
   USER: "USER",
   SITE_MANAGER: "SITE_MANAGER",
   ADMIN: "ADMIN",
@@ -33,10 +33,22 @@ export const checkUserStatus = async () => {
  * @param {string} role - User's role
  * @returns `true` if user role is equal to the given role
  */
-export const checkUserRole = async (role) => {
+export const checkUserRole = async (allowRoles) => {
   const user = await currentUser();
   const publicMetadata = user?.publicMetadata;
 
-  if (user && publicMetadata?.role === UserRoles[role]) return true;
+  for (const role of allowRoles) {
+    if (user && publicMetadata?.role === role) return true;
+  }
+  return false;
+};
+
+export const checkUserRoleClient = (allowRoles) => {
+  const { user } = useUser();
+  const publicMetadata = user?.publicMetadata;
+
+  for (const role of allowRoles) {
+    if (user && publicMetadata?.role === role) return true;
+  }
   return false;
 };
