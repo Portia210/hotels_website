@@ -24,8 +24,29 @@ const useUsers = () => {
     return response;
   };
 
+  const updateUserStatus = async (userId, status) => {
+    const token = await getToken();
+    const response = await axios
+      .post(
+        `${TOURCOMPARE_BE_URL}/api/v1/users/update-status`,
+        {
+          userId,
+          status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        },
+      )
+      .then(res => res.data);
+    return response;
+  };
+
   return {
     fetchUsers,
+    updateUserStatus,
   };
 };
 

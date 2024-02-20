@@ -1,4 +1,3 @@
-import useGetFetchQuery from '@/hooks/useGetFetchQuery';
 import {
   flexRender,
   getCoreRowModel,
@@ -7,9 +6,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useState } from 'react';
 import UserTableFilter from './UsersTable/UserTableFilter';
 import { columns } from './UsersTable/columns';
-import { useState } from 'react';
 
 export default function UsersTable() {
   const [data, setData] = useState([]);
