@@ -1,4 +1,5 @@
 import useUsers from '@/hooks/useUsers';
+import eventEmitter from '@/utils/eventEmitter';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import UserPlansDropdown from './UserPlansDropdown';
@@ -49,9 +50,14 @@ export default function UserTableFilter({ setData }) {
     if (data) setData(data);
   }, [data]);
 
+  useEffect(() => {
+    const listener = eventEmitter.addListener('updateUserStatus', refetch);
+    return () => listener.remove();
+  }, []);
+
   return (
     <div className="row x-gap-20 y-gap-20">
-      <div className="col-4 form-input">
+      <div className="form-input col-sm-12 col-md-4">
         <label className="lh-1 text-16">Email</label>
         <input
           type="email"
@@ -61,21 +67,21 @@ export default function UserTableFilter({ setData }) {
           }
         />
       </div>
-      <div className="col-4 form-input">
+      <div className="form-input col-sm-12 col-md-4">
         <label className="lh-1 text-16">Plan</label>
         <UserPlansDropdown
           value={plan}
           onChange={value => setFormValues({ ...formValues, plan: value })}
         />
       </div>
-      <div className="col-4 form-input">
+      <div className="form-input col-sm-12 col-md-4">
         <label className="lh-1 text-16">Status</label>
         <UserStatusDropdown
           value={status}
           onChange={value => setFormValues({ ...formValues, status: value })}
         />
       </div>
-      <div className="col-4 form-input">
+      <div className="form-input col-sm-12 col-md-4">
         <label className="lh-1 text-16">Agent Number</label>
         <input
           type="text"
