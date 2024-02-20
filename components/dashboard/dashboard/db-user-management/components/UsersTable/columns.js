@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import TableActions from './TableActions';
+import { UserStatus } from '@/utils/roleCheck';
 
 export const columns = [
   {
@@ -36,6 +38,33 @@ export const columns = [
     },
     cell: props => {
       return <span>{props.getValue()}</span>;
+    },
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    size: 100,
+    meta: {
+      headerAlign: 'center',
+      align: 'center',
+    },
+    cell: props => {
+      if (props.getValue() === UserStatus.ACTIVE) {
+        return (
+          <span className="badge bg-success text-white text-14">Active</span>
+        );
+      } else if (props.getValue() === UserStatus.BANNED) {
+        return (
+          <span className="badge bg-warning text-white text-14">Banned</span>
+        );
+      } else if (props.getValue() === UserStatus.DELETED) {
+        return (
+          <span className="badge bg-danger text-white text-14">Deleted</span>
+        );
+      }
+      return (
+        <span className="badge bg-secondary text-white text-14">Unknown</span>
+      );
     },
   },
   {
@@ -78,6 +107,17 @@ export const columns = [
     cell: props => {
       const formatValue = dayjs(props.getValue()).format('DD/MM/YYYY');
       return <span>{formatValue}</span>;
+    },
+  },
+  {
+    header: 'Actions',
+    size: 120,
+    meta: {
+      headerAlign: 'center',
+      align: 'center',
+    },
+    cell: props => {
+      return <TableActions row={props.row.original} />;
     },
   },
 ];
