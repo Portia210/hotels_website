@@ -1,9 +1,8 @@
 import { useQueryClient } from "@tanstack/react-query";
 
-const useGetFetchQuery = (name) => {
+const useGetFetchQuery = (key) => {
   const queryClient = useQueryClient();
-
-  return queryClient.getQueryData(name);
+  return queryClient.getQueryData(key);
 };
 
 export default useGetFetchQuery;

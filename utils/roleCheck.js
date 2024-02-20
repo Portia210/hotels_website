@@ -3,6 +3,7 @@ import { currentUser, useUser } from "@clerk/nextjs";
 export const UserStatus = {
   BANNED: "BANNED",
   DELETED: "DELETED",
+  ACTIVE: "ACTIVE",
 };
 
 export const UserRoles = {
