@@ -1,32 +1,22 @@
-import useUsers from "@/hooks/useUsers";
-import { useQuery } from "@tanstack/react-query";
+import useGetFetchQuery from '@/hooks/useGetFetchQuery';
 import {
-  useReactTable,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-} from "@tanstack/react-table";
-import { useEffect, useState } from "react";
-import { columns } from "./UsersTable/columns";
+  useReactTable,
+} from '@tanstack/react-table';
+import UserTableFilter from './UsersTable/UserTableFilter';
+import { columns } from './UsersTable/columns';
+import { useState } from 'react';
 
 export default function UsersTable() {
-  const [users, setUsers] = useState([]);
-  const { fetchUsers } = useUsers();
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["fetchUsers"],
-    queryFn: () => fetchUsers(),
-  });
-
-  useEffect(() => {
-    console.log(data);
-    if (data) setUsers(data.results);
-  }, [data]);
+  const [data, setData] = useState([])
 
   const table = useReactTable({
     columns,
-    data: users,
+    data: data?.results || [],
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -34,14 +24,15 @@ export default function UsersTable() {
   });
 
   return (
-    <div style={{ maxWidth: "100%", overflowX: "auto" }}>
-      <table className="col-12">
+    <div style={{ maxWidth: '100%', overflowX: 'auto' }}>
+      <UserTableFilter setData={setData}/>
+      <table className="table-2 col-12 text-nowrap mt-10">
         <tbody>
-          {table.getHeaderGroups().map((headerGroup) => (
+          {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
+              {headerGroup.headers.map(header => (
                 <th
-                  className="th"
+                  className="text-primary"
                   width={header.getSize()}
                   key={header.id}
                   style={{

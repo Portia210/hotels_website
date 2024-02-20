@@ -1,10 +1,17 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 export const columns = [
   {
-    header: "Full name",
+    header: '#',
+    size: 50,
+    cell: props => {
+      return <span>{props.row.index + 1}</span>;
+    },
+  },
+  {
+    header: 'Full name',
     size: 200,
-    cell: (props) => {
+    cell: props => {
       const firstName = props.row.original.firstName;
       const lastName = props.row.original.lastName;
       const fullName = `${firstName} ${lastName}`;
@@ -12,68 +19,64 @@ export const columns = [
     },
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: 'email',
+    header: 'Email',
     size: 200,
-    cell: (props) => {
+    cell: props => {
       return <span>{props.getValue()}</span>;
     },
   },
   {
-    accessorKey: "agentNumber",
-    header: "Agent Number",
+    accessorKey: 'agentNumber',
+    header: 'Agent Number',
     size: 180,
     meta: {
-      headerAlign: "center",
-      align: "center",
+      headerAlign: 'center',
+      align: 'center',
     },
-    cell: (props) => {
+    cell: props => {
       return <span>{props.getValue()}</span>;
     },
   },
   {
-    accessorKey: "subscription",
-    header: "Plan",
+    accessorKey: 'subscription',
+    header: 'Plan',
     meta: {
-      headerAlign: "center",
-      align: "center",
+      headerAlign: 'center',
+      align: 'center',
     },
-    cell: (props) => {
+    cell: props => {
       return <span>{props.getValue().name}</span>;
     },
   },
   {
-    header: "Monthly Payment",
+    header: 'Monthly Payment',
     size: 200,
     meta: {
-      headerAlign: "center",
-      align: "center",
+      headerAlign: 'center',
+      align: 'center',
     },
-    cell: (props) => {
-      return <span>20$</span>;
+    cell: props => {
+      return <span>0$</span>;
     },
   },
   {
-    header: "Total Payment",
+    header: 'Total Payment',
     size: 150,
     meta: {
-      headerAlign: "center",
-      align: "center",
+      headerAlign: 'center',
+      align: 'center',
     },
-    cell: (props) => {
-      return <span>200$</span>;
+    cell: props => {
+      return <span>0$</span>;
     },
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: 'createdAt',
     size: 100,
-    header: "Joined Date",
-    meta: {
-      headerAlign: "center",
-      align: "center",
-    },
-    cell: (props) => {
-      const formatValue = dayjs(props.getValue()).format("DD/MM/YYYY");
+    header: 'Joined Date',
+    cell: props => {
+      const formatValue = dayjs(props.getValue()).format('DD/MM/YYYY');
       return <span>{formatValue}</span>;
     },
   },
