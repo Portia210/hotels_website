@@ -1,4 +1,5 @@
 import useUsers from '@/hooks/useUsers';
+import eventEmitter from '@/utils/eventEmitter';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import UserPlansDropdown from './UserPlansDropdown';
@@ -48,6 +49,11 @@ export default function UserTableFilter({ setData }) {
   useEffect(() => {
     if (data) setData(data);
   }, [data]);
+
+  useEffect(() => {
+    const listener = eventEmitter.addListener('updateUserStatus', refetch);
+    return () => listener.remove();
+  }, []);
 
   return (
     <div className="row x-gap-20 y-gap-20">

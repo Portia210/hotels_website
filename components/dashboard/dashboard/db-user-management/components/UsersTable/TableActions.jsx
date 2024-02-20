@@ -1,4 +1,5 @@
 import useUsers from '@/hooks/useUsers';
+import eventEmitter from '@/utils/eventEmitter';
 import { UserStatus } from '@/utils/roleCheck';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -6,7 +7,7 @@ import ActionModal from './ActionModal';
 
 export default function TableActions({ row }) {
   const { updateUserStatus } = useUsers();
-  const banText = row.status === UserStatus.ACTIVE ? 'Ban' : 'Unban';
+  const banText = row.status === UserStatus.BANNED ? 'Unban' : 'Active';
   const modalData = {
     title: `${banText} User`,
     body: `Are you sure you want to ${banText} user ${row.email}?`,
@@ -29,14 +30,17 @@ export default function TableActions({ row }) {
     console.log('Update user', row);
   };
 
-  const onConfirm = () => {
+  const onConfirm = async () => {
     const status =
       row.status === UserStatus.BANNED ? UserStatus.ACTIVE : UserStatus.BANNED;
-    updateUserStatus(row.clerkId, status).then(() => {
-      toast.success('Success', {
-        position: 'bottom-right',
-        autoClose: 3000,
-      });
+    await updateUserStatus(row.clerkId, status);
+    toast.success('Success', {
+      position: 'bottom-right',
+      autoClose: 3000,
+    });
+    eventEmitter.emit('updateUserStatus', {
+      clerkId: row.clerkId,
+      status,
     });
   };
 
