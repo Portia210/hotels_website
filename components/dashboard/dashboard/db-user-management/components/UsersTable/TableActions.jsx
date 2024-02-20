@@ -6,11 +6,10 @@ import ActionModal from './ActionModal';
 
 export default function TableActions({ row }) {
   const { updateUserStatus } = useUsers();
+  const banText = row.status === UserStatus.ACTIVE ? 'Ban' : 'Unban';
   const modalData = {
-    title: `${row.status === UserStatus.ACTIVE ? 'Ban' : 'Unban'} User`,
-    body: `Are you sure you want to ${
-      row.status === UserStatus.ACTIVE ? 'Ban' : 'Unban'
-    } user ${row.email}?`,
+    title: `${banText} User`,
+    body: `Are you sure you want to ${banText} user ${row.email}?`,
   };
 
   const renderTooltip = () => {
@@ -60,7 +59,7 @@ export default function TableActions({ row }) {
         </span>
         <span
           type="button"
-          title={row.status === UserStatus.ACTIVE ? 'Ban' : 'Unban'}
+          title={banText}
           data-bs-toggle="tooltip"
           data-bs-placement="top"
         >

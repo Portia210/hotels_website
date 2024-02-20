@@ -1,7 +1,5 @@
 
 export default function ActionModal({ id, title, body, onCancel, onConfirm }) {
-  console.log('ActionModal', title, body);
-
   return (
     <div
       className="modal fade"
