@@ -51,8 +51,21 @@ export default function UserTableFilter({ setData }) {
   }, [data]);
 
   useEffect(() => {
-    const listener = eventEmitter.addListener('updateUserStatus', refetch);
-    return () => listener.remove();
+    const listenerUserStatus = eventEmitter.addListener(
+      'updateUserStatus',
+      refetch,
+    );
+    const listenerPagination = eventEmitter.addListener(
+      'paginationUpdate',
+      val => {
+        console.log('paginationUpdate', val);
+      },
+    );
+
+    return () => {
+      listenerUserStatus.remove();
+      listenerPagination.remove();
+    };
   }, []);
 
   return (

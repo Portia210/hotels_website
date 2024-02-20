@@ -9,6 +9,7 @@ import {
 import { useState } from 'react';
 import UserTableFilter from './UsersTable/UserTableFilter';
 import { columns } from './UsersTable/columns';
+import TablePagination from './UsersTable/TablePagination';
 
 export default function UsersTable() {
   const [data, setData] = useState([]);
@@ -60,6 +61,7 @@ export default function UsersTable() {
           </tbody>
         </table>
       </div>
+      <TablePagination />
     </>
   );
 }
