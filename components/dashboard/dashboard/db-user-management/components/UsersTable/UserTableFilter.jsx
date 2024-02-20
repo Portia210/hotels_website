@@ -1,6 +1,7 @@
 import useUsers from '@/hooks/useUsers';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import UserPlansDropdown from './UserPlansDropdown';
 import UserStatusDropdown from './UserStatusDropdown';
 
 export default function UserTableFilter({ setData }) {
@@ -62,10 +63,9 @@ export default function UserTableFilter({ setData }) {
       </div>
       <div className="col-4 form-input">
         <label className="lh-1 text-16">Plan</label>
-        <input
-          type="text"
+        <UserPlansDropdown
           value={plan}
-          onChange={e => setFormValues({ ...formValues, plan: e.target.value })}
+          onChange={value => setFormValues({ ...formValues, plan: value })}
         />
       </div>
       <div className="col-4 form-input">
