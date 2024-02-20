@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { columns } from "./UsersTable/columns";
+import UserTableFilter from "./UsersTable/UserTableFilter";
 
 export default function UsersTable() {
   const [users, setUsers] = useState([]);
@@ -35,13 +36,14 @@ export default function UsersTable() {
 
   return (
     <div style={{ maxWidth: "100%", overflowX: "auto" }}>
-      <table className="col-12">
+      <UserTableFilter />
+      <table className="table-2 col-12 text-nowrap mt-10">
         <tbody>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
-                  className="th"
+                  className="text-primary"
                   width={header.getSize()}
                   key={header.id}
                   style={{

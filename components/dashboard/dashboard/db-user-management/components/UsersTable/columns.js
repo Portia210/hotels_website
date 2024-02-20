@@ -50,7 +50,7 @@ export const columns = [
       align: "center",
     },
     cell: (props) => {
-      return <span>20$</span>;
+      return <span>0$</span>;
     },
   },
   {
@@ -61,17 +61,13 @@ export const columns = [
       align: "center",
     },
     cell: (props) => {
-      return <span>200$</span>;
+      return <span>0$</span>;
     },
   },
   {
     accessorKey: "createdAt",
     size: 100,
     header: "Joined Date",
-    meta: {
-      headerAlign: "center",
-      align: "center",
-    },
     cell: (props) => {
       const formatValue = dayjs(props.getValue()).format("DD/MM/YYYY");
       return <span>{formatValue}</span>;
