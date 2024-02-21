@@ -24,6 +24,21 @@ const useUsers = () => {
     return response;
   };
 
+  const getUserById = async id => {
+    if (!id) throw Error('User Id is required!');
+    const url = `${TOURCOMPARE_BE_URL}/api/v1/users?id=${id}`;
+    const token = await getToken();
+    const response = await axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      })
+      .then(res => res.data);
+    return response;
+  };
+
   const updateUserStatus = async (userId, status) => {
     const token = await getToken();
     const response = await axios
@@ -46,6 +61,7 @@ const useUsers = () => {
 
   return {
     fetchUsers,
+    getUserById,
     updateUserStatus,
   };
 };

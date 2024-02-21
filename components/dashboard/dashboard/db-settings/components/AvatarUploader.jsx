@@ -4,7 +4,7 @@ import useTrans from "@/hooks/useTrans";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
+const AvatarUploader = ({ imageUrl, updateProfileImage, readOnly }) => {
   const { t } = useTrans();
   const [image, setImage] = useState(imageUrl);
   const [error, setError] = useState("");
@@ -103,6 +103,7 @@ const AvatarUploader = ({ imageUrl, updateProfileImage }) => {
           <input
             type="file"
             id="avatar-upload"
+            disabled={readOnly || false}
             accept="image/png, image/jpeg"
             onChange={handleImageChange}
             style={{ display: "none" }}
