@@ -5,9 +5,18 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import ActionModal from './ActionModal';
 
+const getBanText = status => {
+  if (status === UserStatus.ACTIVE) {
+    return 'Ban';
+  }
+  return 'Unban';
+};
+
 export default function TableActions({ row }) {
   const { updateUserStatus } = useUsers();
-  const banText = row.status === UserStatus.BANNED ? 'Unban' : 'Active';
+
+  const banText = getBanText(row.status);
+
   const modalData = {
     title: `${banText} User`,
     body: `Are you sure you want to ${banText} user ${row.email}?`,
@@ -20,9 +29,9 @@ export default function TableActions({ row }) {
     );
 
     [...tooltipTriggerList].map(tooltipTriggerEl => {
-      const tootTip = Tooltip.getInstance(tooltipTriggerEl);
-      if (tootTip) return;
-      return new Tooltip(tooltipTriggerEl);
+      return new Tooltip(tooltipTriggerEl, {
+        title: banText,
+      });
     });
   };
 
@@ -46,7 +55,7 @@ export default function TableActions({ row }) {
 
   useEffect(() => {
     renderTooltip();
-  }, []);
+  }, [row?.status]);
 
   return (
     <div>
@@ -61,12 +70,7 @@ export default function TableActions({ row }) {
             <i className="bi bi-pencil-square text-16"></i>
           </div>
         </span>
-        <span
-          type="button"
-          title={banText}
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-        >
+        <span type="button" data-bs-toggle="tooltip" data-bs-placement="top">
           {row.status === UserStatus.ACTIVE && (
             <div
               type="button"

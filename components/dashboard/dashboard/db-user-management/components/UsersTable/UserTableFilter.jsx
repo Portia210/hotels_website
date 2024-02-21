@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import UserPlansDropdown from './UserPlansDropdown';
 import UserStatusDropdown from './UserStatusDropdown';
 
-export default function UserTableFilter({ setData }) {
+export default function UserTableFilter({ setData, setIsLoading }) {
   const { fetchUsers } = useUsers();
   const [isReset, setIsReset] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -49,6 +49,10 @@ export default function UserTableFilter({ setData }) {
   useEffect(() => {
     if (data) setData(data);
   }, [data]);
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading]);
 
   useEffect(() => {
     const listenerUserStatus = eventEmitter.addListener(
