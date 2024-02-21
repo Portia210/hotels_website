@@ -6,29 +6,22 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useMemo, useState } from 'react';
-import Sekeleton from './UsersTable/Skeleton';
+import { useEffect, useState } from 'react';
 import TablePagination from './UsersTable/TablePagination';
 import UserTableFilter from './UsersTable/UserTableFilter';
 import { columns } from './UsersTable/columns';
 
 export default function UsersTable() {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const columnsMemo = useMemo(
-    () =>
-      isLoading
-        ? columns.map((column) => ({
-            ...column,
-            cell: () => <Sekeleton />,
-          }))
-        : columns,
-    [isLoading, columns],
-  );
+  const [pagination, setPagination] = useState({
+    skip: 0,
+    limit: 10,
+    page: 0,
+    total: data?.total || 0,
+  });
 
   const table = useReactTable({
-    columns: columnsMemo,
+    columns,
     data: data?.results || [],
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -36,9 +29,16 @@ export default function UsersTable() {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  useEffect(() => {
+    table.setPagination({
+      pageIndex: pagination.page,
+      pageSize: pagination.limit,
+    });
+  }, [pagination]);
+
   return (
     <>
-      <UserTableFilter setData={setData} setIsLoading={setIsLoading} />
+      <UserTableFilter pagination={pagination} setData={setData} />
       <div style={{ maxWidth: '100%', overflowX: 'auto' }}>
         <table className="table-2 col-12 text-nowrap mt-10">
           <tbody>
@@ -74,7 +74,13 @@ export default function UsersTable() {
           </tbody>
         </table>
       </div>
-      <TablePagination />
+      <TablePagination
+        pagination={{
+          ...pagination,
+          total: data?.total,
+        }}
+        setPagination={setPagination}
+      />
     </>
   );
 }
