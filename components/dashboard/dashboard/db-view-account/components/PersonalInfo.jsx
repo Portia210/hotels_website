@@ -1,14 +1,14 @@
 import CountryList from '@/components/common/CountryList/CountryList';
+import AvatarUploader from '@/components/dashboard/dashboard/db-settings/components/AvatarUploader';
+import UserPlansDropdown from '@/components/dashboard/dashboard/db-user-management/components/UsersTable/UserPlansDropdown';
 import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
 import useUsers from '@/hooks/useUsers';
 import { UserStatus } from '@/utils/roleCheck';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import AvatarUploader from '@/components/dashboard/dashboard/db-settings/components/AvatarUploader';
-import UserPlansDropdown from '@/components/dashboard/dashboard/db-user-management/components/UsersTable/UserPlansDropdown';
-import { useRouter } from 'next/navigation';
 
 const PersonalInfo = ({ clerkId }) => {
   const router = useRouter();
@@ -28,11 +28,25 @@ const PersonalInfo = ({ clerkId }) => {
     mutationFn: () => {
       return upgradeUserPlan(newPlan, clerkId);
     },
+    onSuccess: async () => {
+      toast.success('Plan upgrade Successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      await refetch();
+    },
   });
 
   const deleteAccountMutation = useMutation({
-    mutationFn: (userId, status) => {
-      return updateUserStatus(userId, status);
+    mutationFn: () => {
+      return updateUserStatus(clerkId, UserStatus.DELETED);
+    },
+    onSuccess: () => {
+      toast.success('User deteled', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      router.push('/dashboard/db-user-management');
     },
   });
 
@@ -75,23 +89,11 @@ const PersonalInfo = ({ clerkId }) => {
   const upgradePlan = async () => {
     if (!newPlan || upgradePlanMutation.isLoading) return;
     upgradePlanMutation.mutate();
-    toast.success('Plan upgrade Successfully', {
-      position: 'bottom-right',
-      autoClose: 3000,
-    });
   };
 
   const deleteUser = async () => {
     if (deleteAccountMutation.isLoading) return;
-    deleteAccountMutation.mutate({
-      userId: clerkId,
-      status: UserStatus.DELETED,
-    });
-    toast.success('User deteled', {
-      position: 'bottom-right',
-      autoClose: 3000,
-    });
-    router.push('/dashboard/db-user-management');
+    deleteAccountMutation.mutate();
   };
 
   useEffect(() => {
