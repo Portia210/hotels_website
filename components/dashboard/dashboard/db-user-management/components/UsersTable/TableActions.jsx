@@ -4,6 +4,7 @@ import { UserStatus } from '@/utils/roleCheck';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import ActionModal from './ActionModal';
+import { useRouter } from 'next/navigation';
 
 const getBanText = status => {
   if (status === UserStatus.ACTIVE) {
@@ -13,6 +14,7 @@ const getBanText = status => {
 };
 
 export default function TableActions({ row }) {
+  const router = useRouter();
   const { updateUserStatus } = useUsers();
 
   const banText = getBanText(row.status);
@@ -29,14 +31,16 @@ export default function TableActions({ row }) {
     );
 
     [...tooltipTriggerList].map(tooltipTriggerEl => {
-      return new Tooltip(tooltipTriggerEl, {
-        title: banText,
-      });
+      return new Tooltip(tooltipTriggerEl);
     });
   };
 
-  const onUpdateUser = () => {
-    console.log('Update user', row);
+  const onUpdateUser = id => {
+    const Tooltip = require('bootstrap/js/dist/tooltip');
+    const toolTipElement = document.getElementById(id);
+    const toolTip = Tooltip.getInstance(toolTipElement);
+    toolTip.hide();
+    router.push(`/dashboard/db-user-management/account/${row.clerkId}`);
   };
 
   const onConfirm = async () => {
@@ -63,14 +67,23 @@ export default function TableActions({ row }) {
         <span
           type="button"
           title="Edit"
+          id={`editUser${row.clerkId}`}
           data-bs-toggle="tooltip"
           data-bs-placement="top"
         >
-          <div onClick={onUpdateUser} className="cursor-pointer text-primary">
+          <div
+            onClick={() => onUpdateUser(`editUser${row.clerkId}`)}
+            className="cursor-pointer text-primary"
+          >
             <i className="bi bi-pencil-square text-16"></i>
           </div>
         </span>
-        <span type="button" data-bs-toggle="tooltip" data-bs-placement="top">
+        <span
+          type="button"
+          title={banText}
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+        >
           {row.status === UserStatus.ACTIVE && (
             <div
               type="button"
