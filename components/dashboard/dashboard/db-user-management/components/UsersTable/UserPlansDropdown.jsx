@@ -19,7 +19,7 @@ export default function UserPlansDropdown({ value, onChange }) {
       </option>
       {data?.map(plan => (
         <option key={plan.name} value={plan.name}>
-          {plan.name}
+          {plan.label}
         </option>
       ))}
     </select>

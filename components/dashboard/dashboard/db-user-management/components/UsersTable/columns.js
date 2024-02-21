@@ -76,7 +76,7 @@ export const columns = [
       align: 'center',
     },
     cell: props => {
-      return <span>{props.getValue().name}</span>;
+      return <span>{props.getValue().label}</span>;
     },
   },
   {
