@@ -7,7 +7,8 @@ export const columns = [
     header: '#',
     size: 50,
     cell: props => {
-      return <span>{props.row.index + 1}</span>;
+      const pageIndex = props.table.getState()?.pagination?.pageIndex || 0;
+      return <span>{props.row.index + pageIndex + 1}</span>;
     },
   },
   {
