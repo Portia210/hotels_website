@@ -1,20 +1,20 @@
 import React from 'react';
 import { planContents } from './plans';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const Plan = props => {
-  const t = useTranslations();
+  const { t, isReverse } = props;
   return (
     <div className="card shadow-sm">
       <div className="card-header">
         <h4 className="my-0 font-weight-normal">{props.header}</h4>
       </div>
-      <div className="card-body">
+      <div className="card-body" dir={isReverse ? 'rtl' : 'ltr'}>
         <h1 className="card-title pricing-card-title">
           {!isNaN(props.price) ? (
             <>
               {`${props.price} ${props.currency || ''}`}
-              <small className="text-muted">{t('Pricing.permonth')}</small>
+              <small className="text-muted">/{t('Pricing.permonth')}</small>
             </>
           ) : (
             <>{`${props.price} ${props.currency || ''}`}</>
@@ -39,10 +39,15 @@ const Plan = props => {
 };
 
 const Plans = () => {
-  const plans = planContents.map((obj, i) => {
+  const t = useTranslations();
+  const locale = useLocale();
+  const isReverse = locale === 'he';
+  const plans = planContents(t).map((obj, i) => {
     return (
       <div key={obj.header} className="col-sm-6 col-md-4">
         <Plan
+          t={t}
+          isReverse={isReverse}
           header={obj.header}
           price={obj.price}
           currency={obj.currency}

@@ -96,6 +96,16 @@
     "less": "Less"
   },
   "Pricing": {
-    "permonth": "/ mo"
+    "permonth": " mo",
+    "searchPerDay": "searches per day",
+    "shortlinkPerMonth": "short links per month",
+    "emailSupport": "Email support",
+    "premiumSupport": "Premium support",
+    "allFeatures": "All Features access",
+    "plans": {
+      "standard": "Standard",
+      "advanced": "Advanced",
+      "custom": "Custom"
+    }
   }
 }

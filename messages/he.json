@@ -96,6 +96,16 @@
     "less": "פחות"
   },
   "Pricing": {
-    "permonth": "/ ש'ח"
+    "permonth": " ש'ח",
+    "searchPerDay": "חיפושים ביום",
+    "shortlinkPerMonth": "קיצורי קישורים בחודש",
+    "emailSupport": "תמיכה באימייל, ובוואצפ",
+    "premiumSupport": "Premium support",
+    "allFeatures": "גישה לכל הפיצ'רים",
+    "plans": {
+      "standard": "סטנדרט",
+      "advanced": "מתקדם",
+      "custom": "התאמה אישית"
+    }
   }
 }
