@@ -22,8 +22,10 @@ const ShortenLink = () => {
 
       <section className="layout-pt-lg layout-pb-lg bg-blue-2">
         <div className="container">
-          <div className="d-flex justify-content-center">
-            <PricingSection />
+          <div className="row">
+            <div className="col-12">
+              <PricingSection />
+            </div>
           </div>
         </div>
       </section>
