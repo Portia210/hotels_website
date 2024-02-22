@@ -9,15 +9,18 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import UserRolesDropdown from '../../db-user-management/components/UsersTable/UserRolesDropdown';
 
 const PersonalInfo = ({ clerkId }) => {
   const router = useRouter();
   const { t, isReverse } = useTrans();
-  const { getUserById, updateUserStatus, updateUserInfo } = useUsers();
+  const { getUserById, updateUserStatus, updateUserInfo, updateUserRole } =
+    useUsers();
   const { upgradeUserPlan } = useUserPlans();
   const [user, setUser] = useState({});
   const [selectedCountry, setSelectedCountry] = useState({});
   const [newPlan, setNewPlan] = useState();
+  const [newRole, setNewRole] = useState();
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['fetchUser'],
@@ -50,6 +53,19 @@ const PersonalInfo = ({ clerkId }) => {
     },
   });
 
+  const updateUserRoleMutation = useMutation({
+    mutationFn: ({ userId, role }) => {
+      return updateUserRole(userId, role);
+    },
+    onSuccess: async () => {
+      toast.success('Role update successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      await refetch();
+    },
+  });
+
   const deleteAccountMutation = useMutation({
     mutationFn: () => {
       return updateUserStatus(clerkId, UserStatus.DELETED);
@@ -63,19 +79,23 @@ const PersonalInfo = ({ clerkId }) => {
     },
   });
 
-  const onUpdateUserInfo = async e => {
-    if (updateUserInfoMutation.isLoading) return;
+  const onUpdateUserInfo = async () => {
+    if (updateUserInfoMutation.isLoading || updateUserRoleMutation.isLoading)
+      return;
     try {
       const agentNumber = document.querySelector(
         'input[name=agentNumber]',
       ).value;
       if (!agentNumber) return;
-
-      const data = {
-        userId: clerkId,
-        agentNumber,
-      };
-      updateUserInfoMutation.mutate(data);
+      if (newRole) {
+        updateUserRoleMutation.mutate({ userId: clerkId, role: newRole });
+      }
+      if (user.agentNumber !== agentNumber) {
+        updateUserInfoMutation.mutate({
+          userId: clerkId,
+          agentNumber,
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -206,6 +226,17 @@ const PersonalInfo = ({ clerkId }) => {
                 <UserPlansDropdown
                   value={newPlan || user?.subscription}
                   onChange={val => setNewPlan(val)}
+                />
+              </div>
+            </div>
+            {/* End col-6 */}
+
+            <div className="col-6">
+              <div className="form-input">
+                <label className="lh-1 text-16">Role</label>
+                <UserRolesDropdown
+                  value={newRole || user?.role}
+                  onChange={val => setNewRole(val)}
                 />
               </div>
             </div>
