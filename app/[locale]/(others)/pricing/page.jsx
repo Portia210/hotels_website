@@ -9,7 +9,7 @@ export const metadata = {
     "Make your web links shorter and easier to share. It's simple, quick, and helps your messages look neat and elegant",
 };
 
-const ShortenLink = () => {
+const PricingPage = () => {
   return (
     <>
       {/* End Page Title */}
@@ -20,7 +20,7 @@ const ShortenLink = () => {
       <DefaultHeader />
       {/* End Header 1 */}
 
-      <section className="layout-pt-lg layout-pb-lg bg-blue-2">
+      <section className="layout-pt-lg layout-pb-lg bg-light">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -34,4 +34,4 @@ const ShortenLink = () => {
     </>
   );
 };
-export default dynamic(() => Promise.resolve(ShortenLink), { ssr: false });
+export default dynamic(() => Promise.resolve(PricingPage), { ssr: false });

@@ -94,5 +94,8 @@
     "citiesIn": "Cities in ",
     "more": "More",
     "less": "Less"
+  },
+  "Pricing": {
+    "permonth": "/ mo"
   }
 }

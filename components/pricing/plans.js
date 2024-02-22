@@ -1,7 +1,8 @@
 export const planContents = [
   {
     header: 'Standard',
-    price: 0,
+    price: 80,
+    currency: '₪',
     features: [
       '25 searches per day',
       '500 short links per month',
@@ -13,7 +14,8 @@ export const planContents = [
   },
   {
     header: 'Advanced',
-    price: 15,
+    price: 150,
+    currency: '₪',
     features: [
       '50 searches per day',
       '1000 short links per month',
@@ -25,7 +27,7 @@ export const planContents = [
   },
   {
     header: 'Custom',
-    price: 29,
+    price: 'Contact us',
     features: [
       'Everything in Advanced',
       'Unlimited short links',

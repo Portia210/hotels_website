@@ -80,6 +80,7 @@ export default function ShortLinkInput() {
             id="linkInput"
             className={`text-primary text-truncate text-20`}
             required
+            autoComplete="off"
             value={linkInput}
             placeholder={"Enter long link here"}
             onInput={(e) => setLinkInput(e.target.value)}

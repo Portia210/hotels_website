@@ -1,7 +1,9 @@
 import React from 'react';
 import { planContents } from './plans';
+import { useTranslations } from 'next-intl';
 
 const Plan = props => {
+  const t = useTranslations();
   return (
     <div className="card shadow-sm">
       <div className="card-header">
@@ -9,10 +11,16 @@ const Plan = props => {
       </div>
       <div className="card-body">
         <h1 className="card-title pricing-card-title">
-          {`$${props.price}`}
-          <small className="text-muted">/ mo</small>
+          {!isNaN(props.price) ? (
+            <>
+              {`${props.price} ${props.currency || ''}`}
+              <small className="text-muted">{t('Pricing.permonth')}</small>
+            </>
+          ) : (
+            <>{`${props.price} ${props.currency || ''}`}</>
+          )}
         </h1>
-        <ul className="list-unstyled mt-3 mb-4">
+        <ul className="list-unstyled mt-3 mb-10">
           {props.features.map((feature, i) => (
             <li key={i}>{feature}</li>
           ))}
@@ -37,6 +45,7 @@ const Plans = () => {
         <Plan
           header={obj.header}
           price={obj.price}
+          currency={obj.currency}
           features={obj.features}
           buttonLabel={obj.buttonLabel}
           outline={obj.outline}
