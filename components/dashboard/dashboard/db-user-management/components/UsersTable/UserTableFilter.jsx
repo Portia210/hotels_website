@@ -4,17 +4,20 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import UserPlansDropdown from './UserPlansDropdown';
 import UserStatusDropdown from './UserStatusDropdown';
+import UserRolesDropdown from './UserRolesDropdown';
 
+const defaultForm = {
+  email: '',
+  plan: '',
+  agentNumber: '',
+  status: '',
+  role: '',
+}
 export default function UserTableFilter({ pagination, setData }) {
   const { fetchUsers } = useUsers();
   const [isReset, setIsReset] = useState(false);
-  const [formValues, setFormValues] = useState({
-    email: '',
-    plan: '',
-    agentNumber: '',
-    status: '',
-  });
-  const { email, plan, agentNumber, status } = formValues;
+  const [formValues, setFormValues] = useState(defaultForm);
+  const { email, plan, agentNumber, status, role } = formValues;
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['fetchUsers'],
     queryFn: () =>
@@ -26,12 +29,7 @@ export default function UserTableFilter({ pagination, setData }) {
   });
 
   const onReset = async () => {
-    setFormValues({
-      email: '',
-      plan: '',
-      agentNumber: '',
-      status: '',
-    });
+    setFormValues(defaultForm);
     setIsReset(true);
   };
 
@@ -83,6 +81,13 @@ export default function UserTableFilter({ pagination, setData }) {
         <UserStatusDropdown
           value={status}
           onChange={value => setFormValues({ ...formValues, status: value })}
+        />
+      </div>
+      <div className="form-input col-sm-12 col-md-4">
+        <label className="lh-1 text-16">Role</label>
+        <UserRolesDropdown
+          value={role}
+          onChange={value => setFormValues({ ...formValues, role: value })}
         />
       </div>
       <div className="form-input col-sm-12 col-md-4">

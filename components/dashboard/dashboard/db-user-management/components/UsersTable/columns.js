@@ -31,6 +31,18 @@ export const columns = [
     },
   },
   {
+    accessorKey: 'role',
+    header: 'Role',
+    size: 100,
+    meta: {
+      headerAlign: 'center',
+      align: 'center',
+    },
+    cell: props => {
+      return <span>{props.getValue()}</span>;
+    },
+  },
+  {
     accessorKey: 'agentNumber',
     header: 'Agent Number',
     size: 180,
