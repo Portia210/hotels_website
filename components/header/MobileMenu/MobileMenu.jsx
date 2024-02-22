@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import useTrans from "@/hooks/useTrans";
-import { useRouter } from "next/navigation";
-import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
-import CurrencyMobileMenu from "./CurrencyMobileMenu";
-import LanguageMobileMenu from "./LanguageMobileMenu";
+import useTrans from '@/hooks/useTrans';
+import { useRouter } from 'next/navigation';
+import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
+import CurrencyMobileMenu from './CurrencyMobileMenu';
+import LanguageMobileMenu from './LanguageMobileMenu';
 
 const MobileMenu = ({ isReverse }) => {
   const { t } = useTrans();
@@ -15,7 +15,7 @@ const MobileMenu = ({ isReverse }) => {
   return (
     <>
       <div className="pro-header d-flex align-items-center justify-between border-bottom-light">
-        <Link href="/">
+        <Link href="/" style={{ width: 50 }}>
           <img src="/img/general/logo-dark.svg" alt="brand" />
         </Link>
         {/* End logo */}
@@ -43,7 +43,7 @@ const MobileMenu = ({ isReverse }) => {
             component={
               <CurrencyMobileMenu
                 isReverse={isReverse}
-                textTran={t("Header.currency")}
+                textTran={t('Header.currency')}
               />
             }
           >
@@ -53,27 +53,27 @@ const MobileMenu = ({ isReverse }) => {
             component={
               <LanguageMobileMenu
                 isReverse={isReverse}
-                textTran={t("Header.language")}
+                textTran={t('Header.language')}
               />
             }
           />
         </Menu>
         <div className="border-bottom mb-20 mt-20"></div>
         <Menu>
-          <MenuItem onClick={() => router.push("/dashboard/db-account")}>
-            {t("Header.dashboard")}
+          <MenuItem onClick={() => router.push('/dashboard/db-account')}>
+            {t('Header.dashboard')}
           </MenuItem>
-          <MenuItem onClick={() => router.push("/")}>
-            {t("Header.home")}
+          <MenuItem onClick={() => router.push('/')}>
+            {t('Header.home')}
           </MenuItem>
-          <MenuItem onClick={() => router.push("/user-guide")}>
-            {t("Header.userGuide")}
+          <MenuItem onClick={() => router.push('/user-guide')}>
+            {t('Header.userGuide')}
           </MenuItem>
-          <MenuItem onClick={() => router.push("/shorten-link")}>
-            {t("Header.shortenLink")}
+          <MenuItem onClick={() => router.push('/shorten-link')}>
+            {t('Header.shortenLink')}
           </MenuItem>
-          <MenuItem onClick={() => router.push("/contact")}>
-            {t("Header.contact")}
+          <MenuItem onClick={() => router.push('/contact')}>
+            {t('Header.contact')}
           </MenuItem>
         </Menu>
       </Sidebar>
