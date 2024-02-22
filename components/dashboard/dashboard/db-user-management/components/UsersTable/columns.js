@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import TableActions from './TableActions';
 import { UserStatus } from '@/utils/roleCheck';
+import useUserPlanStore from '@/store/useUserPlansStore';
 
 export const columns = [
   {
@@ -76,7 +77,9 @@ export const columns = [
       align: 'center',
     },
     cell: props => {
-      return <span>{props.getValue().label}</span>;
+      const plans = useUserPlanStore.getState().plans;
+      const label = plans.find(plan => plan._id === props.getValue())?.label;
+      return <span>{label}</span>;
     },
   },
   {
