@@ -29,7 +29,7 @@ export const planContents = [
     features: [
       'Everything in Advanced',
       'Unlimited short links',
-      'Email support',
+      'Premium support',
       'Help center access',
     ],
     buttonLabel: 'Contact Sales',

@@ -45,7 +45,7 @@ const Plans = () => {
     );
   });
 
-  return <div className="row text-center gx-5">{plans}</div>;
+  return <div className="row text-center g-5">{plans}</div>;
 };
 
 export default Plans;
