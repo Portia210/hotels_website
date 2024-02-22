@@ -76,11 +76,33 @@ const useUsers = () => {
     return response;
   };
 
+  const updateUserRole = async (userId, role) => {
+    if (!userId) throw Error('UserId is required!');
+    if (!role) throw Error('Role is required!');
+    const response = await axios
+      .post(
+        `${TOURCOMPARE_BE_URL}/api/v1/users/assign-role`,
+        {
+          userId,
+          role,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+          withCredentials: true,
+        },
+      )
+      .then(res => res.data);
+    return response;
+  };
+
   return {
     fetchUsers,
     getUserById,
     updateUserStatus,
     updateUserInfo,
+    updateUserRole
   };
 };
 
