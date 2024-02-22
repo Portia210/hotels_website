@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 const PersonalInfo = ({ clerkId }) => {
   const router = useRouter();
   const { t, isReverse } = useTrans();
-  const { getUserById, updateUserStatus } = useUsers();
+  const { getUserById, updateUserStatus, updateUserInfo } = useUsers();
   const { upgradeUserPlan } = useUserPlans();
   const [user, setUser] = useState({});
   const [selectedCountry, setSelectedCountry] = useState({});
@@ -37,6 +37,19 @@ const PersonalInfo = ({ clerkId }) => {
     },
   });
 
+  const updateUserInfoMutation = useMutation({
+    mutationFn: data => {
+      return updateUserInfo(data);
+    },
+    onSuccess: async () => {
+      toast.success('Agent number update successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      await refetch();
+    },
+  });
+
   const deleteAccountMutation = useMutation({
     mutationFn: () => {
       return updateUserStatus(clerkId, UserStatus.DELETED);
@@ -50,39 +63,21 @@ const PersonalInfo = ({ clerkId }) => {
     },
   });
 
-  const onUpdateInfo = async e => {
-    const toastId = toast.success("Updating user's profile", {
-      position: 'bottom-right',
-      isLoading: true,
-    });
+  const onUpdateUserInfo = async e => {
+    if (updateUserInfoMutation.isLoading) return;
     try {
-      e.preventDefault();
-      const data = {};
-      for (const key of e.target) {
-        if (key?.name) data[key.name] = key.value;
-      }
-      await user.update({
-        firstName: data?.firstName,
-        lastName: data?.lastName,
-        unsafeMetadata: {
-          primaryPhoneNumber: data?.primaryPhoneNumber,
-          agentNumber: data?.agentNumber,
-          country: selectedCountry,
-        },
-      });
-      toast.success('Successfully updated profile', {
-        position: 'bottom-right',
-        autoClose: 3000,
-      });
+      const agentNumber = document.querySelector(
+        'input[name=agentNumber]',
+      ).value;
+      if (!agentNumber) return;
+
+      const data = {
+        userId: clerkId,
+        agentNumber,
+      };
+      updateUserInfoMutation.mutate(data);
     } catch (error) {
-      toast.error('Oops something went wrong!', {
-        position: 'bottom-right',
-        hideProgressBar: true,
-        autoClose: 3000,
-      });
       console.error(error);
-    } finally {
-      toast.dismiss(toastId);
     }
   };
 
@@ -102,10 +97,6 @@ const PersonalInfo = ({ clerkId }) => {
       setSelectedCountry(data.country);
     }
   }, [data]);
-
-  useEffect(() => {
-    console.log('New plan', newPlan);
-  }, [newPlan]);
 
   if (isLoading) return null;
 
@@ -225,7 +216,7 @@ const PersonalInfo = ({ clerkId }) => {
 
         <div className="d-inline-block pt-30 mr-10">
           <button
-            type="submit"
+            onClick={onUpdateUserInfo}
             className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
           >
             {t('Dashboard.General.saveChanges')}

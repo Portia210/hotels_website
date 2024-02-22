@@ -59,10 +59,28 @@ const useUsers = () => {
     return response;
   };
 
+  const updateUserInfo = async userInfo => {
+    if (!userInfo) throw Error('userInfo is required!');
+    const response = await axios
+      .post(
+        `${TOURCOMPARE_BE_URL}/api/v1/users/manager-update-info`,
+        userInfo,
+        {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+          withCredentials: true,
+        },
+      )
+      .then(res => res.data);
+    return response;
+  };
+
   return {
     fetchUsers,
     getUserById,
     updateUserStatus,
+    updateUserInfo,
   };
 };
 
