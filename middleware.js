@@ -5,6 +5,7 @@ const publicRoutes = [
   "/",
   "/en",
   "/he",
+  "/:locale/pricing",
   "/:locale/sso-callback",
   "/:locale/login",
   "/:locale/signup",
