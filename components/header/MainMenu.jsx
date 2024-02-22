@@ -22,6 +22,10 @@ const MainMenu = ({ style = "" }) => {
           <Link href="/shorten-link">{t("Header.shortenLink")}</Link>
         </li>
 
+        <li className={pathname === "/pricing" ? "current" : ""}>
+          <Link href="/pricing">{t("Header.pricing")}</Link>
+        </li>
+
         <li className={pathname === "/contact" ? "current" : ""}>
           <Link href="/contact">{t("Header.contact")}</Link>
         </li>
