@@ -213,7 +213,7 @@ const PersonalInfo = ({ clerkId }) => {
               <div className="form-input">
                 <label className="lh-1 text-16">Plan</label>
                 <UserPlansDropdown
-                  value={newPlan || user?.subscription?.name}
+                  value={newPlan || user?.subscription}
                   onChange={val => setNewPlan(val)}
                 />
               </div>

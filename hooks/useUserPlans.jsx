@@ -12,13 +12,13 @@ const useUserPlans = () => {
     return response;
   };
 
-  const selfUpgradePlan = async planName => {
-    if (!planName) throw Error('Plan name is required!');
+  const selfUpgradePlan = async planId => {
+    if (!planId) throw Error('Planid is required!');
     const response = await axios
       .post(
         `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/upgrade`,
         {
-          planName,
+          planId,
         },
         {
           headers: {
@@ -31,14 +31,14 @@ const useUserPlans = () => {
     return response;
   };
 
-  const upgradeUserPlan = async (planName, userId) => {
-    if (!planName) throw Error('Plan name is required!');
+  const upgradeUserPlan = async (planId, userId) => {
+    if (!planId) throw Error('Plan name is required!');
     if (!userId) throw Error('User Id is required!');
     const response = await axios
       .post(
         `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/manager-upgrade`,
         {
-          planName,
+          planId,
           userId,
         },
         {
