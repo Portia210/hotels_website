@@ -15,7 +15,15 @@ const MobileMenu = ({ isReverse }) => {
   return (
     <>
       <div className="pro-header d-flex align-items-center justify-between border-bottom-light">
-        <Link href="/" style={{ width: 180 }}>
+        <Link
+          href="/"
+          style={{
+            width: '100%',
+            height: 'auto',
+            maxWidth: 180,
+            maxHeight: 50,
+          }}
+        >
           <img src="/img/general/logo-dark.svg" alt="brand" />
         </Link>
         {/* End logo */}

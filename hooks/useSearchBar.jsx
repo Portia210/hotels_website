@@ -71,7 +71,7 @@ const useSearchBar = () => {
       searchInput.sessionId = sessionId;
       searchInput.destination = JSON.stringify(searchInput.destination);
       const params = new URLSearchParams(searchInput);
-      // window.location.href = `${path}?${params.toString()}`;
+      window.location.href = `${path}?${params.toString()}`;
     }
   };
 

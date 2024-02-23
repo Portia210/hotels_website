@@ -58,7 +58,16 @@ const Header1 = () => {
                   href="/"
                   className={`header-logo ${isReverse ? 'ml-10' : 'mr-10'}`}
                 >
-                  <img style={{ width: 160 }} src="/img/general/home-logo.svg" alt="logo icon" />
+                  <img
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      maxWidth: 180,
+                      maxHeight: 50,
+                    }}
+                    src="/img/general/home-logo.svg"
+                    alt="logo icon"
+                  />
                 </Link>
                 {/* End logo */}
 
