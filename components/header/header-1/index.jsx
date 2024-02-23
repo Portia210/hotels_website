@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { isActiveLink } from "@/utils/linkActiveChecker";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import CurrencyMegaMenu from "../CurrencyMegaMenu";
-import LanguageMegaMenu from "../LanguageMegaMenu";
-import MainMenu from "../MainMenu";
-import MobileMenu from "../MobileMenu/MobileMenu";
-import LoginBtns from "./LoginBtns";
-import { useUser } from "@clerk/nextjs";
-import useTrans from "@/hooks/useTrans";
+import { isActiveLink } from '@/utils/linkActiveChecker';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import CurrencyMegaMenu from '../CurrencyMegaMenu';
+import LanguageMegaMenu from '../LanguageMegaMenu';
+import MainMenu from '../MainMenu';
+import MobileMenu from '../MobileMenu/MobileMenu';
+import LoginBtns from './LoginBtns';
+import { useUser } from '@clerk/nextjs';
+import useTrans from '@/hooks/useTrans';
 
 const Header1 = () => {
   const { isSignedIn } = useUser();
@@ -28,37 +28,37 @@ const Header1 = () => {
   };
 
   useEffect(() => {
-    const isHome = isActiveLink("/", pathname);
+    const isHome = isActiveLink('/', pathname);
     if (!isHome) {
       return setNavbar(true);
     } else {
-      window.addEventListener("scroll", changeBackground);
+      window.addEventListener('scroll', changeBackground);
     }
     return () => {
-      window.removeEventListener("scroll", changeBackground);
+      window.removeEventListener('scroll', changeBackground);
     };
   }, []);
 
   return (
     <>
-      <header className={`header ${navbar ? "bg-dark-1 is-sticky" : ""}`}>
+      <header className={`header ${navbar ? 'bg-dark-1 is-sticky' : ''}`}>
         <div className="header__container px-30 sm:px-20">
           <div
             className={`row justify-between items-center ${
-              isReverse ? "flex-row-reverse" : ""
+              isReverse ? 'flex-row-reverse' : ''
             }`}
           >
             <div className="col-auto">
               <div
                 className={`d-flex items-center ${
-                  isReverse ? "flex-row-reverse" : ""
+                  isReverse ? 'flex-row-reverse' : ''
                 }`}
               >
                 <Link
                   href="/"
-                  className={`header-logo ${isReverse ? "ml-20" : "mr-20"}`} 
+                  className={`header-logo ${isReverse ? 'ml-10' : 'mr-10'}`}
                 >
-                  <img src="/img/general/home-logo.png" alt="logo icon" />
+                  <img style={{ width: 160 }} src="/img/general/home-logo.svg" alt="logo icon" />
                 </Link>
                 {/* End logo */}
 
@@ -66,7 +66,7 @@ const Header1 = () => {
                   <div className="header-menu__content">
                     <MainMenu
                       style={`text-white ${
-                        isReverse ? "flex-row-reverse" : ""
+                        isReverse ? 'flex-row-reverse' : ''
                       }`}
                     />
                   </div>
@@ -80,12 +80,12 @@ const Header1 = () => {
             <div className="col-auto">
               <div
                 className={`d-flex items-center ${
-                  isReverse ? "flex-row-reverse" : ""
+                  isReverse ? 'flex-row-reverse' : ''
                 }`}
               >
                 <div
                   className={`row x-gap-20 items-center ${
-                    isReverse ? "flex-row-reverse" : ""
+                    isReverse ? 'flex-row-reverse' : ''
                   } md:d-none`}
                 >
                   <CurrencyMegaMenu textClass="text-white" />
@@ -110,7 +110,7 @@ const Header1 = () => {
                 {/* Start mobile menu icon */}
                 <div
                   className={`d-none lg:d-flex x-gap-20 items-center text-white ${
-                    isReverse ? "flex-row-reverse pr-30" : "pl-30"
+                    isReverse ? 'flex-row-reverse pr-30' : 'pl-30'
                   }`}
                 >
                   {!isSignedIn && (
