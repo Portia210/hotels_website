@@ -1,5 +1,5 @@
 "use client";
-import DropdownSelelctBar from "@/components/hotel-list/common/DropdownSelelctBar";
+import DropdownSelectStar from "@/components/hotel-list/common/DropdownSelectStar";
 import Pagination from "@/components/hotel-list/common/Pagination";
 import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
 import useFilterBar from "@/hooks/useFilterBar";
@@ -80,7 +80,7 @@ export default function ListHotels() {
                         </i>
                       </button>
                     </div>
-                    <DropdownSelelctBar
+                    <DropdownSelectStar
                       priceFilter={priceFilter}
                       setPriceFilter={setPriceFilter}
                       ratingFilter={ratingFilter}
