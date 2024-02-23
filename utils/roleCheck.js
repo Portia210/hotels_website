@@ -1,15 +1,15 @@
-import { currentUser, useUser } from "@clerk/nextjs";
+import { currentUser, useUser } from '@clerk/nextjs';
 
 export const UserStatus = {
-  BANNED: "BANNED",
-  DELETED: "DELETED",
-  ACTIVE: "ACTIVE",
+  BANNED: 'BANNED',
+  DELETED: 'DELETED',
+  ACTIVE: 'ACTIVE',
 };
 
 export const UserRoles = {
-  USER: "USER",
-  SITE_MANAGER: "SITE_MANAGER",
-  ADMIN: "ADMIN",
+  USER: 'USER',
+  SITE_MANAGER: 'SITE_MANAGER',
+  ADMIN: 'ADMIN',
 };
 
 /**
@@ -34,7 +34,7 @@ export const checkUserStatus = async () => {
  * @param {string} role - User's role
  * @returns `true` if user role is equal to the given role
  */
-export const checkUserRole = async (allowRoles) => {
+export const checkUserRole = async allowRoles => {
   const user = await currentUser();
   const publicMetadata = user?.publicMetadata;
 
@@ -44,7 +44,7 @@ export const checkUserRole = async (allowRoles) => {
   return false;
 };
 
-export const checkUserRoleClient = (allowRoles) => {
+export const checkUserRoleClient = allowRoles => {
   const { user } = useUser();
   const publicMetadata = user?.publicMetadata;
 
@@ -52,4 +52,17 @@ export const checkUserRoleClient = (allowRoles) => {
     if (user && publicMetadata?.role === role) return true;
   }
   return false;
+};
+
+export const getUserRole = async () => {
+  const user = await currentUser();
+  const publicMetadata = user?.publicMetadata;
+  return publicMetadata?.role || null;
+};
+
+
+export const getUserRoleClient = () => {
+  const { user } = useUser();
+  const publicMetadata = user?.publicMetadata;
+  return publicMetadata?.role || 'ADMIN';
 };

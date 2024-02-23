@@ -9,9 +9,11 @@ import {
 import { useEffect, useState } from 'react';
 import TablePagination from './UsersTable/TablePagination';
 import UserTableFilter from './UsersTable/UserTableFilter';
-import { columns } from './UsersTable/columns';
+import { getColumns } from './UsersTable/columns';
+import { getUserRoleClient } from '@/utils/roleCheck';
 
 export default function UsersTable() {
+  const currentRole = getUserRoleClient();
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
     skip: 0,
@@ -21,7 +23,7 @@ export default function UsersTable() {
   });
 
   const table = useReactTable({
-    columns,
+    columns: getColumns(currentRole),
     data: data?.results || [],
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

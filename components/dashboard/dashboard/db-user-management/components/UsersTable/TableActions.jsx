@@ -1,6 +1,6 @@
 import useUsers from '@/hooks/useUsers';
 import eventEmitter from '@/utils/eventEmitter';
-import { UserStatus } from '@/utils/roleCheck';
+import { UserRoles, UserStatus } from '@/utils/roleCheck';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import ActionModal from './ActionModal';
@@ -13,7 +13,7 @@ const getBanText = status => {
   return 'Unban';
 };
 
-export default function TableActions({ row }) {
+export default function TableActions({ myRole, row }) {
   const router = useRouter();
   const { updateUserStatus } = useUsers();
 
@@ -57,6 +57,46 @@ export default function TableActions({ row }) {
     });
   };
 
+  const canBeBan = (myRole, targetRole) => {
+    if (myRole === UserRoles.ADMIN) return true;
+    if (myRole === UserRoles.SITE_MANAGER && targetRole === UserRoles.USER)
+      return true;
+    return false;
+  };
+
+  const renderBanIcon = () => {
+    if (!canBeBan(myRole, row.role)) return null;
+    return (
+      <span
+        type="button"
+        title={banText}
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+      >
+        {row.status === UserStatus.ACTIVE && (
+          <div
+            type="button"
+            className="cursor-pointer text-warning"
+            data-bs-toggle="modal"
+            data-bs-target={`#actionModal${row.clerkId}`}
+          >
+            <i className="bi bi-slash-circle text-16"></i>
+          </div>
+        )}
+        {row.status === UserStatus.BANNED && (
+          <div
+            type="button"
+            className="cursor-pointer text-info"
+            data-bs-toggle="modal"
+            data-bs-target={`#actionModal${row.clerkId}`}
+          >
+            <i className="bi bi-plus-circle text-16"></i>
+          </div>
+        )}
+      </span>
+    );
+  };
+
   useEffect(() => {
     renderTooltip();
   }, [row?.status]);
@@ -78,33 +118,7 @@ export default function TableActions({ row }) {
             <i className="bi bi-pencil-square text-16"></i>
           </div>
         </span>
-        <span
-          type="button"
-          title={banText}
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-        >
-          {row.status === UserStatus.ACTIVE && (
-            <div
-              type="button"
-              className="cursor-pointer text-warning"
-              data-bs-toggle="modal"
-              data-bs-target={`#actionModal${row.clerkId}`}
-            >
-              <i className="bi bi-slash-circle text-16"></i>
-            </div>
-          )}
-          {row.status === UserStatus.BANNED && (
-            <div
-              type="button"
-              className="cursor-pointer text-info"
-              data-bs-toggle="modal"
-              data-bs-target={`#actionModal${row.clerkId}`}
-            >
-              <i className="bi bi-plus-circle text-16"></i>
-            </div>
-          )}
-        </span>
+        {renderBanIcon()}
       </div>
       <ActionModal
         id={row.clerkId}

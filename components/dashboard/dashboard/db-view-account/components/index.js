@@ -6,8 +6,12 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import PersonalInfo from './PersonalInfo';
+import { getUserRoleClient } from '@/utils/roleCheck';
 
 const Index = () => {
+  const { t } = useTrans();
+  const params = useParams();
+  const clerkId = params.id;
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -18,15 +22,12 @@ const Index = () => {
         },
       }),
   );
-
-  const params = useParams();
-  const clerkId = params.id;
-
-  const { t } = useTrans();
+  const currentRole = getUserRoleClient();
+  
   const tabs = [
     {
       label: t('Dashboard.PersonalInfo.personalInfoLabel'),
-      content: <PersonalInfo clerkId={clerkId} />,
+      content: <PersonalInfo clerkId={clerkId} currentRole={currentRole}/>,
     },
   ];
 
