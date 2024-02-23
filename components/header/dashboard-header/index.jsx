@@ -42,7 +42,7 @@ const HeaderDashBoard = () => {
         <div className="header__container px-30 sm:px-20">
           <div className="-left-side">
             <Link href="/" className="header-logo">
-              <img style={{ width: 50 }} src="/img/general/logo-dark.svg" alt="logo icon" />
+              <img style={{ width: 180 }} src="/img/general/logo-dark.svg" alt="logo icon" />
             </Link>
             {/* End logo */}
           </div>
