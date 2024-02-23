@@ -13,7 +13,7 @@ const SignUpForm = () => {
   const [selectedCountry, setSelectedCountry] = useState();
   const router = useRouter();
   const { signUp, setActive } = useSignUp();
-  const { checkAgentNumber } = useSignUpForm();
+  const { checkEmailAgentNumber } = useSignUpForm();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -25,10 +25,8 @@ const SignUpForm = () => {
     if (data.password !== data.confirmPassword) {
       return setErrorMsg('Password is not matched');
     }
-    const isValid = await checkAgentNumber(data.agentNumber);
-    if (!isValid) {
-      return setErrorMsg('Agent number is invalid');
-    }
+    const invalidMsg = await checkEmailAgentNumber(data.email, data.agentNumber);
+    if (invalidMsg) return setErrorMsg(invalidMsg);
     await signUp
       .create({
         emailAddress: data.email,

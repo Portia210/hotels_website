@@ -2,14 +2,17 @@ import { TOURCOMPARE_BE_URL } from '@/constants/environment';
 import axios from 'axios';
 
 const useSignUpForm = () => {
-  const checkAgentNumber = async agentNumber => {
-    if (!agentNumber) return true;
-    return await axios
-      .get(
-        `${TOURCOMPARE_BE_URL}/api/v1/users/agent-number?agentNumber=${agentNumber}`,
-      )
-      .then(res => res.data);
+  const checkEmailAgentNumber = async (email, agentNumber) => {
+    if (!agentNumber) return;
+    const url = `${TOURCOMPARE_BE_URL}/api/v1/users/agent-number?agentNumber=${agentNumber}&email=${email}`;
+    return await axios.get(url).then(res => res.data);
   };
-  return { checkAgentNumber };
+  const checkAgentNumber = async (agentNumber) => {
+    if (!agentNumber) return;
+    const url = `${TOURCOMPARE_BE_URL}/api/v1/users/agent-number?agentNumber=${agentNumber}`;
+    return await axios.get(url).then(res => res.data);
+  };
+  
+  return { checkAgentNumber, checkEmailAgentNumber };
 };
 export default useSignUpForm;

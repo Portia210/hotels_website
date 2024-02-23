@@ -1,24 +1,23 @@
-import { useUser } from "@clerk/nextjs";
-import { toast } from "react-toastify";
-import AvatarUploader from "../../db-settings/components/AvatarUploader";
-import { useEffect, useState } from "react";
-import CountryList from "@/components/common/CountryList/CountryList";
-import useTrans from "@/hooks/useTrans";
-import { useLocale } from "next-intl";
+import { useUser } from '@clerk/nextjs';
+import { toast } from 'react-toastify';
+import AvatarUploader from '@/components/dashboard/dashboard/db-settings/components/AvatarUploader';
+import { useEffect, useState } from 'react';
+import CountryList from '@/components/common/CountryList/CountryList';
+import useTrans from '@/hooks/useTrans';
+import useSignUpForm from '@/hooks/useSignUpForm';
 
 const PersonalInfo = () => {
-  const locale = useLocale();
-  const isReverse = locale === "he";
-  const { t } = useTrans();
+  const { t, isReverse } = useTrans();
   const [file, setFile] = useState(null);
   const { user } = useUser();
+  const { checkAgentNumber } = useSignUpForm();
   const [selectedCountry, setSelectedCountry] = useState(
-    user?.unsafeMetadata?.country
+    user?.unsafeMetadata?.country,
   );
 
-  const onUpdateInfo = async (e) => {
+  const onUpdateInfo = async e => {
     const toastId = toast.success("Updating user's profile", {
-      position: "bottom-right",
+      position: 'bottom-right',
       isLoading: true,
     });
     try {
@@ -26,6 +25,14 @@ const PersonalInfo = () => {
       const data = {};
       for (const key of e.target) {
         if (key?.name) data[key.name] = key.value;
+      }
+      const inValidMsg = await checkAgentNumber(data.agentNumber);
+      if (inValidMsg) {
+        toast.error(inValidMsg, {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
+        return;
       }
       if (file) await user.setProfileImage({ file });
       await user.update({
@@ -37,13 +44,13 @@ const PersonalInfo = () => {
           country: selectedCountry,
         },
       });
-      toast.success("Successfully updated profile", {
-        position: "bottom-right",
+      toast.success('Successfully updated profile', {
+        position: 'bottom-right',
         autoClose: 3000,
       });
     } catch (error) {
-      toast.error("Oops something went wrong!", {
-        position: "bottom-right",
+      toast.error('Oops something went wrong!', {
+        position: 'bottom-right',
         hideProgressBar: true,
         autoClose: 3000,
       });
@@ -53,7 +60,7 @@ const PersonalInfo = () => {
     }
   };
 
-  const onUpdateProfileImage = async (file) => {
+  const onUpdateProfileImage = async file => {
     setFile(file);
   };
 
@@ -75,7 +82,7 @@ const PersonalInfo = () => {
 
         <div className="col-xl-9">
           <div className="row x-gap-20 y-gap-20 mb-5">
-            <div className={`col-md-6 ${isReverse && "order-2"}`}>
+            <div className={`col-md-6 ${isReverse && 'order-2'}`}>
               <div className="form-input ">
                 <input
                   type="text"
@@ -84,13 +91,13 @@ const PersonalInfo = () => {
                   defaultValue={user?.firstName}
                 />
                 <label className="lh-1 text-16 text-light-1">
-                  {t("Dashboard.PersonalInfo.firstName")}
+                  {t('Dashboard.PersonalInfo.firstName')}
                 </label>
               </div>
             </div>
             {/* End col-6 */}
 
-            <div className={`col-md-6 ${isReverse && "order-1"}`}>
+            <div className={`col-md-6 ${isReverse && 'order-1'}`}>
               <div className="form-input ">
                 <input
                   type="text"
@@ -99,7 +106,7 @@ const PersonalInfo = () => {
                   defaultValue={user?.lastName}
                 />
                 <label className="lh-1 text-16 text-light-1">
-                  {t("Dashboard.PersonalInfo.lastName")}
+                  {t('Dashboard.PersonalInfo.lastName')}
                 </label>
               </div>
             </div>
@@ -114,7 +121,7 @@ const PersonalInfo = () => {
                   defaultValue={user?.primaryEmailAddress?.emailAddress}
                 />
                 <label className="lh-1 text-16 text-light-1">
-                  {t("Dashboard.PersonalInfo.email")}
+                  {t('Dashboard.PersonalInfo.email')}
                 </label>
               </div>
             </div>
@@ -129,7 +136,7 @@ const PersonalInfo = () => {
                   defaultValue={user?.unsafeMetadata?.primaryPhoneNumber}
                 />
                 <label className="lh-1 text-16 text-light-1">
-                  {t("Dashboard.PersonalInfo.phoneNumber")}
+                  {t('Dashboard.PersonalInfo.phoneNumber')}
                 </label>
               </div>
             </div>
@@ -143,7 +150,7 @@ const PersonalInfo = () => {
                   defaultValue={user?.unsafeMetadata?.agentNumber}
                 />
                 <label className="lh-1 text-16 text-light-1">
-                  {t("Dashboard.PersonalInfo.agentNumber")}
+                  {t('Dashboard.PersonalInfo.agentNumber')}
                 </label>
               </div>
             </div>
@@ -153,7 +160,7 @@ const PersonalInfo = () => {
                   className="position-absolute lh-1 text-16 text-light-1"
                   style={{ marginTop: -8 }}
                 >
-                  {t("Dashboard.PersonalInfo.country")}
+                  {t('Dashboard.PersonalInfo.country')}
                 </label>
                 <CountryList
                   onCountrySelected={setSelectedCountry}
@@ -171,7 +178,7 @@ const PersonalInfo = () => {
             type="submit"
             className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
           >
-            {t("Dashboard.General.saveChanges")}
+            {t('Dashboard.General.saveChanges')}
             <div className="icon-arrow-top-right ml-15" />
           </button>
         </div>

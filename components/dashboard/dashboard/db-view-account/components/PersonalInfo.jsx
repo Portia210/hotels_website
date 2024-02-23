@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import UserRolesDropdown from '../../db-user-management/components/UsersTable/UserRolesDropdown';
+import useSignUpForm from '@/hooks/useSignUpForm';
 
 const PersonalInfo = ({ clerkId }) => {
   const router = useRouter();
@@ -17,6 +18,8 @@ const PersonalInfo = ({ clerkId }) => {
   const { getUserById, updateUserStatus, updateUserInfo, updateUserRole } =
     useUsers();
   const { upgradeUserPlan } = useUserPlans();
+  const { checkAgentNumber } = useSignUpForm();
+
   const [user, setUser] = useState({});
   const [selectedCountry, setSelectedCountry] = useState({});
   const [newPlan, setNewPlan] = useState();
@@ -87,6 +90,14 @@ const PersonalInfo = ({ clerkId }) => {
         'input[name=agentNumber]',
       ).value;
       if (!agentNumber) return;
+      const inValidMsg = await checkAgentNumber(agentNumber);
+      if (inValidMsg) {
+        toast.error(inValidMsg, {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
+        return;
+      }
       if (newRole) {
         updateUserRoleMutation.mutate({ userId: clerkId, role: newRole });
       }
