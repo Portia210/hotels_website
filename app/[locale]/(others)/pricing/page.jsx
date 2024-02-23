@@ -29,8 +29,10 @@ const PricingPage = () => {
             <div className="col-12">
               <div className="w-100 text-center mb-50 d-flex justify-content-center">
                 <div className="md:w-75 sm:w-100">
-                  <h1 className="text-30 fw-600 mb-10">{t('Pricing.title')}</h1>
-                  <h2 className="text-22 sm:text-16 fw-600">{t('Pricing.subtitle')}</h2>
+                  <h1 className="text-30 sm:text-26 fw-600 mb-10">{t('Pricing.title')}</h1>
+                  <h2 className="text-22 fw-600" style={{ maxWidth: 700 }}>
+                    {t('Pricing.subtitle')}
+                  </h2>
                 </div>
               </div>
             </div>

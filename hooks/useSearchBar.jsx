@@ -32,7 +32,6 @@ const useSearchBar = () => {
           },
         )
         .then(res => res.data);
-      if (sessionId.code === '0012') return router.push('/hotel-list/no-plan');
       return sessionId;
     } catch (error) {
       console.error('getSession error:::', error);
@@ -60,6 +59,7 @@ const useSearchBar = () => {
         destination: true,
       });
       const sessionId = await getSession(searchStore.searchInput);
+      if (sessionId.code === '0012') return router.push('/hotel-list/no-plan');
       let searchInput = cloneDeep(searchStore.searchInput);
       Cookies.set('searchInput', JSON.stringify(searchInput), {
         expires: 1,
