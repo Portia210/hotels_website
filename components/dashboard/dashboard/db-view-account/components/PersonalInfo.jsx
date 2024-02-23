@@ -4,7 +4,7 @@ import UserPlansDropdown from '@/components/dashboard/dashboard/db-user-manageme
 import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
 import useUsers from '@/hooks/useUsers';
-import { UserStatus } from '@/utils/roleCheck';
+import { UserRoles, UserStatus } from '@/utils/roleCheck';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -12,14 +12,13 @@ import { toast } from 'react-toastify';
 import UserRolesDropdown from '../../db-user-management/components/UsersTable/UserRolesDropdown';
 import useSignUpForm from '@/hooks/useSignUpForm';
 
-const PersonalInfo = ({ clerkId }) => {
+const PersonalInfo = ({ clerkId, currentRole }) => {
   const router = useRouter();
   const { t, isReverse } = useTrans();
   const { getUserById, updateUserStatus, updateUserInfo, updateUserRole } =
     useUsers();
   const { upgradeUserPlan } = useUserPlans();
   const { checkAgentNumber } = useSignUpForm();
-
   const [user, setUser] = useState({});
   const [selectedCountry, setSelectedCountry] = useState({});
   const [newPlan, setNewPlan] = useState();
@@ -226,6 +225,7 @@ const PersonalInfo = ({ clerkId }) => {
                 <CountryList
                   onCountrySelected={setSelectedCountry}
                   selectedItem={selectedCountry}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -241,16 +241,17 @@ const PersonalInfo = ({ clerkId }) => {
               </div>
             </div>
             {/* End col-6 */}
-
-            <div className="col-6">
-              <div className="form-input">
-                <label className="lh-1 text-16">Role</label>
-                <UserRolesDropdown
-                  value={newRole || user?.role}
-                  onChange={val => setNewRole(val)}
-                />
+            {currentRole == UserRoles.ADMIN && (
+              <div className="col-6">
+                <div className="form-input">
+                  <label className="lh-1 text-16">Role</label>
+                  <UserRolesDropdown
+                    value={newRole || user?.role}
+                    onChange={val => setNewRole(val)}
+                  />
+                </div>
               </div>
-            </div>
+            )}
             {/* End col-6 */}
           </div>
         </div>
