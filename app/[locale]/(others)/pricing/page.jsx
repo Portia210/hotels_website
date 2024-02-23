@@ -27,9 +27,11 @@ const PricingPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="text-center mb-50">
-                <h1 className="text-30 fw-600 mb-10">{t('Pricing.title')}</h1>
-                <h2 className="text-22 fw-600">{t('Pricing.subtitle')}</h2>
+              <div className="w-100 text-center mb-50 d-flex justify-content-center">
+                <div className="md:w-75 sm:w-100">
+                  <h1 className="text-30 fw-600 mb-10">{t('Pricing.title')}</h1>
+                  <h2 className="text-22 sm:text-16 fw-600">{t('Pricing.subtitle')}</h2>
+                </div>
               </div>
             </div>
             {/* End text-center */}

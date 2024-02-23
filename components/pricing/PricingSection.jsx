@@ -23,7 +23,7 @@ const Plan = props => {
         <ul className="list-unstyled mt-3 mb-10">
           {props.features.map((feature, i) => (
             <li key={i}>
-              <i className={`bi bi-check-circle ${isReverse ? 'ml-10': 'mr-10'}`}></i>
+              <i className={`bi bi-check-circle text-success ${isReverse ? 'ml-10': 'mr-10'}`}></i>
               {feature}
             </li>
           ))}
@@ -47,7 +47,7 @@ const Plans = () => {
   const isReverse = locale === 'he';
   const plans = planContents(t).map((obj, i) => {
     return (
-      <div key={obj.header} className="col-sm-6 col-md-4">
+      <div key={obj.header} className="col-sm-6 col-md-6">
         <Plan
           t={t}
           isReverse={isReverse}

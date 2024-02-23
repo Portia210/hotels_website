@@ -32,17 +32,17 @@ export const planContents = (t) => {
       buttonLabel: `${t('Pricing.getStarted')}`,
       outline: false,
     },
-    {
-      header: `${t('Pricing.plans.custom')}`,
-      price: 'Contact us',
-      features: [
-        'Everything in Advanced',
-        'Unlimited short links',
-        `${t('Pricing.dedicatedSupport')}`,
-        `${t('Pricing.allFeatures')}`,
-      ],
-      buttonLabel: 'Contact Sales',
-      outline: false,
-    },
+    // {
+    //   header: `${t('Pricing.plans.custom')}`,
+    //   price: 'Contact us',
+    //   features: [
+    //     'Everything in Advanced',
+    //     'Unlimited short links',
+    //     `${t('Pricing.dedicatedSupport')}`,
+    //     `${t('Pricing.allFeatures')}`,
+    //   ],
+    //   buttonLabel: 'Contact Sales',
+    //   outline: false,
+    // },
   ];
 };
