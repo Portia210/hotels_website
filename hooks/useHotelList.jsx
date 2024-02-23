@@ -1,12 +1,14 @@
-import { TOURCOMPARE_BE_URL } from "@/constants/environment";
-import useSearchStore from "@/store/useSearchStore";
-import { sleep } from "@/utils/sleep";
-import { SearchInputSchema } from "@/zod/searchInput";
-import { useAuth } from "@clerk/nextjs";
-import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { TOURCOMPARE_BE_URL } from '@/constants/environment';
+import useSearchStore from '@/store/useSearchStore';
+import { sleep } from '@/utils/sleep';
+import { SearchInputSchema } from '@/zod/searchInput';
+import { useAuth } from '@clerk/nextjs';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 
 const useHotelList = () => {
+  const router = useRouter();
   const { getToken } = useAuth();
   const { searchInput, isExpired, setIsExpired } = useSearchStore();
   const isSearchFormVaild = SearchInputSchema.safeParse(searchInput);
@@ -14,7 +16,7 @@ const useHotelList = () => {
   const [hotels, setHotels] = useState([]);
 
   const fetchHotel = async (sessionId, token) => {
-    if (!sessionId) throw Error("sessionId is required");
+    if (!sessionId) return router.replace('/');
     const url = `${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`;
 
     const data = await axios
@@ -22,15 +24,15 @@ const useHotelList = () => {
         withCredentials: true,
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => res.data);
+      .then(res => res.data);
     setIsExpired(data.isExpired);
     const hotels = data.results;
-    setHotels((prevHotels) => {
+    setHotels(prevHotels => {
       const updatedHotels = [...prevHotels];
       for (const newHotel of hotels) {
         if (
           !updatedHotels.find(
-            (oldHotel) => oldHotel.travelorLink === newHotel.travelorLink
+            oldHotel => oldHotel.travelorLink === newHotel.travelorLink,
           )
         ) {
           updatedHotels.push(newHotel);
@@ -50,19 +52,19 @@ const useHotelList = () => {
     setLoading(true);
     try {
       const params = new URLSearchParams(window.location.search);
-      const sessionId = params.get("sessionId");
+      const sessionId = params.get('sessionId');
       let response = await fetchHotel(sessionId, token);
       do {
-        if (response.status === "FINISHED") {
+        if (response.status === 'FINISHED') {
           response = await fetchHotel(sessionId, token);
           break;
         }
         await sleep(2000);
         response = await fetchHotel(sessionId, token);
-      } while (response.status === "RUNNING");
+      } while (response.status === 'RUNNING');
       setLoading(false);
     } catch (error) {
-      console.error("sendCommand error:::", error);
+      console.error('sendCommand error:::', error);
       throw error;
     } finally {
       setLoading(false);

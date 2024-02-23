@@ -4,7 +4,7 @@ import { PriceFilter } from "@/constants/searchFilter";
 import RatingFilter from "./RatingFilter";
 import useTransStore from "@/store/useTransStore";
 
-const DropdownSelelctBar = ({
+const DropdownSelectStar = ({
   priceFilter,
   setPriceFilter,
   ratingFilter,
@@ -83,4 +83,4 @@ const DropdownSelelctBar = ({
   );
 };
 
-export default DropdownSelelctBar;
+export default DropdownSelectStar;
