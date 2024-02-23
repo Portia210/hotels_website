@@ -1,27 +1,33 @@
-"use client";
+'use client';
 
-import { useSignUp } from "@clerk/nextjs";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import CountryList from "./CountryList/CountryList";
+import useSignUpForm from '@/hooks/useSignUpForm';
+import { useSignUp } from '@clerk/nextjs';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import CountryList from './CountryList/CountryList';
 
 const SignUpForm = () => {
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
   const [pendingForEmailVerified, setPendingForEmailVerified] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState();
   const router = useRouter();
   const { signUp, setActive } = useSignUp();
+  const { checkAgentNumber } = useSignUpForm();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
     let data = {};
     for (let i = 0; i < event.target.length; i++) {
-      if (event.target[i].name === "") continue;
+      if (event.target[i].name === '') continue;
       data[event.target[i].name] = event.target[i].value;
     }
     if (data.password !== data.confirmPassword) {
-      return setErrorMsg("Password is not matched");
+      return setErrorMsg('Password is not matched');
+    }
+    const isValid = await checkAgentNumber(data.agentNumber);
+    if (!isValid) {
+      return setErrorMsg('Agent number is invalid');
     }
     await signUp
       .create({
@@ -35,19 +41,19 @@ const SignUpForm = () => {
           country: selectedCountry,
         },
       })
-      .then(async (result) => {
-        if (result.status === "complete") {
+      .then(async result => {
+        if (result.status === 'complete') {
           setActive({ session: result.createdSessionId });
-          router.push("/");
+          router.push('/');
         } else {
           await result.prepareVerification({
-            strategy: "email_link",
+            strategy: 'email_link',
             redirectUrl: `${window.location.origin}`,
           });
           setPendingForEmailVerified(true);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         let message = err?.message;
         if (err?.errors?.length > 0) {
           message = err?.errors[0]?.longMessage || err;
@@ -62,7 +68,7 @@ const SignUpForm = () => {
         <div className="col-12">
           <h1 className="text-22 fw-500">Welcome back</h1>
           <p className="mt-10">
-            Already have an account yet?{" "}
+            Already have an account yet?{' '}
             <Link href="/login" className="text-blue-1">
               Log in
             </Link>
@@ -80,7 +86,7 @@ const SignUpForm = () => {
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
-          Already have an account yet?{" "}
+          Already have an account yet?{' '}
           <Link href="/login" className="text-blue-1">
             Log in
           </Link>
@@ -151,9 +157,12 @@ const SignUpForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <label className="lh-1 text-14 text-light-1"                   
+          <label
+            className="lh-1 text-14 text-light-1"
             style={{ marginTop: -8 }}
-          >Country</label>
+          >
+            Country
+          </label>
           <CountryList
             onCountrySelected={setSelectedCountry}
             selectedItem={selectedCountry}
