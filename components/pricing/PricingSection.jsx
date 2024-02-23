@@ -22,7 +22,10 @@ const Plan = props => {
         </h1>
         <ul className="list-unstyled mt-3 mb-10">
           {props.features.map((feature, i) => (
-            <li key={i}>{feature}</li>
+            <li key={i}>
+              <i className={`bi bi-check-circle ${isReverse ? 'ml-10': 'mr-10'}`}></i>
+              {feature}
+            </li>
           ))}
         </ul>
         <button

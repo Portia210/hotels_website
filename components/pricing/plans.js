@@ -7,10 +7,13 @@ export const planContents = (t) => {
       features: [
         `25 ${t('Pricing.searchPerDay')}`,
         `500 ${t('Pricing.shortlinkPerMonth')}`,
-        `${t('Pricing.emailSupport')}`,
+        `${t('Pricing.generateCustomShortLinks')}`,
+        `${t('Pricing.analyzeLinkPerformance')}`,
         `${t('Pricing.allFeatures')}`,
+        `${t('Pricing.dedicatedSupport')}`,
+        `${t('Pricing.cancelAnytime')}`,
       ],
-      buttonLabel: 'Get started',
+      buttonLabel: `${t('Pricing.getStarted')}`,
       outline: true,
     },
     {
@@ -20,10 +23,13 @@ export const planContents = (t) => {
       features: [
         `50 ${t('Pricing.searchPerDay')}`,
         `1000 ${t('Pricing.shortlinkPerMonth')}`,
-        `${t('Pricing.emailSupport')}`,
+        `${t('Pricing.generateCustomShortLinks')}`,
+        `${t('Pricing.deeperLinkInsight')}`,
         `${t('Pricing.allFeatures')}`,
+        `${t('Pricing.dedicatedSupport')}`,
+        `${t('Pricing.cancelAnytime')}`,
       ],
-      buttonLabel: 'Get started',
+      buttonLabel: `${t('Pricing.getStarted')}`,
       outline: false,
     },
     {
@@ -32,7 +38,7 @@ export const planContents = (t) => {
       features: [
         'Everything in Advanced',
         'Unlimited short links',
-        'Premium support',
+        `${t('Pricing.dedicatedSupport')}`,
         `${t('Pricing.allFeatures')}`,
       ],
       buttonLabel: 'Contact Sales',

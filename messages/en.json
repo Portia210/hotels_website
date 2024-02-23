@@ -96,12 +96,19 @@
     "less": "Less"
   },
   "Pricing": {
+    "title": "Fuel Your Touring Business: Plans for Every Agent",
+    "subtitle": "Boost your business with hotel comparisons, generate custom short links for easy marketing, and gain valuable insights.",
     "permonth": " mo",
     "searchPerDay": "searches per day",
     "shortlinkPerMonth": "short links per month",
+    "deeperLinkInsight": "Gain deeper link insights",
+    "generateCustomShortLinks": "Generate custom short links",
+    "analyzeLinkPerformance": "Analyze link performance",
     "emailSupport": "Email support",
-    "premiumSupport": "Premium support",
-    "allFeatures": "All Features access",
+    "cancelAnytime": "Cancel anytime",
+    "dedicatedSupport": "Dedicated support",
+    "allFeatures": "Full website access",
+    "getStarted": "Get Started",
     "plans": {
       "standard": "Standard",
       "advanced": "Advanced",
