@@ -3,7 +3,7 @@ import TableActions from './TableActions';
 import { UserStatus } from '@/utils/roleCheck';
 import useUserPlanStore from '@/store/useUserPlansStore';
 
-export const columns = [
+export const getColumns = (myRole) => [
   {
     header: '#',
     size: 50,
@@ -133,7 +133,7 @@ export const columns = [
       align: 'center',
     },
     cell: props => {
-      return <TableActions row={props.row.original} />;
+      return <TableActions myRole={myRole} row={props.row.original} />;
     },
   },
 ];
