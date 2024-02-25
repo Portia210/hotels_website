@@ -77,6 +77,9 @@ const MobileMenu = ({ isReverse }) => {
           <MenuItem onClick={() => router.push('/user-guide')}>
             {t('Header.userGuide')}
           </MenuItem>
+          <MenuItem onClick={() => router.push('/pricing')}>
+            {t('Header.pricing')}
+          </MenuItem>
           <MenuItem onClick={() => router.push('/shorten-link')}>
             {t('Header.shortenLink')}
           </MenuItem>
