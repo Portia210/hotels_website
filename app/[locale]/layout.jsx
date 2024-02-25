@@ -1,22 +1,23 @@
-"use client";
-import { ClerkProvider } from "@clerk/nextjs";
-import Aos from "aos";
-import "aos/dist/aos.css";
-import { useLocale } from "next-intl";
-import { notFound } from "next/navigation";
-import { useEffect } from "react";
-import "swiper/css";
-import "swiper/css/effect-cards";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { ToastContainer } from "react-toastify";
-import SrollTop from "../../components/common/ScrollTop";
-import "../../styles/index.scss";
-import "react-toastify/dist/ReactToastify.css";
+'use client';
+import { ClerkProvider } from '@clerk/nextjs';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+import { useLocale } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { useEffect } from 'react';
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import { ToastContainer } from 'react-toastify';
+import SrollTop from '../../components/common/ScrollTop';
+import '../../styles/index.scss';
+import 'react-toastify/dist/ReactToastify.css';
+import TanstackProvider from '@/providers/TanstackProvider';
 
-if (typeof window !== "undefined") {
-  require("bootstrap/dist/js/bootstrap");
+if (typeof window !== 'undefined') {
+  require('bootstrap/dist/js/bootstrap');
 }
 
 export default function RootLayout({ children, params }) {
@@ -35,7 +36,9 @@ export default function RootLayout({ children, params }) {
   }, []);
 
   return (
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang={locale}>
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,11 +58,13 @@ export default function RootLayout({ children, params }) {
           <link rel="icon" href="./favicon.ico" />
         </head>
         <body>
-          <main>
-            <ToastContainer />
-            {children}
-            <SrollTop />
-          </main>
+          <TanstackProvider>
+            <main>
+              <ToastContainer />
+              {children}
+              <SrollTop />
+            </main>
+          </TanstackProvider>
         </body>
       </html>
     </ClerkProvider>
