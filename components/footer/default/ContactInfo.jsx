@@ -42,6 +42,7 @@ const ContactInfo = () => {
                 <a
                   href={action.link}
                   key={index}
+                  target="_blank"
                   className="d-block text-18 fw-500 text-blue-1 mt-5"
                 >
                   {action.text}
