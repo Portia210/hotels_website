@@ -52,29 +52,28 @@ const Locations = ({ isReverse, gallery, showSites }) => {
               </div>
               <div className="col-auto">
                 <div
-                  className={`fs-6 fw-500 text-wrap ${
+                  className={`fs-6 fw-500 text-nowrap text-truncate ${
                     isReverse ? 'text-end' : 'text-start'
                   }`}
-                  style={{ width: '100px' }}
+                  style={{ width: '130px' }}
                 >
                   {item?.name}
-                  <div className="cursor-pointer d-flex flex-column text-nowrap">
+                  <div className="cursor-pointer d-flex flex-row x-gap-10 text-nowrap">
                     {showSites && 
                     <i
                       onClick={() => setSelectedCity(item)}
-                      className="bi bi-geo-alt"
+                      className="text-primary bi bi-geo-alt"
                     >
-                      {' '}
-                      <label className="cursor-pointer">Sites</label>
+                      <label className="cursor-pointer text-dark">Sites</label>
                     </i>
                     }
                     
                     <i
                       onClick={() => googleSearch(item)}
-                      className="bi bi-info-circle"
+                      className="text-primary bi bi-info-circle"
                     >
                       {' '}
-                      <label className="cursor-pointer">Info</label>
+                      <label className="cursor-pointer text-dark">Info</label>
                     </i>
                   </div>
                 </div>
