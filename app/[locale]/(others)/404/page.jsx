@@ -4,8 +4,8 @@ import DefaultHeader from "@/components/header/default-header";
 import dynamic from "next/dynamic";
 
 export const metadata = {
-  title: "404 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "404 || Agent-Space - Travel & Tour React NextJS Template",
+  description: "Agent-Space - Travel & Tour React NextJS Template",
 };
 
 const index = () => {

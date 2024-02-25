@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useMessages } from 'next-intl';
 
 export async function generateMetadata() {
-  return { title: 'GoTrip: Hotel List' };
+  return { title: 'Agent-Space: Hotel List' };
 }
 
 const index = () => {

@@ -1,7 +1,4 @@
 import LocationTopBar from "@/components/common/LocationTopBar";
-import Banner from "@/components/destinations/components/Banner";
-import Categories from "@/components/destinations/components/Categories";
-import IntroTown from "@/components/destinations/components/IntroTown";
 import DefaultFooter from "@/components/footer/default";
 import DefaultHeader from "@/components/header/default-header";
 import Hotels from "@/components/hotels/Hotels2";
@@ -9,8 +6,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Destinations || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Destinations || Agent-Space - Travel & Tour React NextJS Template",
+  description: "Agent-Space - Travel & Tour React NextJS Template",
 };
 
 const Destinations = () => {

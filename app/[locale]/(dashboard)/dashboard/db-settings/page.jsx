@@ -4,8 +4,8 @@ import TransConfig from "@/components/config/TransConfig";
 import { useMessages } from "next-intl";
 
 export const metadata = {
-  title: "Settings || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Settings || Agent-Space - Travel & Tour React NextJS Template",
+  description: "Agent-Space - Travel & Tour React NextJS Template",
 };
 
 export default function page() {

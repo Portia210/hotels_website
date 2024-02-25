@@ -3,8 +3,8 @@ import DefaultHeader from "@/components/header/default-header";
 import dynamic from "next/dynamic";
 
 export const metadata = {
-  title: "Terms & Conditions || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Terms & Conditions || Agent-Space - Travel & Tour React NextJS Template",
+  description: "Agent-Space - Travel & Tour React NextJS Template",
 };
 
 const Terms = () => {
