@@ -57,19 +57,20 @@ const Locations = ({ isReverse, gallery, showSites }) => {
                   className={`fs-6 fw-500 text-nowrap text-truncate ${
                     isReverse ? 'text-end' : 'text-start'
                   }`}
+                  dir={isReverse ? 'rtl' : 'ltr'}
                   style={{ width: '130px' }}
                 >
                   {item?.name}
                   <div
-                    className={`cursor-pointer d-flex flex-row x-gap-15 mt-10 text-nowrap ${
-                      isReverse && 'flex-row-reverse'
-                    }`}
+                    className={`cursor-pointer d-flex flex-row x-gap-15 mt-10 text-nowrap`}
                   >
                     {showSites && (
                       <i
                         onClick={() => setSelectedCity(item)}
                         className="text-primary bi bi-geo-alt"
+                        dir={isReverse ? 'rtl' : 'ltr'}
                       >
+                        {" "}
                         <label className="cursor-pointer text-dark">
                           {t('DestinationWeLove.sites')}
                         </label>
@@ -79,6 +80,7 @@ const Locations = ({ isReverse, gallery, showSites }) => {
                     <i
                       onClick={() => googleSearch(item)}
                       className="text-primary bi bi-info-circle"
+                      dir={isReverse ? 'rtl' : 'ltr'}
                     >
                       {' '}
                       <label className="cursor-pointer text-dark">
