@@ -17,7 +17,6 @@ export default function TouristAttractionGallery() {
   const { fetchTouristAttractions, loading } = useDestinationGallery();
 
   const getTouristAttractions = async city => {
-    console.log('city -->', city);
     const response = await fetchTouristAttractions(city.name);
     const places = Array.from(
       new Set(response.results.map(places => places.name)),
@@ -43,6 +42,10 @@ export default function TouristAttractionGallery() {
     if (selectedCity) {
       getTouristAttractions(selectedCity);
       setMaxResult(8);
+      const placesGallery = document.getElementById("placesGallery");
+      if (placesGallery) {
+        placesGallery.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   }, [selectedCity]);
 
@@ -51,7 +54,7 @@ export default function TouristAttractionGallery() {
   return (
     <section
       className="layout-pb-md"
-      id="cityGallery"
+      id="placesGallery"
       style={{
         scrollMarginTop: '180px',
       }}
