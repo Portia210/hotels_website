@@ -1,16 +1,28 @@
-"use client";
+'use client';
 
-import useCurrency from "@/hooks/useCurrency";
+import useCurrency from '@/hooks/useCurrency';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 
 const CurrencyMegaMenu = ({ textClass }) => {
+  const [currencies, setCurrencies] = useState([]);
 
   const {
     handleCurrency,
-    currencies,
     selectedCurrency,
     handleItemClick,
     click,
-  } = useCurrency();
+    fetchCurrencies,
+  } = useCurrency(currencies);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['fetchCurrencies'],
+    queryFn: () => fetchCurrencies(),
+  });
+
+  useEffect(() => {
+    if (data) setCurrencies(data.rates);
+  }, [data]);
 
   return (
     <>
@@ -29,12 +41,14 @@ const CurrencyMegaMenu = ({ textClass }) => {
       {/* End currencty dropdown wrapper */}
 
       <div
-        className={`currencyMenu js-currencyMenu pt-120 ${click ? "" : "is-hidden"}`}
+        className={`currencyMenu js-currencyMenu pt-120 ${
+          click ? '' : 'is-hidden'
+        }`}
       >
         <div className="currencyMenu__bg" onClick={handleCurrency}></div>
         <div
           className="currencyMenu__content bg-white rounded-4"
-          style={{ width: "80%" }}
+          style={{ width: '80%' }}
         >
           <div className="d-flex items-center justify-between px-30 py-20 sm:px-15 border-bottom-light">
             <div className="text-20 fw-500 lh-15">Select your currency</div>
@@ -47,10 +61,10 @@ const CurrencyMegaMenu = ({ textClass }) => {
           </div>
           {/* End flex wrapper */}
           <ul className="modalGrid px-30 py-30 sm:px-15 sm:py-15">
-            {currencies.map((item) => (
+            {currencies.map(item => (
               <li
                 className={`modalGrid__item js-item ${
-                  selectedCurrency?.currency === item.currency ? "active" : ""
+                  selectedCurrency?.currency === item.currency ? 'active' : ''
                 }`}
                 key={item.currency}
                 onClick={() => handleItemClick(item)}

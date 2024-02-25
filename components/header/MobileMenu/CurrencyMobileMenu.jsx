@@ -1,16 +1,28 @@
-"use client";
+'use client';
 
-import useCurrency from "@/hooks/useCurrency";
+import useCurrency from '@/hooks/useCurrency';
+import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 const CurrencyMobileMenu = ({ textClass, textTran, isReverse }) => {
+  const [currencies, setCurrencies] = useState([]);
 
   const {
+    fetchCurrencies,
     handleCurrency,
-    currencies,
     selectedCurrency,
     handleItemClick,
     click,
-  } = useCurrency();
+  } = useCurrency(currencies);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['fetchCurrencies'],
+    queryFn: () => fetchCurrencies(),
+  });
+
+  useEffect(() => {
+    if (data) setCurrencies(data.rates);
+  }, [data]);
 
   return (
     <>
@@ -25,7 +37,7 @@ const CurrencyMobileMenu = ({ textClass, textTran, isReverse }) => {
         >
           <span className="js-currencyMenu-mainTitle">
             <span
-              className={`${isReverse ? "ms-2 me-3" : "ms-3 me-2"} text-18 `}
+              className={`${isReverse ? 'ms-2 me-3' : 'ms-3 me-2'} text-18 `}
             >
               {textTran}
             </span>
@@ -33,7 +45,7 @@ const CurrencyMobileMenu = ({ textClass, textTran, isReverse }) => {
           </span>
           <i
             className={`icon-chevron-sm-down text-7 ${
-              isReverse ? "mr-10" : "ml-10"
+              isReverse ? 'mr-10' : 'ml-10'
             }`}
           />
         </button>
@@ -41,12 +53,12 @@ const CurrencyMobileMenu = ({ textClass, textTran, isReverse }) => {
       {/* End currencty dropdown wrapper */}
 
       <div
-        className={`currencyMenu js-currencyMenu ${click ? "" : "is-hidden"}`}
+        className={`currencyMenu js-currencyMenu ${click ? '' : 'is-hidden'}`}
       >
         <div className="currencyMenu__bg" onClick={handleCurrency}></div>
         <div
           className="currencyMenu__content bg-white rounded-4"
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
         >
           <div className="d-flex items-center justify-between px-30 py-20 sm:px-15 border-bottom-light">
             <div className="text-20 fw-500 lh-15">Select your currency</div>
@@ -59,10 +71,10 @@ const CurrencyMobileMenu = ({ textClass, textTran, isReverse }) => {
           </div>
           {/* End flex wrapper */}
           <ul className="px-30 py-30 sm:px-15 sm:py-15">
-            {currencies.map((item) => (
+            {currencies.map(item => (
               <li
                 className={`js-item ${
-                  selectedCurrency?.currency === item.currency ? "active" : ""
+                  selectedCurrency?.currency === item.currency ? 'active' : ''
                 }`}
                 key={item.currency}
                 onClick={() => handleItemClick(item)}

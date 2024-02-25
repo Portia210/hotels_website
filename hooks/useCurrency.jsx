@@ -1,15 +1,14 @@
-import { TOURCOMPARE_BE_URL } from "@/constants/environment";
-import useCurrencyStore from "@/store/useCurrencyStore";
-import { loadDefaultCurrency } from "@/utils/currencyConverter";
-import axios from "axios";
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { TOURCOMPARE_BE_URL } from '@/constants/environment';
+import useCurrencyStore from '@/store/useCurrencyStore';
+import { loadDefaultCurrency } from '@/utils/currencyConverter';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
 
-const useCurrency = () => {
+const useCurrency = (currencies) => {
   const currencyStore = useCurrencyStore();
   const [click, setClick] = useState(false);
-  const handleCurrency = () => setClick((prevState) => !prevState);
-  const [currencies, setCurrencies] = useState([]);
+  const handleCurrency = () => setClick(prevState => !prevState);
   const [selectedCurrency, setSelectedCurrency] = useState();
 
   const fetchCurrencies = async () => {
@@ -17,21 +16,17 @@ const useCurrency = () => {
       .post(`${TOURCOMPARE_BE_URL}/api/v1/currency`, null, {
         withCredentials: true,
       })
-      .then((res) => res.data);
-    setCurrencies(data.rates);
+      .then(res => res.data);
+    return data;
   };
 
-  const handleItemClick = (item) => {
-    Cookies.set("currency", JSON.stringify(item), {
+  const handleItemClick = item => {
+    Cookies.set('currency', JSON.stringify(item), {
       expires: 30,
     });
     setSelectedCurrency(item);
     setClick(false);
   };
-
-  useEffect(() => {
-    fetchCurrencies();
-  }, []);
 
   const onLoadCurrency = () => {
     const currency = loadDefaultCurrency(currencies);
@@ -44,8 +39,8 @@ const useCurrency = () => {
   }, [selectedCurrency, currencies]);
 
   return {
+    fetchCurrencies,
     handleCurrency,
-    currencies,
     selectedCurrency: currencyStore.currency,
     handleItemClick,
     click,
