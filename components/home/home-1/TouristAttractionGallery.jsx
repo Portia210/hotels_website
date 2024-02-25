@@ -10,6 +10,8 @@ export default function TouristAttractionGallery() {
   const [maxResult, setMaxResult] = useState(8);
   const {
     selectedCity,
+    selectedCountry,
+    setSelectedCity,
     touristAttractionsGallery,
     setTouristAttractionsGallery,
   } = useDestinationGalleryStore();
@@ -42,12 +44,19 @@ export default function TouristAttractionGallery() {
     if (selectedCity) {
       getTouristAttractions(selectedCity);
       setMaxResult(8);
-      const placesGallery = document.getElementById("placesGallery");
+      const placesGallery = document.getElementById('placesGallery');
       if (placesGallery) {
-        placesGallery.scrollIntoView({ behavior: "smooth", block: "start" });
+        placesGallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   }, [selectedCity]);
+
+  useEffect(() => {
+    if (selectedCountry) {
+      setSelectedCity(null);
+      setTouristAttractionsGallery([]);
+    }
+  }, [selectedCountry]);
 
   if (!selectedCity) return null;
 
@@ -65,7 +74,9 @@ export default function TouristAttractionGallery() {
             <div className="sectionTitle -md">
               <h2 className="sectionTitle__title">
                 {selectedCity?.name &&
-                  `${t('DestinationWeLove.touristAttraction')}${selectedCity?.name}`}
+                  `${t('DestinationWeLove.touristAttraction')}${
+                    selectedCity?.name
+                  }`}
               </h2>
             </div>
           </div>
