@@ -92,6 +92,7 @@
   "DestinationWeLove": {
     "title": "Destinations we love",
     "citiesIn": "Cities in ",
+    "touristAttraction": "Tourist attractions in ",
     "more": "More",
     "less": "Less"
   },

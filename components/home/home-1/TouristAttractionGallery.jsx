@@ -5,32 +5,32 @@ import { useEffect, useState } from 'react';
 import Locations from './Locations';
 import useTrans from '@/hooks/useTrans';
 
-export default function DestinationGallery() {
+export default function TouristAttractionGallery() {
   const { t, isReverse } = useTrans();
   const [maxResult, setMaxResult] = useState(8);
   const {
-    selectedCountry,
-    destinationGallery,
-    setDestinationGallery,
+    selectedCity,
+    touristAttractionsGallery,
+    setTouristAttractionsGallery,
   } = useDestinationGalleryStore();
 
-  const { fetchCountryCities, loading } = useDestinationGallery();
+  const { fetchTouristAttractions, loading } = useDestinationGallery();
 
-  const getCountryCities = async country => {
-    const response = await fetchCountryCities(country.label);
-    const cities = Array.from(
-      new Set(response.results.map(city => city.name)),
-    ).map(name => response.results.find(city => city.name === name));
+  const getTouristAttractions = async city => {
+    const response = await fetchTouristAttractions(city.name);
+    const places = Array.from(
+      new Set(response.results.map(places => places.name)),
+    ).map(name => response.results.find(places => places.name === name));
 
-    setDestinationGallery(cities);
+    setTouristAttractionsGallery(places);
   };
 
   const handleLoadMore = () => {
-    if (destinationGallery.length > 0) {
+    if (touristAttractionsGallery.length > 0) {
       setMaxResult(prev => {
-        if (prev < destinationGallery.length) {
-          return destinationGallery.length;
-        } else if (prev === destinationGallery.length) {
+        if (prev < touristAttractionsGallery.length) {
+          return touristAttractionsGallery.length;
+        } else if (prev === touristAttractionsGallery.length) {
           return 8;
         }
         return prev;
@@ -39,16 +39,22 @@ export default function DestinationGallery() {
   };
 
   useEffect(() => {
-    if (selectedCountry) {
-      getCountryCities(selectedCountry);
+    if (selectedCity) {
+      getTouristAttractions(selectedCity);
       setMaxResult(8);
+      const placesGallery = document.getElementById("placesGallery");
+      if (placesGallery) {
+        placesGallery.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
-  }, [selectedCountry]);
+  }, [selectedCity]);
+
+  if (!selectedCity) return null;
 
   return (
     <section
       className="layout-pb-md"
-      id="cityGallery"
+      id="placesGallery"
       style={{
         scrollMarginTop: '180px',
       }}
@@ -58,8 +64,8 @@ export default function DestinationGallery() {
           <div className={`col-auto ${isReverse && 'order-1'}`}>
             <div className="sectionTitle -md">
               <h2 className="sectionTitle__title">
-                {selectedCountry?.label &&
-                  `${t('DestinationWeLove.citiesIn')}${selectedCountry?.label}`}
+                {selectedCity?.name &&
+                  `${t('DestinationWeLove.touristAttraction')}${selectedCity?.name}`}
               </h2>
             </div>
           </div>
@@ -73,7 +79,7 @@ export default function DestinationGallery() {
                 </div>
               </div>
             ) : (
-              destinationGallery.length > 8 && (
+              touristAttractionsGallery.length > 8 && (
                 <button
                   onClick={handleLoadMore}
                   className="button -md -blue-1 bg-blue-1-05 text-blue-1"
@@ -100,8 +106,8 @@ export default function DestinationGallery() {
         >
           <Locations
             isReverse={isReverse}
-            showSites={true}
-            gallery={destinationGallery?.slice(0, maxResult)}
+            showSites={false}
+            gallery={touristAttractionsGallery?.slice(0, maxResult)}
           />
         </div>
         {/* End .row */}
