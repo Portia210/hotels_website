@@ -1,4 +1,7 @@
 export default function ResultHeader({ loading, isExpired, totalResult }) {
+  if (isExpired) {
+    return <h3>Results are not updated, please search again</h3>;
+  }
   return (
     <>
       {loading && (
@@ -14,9 +17,6 @@ export default function ResultHeader({ loading, isExpired, totalResult }) {
         </div>
       )}
       {!loading && totalResult === 0 && !isExpired && <h3>No hotels found</h3>}
-      {!loading && totalResult === 0 && isExpired && (
-        <h3>Results are not updated, please search again</h3>
-      )}
       {!loading && totalResult > 0 && (
         <h3 className="text-24 fw-600 text-dark-1">
           {totalResult} Hotels found

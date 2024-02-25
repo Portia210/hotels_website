@@ -98,7 +98,7 @@ export default function ListHotels() {
             {/* End col-auto */}
 
             <div className="col-lg-4 col-md-5 col-sm-6">
-              <HotelNameFilter disabled={loading || isExpired}/>
+              <HotelNameFilter disabled={loading || isExpired} />
             </div>
             <div className="col-auto">
               <button
@@ -124,7 +124,7 @@ export default function ListHotels() {
                 isExpired={isExpired}
                 totalResult={totalFilter}
               />
-              <HotelProperties hotels={data} />
+              {!isExpired && <HotelProperties hotels={data} />}
             </div>
             {/* End .row */}
             <Pagination

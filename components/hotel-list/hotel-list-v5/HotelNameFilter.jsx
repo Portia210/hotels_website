@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 
 export default function HotelNameFilter({ disabled }) {
   const { hotels, setHotels } = useHotelNameFilterStore();
-  const { filterHotels, setFilterHotels } = useHotelFilterStore();
+  const {
+    hotels: originHotels,
+    filterHotels,
+    setFilterHotels,
+    onFilterHotel,
+  } = useHotelFilterStore();
   const [hotelName, setHotelName] = useState('');
 
   const onInputChange = e => {
@@ -19,7 +24,8 @@ export default function HotelNameFilter({ disabled }) {
       });
       setFilterHotels(filteredHotels);
     } else {
-      setFilterHotels(hotels);
+      setFilterHotels(originHotels);
+      onFilterHotel();
     }
   }, [hotelName]);
 
@@ -36,7 +42,7 @@ export default function HotelNameFilter({ disabled }) {
         disabled={disabled}
         onChange={onInputChange}
       />
-        <div className="icon-search text-20 mr-10"></div>
+      <div className="icon-search text-20 mr-10"></div>
     </div>
   );
 }
