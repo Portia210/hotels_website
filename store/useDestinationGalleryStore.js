@@ -5,6 +5,8 @@ const useDestinationGalleryStore = create(set => ({
   setSelectedCountry: country => set({ selectedCountry: country }),
   destinationGallery: [],
   setDestinationGallery: destinationGallery => set({ destinationGallery }),
+  selectedCity: null,
+  setSelectedCity: city => set({ selectedCity: city }),
   touristAttractionsGallery: [],
   setTouristAttractionsGallery: touristAttractionsGallery =>
     set({ touristAttractionsGallery }),

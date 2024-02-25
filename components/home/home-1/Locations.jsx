@@ -1,8 +1,10 @@
 import useSearchStore from '@/store/useSearchStore';
 import { destinationAutoTyping } from '@/utils/destinationAutoTyping';
 import Image from 'next/image';
+import useDestinationGalleryStore from '@/store/useDestinationGalleryStore';
 
-const Locations = ({ isReverse, gallery, showTouristAttractions }) => {
+const Locations = ({ isReverse, gallery, showSites }) => {
+  const setSelectedCity = useDestinationGalleryStore().setSelectedCity
   const { setDestination, setLocationInput } = useSearchStore();
   const handleCityClick = city => {
     if (!city.name) return;
@@ -57,13 +59,16 @@ const Locations = ({ isReverse, gallery, showTouristAttractions }) => {
                 >
                   {item?.name}
                   <div className="cursor-pointer d-flex flex-column text-nowrap">
+                    {showSites && 
                     <i
-                      onClick={() => showTouristAttractions(item)}
+                      onClick={() => setSelectedCity(item)}
                       className="bi bi-geo-alt"
                     >
                       {' '}
                       <label className="cursor-pointer">Sites</label>
                     </i>
+                    }
+                    
                     <i
                       onClick={() => googleSearch(item)}
                       className="bi bi-info-circle"

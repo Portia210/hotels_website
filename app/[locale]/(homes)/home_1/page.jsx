@@ -4,6 +4,7 @@ import Header1 from "@/components/header/header-1";
 import Hero1 from "@/components/hero/hero-1";
 import DestinationGallery from "@/components/home/home-1/DestinationGallery";
 import Destinations from "@/components/home/home-1/Destinations/Destinations";
+import TouristAttractionGallery from "@/components/home/home-1/TouristAttractionGallery";
 import useTransServer from "@/hooks/useTransServer";
 import { auth } from "@clerk/nextjs";
 import { useMessages } from "next-intl";
@@ -60,6 +61,9 @@ const Home_1 = () => {
 
       <DestinationGallery />
       {/* End Destination Gallery Section */}
+
+      <TouristAttractionGallery />
+      {/* End TouristAttraction Gallery Section */}
 
       {/* Start Footer Section */}
       <DefaultFooter />
