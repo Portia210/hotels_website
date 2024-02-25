@@ -6,8 +6,8 @@ import { redirect } from "next/navigation";
 import MainHome from "./(homes)/home_1/page";
 
 export const metadata = {
-  title: "GoTrip: Home",
-  description: "GoTrip - Travel & Tour",
+  title: "Agent-Space: Home",
+  description: "Agent-Space - Travel & Tour",
 };
 
 export default async function Home() {

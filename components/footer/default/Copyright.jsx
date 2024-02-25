@@ -12,7 +12,7 @@ const Copyright = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-              Gotrip
+              Agent-Space
               </a>
               All rights reserved.
             </div>

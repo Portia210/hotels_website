@@ -1,14 +1,12 @@
-import Address from "@/components/block/Address";
 import ContactForm from "@/components/common/ContactForm";
 import LocationTopBar from "@/components/common/LocationTopBar";
-import Social from "@/components/common/social/Social";
 import DefaultFooter from "@/components/footer/default";
 import DefaultHeader from "@/components/header/default-header";
 import dynamic from "next/dynamic";
 
 export const metadata = {
-  title: "Contact || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Contact || Agent-Space - Travel & Tour React NextJS Template",
+  description: "Agent-Space - Travel & Tour React NextJS Template",
 };
 
 const Contact = () => {

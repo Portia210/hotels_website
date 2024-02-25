@@ -5,8 +5,8 @@ import { getMessages } from "next-intl/server";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "GoTrip: User Management",
-  description: "GoTrip - Travel & Tour",
+  title: "Agent-Space: User Management",
+  description: "Agent-Space - Travel & Tour",
 };
 
 export default async function page() {

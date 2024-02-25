@@ -8,8 +8,8 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Login || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Login || Agent-Space - Travel & Tour React NextJS Template",
+  description: "Agent-Space - Travel & Tour React NextJS Template",
 };
 
 const LogIn = async () => {

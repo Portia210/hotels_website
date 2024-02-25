@@ -9,8 +9,8 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 
 export const metadata = {
-  title: "About || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "About || Agent-Space - Travel & Tour React NextJS Template",
+  description: "Agent-Space - Travel & Tour React NextJS Template",
 };
 
 const About = () => {

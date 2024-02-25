@@ -8,11 +8,11 @@ import { useMessages } from "next-intl";
 export async function generateMetadata({ searchParams }) {
   try {
     const { destination } = JSON.parse(searchParams?.destination || "{}");
-    const title = `GoTrip: Hotels in ${destination}` || "GoTrip: Hotel List";
+    const title = `Agent-Space: Hotels in ${destination}` || "Agent-Space: Hotel List";
     return { title };
   } catch (error) {
     console.error("Error when generateMetadata", error);
-    return { title: "GoTrip: Hotel List" };
+    return { title: "Agent-Space: Hotel List" };
   }
 }
 

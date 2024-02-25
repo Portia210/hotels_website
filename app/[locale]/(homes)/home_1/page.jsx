@@ -11,8 +11,8 @@ import { useMessages } from "next-intl";
 import dynamic from "next/dynamic";
 
 export const metadata = {
-  title: "Home-1 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Home || Agent-Space - Travel & Tour React NextJS Template",
+  description: "Agent-Space - Travel & Tour React NextJS Template",
 };
 
 const Home_1 = () => {
