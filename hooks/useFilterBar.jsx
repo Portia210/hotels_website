@@ -1,14 +1,14 @@
-import useHotelFilterStore from "@/store/useHotelFilterStore";
-import { useEffect } from "react";
-import { defaultFilter } from "./hotelFilters";
-import useHotelGapFilter from "./hotelFilters/useHotelGapFilter";
-import useHotelPagination from "./hotelFilters/useHotelPagination";
-import usePriceFilter from "./hotelFilters/usePriceFilter";
-import useRatingFilter from "./hotelFilters/useRatingFilter";
-import useStarFilter from "./hotelFilters/useStarFilter";
+import useHotelFilterStore from '@/store/useHotelFilterStore';
+import { useEffect } from 'react';
+import { defaultFilter } from './hotelFilters';
+import useHotelGapFilter from './hotelFilters/useHotelGapFilter';
+import useHotelPagination from './hotelFilters/useHotelPagination';
+import usePriceFilter from './hotelFilters/usePriceFilter';
+import useRatingFilter from './hotelFilters/useRatingFilter';
+import useStarFilter from './hotelFilters/useStarFilter';
 
 // TODO: optimize this hook, reduce the number of re-renders
-const useFilterBar = (hotels) => {
+const useFilterBar = hotels => {
   const {
     setGapActive,
     filterHotels,
@@ -29,7 +29,7 @@ const useFilterBar = (hotels) => {
     if (Array.isArray(filterHotels)) {
       return filterHotels.slice(
         pagination.offset,
-        pagination.offset + pagination.limit
+        pagination.offset + pagination.limit,
       );
     }
     return [];
@@ -46,10 +46,11 @@ const useFilterBar = (hotels) => {
     setPriceFilter(defaultFilter.priceFilter);
     setRatingFilter(defaultFilter.ratingFilter);
     setStarFilter(defaultFilter.starFilter);
-    setPagination(defaultFilter.pagination);
     setFilterHotels(hotels);
     setHotels(hotels);
     setGapActive(false);
+    setPagination(defaultFilter.pagination);
+    setCurrentPage(1);
   };
 
   useEffect(() => {
