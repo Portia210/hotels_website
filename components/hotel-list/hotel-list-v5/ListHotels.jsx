@@ -1,17 +1,18 @@
-"use client";
-import DropdownSelectStar from "@/components/hotel-list/common/DropdownSelectStar";
-import Pagination from "@/components/hotel-list/common/Pagination";
-import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
-import useFilterBar from "@/hooks/useFilterBar";
-import useHotelList from "@/hooks/useHotelList";
-import useHotelFilterStore from "@/store/useHotelFilterStore";
-import useTransStore from "@/store/useTransStore";
-import { useEffect } from "react";
-import ResultHeader from "./ResultHeader";
+'use client';
+import DropdownSelectStar from '@/components/hotel-list/common/DropdownSelectStar';
+import Pagination from '@/components/hotel-list/common/Pagination';
+import HotelProperties from '@/components/hotel-list/hotel-list-v5/HotelProperties';
+import useFilterBar from '@/hooks/useFilterBar';
+import useHotelList from '@/hooks/useHotelList';
+import useHotelFilterStore from '@/store/useHotelFilterStore';
+import useTransStore from '@/store/useTransStore';
+import { useEffect } from 'react';
+import HotelNameFilter from './HotelNameFilter';
+import ResultHeader from './ResultHeader';
 
 export default function ListHotels() {
   const { gapActive, setGapActive, setHotels } = useHotelFilterStore();
-  const messages = useTransStore((state) => state.messages);
+  const messages = useTransStore(state => state.messages);
   const hotelTrans = messages?.Hotel;
   const filterTrans = messages?.FilterBar;
   const { hotels, loading, isExpired } = useHotelList();
@@ -32,18 +33,18 @@ export default function ListHotels() {
 
   const renderTooltip = () => {
     if (!hotelTrans?.tooltipCopy) return;
-    const Tooltip = require("bootstrap/js/dist/tooltip");
-    const copyHotelToolTip = document.getElementById("copyHotelInfoTooltip");
-    const shortenLinkToolTip = document.getElementById("shortenLinkTooltip");
+    const Tooltip = require('bootstrap/js/dist/tooltip');
+    const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip');
+    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip');
     new Tooltip(shortenLinkToolTip, {
-      container: "body",
-      trigger: "hover",
-      title: hotelTrans.shortLink || "",
+      container: 'body',
+      trigger: 'hover',
+      title: hotelTrans.shortLink || '',
     });
     new Tooltip(copyHotelToolTip, {
-      container: "body",
-      trigger: "hover",
-      title: hotelTrans.tooltipCopy || "",
+      container: 'body',
+      trigger: 'hover',
+      title: hotelTrans.tooltipCopy || '',
     });
   };
 
@@ -60,7 +61,7 @@ export default function ListHotels() {
       {/* Top SearchBanner */}
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">
-          <div className="row y-gap-20 justify-between items-center">
+          <div className="row y-gap-20 items-center">
             <div className="col-auto">
               <div className="row x-gap-20 y-gap-10 items-center">
                 <div className="col-auto">
@@ -96,13 +97,16 @@ export default function ListHotels() {
             </div>
             {/* End col-auto */}
 
+            <div className="col-lg-4 col-md-5 col-sm-6">
+              <HotelNameFilter disabled={loading || isExpired}/>
+            </div>
             <div className="col-auto">
               <button
                 onClick={() => {
                   setGapActive(!gapActive);
                 }}
                 className={`button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1 ${
-                  gapActive && "active"
+                  gapActive && 'active'
                 }`}
               >
                 <i className="icon-up-down text-14 mr-10"></i>
@@ -115,7 +119,11 @@ export default function ListHotels() {
             {/* End border-top */}
 
             <div className="row y-gap-30 sm:pr-0">
-              <ResultHeader loading={loading} isExpired={isExpired} totalResult={totalFilter} />
+              <ResultHeader
+                loading={loading}
+                isExpired={isExpired}
+                totalResult={totalFilter}
+              />
               <HotelProperties hotels={data} />
             </div>
             {/* End .row */}
