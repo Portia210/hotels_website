@@ -1,59 +1,17 @@
-import { PriceFilter } from "@/constants/searchFilter";
-import { FILTER_TYPE } from "@/hooks/hotelFilters";
-import { create } from "zustand";
-import { defaultFilter } from "@/hooks/hotelFilters";
-
-const filterHotelByPrice = (filterType = PriceFilter.HTL, hotels) => {
-  let results = [];
-  if (filterType === PriceFilter.HTL) {
-    results = hotels.sort((a, b) => b.travelorPrice - a.travelorPrice);
-  } else {
-    results = hotels.sort((a, b) => a.travelorPrice - b.travelorPrice);
-  }
-  return results;
-};
-
-const filterByBiggestPriceGap = (hotels) => {
-  const results = hotels.sort(
-    (a, b) => b.price_difference - a.price_difference
-  );
-  return results;
-};
-
-const filterHotelByRating = (hotels, ratingFilter) => {
-  const results = hotels.filter((hotel) => hotel.rate >= ratingFilter);
-  return results;
-};
-
-const filterHotelByStar = (hotels, starFilter) => {
-  const results = hotels.filter((hotel) => hotel.stars >= starFilter);
-  return results;
-};
-
-const filterHotel = (condition, hotels) => {
-  let results = hotels;
-  if (condition.ratingFilter) {
-    results = filterHotelByRating(results, condition.ratingFilter);
-  }
-  if (condition.starFilter) {
-    results = filterHotelByStar(results, condition.starFilter);
-  }
-  if (condition.priceFilter) {
-    results = filterHotelByPrice(condition.priceFilter, results);
-  }
-  if (condition.priceGapFilter) {
-    results = filterByBiggestPriceGap(results);
-  }
-  return results;
-};
+import { FILTER_TYPE, defaultFilter } from '@/hooks/hotelFilters';
+import {
+  filterHotel,
+  filterHotelByPrice
+} from '@/utils/hotelFilter';
+import { create } from 'zustand';
 
 const useHotelFilterStore = create((set, get) => ({
   gapActive: false,
-  setGapActive: (gapActive) => set(() => ({ gapActive })),
+  setGapActive: gapActive => set(() => ({ gapActive })),
   hotels: [],
-  setHotels: (hotels) => set(() => ({ hotels })),
+  setHotels: hotels => set(() => ({ hotels })),
   filterHotels: [],
-  setFilterHotels: (filterHotels) => set(() => ({ filterHotels })),
+  setFilterHotels: filterHotels => set(() => ({ filterHotels })),
   condition: {
     ...defaultFilter,
   },
@@ -65,7 +23,7 @@ const useHotelFilterStore = create((set, get) => ({
     }
   },
   setCondition: (type, condition) =>
-    set((state) => {
+    set(state => {
       let filterHotels = [];
       if (type === FILTER_TYPE.RATING) {
         state.condition.ratingFilter = condition;
@@ -81,7 +39,7 @@ const useHotelFilterStore = create((set, get) => ({
         state.condition.priceGapFilter = condition;
         const filteredHotelPriceOrder = filterHotelByPrice(
           state.condition.priceFilter,
-          state.filterHotels
+          state.filterHotels,
         );
         filterHotels = filterHotel(state.condition, filteredHotelPriceOrder);
       }
