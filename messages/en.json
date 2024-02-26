@@ -12,6 +12,12 @@
     "currency": "Currency",
     "dashboard": "Dashboard"
   },
+  "Hero": {
+    "headLine": "Discover the Greatest Deals Around!",
+    "subHeadLine": "Discover price gaps between Travelor and Booking and gain high commissions.",
+    "subHeadLine2": "Become more effective, and share you like easily with our special tools.",
+    "headLine2": "Discover the Greatest Deals Around!"
+  },
   "SearchBox": {
     "search": "Search",
     "location": "Location",

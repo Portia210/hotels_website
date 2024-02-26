@@ -1,24 +1,26 @@
-import TransConfig from "@/components/config/TransConfig";
-import DefaultFooter from "@/components/footer/default";
-import Header1 from "@/components/header/header-1";
-import ListHotels from "@/components/hotel-list/hotel-list-v5/ListHotels";
-import MainFilterSearchBox from "@/components/hotel-list/hotel-list-v5/MainFilterSearchBox";
-import { useMessages } from "next-intl";
+import TransConfig from '@/components/config/TransConfig';
+import DefaultFooter from '@/components/footer/default';
+import Header1 from '@/components/header/header-1';
+import ListHotels from '@/components/hotel-list/hotel-list-v5/ListHotels';
+import MainFilterSearchBox from '@/components/hotel-list/hotel-list-v5/MainFilterSearchBox';
+import { useTranslations } from 'next-intl';
+import { useMessages } from 'next-intl';
 
 export async function generateMetadata({ searchParams }) {
   try {
-    const { destination } = JSON.parse(searchParams?.destination || "{}");
-    const title = `Agent-Space: Hotels in ${destination}` || "Agent-Space: Hotel List";
+    const { destination } = JSON.parse(searchParams?.destination || '{}');
+    const title =
+      `Agent-Space: Hotels in ${destination}` || 'Agent-Space: Hotel List';
     return { title };
   } catch (error) {
-    console.error("Error when generateMetadata", error);
-    return { title: "Agent-Space: Hotel List" };
+    console.error('Error when generateMetadata', error);
+    return { title: 'Agent-Space: Hotel List' };
   }
 }
 
 const index = () => {
   const messages = useMessages();
-
+  const t = useTranslations();
   return (
     <>
       <TransConfig messages={messages} />
@@ -45,7 +47,7 @@ const index = () => {
             <div className="col-12">
               <div className="text-center">
                 <h1 className="text-30 fw-600 text-white">
-                  Find Your Dream Luxury Hotel
+                  {t('Hero.headLine2')}
                 </h1>
               </div>
               {/* End text-center */}
