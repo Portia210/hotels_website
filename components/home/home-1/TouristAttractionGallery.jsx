@@ -19,7 +19,7 @@ export default function TouristAttractionGallery() {
   const { fetchTouristAttractions, loading } = useDestinationGallery();
 
   const getTouristAttractions = async city => {
-    const response = await fetchTouristAttractions(city.name);
+    const response = await fetchTouristAttractions(`${city.name}, ${selectedCountry.label}`);
     const places = Array.from(
       new Set(response.results.map(places => places.name)),
     ).map(name => response.results.find(places => places.name === name));

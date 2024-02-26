@@ -6,7 +6,7 @@ import useTrans from '@/hooks/useTrans';
 
 const Locations = ({ isReverse, gallery, showSites }) => {
   const { t } = useTrans();
-  const setSelectedCity = useDestinationGalleryStore().setSelectedCity;
+  const { selectedCountry, setSelectedCity } = useDestinationGalleryStore();
   const { setDestination, setLocationInput } = useSearchStore();
   const handleCityClick = city => {
     if (!city.name) return;
@@ -22,7 +22,11 @@ const Locations = ({ isReverse, gallery, showSites }) => {
   };
 
   const googleSearch = city => {
-    window.open(`https://www.google.com/search?q=${city.name}`, '_blank');
+    let url = `https://www.google.com/search?q=${city.name}, ${selectedCountry.label}`;
+    if (showSites) {
+      url = `https://www.google.com/search?q=${city.name}`;
+    }
+    window.open(url, '_blank');
   };
 
   return (
@@ -54,13 +58,13 @@ const Locations = ({ isReverse, gallery, showSites }) => {
               </div>
               <div className="col-auto">
                 <div
-                  className={`fs-6 fw-500 text-nowrap text-truncate ${
+                  className={`fs-6 fw-500 text-wrap text-truncate ${
                     isReverse ? 'text-end' : 'text-start'
                   }`}
                   dir={isReverse ? 'rtl' : 'ltr'}
                   style={{ width: '130px' }}
                 >
-                  {item?.name}
+                  <span class="limited-lines">{item?.name}</span>
                   <div
                     className={`cursor-pointer d-flex flex-row x-gap-15 mt-10 text-nowrap`}
                   >
@@ -70,7 +74,7 @@ const Locations = ({ isReverse, gallery, showSites }) => {
                         className="text-primary bi bi-geo-alt"
                         dir={isReverse ? 'rtl' : 'ltr'}
                       >
-                        {" "}
+                        {' '}
                         <label className="cursor-pointer text-dark">
                           {t('DestinationWeLove.sites')}
                         </label>
