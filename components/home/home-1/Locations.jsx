@@ -6,7 +6,7 @@ import useTrans from '@/hooks/useTrans';
 
 const Locations = ({ isReverse, gallery, showSites }) => {
   const { t } = useTrans();
-  const { selectedCountry, setSelectedCity } = useDestinationGalleryStore();
+  const { selectedCountry, selectedCity, setSelectedCity } = useDestinationGalleryStore();
   const { setDestination, setLocationInput } = useSearchStore();
   const handleCityClick = city => {
     if (!city.name) return;
@@ -22,7 +22,10 @@ const Locations = ({ isReverse, gallery, showSites }) => {
   };
 
   const googleSearch = city => {
-    const url = `https://www.google.com/search?q=${city.name}, ${selectedCountry.label}`;
+    let url = `https://www.google.com/search?q=${city.name}, ${selectedCountry.label}`;
+    if (!showSites) {
+      url = `https://www.google.com/search?q=${city.name}, ${selectedCity.name}, ${selectedCountry.label}`;
+    }
     window.open(url, '_blank');
   };
 
