@@ -4,17 +4,15 @@ import Pagination from '@/components/hotel-list/common/Pagination';
 import HotelProperties from '@/components/hotel-list/hotel-list-v5/HotelProperties';
 import useFilterBar from '@/hooks/useFilterBar';
 import useHotelList from '@/hooks/useHotelList';
+import useTrans from '@/hooks/useTrans';
 import useHotelFilterStore from '@/store/useHotelFilterStore';
-import useTransStore from '@/store/useTransStore';
 import { useEffect } from 'react';
 import HotelNameFilter from './HotelNameFilter';
 import ResultHeader from './ResultHeader';
 
 export default function ListHotels() {
+  const { t, isReverse } = useTrans();
   const { gapActive, setGapActive, setHotels } = useHotelFilterStore();
-  const messages = useTransStore(state => state.messages);
-  const hotelTrans = messages?.Hotel;
-  const filterTrans = messages?.FilterBar;
   const { hotels, loading, isExpired } = useHotelList();
   const {
     data,
@@ -32,25 +30,25 @@ export default function ListHotels() {
   } = useFilterBar(hotels);
 
   const renderTooltip = () => {
-    if (!hotelTrans?.tooltipCopy) return;
+    if (!t('Hotel.tooltipCopy')) return;
     const Tooltip = require('bootstrap/js/dist/tooltip');
     const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip');
     const shortenLinkToolTip = document.getElementById('shortenLinkTooltip');
     new Tooltip(shortenLinkToolTip, {
       container: 'body',
       trigger: 'hover',
-      title: hotelTrans.shortLink || '',
+      title: t('Hotel.shortLink') || '',
     });
     new Tooltip(copyHotelToolTip, {
       container: 'body',
       trigger: 'hover',
-      title: hotelTrans.tooltipCopy || '',
+      title: t('Hotel.tooltipCopy') || '',
     });
   };
 
   useEffect(() => {
     renderTooltip();
-  }, [hotelTrans?.tooltipCopy]);
+  }, [t('Hotel.tooltipCopy')]);
 
   useEffect(() => {
     setHotels(hotels);
@@ -65,7 +63,7 @@ export default function ListHotels() {
             <div className="col-auto">
               <div className="row x-gap-20 y-gap-10 items-center">
                 <div className="col-auto">
-                  <div className="text-18 fw-500">{filterTrans?.filter}</div>
+                  <div className="text-18 fw-500">{t('FilterBar.filter')}</div>
                 </div>
                 {/* End .col-auto */}
 
@@ -77,7 +75,7 @@ export default function ListHotels() {
                         className="button -dark-1 bg-blue-1 text-white text-14 rounded-100 px-15 h-34"
                       >
                         <i className="bi bi-arrow-clockwise mr-1">
-                          {filterTrans?.reset}
+                          {t('FilterBar.reset')}
                         </i>
                       </button>
                     </div>
@@ -97,7 +95,7 @@ export default function ListHotels() {
             </div>
             {/* End col-auto */}
 
-            <div className="col-lg-4 col-md-5 col-sm-6">
+            <div className={`col-lg-${isReverse ? '3': '4'} col-md-5 col-sm-6`}>
               <HotelNameFilter disabled={loading || isExpired} />
             </div>
             <div className="col-auto">
@@ -110,7 +108,7 @@ export default function ListHotels() {
                 }`}
               >
                 <i className="icon-up-down text-14 mr-10"></i>
-                {filterTrans?.bHotelGap}
+                {t('FilterBar.bHotelGap')}
               </button>
             </div>
             {/* End col-auto */}

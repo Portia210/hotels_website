@@ -22,10 +22,7 @@ const Locations = ({ isReverse, gallery, showSites }) => {
   };
 
   const googleSearch = city => {
-    let url = `https://www.google.com/search?q=${city.name}, ${selectedCountry.label}`;
-    if (showSites) {
-      url = `https://www.google.com/search?q=${city.name}`;
-    }
+    const url = `https://www.google.com/search?q=${city.name}, ${selectedCountry.label}`;
     window.open(url, '_blank');
   };
 
