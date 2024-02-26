@@ -43,7 +43,12 @@
     "lth": "Lowest to highest",
     "rating": "Rating",
     "stars": "Stars",
+    "hotelName": "Hotel name",
     "bHotelGap": "Biggest hotel gap"
+  },
+  "ResultHeader": {
+    "loading": "Searching for hotels",
+    "hotelsFound": "x Hotels found"
   },
   "Hotel": {
     "hotel": "Hotel",
