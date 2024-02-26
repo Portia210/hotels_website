@@ -1,8 +1,10 @@
+import useTrans from '@/hooks/useTrans';
 import useHotelFilterStore from '@/store/useHotelFilterStore';
 import useHotelNameFilterStore from '@/store/useHotelNameFilterStore';
 import { useEffect, useState } from 'react';
 
 export default function HotelNameFilter({ disabled }) {
+  const { t } = useTrans();
   const { hotels, setHotels } = useHotelNameFilterStore();
   const {
     hotels: originHotels,
@@ -37,7 +39,7 @@ export default function HotelNameFilter({ disabled }) {
     <div className="d-flex items-center border rounded-pill w-100">
       <input
         className="lh-1 px-10 py-5"
-        placeholder="Hotel name"
+        placeholder={`${t('FilterBar.hotelName')}`}
         value={hotelName || ''}
         disabled={disabled}
         onChange={onInputChange}
