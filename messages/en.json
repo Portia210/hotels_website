@@ -18,6 +18,24 @@
     "subHeadLine2": "Become more effective, and share you like easily with our special tools.",
     "headLine2": "Discover the Greatest Deals Around!"
   },
+  "Footer": {
+    "contact": "Contact",
+    "contactUs": "Contact Us",
+    "contactPage": "Contact Page",
+    "supportEmailAddress": "Support Email Address",
+    "phoneNumber": "Phone Number",
+    "whatsappSupportGroup": "Whatsapp Support Groups",
+    "hebrewGroup": "Hebrew Group",
+    "englishGroup": "English Group",
+    "quickLinks": "Quick Links",
+    "userGuide": "User Guide",
+    "termOfUse": "Term of Use",
+    "privacyPolicy": "Privacy Policy",
+    "services": "Services",
+    "shortenLink": "Shorten Link",
+    "citiesInCountry": "City in Country",
+    "popularTouristAttractions": "Popular Tourist Attractions"
+  },
   "SearchBox": {
     "search": "Search",
     "location": "Location",
