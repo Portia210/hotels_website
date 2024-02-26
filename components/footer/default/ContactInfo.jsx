@@ -1,14 +1,6 @@
 const ContactInfo = ({ t }) => {
   const contactContent = [
     {
-      id: 1,
-      title: t('Footer.supportEmailAddress'),
-      action: 'mailto:agent1spc@gmail.com',
-      text: 'agent1spc@gmail.com',
-    },
-    {
-      id: 2,
-      title: t('Footer.contactPage'),
       action: [
         {
           link: '/contact',
@@ -17,17 +9,15 @@ const ContactInfo = ({ t }) => {
       ],
     },
     {
-      id: 3,
-      title: t('Footer.phoneNumber'),
+      title: t('Footer.supportEmailAddress'),
       action: [
         {
-          link: 'tel:+972-53332-4495',
-          text: '+972-53332-4495',
+          link: 'mailto:agent1spc@gmail.com',
+          text: 'agent1spc@gmail.com',
         },
       ],
     },
     {
-      id: 4,
       title: t('Footer.whatsappSupportGroup'),
       action: [
         {
@@ -40,23 +30,41 @@ const ContactInfo = ({ t }) => {
         },
       ],
     },
+    {
+      title: t('Footer.businessDetail'),
+      action: [
+        {
+          title: t('Footer.phoneNumber'),
+          link: 'tel:+972-53332-4495',
+          text: '+972-53332-4495',
+        },
+        {
+          title: t('Footer.address'),
+          text: t('Footer.businessAddress'),
+        },
+      ],
+    },
   ];
   return (
     <>
-      {contactContent.map(item => (
-        <div className="mt-30" key={item.id}>
-          <div className={'text-16 mt-30'}>{item.title}</div>
+      {contactContent.map((item, idx) => (
+        <div className="mt-30" key={idx}>
+          {item.title && <div className={'text-16 mt-10'}>{item.title}</div>}
           {Array.isArray(item.action) && (
             <div>
               {item.action.map((action, index) => (
-                <a
-                  href={action.link}
-                  key={index}
-                  target="_blank"
-                  className="d-block text-18 fw-500 text-blue-1 mt-5"
-                >
-                  {action.text}
-                </a>
+                <div key={index}>
+                  {action.title && (
+                    <div className={'text-16 mt-5'}>{action.title}</div>
+                  )}
+                  <a
+                    href={action.link}
+                    target="_blank"
+                    className="d-block text-18 fw-500 text-blue-1"
+                  >
+                    {action.text}
+                  </a>
+                </div>
               ))}
             </div>
           )}

@@ -34,7 +34,10 @@
     "services": "Services",
     "shortenLink": "Shorten Link",
     "citiesInCountry": "City in Country",
-    "popularTouristAttractions": "Popular Tourist Attractions"
+    "popularTouristAttractions": "Popular Tourist Attractions",
+    "businessDetail": "Business Detail",
+    "address": "Address",
+    "businessAddress": "Yad Binyamin, Derech haavot 256"
   },
   "SearchBox": {
     "search": "Search",

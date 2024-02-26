@@ -29,8 +29,8 @@
     "supportEmailAddress": "כתובת הדואר האלקטרוני של",
     "phoneNumber": "מספר טלפון",
     "whatsappSupportGroup": "קבוצות וואצפ לתמיכה",
-    "hebrewGroup": "Hebrew Group",
-    "englishGroup": "English Group",
+    "hebrewGroup": "תמיכה בוואצפ בעברית",
+    "englishGroup": "תמיכה בוואצפ באנגלית",
     "quickLinks": "קישורים מהירים",
     "userGuide": "מדריך למשתמש",
     "termOfUse": "תנאי שימוש",
@@ -38,7 +38,10 @@
     "services": "שירותים",
     "shortenLink": "קיצורי קישורים",
     "citiesInCountry": "ערים במדינות",
-    "popularTouristAttractions": "פופלריות לתיירים <br/> אטרקציות"
+    "popularTouristAttractions": "פופלריות לתיירים <br/> אטרקציות",
+    "businessDetail": "פרטי עסק",
+    "address": "כתובת",
+    "businessAddress": "יד בנימין דרך האבות 256"
   },
   "SearchBox": {
     "search": "חיפוש",
