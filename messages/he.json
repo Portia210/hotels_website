@@ -22,6 +22,24 @@
     "subHeadLine2": "הפוך להיות יותר אפקטיבי ושתף את הקישור בקלות באמצעות הכלים המיוחדים שלנו",
     "headLine2": "גלה את הדילים הטובים ביותר"
   },
+  "Footer": {
+    "contact": "צור קשר",
+    "contactUs": "לפנות אלינו",
+    "contactPage": "דף צור קשר",
+    "supportEmailAddress": "כתובת הדואר האלקטרוני של",
+    "phoneNumber": "מספר טלפון",
+    "whatsappSupportGroup": "קבוצות וואצפ לתמיכה",
+    "hebrewGroup": "Hebrew Group",
+    "englishGroup": "English Group",
+    "quickLinks": "קישורים מהירים",
+    "userGuide": "מדריך למשתמש",
+    "termOfUse": "תנאי שימוש",
+    "privacyPolicy": "מדיניות פרטיות",
+    "services": "שירותים",
+    "shortenLink": "קיצורי קישורים",
+    "citiesInCountry": "ערים במדינות",
+    "popularTouristAttractions": "פופלריות לתיירים <br/> אטרקציות"
+  },
   "SearchBox": {
     "search": "חיפוש",
     "location": "יעד",

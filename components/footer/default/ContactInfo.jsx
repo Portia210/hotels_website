@@ -1,32 +1,42 @@
-const ContactInfo = () => {
+const ContactInfo = ({ t }) => {
   const contactContent = [
     {
       id: 1,
-      title: 'Need live support?',
-      action: 'mailto:xyz@abc.com',
-      text: 'hi@gotrip.com',
+      title: t('Footer.supportEmailAddress'),
+      action: 'mailto:agent1spc@gmail.com',
+      text: 'agent1spc@gmail.com',
     },
     {
       id: 2,
-      title: 'Contact Page',
+      title: t('Footer.contactPage'),
       action: [
         {
           link: '/contact',
+          text: t('Footer.contactUs'),
         },
       ],
-      text: 'Contact us',
     },
     {
       id: 3,
-      title: 'Support WhatsApp Group',
+      title: t('Footer.phoneNumber'),
+      action: [
+        {
+          link: 'tel:+972-53332-4495',
+          text: '+972-53332-4495',
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: t('Footer.whatsappSupportGroup'),
       action: [
         {
           link: 'https://chat.whatsapp.com/JrGL7UOxEqQIsMhCKivh1S',
-          text: 'Hebrew WhatsApp Group',
+          text: t('Footer.hebrewGroup'),
         },
         {
           link: 'https://chat.whatsapp.com/JqYHRcwAwQx9bi7b11vg9I',
-          text: 'English WhatsApp Group',
+          text: t('Footer.englishGroup'),
         },
       ],
     },
@@ -53,7 +63,7 @@ const ContactInfo = () => {
           {!Array.isArray(item.action) && (
             <a
               href={item.action}
-              className="text-14 text-blue-500 hover:underline"
+              className="text-16 text-blue-500 hover:underline"
             >
               {item.text}
             </a>
