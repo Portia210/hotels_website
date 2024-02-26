@@ -4,7 +4,7 @@ import { useSignIn } from "@clerk/nextjs";
 const LoginWithSocial = () => {
   const { isLoaded, signIn } = useSignIn();
 
-  if (true) return null; // Todo remove later when site published
+  if (!isLoaded) return null;
 
   const signInWith = async () => {
     try {
