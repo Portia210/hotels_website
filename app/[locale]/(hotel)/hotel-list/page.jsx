@@ -57,7 +57,41 @@ const index = () => {
           </div>
         </div>
       </section>
-      <ListHotels />
+      <section className="layout-pt-md layout-pb-lg">
+        <div className="container">
+          <ul className="nav nav-pills mb-30">
+            <li className="nav-item">
+              <a
+                className="nav-link active"
+                id="matchedHotels-tab"
+                data-bs-toggle="pill"
+                href="#matchedHotels"
+              >
+                Matches
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                id="restResults-tab"
+                data-bs-toggle="pill"
+                href="#restResults"
+              >
+                Rest of the results
+              </a>
+            </li>
+          </ul>
+
+          <div className="tab-content">
+            <div id="matchedHotels" className="tab-pane fade show active">
+              <ListHotels />
+            </div>
+            <div id="restResults" className="tab-pane fade">
+              <ListHotels />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* End layout for listing sidebar and content */}
 
