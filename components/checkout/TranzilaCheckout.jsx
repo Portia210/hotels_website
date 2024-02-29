@@ -1,15 +1,16 @@
 'use client';
 
-import { TOURCOMPARE_BE_URL } from '@/constants/environment';
+import useCheckout from '@/hooks/useCheckout';
+import { createIframeUrl } from '@/utils/payment';
 import { useUser } from '@clerk/nextjs';
-import dayjs from 'dayjs';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
+import { useEffect } from 'react';
 
 export default function TranzilaCheckout() {
   const { user, isLoaded } = useUser();
+  const { fetchCheckoutSession, createCheckoutSession } = useCheckout();
   const locale = useLocale();
-
-  if (!isLoaded) return null;
 
   const plan = {
     name: 'Plan B',
@@ -18,39 +19,36 @@ export default function TranzilaCheckout() {
     currency: 1,
     duration: 12, // months
   };
+
+  const createCheckoutSessionMutation = useMutation({
+    mutationFn: () => createCheckoutSession(plan),
+  });
+
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['fetchCheckoutSession'],
+    queryFn: () => fetchCheckoutSession(user.id),
+    refetchInterval: 1000,
+  });
+
+  useEffect(() => createCheckoutSessionMutation.mutate(), []);
+
+  if (!isLoaded) return null;
+
   const json_purchase_data = JSON.stringify([
     {
       product_name: plan.id,
-      product_quantity: 1,
+      product_quantity: plan.duration,
       product_price: plan.price,
     },
   ]);
 
-  const terminalName = `agentspc`;
-  const recur_start_date = dayjs().format('YYYY-MM-DD').toString();
-
-  const buyer = {
+  const additionalInfo = {
     json_purchase_data: encodeURIComponent(json_purchase_data),
     email: user.emailAddresses[0].emailAddress,
   };
 
-  const params = new URLSearchParams({
-    cred_type: 1,
-    tranmode: 'N',
-    lang: locale === 'he' ? 'il' : 'us',
-    recur_start_date,
-    success_url_address: `${TOURCOMPARE_BE_URL}/api/v1/payment/success`,
-    fail_url_address: `${TOURCOMPARE_BE_URL}/api/v1/payment/failure`,
-    notify_url_address: `${TOURCOMPARE_BE_URL}/api/v1/payment/notify`,
-    currency: plan.currency,
-    sum: Number(plan.price),
-    recur_sum: Number(plan.price),
-    recur_transaction: '4_approved',
-    recur_payments: plan.duration,
-    ...buyer,
-  });
+  const iframeUrl = createIframeUrl(plan, additionalInfo, locale);
 
-  const iframeUrl = `https://direct.tranzila.com/${terminalName}/iframenew.php?${params.toString()}`;
   return (
     <div>
       <iframe
@@ -59,7 +57,7 @@ export default function TranzilaCheckout() {
         name="tranzila"
         src={iframeUrl}
         width="100%"
-        height="1000px"
+        height="500px"
       ></iframe>
     </div>
   );
