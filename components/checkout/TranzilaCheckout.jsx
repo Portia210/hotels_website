@@ -1,16 +1,22 @@
 'use client';
 
 import useCheckout from '@/hooks/useCheckout';
+import useUserPlans from '@/hooks/useUserPlans';
 import { createIframeUrl } from '@/utils/payment';
 import { useUser } from '@clerk/nextjs';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation'
 
 export default function TranzilaCheckout() {
+  const { id } = useParams();  
   const { user, isLoaded } = useUser();
   const { fetchCheckoutSession, createCheckoutSession } = useCheckout();
+  const { getPlan } = useUserPlans();
   const locale = useLocale();
+
+  // const [plan, setPlan] = useState();
 
   const plan = {
     name: 'Plan B',
@@ -20,9 +26,21 @@ export default function TranzilaCheckout() {
     duration: 12, // months
   };
 
+  const fetchPlan = async () => {
+    const plan = await getPlan(id);
+    console.log('plan -->', plan);
+    // setPlan(plan);
+  }
+
   const createCheckoutSessionMutation = useMutation({
     mutationFn: () => createCheckoutSession(plan),
   });
+
+  const { data: planData } = useQuery({
+    queryKey: ['fetchPlan'],
+    queryFn: () => fetchPlan(user.id)
+  });
+
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['fetchCheckoutSession'],

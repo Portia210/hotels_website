@@ -8,7 +8,8 @@ export const metadata = {
   description: 'Checkout now',
 };
 
-const ShortenLink = () => {
+const CheckoutPage = () => {
+
   return (
     <>
       {/* End Page Title */}
@@ -32,4 +33,4 @@ const ShortenLink = () => {
     </>
   );
 };
-export default dynamic(() => Promise.resolve(ShortenLink), { ssr: false });
+export default dynamic(() => Promise.resolve(CheckoutPage), { ssr: false });

@@ -12,6 +12,21 @@ const useUserPlans = () => {
     return response;
   };
 
+  const getPlan = async id => {
+    const response = await axios
+      .get(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/detail/${id}`)
+      .then(res => res.data);
+    return response;
+  };
+
+  const getPlanByLabel = async label => {
+    if (!label) throw Error('Label is required!');
+    const response = await axios
+      .get(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/label?label=${label}`)
+      .then(res => res.data);
+    return response;
+  };
+
   const selfUpgradePlan = async planId => {
     if (!planId) throw Error('Planid is required!');
     const response = await axios
@@ -53,6 +68,8 @@ const useUserPlans = () => {
   };
 
   return {
+    getPlan,
+    getPlanByLabel,
     fetchPlans,
     selfUpgradePlan,
     upgradeUserPlan,
