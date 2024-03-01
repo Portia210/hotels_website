@@ -15,7 +15,7 @@ export const createIframeUrl = (plan, additionalInfo, locale) => {
     fail_url_address: `${TOURCOMPARE_BE_URL}/api/v1/payment/failure`,
     notify_url_address: `${TOURCOMPARE_BE_URL}/api/v1/payment/notify`,
     currency: plan.currency,
-    sum: Number(plan.price),
+    sum: Number(plan.sum), // cost to upgrade from current plan to this plan
     recur_sum: Number(plan.price),
     recur_transaction: '4_approved',
     recur_payments: plan.duration,

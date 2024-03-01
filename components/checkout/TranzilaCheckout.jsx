@@ -6,49 +6,59 @@ import { createIframeUrl } from '@/utils/payment';
 import { useUser } from '@clerk/nextjs';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation'
 
 export default function TranzilaCheckout() {
-  const { id } = useParams();  
+  const { id } = useParams();
   const { user, isLoaded } = useUser();
   const { fetchCheckoutSession, createCheckoutSession } = useCheckout();
   const { getPlan } = useUserPlans();
+  const [originPlan, setOriginPlan] = useState(null);
+
   const locale = useLocale();
 
-  // const [plan, setPlan] = useState();
-
-  const plan = {
-    name: 'Plan B',
-    id: '65c363371936ee997a061a4a',
-    price: 20,
+  const myplan = {
+    name: originPlan?.label,
+    id: originPlan?._id,
+    price: originPlan?.price,
     currency: 1,
-    duration: 12, // months
+    duration: 12,
   };
+
+  const createCheckoutSessionMutation = useMutation({
+    mutationFn: () => createCheckoutSession(myplan),
+  });
 
   const fetchPlan = async () => {
     const plan = await getPlan(id);
-    console.log('plan -->', plan);
-    // setPlan(plan);
-  }
+    setOriginPlan(plan);
+  };
 
-  const createCheckoutSessionMutation = useMutation({
-    mutationFn: () => createCheckoutSession(plan),
-  });
-
-  const { data: planData } = useQuery({
+  useQuery({
     queryKey: ['fetchPlan'],
-    queryFn: () => fetchPlan(user.id)
+    queryFn: () => fetchPlan(user.id),
   });
 
-
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data: planData, isLoading } = useQuery({
     queryKey: ['fetchCheckoutSession'],
-    queryFn: () => fetchCheckoutSession(user.id),
+    queryFn: () =>  fetchCheckoutSession(user.id),
     refetchInterval: 1000,
   });
 
-  useEffect(() => createCheckoutSessionMutation.mutate(), []);
+  const plan = {
+    name: planData?.name,
+    id,
+    price: planData?.price,
+    currency: 1,
+    duration: planData?.quantity,
+    sum: planData?.sum,
+  };
+
+  useEffect(() => {
+    if (!originPlan) return;
+    createCheckoutSessionMutation.mutate();
+  }, [originPlan]);
 
   if (!isLoaded) return null;
 
@@ -66,6 +76,8 @@ export default function TranzilaCheckout() {
   };
 
   const iframeUrl = createIframeUrl(plan, additionalInfo, locale);
+
+  if (isLoading) return null;
 
   return (
     <div>

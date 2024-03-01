@@ -32,6 +32,7 @@ const useCheckout = () => {
         router.push('/dashboard/db-dashboard');
       } else if (res.status === PaymentStatus.FAILURE) {
         alert('Payment failed please contact support');
+        router.push('/pricing');
       }
       return res;
     } catch (error) {
