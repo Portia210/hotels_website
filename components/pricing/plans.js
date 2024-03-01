@@ -2,6 +2,7 @@ export const planContents = (t) => {
   return [
     {
       header: `${t('Pricing.plans.standard')}`,
+      value: 'Standard',
       price: 80,
       currency: '₪',
       features: [
@@ -18,6 +19,7 @@ export const planContents = (t) => {
     },
     {
       header: `${t('Pricing.plans.advanced')}`,
+      value: 'Advanced',
       price: 150,
       currency: '₪',
       features: [
