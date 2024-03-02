@@ -1,10 +1,23 @@
+'use client';
+
+import useUserCredit from '@/hooks/useUserCredit';
+import { useQuery } from '@tanstack/react-query';
+
 export default function CreditCard() {
+  const { getUserRemainCredit } = useUserCredit();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['fetchHotelSearchCredit'],
+    queryFn: () => getUserRemainCredit('HOTEL_SEARCH'),
+  });
+
   const item = {
     title: "Credits",
-    amount: "18 searches today",
-    description: "2/20 searches remain",
+    amount: `${data?.total || 0 - data?.remaining || 0} searches today`,
+    description: `${data?.remaining || 0}/${data?.total || 0} searches remain`,
     icon: <i className="bi bi-search"></i>,
   };
+  
   return (
     <div className="py-30 px-30 rounded-4 bg-white shadow-3">
       <div className="row y-gap-20 justify-between items-center">

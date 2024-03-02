@@ -24,8 +24,8 @@ export default function PlanCard() {
 
   const item = {
     title: 'Your Plan',
-    amount: planData?.label,
-    description: `${data?.total} searches per day`,
+    label: planData?.label || 'Standard',
+    description: `${data?.total || 0} searches per day`,
     icon: <i className="bi bi-box"></i>,
   };
 
@@ -34,7 +34,7 @@ export default function PlanCard() {
       <div className="row y-gap-20 justify-between items-center">
         <div className="col-auto text-nowrap">
           <div className="fw-500 lh-14 text-primary">{item.title}</div>
-          <div className="text-20 lh-16 fw-600 mt-5">{item.amount}</div>
+          <div className="text-20 lh-16 fw-600 mt-5">{item.label}</div>
           <div className="text-15 lh-14 text-light-1 mt-5">
             {item.description}
           </div>

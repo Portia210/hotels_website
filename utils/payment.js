@@ -14,7 +14,7 @@ export const createIframeUrl = (plan, additionalInfo, locale) => {
     success_url_address: `${TOURCOMPARE_BE_URL}/api/v1/payment/success`,
     fail_url_address: `${TOURCOMPARE_BE_URL}/api/v1/payment/failure`,
     notify_url_address: `${TOURCOMPARE_BE_URL}/api/v1/payment/notify`,
-    // notify_url_address: `https://8dc5-185-185-133-179.ngrok-free.app/api/v1/payment/notify`,
+    // notify_url_address: `https://bc99-185-185-133-187.ngrok-free.app/api/v1/payment/notify`,
     currency: plan.currency,
     sum: Number(plan.sum), // cost to upgrade from current plan to this plan
     recur_sum: Number(plan.price),
