@@ -1,10 +1,34 @@
+'use client';
+
+import useUserPlans from '@/hooks/useUserPlans';
+import useUserCredit from '@/hooks/useUserCredit';
+import { useQuery } from '@tanstack/react-query';
+
 export default function PlanCard() {
+  const { getUserRemainCredit } = useUserCredit();
+  const { getCurrentPlan } = useUserPlans();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['fetchHotelSearchCredit'],
+    queryFn: () => getUserRemainCredit('HOTEL_SEARCH'),
+  });
+
+  const {
+    data: planData,
+    isLoading: planLoading,
+    error: planError,
+  } = useQuery({
+    queryKey: ['fetchCurrentPlan'],
+    queryFn: () => getCurrentPlan(),
+  });
+
   const item = {
-    title: "Your Plan",
-    amount: "Standard",
-    description: "20 searches per day",
+    title: 'Your Plan',
+    amount: planData?.label,
+    description: `${data?.total} searches per day`,
     icon: <i className="bi bi-box"></i>,
   };
+
   return (
     <div className="py-30 px-30 rounded-4 bg-white shadow-3">
       <div className="row y-gap-20 justify-between items-center">
