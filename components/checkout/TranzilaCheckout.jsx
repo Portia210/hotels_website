@@ -4,31 +4,17 @@ import useCheckout from '@/hooks/useCheckout';
 import useUserPlans from '@/hooks/useUserPlans';
 import { createIframeUrl } from '@/utils/payment';
 import { useUser } from '@clerk/nextjs';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export default function TranzilaCheckout() {
   const { id } = useParams();
   const { user, isLoaded } = useUser();
-  const { fetchCheckoutSession, createCheckoutSession } = useCheckout();
+  const { fetchCheckoutSession } = useCheckout();
   const { getPlan } = useUserPlans();
-  const [originPlan, setOriginPlan] = useState(null);
 
   const locale = useLocale();
-
-  const myplan = {
-    name: originPlan?.label,
-    id: originPlan?._id,
-    price: originPlan?.price,
-    currency: 1,
-    duration: 12,
-  };
-
-  const createCheckoutSessionMutation = useMutation({
-    mutationFn: () => createCheckoutSession(myplan),
-  });
 
   const fetchPlan = async () => {
     const plan = await getPlan(id);
@@ -42,7 +28,7 @@ export default function TranzilaCheckout() {
 
   const { data: planData, isLoading } = useQuery({
     queryKey: ['fetchCheckoutSession'],
-    queryFn: () =>  fetchCheckoutSession(user.id),
+    queryFn: () => fetchCheckoutSession(user.id),
     refetchInterval: 1000,
   });
 
@@ -54,11 +40,6 @@ export default function TranzilaCheckout() {
     duration: planData?.quantity,
     sum: planData?.sum,
   };
-
-  useEffect(() => {
-    if (!originPlan) return;
-    createCheckoutSessionMutation.mutate();
-  }, [originPlan]);
 
   if (!isLoaded) return null;
 
