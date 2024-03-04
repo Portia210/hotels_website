@@ -28,7 +28,11 @@ export default function TranzilaCheckout() {
 
   const { data: planData, isLoading } = useQuery({
     queryKey: ['fetchCheckoutSession'],
-    queryFn: () => fetchCheckoutSession(user.id),
+    queryFn: () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const checkoutSessionId = urlParams.get('checkoutSessionId');
+      return fetchCheckoutSession(checkoutSessionId);
+    },
     refetchInterval: 1000,
   });
 

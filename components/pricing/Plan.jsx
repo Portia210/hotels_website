@@ -1,18 +1,23 @@
 'use client';
 
+import useCheckout from '@/hooks/useCheckout';
 import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
 import { useRouter } from 'next/navigation';
 
 const Plan = props => {
   const { getPlanByLabel } = useUserPlans();
+  const { createCheckoutSession } = useCheckout();
   const router = useRouter();
   const { t } = useTrans();
   const { isReverse, value } = props;
 
   const handleGetStarted = async () => {
     const plan = await getPlanByLabel(value);
-    if (plan._id) router.push(`/checkout/${plan._id}`);
+    if (plan._id) {
+      const checkoutSessionId = await createCheckoutSession(plan._id);
+      router.push(`/checkout/${plan._id}?checkoutSessionId=${checkoutSessionId}`);
+    }
   };
 
   return (

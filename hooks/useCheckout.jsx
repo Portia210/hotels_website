@@ -1,4 +1,5 @@
 import { TOURCOMPARE_BE_URL } from '@/constants/environment';
+import checkoutService from '@/service/checkout/CheckoutService';
 import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -13,16 +14,21 @@ export const PaymentStatus = {
 const useCheckout = () => {
   const router = useRouter();
   const { getToken } = useAuth();
-  const fetchCheckoutSession = async () => {
+
+  const fetchCheckoutSession = async checkoutSessionId => {
     try {
+      if (!checkoutSessionId) throw Error('Checkout session id is required');
       const token = await getToken();
       const res = await axios
-        .get(`${TOURCOMPARE_BE_URL}/api/v1/payment/checkout-session`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        .get(
+          `${TOURCOMPARE_BE_URL}/api/v1/payment/checkout-session?checkoutSessionId=${checkoutSessionId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
           },
-          withCredentials: true,
-        })
+        )
         .then(res => res.data);
       if (res.status === PaymentStatus.SUCCESS) {
         router.push('/dashboard/db-dashboard');
@@ -33,11 +39,16 @@ const useCheckout = () => {
       return res;
     } catch (error) {
       console.error('Error fetching checkout session', error);
-      throw error;
+      router.push('/pricing');
     }
   };
 
-  return { fetchCheckoutSession };
+  const createCheckoutSession = async planId => {
+    const token = await getToken();
+    return await checkoutService.createCheckoutSession(planId, token);
+  };
+
+  return { fetchCheckoutSession, createCheckoutSession };
 };
 
 export default useCheckout;
