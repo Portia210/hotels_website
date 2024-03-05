@@ -1,10 +1,16 @@
+import useHotelTabStore from '@/store/useHotelTabStore';
+
 export default function HotelTabs() {
+  const { activeStore, setActiveStore } = useHotelTabStore();
   return (
     <>
       <ul className="nav nav-tabs mb-30">
         <li className="nav-item">
           <a
-            className="nav-link active"
+            onClick={() => setActiveStore('matchedHotels')}
+            className={`nav-link ${
+              activeStore === 'matchedHotels' ? 'active' : ''
+            }`}
             id="matchedHotels-tab"
             data-bs-toggle="tab"
             href="#matchedHotels"
@@ -14,7 +20,10 @@ export default function HotelTabs() {
         </li>
         <li className="nav-item">
           <a
-            className="nav-link"
+            onClick={() => setActiveStore('restResults')}
+            className={`nav-link ${
+              activeStore === 'restResults' ? 'active' : ''
+            }`}
             id="restResults-tab"
             data-bs-toggle="tab"
             href="#restResults"
