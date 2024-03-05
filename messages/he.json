@@ -108,7 +108,8 @@
       "email": "אימייל",
       "phoneNumber": "מס' טלפון",
       "agentNumber": "מס' סוכן",
-      "country": "מדינה"
+      "country": "מדינה",
+      "userBilling": "Billing"
     },
     "SetPassword": {
       "setPasswordLabel": "הגדר סיסמה",
@@ -144,6 +145,9 @@
     "dedicatedSupport": "תמיכה ייעודית",
     "getStarted": "בואו נתחיל!",
     "allFeatures": "גישה לכל הפיצ'רים",
+    "currentPlan": "התוכנית הנוכחית",
+    "downgradePlan": "להמשיך להרחיב",
+    "upgradePlan": "תוכנית לשיפור",
     "plans": {
       "standard": "סטנדרט",
       "advanced": "מתקדם",

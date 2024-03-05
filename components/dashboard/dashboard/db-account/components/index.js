@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import PersonalInfo from "./PersonalInfo";
 import useTrans from "@/hooks/useTrans";
+import UserBilling from "./UserBilling";
 
 const Index = () => {
   const { t } = useTrans();
@@ -11,6 +12,10 @@ const Index = () => {
     {
       label: t('Dashboard.PersonalInfo.personalInfoLabel'),
       content: <PersonalInfo />,
+    },
+    {
+      label: t('Dashboard.PersonalInfo.userBilling'),
+      content: <UserBilling />,
     },
   ];
 

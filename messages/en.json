@@ -108,7 +108,8 @@
       "email": "Email",
       "phoneNumber": "Phone Number",
       "agentNumber": "Agent Number",
-      "country": "Country"
+      "country": "Country",
+      "userBilling": "Billing"
     },
     "SetPassword": {
       "setPasswordLabel": "Set Password",
@@ -144,6 +145,9 @@
     "dedicatedSupport": "Dedicated support",
     "allFeatures": "Full website access",
     "getStarted": "Get Started",
+    "currentPlan": "Current Plan",
+    "downgradePlan": "Downgrade Plan",
+    "upgradePlan": "Upgrade Plan",
     "plans": {
       "standard": "Standard",
       "advanced": "Advanced",
