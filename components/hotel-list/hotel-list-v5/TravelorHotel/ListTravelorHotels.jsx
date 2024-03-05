@@ -31,6 +31,27 @@ export default function ListTravelorHotels() {
     resetFilter,
   } = useTravelorFilterBar(hotels);
 
+  const renderTooltip = () => {
+    if (!t('Hotel.tooltipCopy')) return;
+    const Tooltip = require('bootstrap/js/dist/tooltip');
+    const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip');
+    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip');
+    new Tooltip(shortenLinkToolTip, {
+      container: 'body',
+      trigger: 'hover',
+      title: t('Hotel.shortLink') || '',
+    });
+    new Tooltip(copyHotelToolTip, {
+      container: 'body',
+      trigger: 'hover',
+      title: t('Hotel.tooltipCopy') || '',
+    });
+  };
+
+  useEffect(() => {
+    renderTooltip();
+  }, [t('Hotel.tooltipCopy')]);
+  
   useEffect(() => {
     setHotels(hotels);
   }, [hotels.length]);
