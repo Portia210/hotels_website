@@ -1,20 +1,21 @@
 'use client';
 import DropdownSelectStar from '@/components/hotel-list/common/DropdownSelectStar';
 import Pagination from '@/components/hotel-list/common/Pagination';
-import HotelProperties from '@/components/hotel-list/hotel-list-v5/HotelProperties';
-import useFilterBar from '@/hooks/useFilterBar';
-import useHotelList from '@/hooks/useHotelList';
 import useTrans from '@/hooks/useTrans';
-import useHotelFilterStore from '@/store/useHotelFilterStore';
+import useTravelorHotelList from '@/hooks/useTravelorHotelList';
+import useTravelorFilterBar from '@/hooks/useTravelorFilterBar';
+import useTravelorHotelFilterStore from '@/store/useTravelorHotelFilterStore';
+import HotelNameFilter from '../HotelNameFilter';
+import HotelTabs from '../HotelTabs';
+import ResultHeader from '../ResultHeader';
+import TravelorHotelProperties from './TravelorHotelProperties';
 import { useEffect } from 'react';
-import HotelNameFilter from './HotelNameFilter';
-import ResultHeader from './ResultHeader';
-import HotelTabs from './HotelTabs';
 
-export default function ListHotels() {
+export default function ListTravelorHotels() {
   const { t, isReverse } = useTrans();
-  const { gapActive, setGapActive, setHotels } = useHotelFilterStore();
-  const { hotels, loading, isExpired } = useHotelList();
+  const { gapActive, setGapActive, setHotels } = useTravelorHotelFilterStore();
+  const { hotels, loading, isExpired } = useTravelorHotelList();
+
   const {
     data,
     totalFilter,
@@ -28,7 +29,7 @@ export default function ListHotels() {
     starFilter,
     handleStarFilterChange,
     resetFilter,
-  } = useFilterBar(hotels);
+  } = useTravelorFilterBar(hotels);
 
   const renderTooltip = () => {
     if (!t('Hotel.tooltipCopy')) return;
@@ -50,10 +51,11 @@ export default function ListHotels() {
   useEffect(() => {
     renderTooltip();
   }, [t('Hotel.tooltipCopy')]);
-
+  
   useEffect(() => {
     setHotels(hotels);
   }, [hotels.length]);
+
 
   return (
     <>
@@ -112,15 +114,15 @@ export default function ListHotels() {
         </div>
         {/* End col-auto */}
 
-        <HotelTabs/>
-        
+        <HotelTabs />
+
         <div className="row y-gap-30 sm:pr-0">
           <ResultHeader
             loading={loading}
             isExpired={isExpired}
             totalResult={totalFilter}
           />
-          {!isExpired && <HotelProperties hotels={data} />}
+          {!isExpired && <TravelorHotelProperties hotels={data} />}
         </div>
         {/* End .row */}
         <Pagination

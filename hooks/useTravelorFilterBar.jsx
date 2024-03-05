@@ -6,17 +6,18 @@ import useHotelPagination from './hotelFilters/useHotelPagination';
 import usePriceFilter from './hotelFilters/usePriceFilter';
 import useRatingFilter from './hotelFilters/useRatingFilter';
 import useStarFilter from './hotelFilters/useStarFilter';
+import useTravelorHotelFilterStore from '../store/useTravelorHotelFilterStore';
 
 // TODO: optimize this hook, reduce the number of re-renders
-const useFilterBar = hotels => {
-  const hotelFilterStore = useHotelFilterStore();
+const useTravelorFilterBar = hotels => {
+  const travelorHotelFilterStore = useTravelorHotelFilterStore();
   const {
     setGapActive,
     filterHotels,
     setFilterHotels,
     onFilterHotel,
     setHotels,
-  } = hotelFilterStore;
+  } = travelorHotelFilterStore;
 
   const {
     currentPage,
@@ -37,11 +38,15 @@ const useFilterBar = hotels => {
   };
 
   const { ratingFilter, setRatingFilter, handleRatingFilterChange } =
-    useRatingFilter(hotelFilterStore);
-  const { starFilter, setStarFilter, handleStarFilterChange } = useStarFilter(hotelFilterStore);
-  useHotelGapFilter(hotelFilterStore);
+    useRatingFilter(travelorHotelFilterStore);
+  const { starFilter, setStarFilter, handleStarFilterChange } = useStarFilter(
+    travelorHotelFilterStore,
+  );
+  useHotelGapFilter(travelorHotelFilterStore);
 
-  const { priceFilter, setPriceFilter } = usePriceFilter(hotelFilterStore);
+  const { priceFilter, setPriceFilter } = usePriceFilter(
+    travelorHotelFilterStore,
+  );
 
   const resetFilter = () => {
     setPriceFilter(defaultFilter.priceFilter);
@@ -79,4 +84,4 @@ const useFilterBar = hotels => {
   };
 };
 
-export default useFilterBar;
+export default useTravelorFilterBar;

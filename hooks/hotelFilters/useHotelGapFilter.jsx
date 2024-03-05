@@ -1,9 +1,8 @@
 import { FILTER_TYPE } from "@/hooks/hotelFilters";
-import useHotelFilterStore from "@/store/useHotelFilterStore";
 import { useEffect } from "react";
 
-const useHotelGapFilter = () => {
-  const { gapActive, setCondition } = useHotelFilterStore();
+const useHotelGapFilter = (hotelFilterStore) => {
+  const { gapActive, setCondition } = hotelFilterStore;
 
   useEffect(() => {
     setCondition(FILTER_TYPE.PRICE_GAP, gapActive);
