@@ -3,16 +3,19 @@
 import useCheckout from '@/hooks/useCheckout';
 import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
+import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 
 const Plan = props => {
   const { isReverse, value, currentPlan } = props;
   const router = useRouter();
+  const { isSignedIn } = useUser();
   const { getPlanByLabel } = useUserPlans();
   const { createCheckoutSession } = useCheckout();
   const { t } = useTrans();
 
   const handleGetStarted = async () => {
+    if (!isSignedIn) return router.push('/login');
     const plan = await getPlanByLabel(value);
     if (plan._id) {
       const checkoutSessionId = await createCheckoutSession(plan._id);
@@ -23,6 +26,7 @@ const Plan = props => {
   };
 
   const handleDowngradePlan = async () => {
+    if (!isSignedIn) return router.push('/login');
     const plan = await getPlanByLabel(value);
     if (plan._id) {
       console.log('Downgrade plan');

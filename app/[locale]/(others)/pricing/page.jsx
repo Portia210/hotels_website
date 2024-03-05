@@ -7,10 +7,11 @@ import dynamic from 'next/dynamic';
 import { auth } from '@clerk/nextjs';
 
 export const metadata = {
-  title: 'Agent-Space: Shorten Your Links Easily!',
+  title: 'Agent-Space: Pricing',
   description:
-    "Make your web links shorter and easier to share. It's simple, quick, and helps your messages look neat and elegant",
+    'Pricing page for Agent-Space. Choose the best plan for your needs.',
 };
+
 const fetchCurrentPlan = async () => {
   const { getToken, userId } = auth();
   if (!userId) return;
@@ -49,7 +50,7 @@ const PricingPage = async () => {
             </div>
             {/* End text-center */}
             <div className="col-12">
-              <PricingSection currentPlan={currentPlan}/>
+              <PricingSection currentPlan={currentPlan} />
             </div>
           </div>
         </div>

@@ -108,7 +108,8 @@
       "email": "Email",
       "phoneNumber": "Phone Number",
       "agentNumber": "Agent Number",
-      "country": "Country"
+      "country": "Country",
+      "userBilling": "Billing"
     },
     "SetPassword": {
       "setPasswordLabel": "Set Password",

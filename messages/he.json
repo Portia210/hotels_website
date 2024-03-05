@@ -108,7 +108,8 @@
       "email": "אימייל",
       "phoneNumber": "מס' טלפון",
       "agentNumber": "מס' סוכן",
-      "country": "מדינה"
+      "country": "מדינה",
+      "userBilling": "Billing"
     },
     "SetPassword": {
       "setPasswordLabel": "הגדר סיסמה",
