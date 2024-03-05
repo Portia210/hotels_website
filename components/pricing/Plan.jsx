@@ -6,18 +6,54 @@ import useUserPlans from '@/hooks/useUserPlans';
 import { useRouter } from 'next/navigation';
 
 const Plan = props => {
+  const { isReverse, value, currentPlan } = props;
+  const router = useRouter();
   const { getPlanByLabel } = useUserPlans();
   const { createCheckoutSession } = useCheckout();
-  const router = useRouter();
   const { t } = useTrans();
-  const { isReverse, value } = props;
 
   const handleGetStarted = async () => {
     const plan = await getPlanByLabel(value);
     if (plan._id) {
       const checkoutSessionId = await createCheckoutSession(plan._id);
-      router.push(`/checkout/${plan._id}?checkoutSessionId=${checkoutSessionId}`);
+      router.push(
+        `/checkout/${plan._id}?checkoutSessionId=${checkoutSessionId}`,
+      );
     }
+  };
+
+  const handleDowngradePlan = async () => {
+    const plan = await getPlanByLabel(value);
+    if (plan._id) {
+      console.log('Downgrade plan');
+    }
+  };
+
+  const renderGetStartedBtn = async () => {
+    let btnText = t('Pricing.getStarted');
+    let btnDisabled = false;
+
+    if (currentPlan && currentPlan.label === value) {
+      btnText = t('Pricing.currentPlan');
+      btnDisabled = true;
+    } else if (currentPlan && currentPlan.label === 'Advanced') {
+      btnText = t('Pricing.downgradePlan');
+    } else if (currentPlan && currentPlan.label === 'Standard') {
+      btnText = t('Pricing.upgradePlan');
+    }
+
+    return (
+      <button
+        onClick={!btnDisabled ? handleDowngradePlan : handleGetStarted}
+        className={`btn btn-lg btn-block ${
+          props.outline ? 'btn-outline-primary' : 'btn-primary'
+        }`}
+        disabled={btnDisabled}
+        type="button"
+      >
+        {btnText}
+      </button>
+    );
   };
 
   return (
@@ -48,15 +84,7 @@ const Plan = props => {
             </li>
           ))}
         </ul>
-        <button
-          onClick={handleGetStarted}
-          className={`btn btn-lg btn-block ${
-            props.outline ? 'btn-outline-primary' : 'btn-primary'
-          }`}
-          type="button"
-        >
-          {props.buttonLabel}
-        </button>
+        {renderGetStartedBtn()}
       </div>
     </div>
   );

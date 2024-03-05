@@ -1,8 +1,8 @@
 import { useLocale, useTranslations } from 'next-intl';
-import { planContents } from './plans';
 import Plan from './Plan';
+import { planContents } from './plans';
 
-const Plans = () => {
+const PricingSection = ({ currentPlan }) => {
   const t = useTranslations();
   const locale = useLocale();
   const isReverse = locale === 'he';
@@ -10,13 +10,13 @@ const Plans = () => {
     return (
       <div key={obj.header} className="px-20 py-20">
         <Plan
+          currentPlan={currentPlan}
           value={obj.value}
           isReverse={isReverse}
           header={obj.header}
           price={obj.price}
           currency={obj.currency}
           features={obj.features}
-          buttonLabel={obj.buttonLabel}
           outline={obj.outline}
         />
       </div>
@@ -30,4 +30,4 @@ const Plans = () => {
   );
 };
 
-export default Plans;
+export default PricingSection;

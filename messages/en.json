@@ -144,6 +144,9 @@
     "dedicatedSupport": "Dedicated support",
     "allFeatures": "Full website access",
     "getStarted": "Get Started",
+    "currentPlan": "Current Plan",
+    "downgradePlan": "Downgrade Plan",
+    "upgradePlan": "Upgrade Plan",
     "plans": {
       "standard": "Standard",
       "advanced": "Advanced",

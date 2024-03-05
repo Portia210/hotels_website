@@ -1,4 +1,5 @@
 import { TOURCOMPARE_BE_URL } from '@/constants/environment';
+import subscriptionPlanService from '@/service/plans/SubscriptionPlanService';
 import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 
@@ -31,14 +32,7 @@ const useUserPlans = () => {
 
   const getCurrentPlan = async () => {
     const token = await getToken();
-    const response = await axios
-      .get(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/user/plan`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(res => res.data);
-    return response;
+    return subscriptionPlanService.getCurrentPlan(token);
   };
 
   const selfUpgradePlan = async planId => {
