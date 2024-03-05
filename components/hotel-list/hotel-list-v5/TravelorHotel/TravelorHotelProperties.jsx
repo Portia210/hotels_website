@@ -5,11 +5,11 @@ import { convertCurrency } from "@/utils/currencyConverter";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import HotelInfoToast from "../common/HotelInfoToast";
-import HotelStars from "../common/HotelStars";
+import HotelInfoToast from "../../common/HotelInfoToast";
+import HotelStars from "../../common/HotelStars";
 import useTrans from "@/hooks/useTrans";
 
-const HotelProperties = ({ hotels }) => {
+const TravelorHotelProperties = ({ hotels }) => {
   const { t, isReverse } = useTrans();
 
   const [selectedHotel, setSelectedHotel] = useState(null);
@@ -128,24 +128,6 @@ const HotelProperties = ({ hotels }) => {
                     </Link>
                   </span>
                 </div>
-                <div className="d-flex justify-between fw-500">
-                  <span className="">
-                    {convertCurrency(item?.bookingPrice, currency)}
-                  </span>
-                  <span className="text-blue-1">
-                    <Link target="_blank" href={item.bookingLink}>
-                      {t("Hotel.toBooking")}
-                    </Link>
-                  </span>
-                </div>
-                {item?.price_difference > 0 && (
-                  <div className={`d-flex x-gap-5 text-success fw-500`}>
-                    <span>
-                      {convertCurrency(item?.price_difference, currency)}
-                    </span>
-                    <span>{t("Hotel.youSave")}</span>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -159,4 +141,4 @@ const HotelProperties = ({ hotels }) => {
   );
 };
 
-export default HotelProperties;
+export default TravelorHotelProperties;

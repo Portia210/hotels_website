@@ -1,14 +1,13 @@
-import { FILTER_TYPE } from "@/hooks/hotelFilters";
-import useHotelFilterStore from "@/store/useHotelFilterStore";
-import { useState } from "react";
-import { defaultFilter } from ".";
+import { FILTER_TYPE } from '@/hooks/hotelFilters';
+import { useState } from 'react';
+import { defaultFilter } from '.';
 
-const useRatingFilter = () => {
+const useRatingFilter = (hotelFilterStore) => {
   const [ratingFilter, setRatingFilter] = useState(defaultFilter.ratingFilter);
-  const { setCondition } = useHotelFilterStore();
+  const { setCondition } = hotelFilterStore;
 
-  const handleRatingFilterChange = (value) => {
-    setRatingFilter((prev) => {
+  const handleRatingFilterChange = value => {
+    setRatingFilter(prev => {
       if (prev === value) {
         return 0;
       }

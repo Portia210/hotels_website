@@ -1,9 +1,8 @@
-import useHotelFilterStore from "@/store/useHotelFilterStore";
 import { useState } from "react";
 import { FILTER_TYPE, defaultFilter } from ".";
 
-const usePriceFilter = () => {
-  const { gapActive, setGapActive, setCondition } = useHotelFilterStore();
+const usePriceFilter = (hotelFilterStore) => {
+  const { gapActive, setGapActive, setCondition } = hotelFilterStore;
   const [priceFilter, setPriceFilter] = useState(defaultFilter.priceFilter);
 
   const handleChangePriceFilter = (val) => {

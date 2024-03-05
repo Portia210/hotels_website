@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
-const useHotelList = () => {
+const useTravelorHotelList = () => {
   const router = useRouter();
   const { getToken } = useAuth();
   const { searchInput, isExpired, setIsExpired } = useSearchStore();
@@ -17,7 +17,7 @@ const useHotelList = () => {
 
   const fetchHotel = async (sessionId, token) => {
     if (!sessionId) return router.replace('/');
-    const url = `${TOURCOMPARE_BE_URL}/api/v1/hotels/session?sessionId=${sessionId}`;
+    const url = `${TOURCOMPARE_BE_URL}/api/v1/hotels/session-full?sessionId=${sessionId}`;
     const data = await axios
       .get(url, {
         withCredentials: true,
@@ -81,4 +81,4 @@ const useHotelList = () => {
   };
 };
 
-export default useHotelList;
+export default useTravelorHotelList;

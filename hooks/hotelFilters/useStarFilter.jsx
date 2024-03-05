@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { defaultFilter } from ".";
-import useHotelFilterStore from "@/store/useHotelFilterStore";
 import { FILTER_TYPE } from "@/hooks/hotelFilters";
 
-const useStarFilter = () => {
+const useStarFilter = (hotelFilterStore) => {
   const [starFilter, setStarFilter] = useState(defaultFilter.starFilter);
-  const { setCondition } = useHotelFilterStore();
+  const { setCondition } = hotelFilterStore;
 
   const handleStarFilterChange = (value) => {
     setStarFilter((prev) => {

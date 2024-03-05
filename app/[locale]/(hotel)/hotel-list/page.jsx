@@ -2,9 +2,9 @@ import TransConfig from '@/components/config/TransConfig';
 import DefaultFooter from '@/components/footer/default';
 import Header1 from '@/components/header/header-1';
 import ListHotels from '@/components/hotel-list/hotel-list-v5/ListHotels';
+import ListTravelorHotels from '@/components/hotel-list/hotel-list-v5/TravelorHotel/ListTravelorHotels';
 import MainFilterSearchBox from '@/components/hotel-list/hotel-list-v5/MainFilterSearchBox';
-import { useTranslations } from 'next-intl';
-import { useMessages } from 'next-intl';
+import { useMessages, useTranslations } from 'next-intl';
 
 export async function generateMetadata({ searchParams }) {
   try {
@@ -59,35 +59,12 @@ const index = () => {
       </section>
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">
-          <ul className="nav nav-pills mb-30">
-            <li className="nav-item">
-              <a
-                className="nav-link active"
-                id="matchedHotels-tab"
-                data-bs-toggle="pill"
-                href="#matchedHotels"
-              >
-                Matches
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                id="restResults-tab"
-                data-bs-toggle="pill"
-                href="#restResults"
-              >
-                Rest of the results
-              </a>
-            </li>
-          </ul>
-
           <div className="tab-content">
             <div id="matchedHotels" className="tab-pane fade show active">
               <ListHotels />
             </div>
             <div id="restResults" className="tab-pane fade">
-              <ListHotels />
+              <ListTravelorHotels />
             </div>
           </div>
         </div>
