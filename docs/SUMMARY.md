@@ -1,8 +1,18 @@
 # Table of contents
 
+## Overview - הרעיון מאחורי האתר <a href="#the-big-idea" id="the-big-idea"></a>
+
+* [מדוע נוצרים הפרשי מחירים](README.md)
+* [למה חשוב להשוות מחירים](the-big-idea/why-important-to-compare.md)
+* [איך עבדתם עד היום?](the-big-idea/how-did-you-use-to-work.md)
+* [איך האתר פותר את הבעיה](the-big-idea/how-the-website-solve-it.md)
+* [שיווק הקישור!!!](the-big-idea/links-marketing.md)
+* [האם המינוי משתלם?](the-big-idea/is-the-subsciption-pay-off.md)
+
 ## User Guide- מדריך למשתמש
 
-* [יצירת חשבון](README.md)
+* [הסבר כללי, מי אנחנו?](user-guide/overview.md)
+* [יצירת חשבון](<README (1).md>)
 * [תפריט](user-guide/menu.md)
 * [דף הבית](user-guide/home-page.md)
 * [איזור אישי ](user-guide/personal-area.md)
