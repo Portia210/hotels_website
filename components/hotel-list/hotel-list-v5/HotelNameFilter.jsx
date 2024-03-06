@@ -1,17 +1,19 @@
 import useTrans from '@/hooks/useTrans';
-import useHotelFilterStore from '@/store/useHotelFilterStore';
-import useHotelNameFilterStore from '@/store/useHotelNameFilterStore';
 import { useEffect, useState } from 'react';
 
-export default function HotelNameFilter({ disabled }) {
+export default function HotelNameFilter({
+  hotelFilterStore,
+  hotelNameFilterStore,
+  disabled,
+}) {
   const { t } = useTrans();
-  const { hotels, setHotels } = useHotelNameFilterStore();
+  const { hotels, setHotels } = hotelNameFilterStore;
   const {
     hotels: originHotels,
     filterHotels,
     setFilterHotels,
     onFilterHotel,
-  } = useHotelFilterStore();
+  } = hotelFilterStore;
   const [hotelName, setHotelName] = useState('');
 
   const onInputChange = e => {

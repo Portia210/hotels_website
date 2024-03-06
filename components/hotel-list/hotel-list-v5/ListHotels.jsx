@@ -6,15 +6,18 @@ import useFilterBar from '@/hooks/useFilterBar';
 import useHotelList from '@/hooks/useHotelList';
 import useTrans from '@/hooks/useTrans';
 import useHotelFilterStore from '@/store/useHotelFilterStore';
+import useHotelNameFilterStore from '@/store/useHotelNameFilterStore';
 import { useEffect } from 'react';
 import HotelNameFilter from './HotelNameFilter';
-import ResultHeader from './ResultHeader';
 import HotelTabs from './HotelTabs';
+import ResultHeader from './ResultHeader';
 
 export default function ListHotels() {
   const { t, isReverse } = useTrans();
-  const { gapActive, setGapActive, setHotels } = useHotelFilterStore();
+  const hotelFilterStore = useHotelFilterStore();
+  const hotelNameFilterStore = useHotelNameFilterStore();
   const { hotels, loading, isExpired } = useHotelList();
+  const { gapActive, setGapActive, setHotels } = hotelFilterStore;
   const {
     data,
     totalFilter,
@@ -95,7 +98,11 @@ export default function ListHotels() {
         {/* End col-auto */}
 
         <div className={`col-lg-${isReverse ? '3' : '4'} col-md-5 col-sm-6`}>
-          <HotelNameFilter disabled={loading || isExpired} />
+          <HotelNameFilter
+            hotelFilterStore={hotelFilterStore}
+            hotelNameFilterStore={hotelNameFilterStore}
+            disabled={loading || isExpired}
+          />
         </div>
         <div className="col-auto">
           <button
@@ -112,8 +119,8 @@ export default function ListHotels() {
         </div>
         {/* End col-auto */}
 
-        <HotelTabs/>
-        
+        <HotelTabs />
+
         <div className="row y-gap-30 sm:pr-0">
           <ResultHeader
             loading={loading}

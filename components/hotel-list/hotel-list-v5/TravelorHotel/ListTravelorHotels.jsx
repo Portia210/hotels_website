@@ -2,19 +2,22 @@
 import DropdownSelectStar from '@/components/hotel-list/common/DropdownSelectStar';
 import Pagination from '@/components/hotel-list/common/Pagination';
 import useTrans from '@/hooks/useTrans';
-import useTravelorHotelList from '@/hooks/useTravelorHotelList';
 import useTravelorFilterBar from '@/hooks/useTravelorFilterBar';
+import useTravelorHotelList from '@/hooks/useTravelorHotelList';
 import useTravelorHotelFilterStore from '@/store/useTravelorHotelFilterStore';
+import useTravelorHotelNameFilterStore from '@/store/useTravelorHotelNameFilterStore';
+import { useEffect } from 'react';
 import HotelNameFilter from '../HotelNameFilter';
 import HotelTabs from '../HotelTabs';
 import ResultHeader from '../ResultHeader';
 import TravelorHotelProperties from './TravelorHotelProperties';
-import { useEffect } from 'react';
 
 export default function ListTravelorHotels() {
   const { t, isReverse } = useTrans();
-  const { gapActive, setGapActive, setHotels } = useTravelorHotelFilterStore();
+  const travelorHotelFilterStore = useTravelorHotelFilterStore();
+  const hotelNameFilterStore = useTravelorHotelNameFilterStore();
   const { hotels, loading, isExpired } = useTravelorHotelList();
+  const { gapActive, setGapActive, setHotels } = travelorHotelFilterStore;
 
   const {
     data,
@@ -51,11 +54,10 @@ export default function ListTravelorHotels() {
   useEffect(() => {
     renderTooltip();
   }, [t('Hotel.tooltipCopy')]);
-  
+
   useEffect(() => {
     setHotels(hotels);
   }, [hotels.length]);
-
 
   return (
     <>
@@ -97,7 +99,11 @@ export default function ListTravelorHotels() {
         {/* End col-auto */}
 
         <div className={`col-lg-${isReverse ? '3' : '4'} col-md-5 col-sm-6`}>
-          <HotelNameFilter disabled={loading || isExpired} />
+          <HotelNameFilter
+            hotelFilterStore={travelorHotelFilterStore}
+            hotelNameFilterStore={hotelNameFilterStore}
+            disabled={loading || isExpired}
+          />
         </div>
         <div className="col-auto">
           <button
