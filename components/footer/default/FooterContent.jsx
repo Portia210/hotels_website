@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-const FooterContent = ({ t }) => {
+const FooterContent = ({ t, isReverse }) => {
+  
   const data = [
     {
       id: 1,
@@ -32,14 +33,14 @@ const FooterContent = ({ t }) => {
     <>
       {data.map(item => (
         <div className="col-xl-4 col-lg-4 col-sm-6" key={item.id}>
-          <h5 className="text-16 fw-500 mb-30">{item.title}</h5>
+          <h5 className={`text-16 mb-30 fw-${isReverse ? '600': '500'}`}>{item.title}</h5>
           <div className="d-flex y-gap-10 flex-column">
             {item.menuList.map((menu, i) => (
               <Link
                 href={menu.routerPath}
                 key={i}
                 dangerouslySetInnerHTML={{
-                  __html: <>{menu.name}</>
+                  __html: <>{menu.name}</>,
                 }}
               ></Link>
             ))}

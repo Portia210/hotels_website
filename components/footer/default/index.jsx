@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import ContactInfo from './ContactInfo';
 import Copyright from './Copyright';
 import FooterContent from './FooterContent';
@@ -17,7 +16,7 @@ const index = () => {
             </div>
             {/* End col */}
 
-            <FooterContent t={t} />
+            <FooterContent t={t} isReverse={isReverse}/>
             {/* End footer menu content */}
           </div>
         </div>
