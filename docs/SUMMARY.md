@@ -15,10 +15,10 @@
 * [דרך הפעולה, שיווק קישורים](user-guide/links-marketing.md)
 * [מחירי שימוש באתר](user-guide/pricing.md)
 
-## Privacy Policy
+## Privacy Policy- מדיניות פרטיות
 
-* [Page 3](privacy-policy/page-3.md)
+* [פירוט המדיניות](privacy-policy/details.md)
 
-## Terms of use
+## Terms of use- תנאי שימוש
 
-* [Page 4](terms-of-use/page-4.md)
+* [פירוט התנאים ](terms-of-use/details.md)
