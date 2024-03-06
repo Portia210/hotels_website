@@ -1,10 +1,19 @@
 # Table of contents
 
-## User Guide
+## מדריך למשתמש
 
-* [Page 2](README.md)
-* [יצירת חשבון](user-guide/create-account.md)
-* [Page 1](user-guide/page-1.md)
+* [יצירת חשבון](README.md)
+* [תפריט](undefined/menu.md)
+* [דף הבית](undefined/home-page.md)
+* [איזור אישי ](undefined/personal-area.md)
+* [ביצוע חיפוש](undefined/searching.md)
+* [פרטי מלון](undefined/hotel-details.md)
+* [העתקת פרטי מלון וקיצור קישור](undefined/copy-hotel-details.md)
+* [המחיר שהאתר מוצא](undefined/price-found.md)
+* [איך לחפש באופן נכון](undefined/search-correctly.md)
+* [עדכניות התוצאות](undefined/results-relevancy.md)
+* [דרך הפעולה, שיווק קישורים](undefined/links-marketing.md)
+* [מחירי שימוש באתר](undefined/pricing.md)
 
 ## Privacy Policy
 
