@@ -17,7 +17,7 @@ export default function ListTravelorHotels() {
   const travelorHotelFilterStore = useTravelorHotelFilterStore();
   const hotelNameFilterStore = useTravelorHotelNameFilterStore();
   const { hotels, loading, isExpired } = useTravelorHotelList();
-  const { gapActive, setGapActive, setHotels } = travelorHotelFilterStore;
+  const { setHotels } = travelorHotelFilterStore;
 
   const {
     data,
@@ -37,8 +37,12 @@ export default function ListTravelorHotels() {
   const renderTooltip = () => {
     if (!t('Hotel.tooltipCopy')) return;
     const Tooltip = require('bootstrap/js/dist/tooltip');
-    const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip');
-    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip');
+    const copyHotelToolTip = document.getElementById(
+      'copyHotelInfoTooltip_travelor',
+    );
+    const shortenLinkToolTip = document.getElementById(
+      'shortenLinkTooltip_travelor',
+    );
     new Tooltip(shortenLinkToolTip, {
       container: 'body',
       trigger: 'hover',
@@ -105,20 +109,6 @@ export default function ListTravelorHotels() {
             disabled={loading || isExpired}
           />
         </div>
-        <div className="col-auto">
-          <button
-            onClick={() => {
-              setGapActive(!gapActive);
-            }}
-            className={`button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1 ${
-              gapActive && 'active'
-            }`}
-          >
-            <i className="icon-up-down text-14 mr-10"></i>
-            {t('FilterBar.bHotelGap')}
-          </button>
-        </div>
-        {/* End col-auto */}
 
         <HotelTabs />
 

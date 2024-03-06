@@ -36,8 +36,8 @@ export default function ListHotels() {
   const renderTooltip = () => {
     if (!t('Hotel.tooltipCopy')) return;
     const Tooltip = require('bootstrap/js/dist/tooltip');
-    const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip');
-    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip');
+    const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip_matches');
+    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip_matches');
     new Tooltip(shortenLinkToolTip, {
       container: 'body',
       trigger: 'hover',
@@ -97,14 +97,14 @@ export default function ListHotels() {
         </div>
         {/* End col-auto */}
 
-        <div className={`col-lg-${isReverse ? '3' : '4'} col-md-5 col-sm-6`}>
+        <div className={`col-lg-3 col-md-5 col-sm-6`}>
           <HotelNameFilter
             hotelFilterStore={hotelFilterStore}
             hotelNameFilterStore={hotelNameFilterStore}
             disabled={loading || isExpired}
           />
         </div>
-        <div className="col-auto">
+        <div className="col-auto ms-auto">
           <button
             onClick={() => {
               setGapActive(!gapActive);
