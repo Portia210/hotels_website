@@ -1,3 +1,3 @@
 # האם המינוי משתלם?
 
-{% embed url="https://docs.google.com/document/d/18lIUJZ0EhxtNL2pek5Gds1ObyHbNPSmDuR7QyKFx5ZM/edit?usp=sharing" %}
+{% embed url="https://docs.google.com/document/d/137g1xA7NEQtwGNe4vxtYo6TnRbwscj1X49kNgKmGkmE/edit?usp=sharing" %}
