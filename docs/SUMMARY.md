@@ -11,7 +11,6 @@
 
 ## User Guide- מדריך למשתמש
 
-* [הסבר כללי, מי אנחנו?](user-guide/overview.md)
 * [יצירת חשבון](<README (1).md>)
 * [תפריט](user-guide/menu.md)
 * [דף הבית](user-guide/home-page.md)
