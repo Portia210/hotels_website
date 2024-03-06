@@ -74,7 +74,9 @@ const MobileMenu = ({ isReverse }) => {
           <MenuItem onClick={() => router.push('/')}>
             {t('Header.home')}
           </MenuItem>
-          <MenuItem onClick={() => router.push('/user-guide')}>
+          <MenuItem onClick={() => {
+            window.open('https://docs.agent-space.com', '_blank');
+          }}>
             {t('Header.userGuide')}
           </MenuItem>
           <MenuItem onClick={() => router.push('/pricing')}>
