@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# מדריך למשתמש
+# 📘 מדריך למשתמש
 
 
 

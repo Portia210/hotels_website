@@ -2,4 +2,4 @@
 
 ## User Guide
 
-* [מדריך למשתמש](README.md)
+* [📘 מדריך למשתמש](README.md)
