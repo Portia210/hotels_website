@@ -1,35 +1,18 @@
-const ContactInfo = ({ t }) => {
+export default function BusinessInfo({ t }) {
   const contactContent = [
     {
       action: [
         {
-          link: '/contact',
-          text: t('Footer.contactUs'),
+          title: t('Footer.address'),
+          text: t('Footer.businessAddress'),
+        },
+        {
+          title: t('Footer.phoneNumber'),
+          link: 'tel:+972-53332-4495',
+          text: '+972-53332-4495',
         },
       ],
     },
-    {
-      title: t('Footer.supportEmailAddress'),
-      action: [
-        {
-          link: 'mailto:agent1spc@gmail.com',
-          text: 'agent1spc@gmail.com',
-        },
-      ],
-    },
-    {
-      title: t('Footer.whatsappSupportGroup'),
-      action: [
-        {
-          link: 'https://chat.whatsapp.com/JrGL7UOxEqQIsMhCKivh1S',
-          text: t('Footer.hebrewGroup'),
-        },
-        {
-          link: 'https://chat.whatsapp.com/JqYHRcwAwQx9bi7b11vg9I',
-          text: t('Footer.englishGroup'),
-        },
-      ],
-    }
   ];
   return (
     <>
@@ -46,7 +29,7 @@ const ContactInfo = ({ t }) => {
                   <a
                     href={action.link}
                     target="_blank"
-                    className="d-block text-18 fw-500 text-blue-1"
+                    className="d-block text-18 fw-500 text-blue-1 text-nowrap"
                   >
                     {action.text}
                   </a>
@@ -66,6 +49,4 @@ const ContactInfo = ({ t }) => {
       ))}
     </>
   );
-};
-
-export default ContactInfo;
+}

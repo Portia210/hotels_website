@@ -1,3 +1,4 @@
+import BusinessInfo from './BusinessInfo';
 import ContactInfo from './ContactInfo';
 import Copyright from './Copyright';
 import FooterContent from './FooterContent';
@@ -10,13 +11,17 @@ const index = () => {
       <div className="container" dir={isReverse ? 'rtl' : 'ltr'}>
         <div className="pt-60 pb-60">
           <div className="row y-gap-40 justify-between xl:justify-start">
-            <div className="col-xl-4 col-lg-4 col-sm-6">
+            <div className="col-xl-3 col-lg-3 col-sm-6">
               <h5 className="text-16 fw-500 mb-30">{t('Footer.contact')}</h5>
               <ContactInfo t={t} />
             </div>
             {/* End col */}
 
-            <FooterContent t={t} isReverse={isReverse}/>
+            <FooterContent t={t} isReverse={isReverse} />
+            <div className="col-xl-3 col-lg-3 col-sm-6">
+              <h5 className="text-16 fw-500 mb-30">{t('Footer.businessDetail')}</h5>
+              <BusinessInfo t={t} />
+            </div>
             {/* End footer menu content */}
           </div>
         </div>
