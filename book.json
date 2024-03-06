@@ -1,4 +1,5 @@
 {
   "language": "he",
-  "direction": "rtl"
+  "direction": "rtl",
+  "root": "./docs"
 }
