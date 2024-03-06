@@ -2,5 +2,4 @@
 
 ## User Guide
 
-* [📘 מדריך למשתמש](README.md)
-* [UserGuide1](user-guide/userguide1.md)
+* [Authentication](README.md)
