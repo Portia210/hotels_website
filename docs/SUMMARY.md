@@ -1,3 +1,4 @@
 # Table of contents
 
-* [📘 מדריך למשתמש](README.md)
+* [Page 1](README.md)
+* [יצירת חשבון](create-account.md)
