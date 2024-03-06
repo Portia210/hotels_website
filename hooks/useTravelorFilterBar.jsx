@@ -1,12 +1,10 @@
-import useHotelFilterStore from '@/store/useHotelFilterStore';
 import { useEffect } from 'react';
+import useTravelorHotelFilterStore from '../store/useTravelorHotelFilterStore';
 import { defaultFilter } from './hotelFilters';
-import useHotelGapFilter from './hotelFilters/useHotelGapFilter';
 import useHotelPagination from './hotelFilters/useHotelPagination';
 import usePriceFilter from './hotelFilters/usePriceFilter';
 import useRatingFilter from './hotelFilters/useRatingFilter';
 import useStarFilter from './hotelFilters/useStarFilter';
-import useTravelorHotelFilterStore from '../store/useTravelorHotelFilterStore';
 
 // TODO: optimize this hook, reduce the number of re-renders
 const useTravelorFilterBar = hotels => {
@@ -42,8 +40,7 @@ const useTravelorFilterBar = hotels => {
   const { starFilter, setStarFilter, handleStarFilterChange } = useStarFilter(
     travelorHotelFilterStore,
   );
-  useHotelGapFilter(travelorHotelFilterStore);
-
+  
   const { priceFilter, setPriceFilter } = usePriceFilter(
     travelorHotelFilterStore,
   );

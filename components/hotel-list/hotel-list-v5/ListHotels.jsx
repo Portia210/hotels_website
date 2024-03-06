@@ -13,7 +13,7 @@ import HotelTabs from './HotelTabs';
 import ResultHeader from './ResultHeader';
 
 export default function ListHotels() {
-  const { t, isReverse } = useTrans();
+  const { t } = useTrans();
   const hotelFilterStore = useHotelFilterStore();
   const hotelNameFilterStore = useHotelNameFilterStore();
   const { hotels, loading, isExpired } = useHotelList();
