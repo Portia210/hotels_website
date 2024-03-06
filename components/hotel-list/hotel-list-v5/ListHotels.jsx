@@ -6,15 +6,18 @@ import useFilterBar from '@/hooks/useFilterBar';
 import useHotelList from '@/hooks/useHotelList';
 import useTrans from '@/hooks/useTrans';
 import useHotelFilterStore from '@/store/useHotelFilterStore';
+import useHotelNameFilterStore from '@/store/useHotelNameFilterStore';
 import { useEffect } from 'react';
 import HotelNameFilter from './HotelNameFilter';
-import ResultHeader from './ResultHeader';
 import HotelTabs from './HotelTabs';
+import ResultHeader from './ResultHeader';
 
 export default function ListHotels() {
   const { t, isReverse } = useTrans();
-  const { gapActive, setGapActive, setHotels } = useHotelFilterStore();
+  const hotelFilterStore = useHotelFilterStore();
+  const hotelNameFilterStore = useHotelNameFilterStore();
   const { hotels, loading, isExpired } = useHotelList();
+  const { gapActive, setGapActive, setHotels } = hotelFilterStore;
   const {
     data,
     totalFilter,
@@ -33,8 +36,8 @@ export default function ListHotels() {
   const renderTooltip = () => {
     if (!t('Hotel.tooltipCopy')) return;
     const Tooltip = require('bootstrap/js/dist/tooltip');
-    const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip');
-    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip');
+    const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip_matches');
+    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip_matches');
     new Tooltip(shortenLinkToolTip, {
       container: 'body',
       trigger: 'hover',
@@ -94,10 +97,14 @@ export default function ListHotels() {
         </div>
         {/* End col-auto */}
 
-        <div className={`col-lg-${isReverse ? '3' : '4'} col-md-5 col-sm-6`}>
-          <HotelNameFilter disabled={loading || isExpired} />
+        <div className={`col-lg-3 col-md-5 col-sm-6`}>
+          <HotelNameFilter
+            hotelFilterStore={hotelFilterStore}
+            hotelNameFilterStore={hotelNameFilterStore}
+            disabled={loading || isExpired}
+          />
         </div>
-        <div className="col-auto">
+        <div className="col-auto ms-auto">
           <button
             onClick={() => {
               setGapActive(!gapActive);
@@ -112,8 +119,8 @@ export default function ListHotels() {
         </div>
         {/* End col-auto */}
 
-        <HotelTabs/>
-        
+        <HotelTabs />
+
         <div className="row y-gap-30 sm:pr-0">
           <ResultHeader
             loading={loading}
