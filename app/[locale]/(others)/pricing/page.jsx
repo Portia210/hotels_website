@@ -2,9 +2,10 @@ import DefaultFooter from '@/components/footer/default';
 import DefaultHeader from '@/components/header/default-header';
 import PricingSection from '@/components/pricing/PricingSection';
 import subscriptionPlanService from '@/service/plans/SubscriptionPlanService';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, getMessages } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 import { auth } from '@clerk/nextjs';
+import TransConfig from '@/components/config/TransConfig';
 
 export const metadata = {
   title: 'Agent-Space: Pricing',
@@ -22,10 +23,11 @@ const fetchCurrentPlan = async () => {
 
 const PricingPage = async () => {
   const t = await getTranslations('Pricing');
+  const messages = await getMessages();
   const currentPlan = await fetchCurrentPlan();
   return (
     <>
-      {/* End Page Title */}
+      <TransConfig messages={messages} />
 
       <div className="header-margin"></div>
       {/* header top margin */}
