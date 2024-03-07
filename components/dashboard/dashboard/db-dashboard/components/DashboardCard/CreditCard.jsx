@@ -11,10 +11,12 @@ export default function CreditCard() {
     queryFn: () => getUserRemainCredit('HOTEL_SEARCH'),
   });
 
+  const count = Math.max(data?.total - data?.remaining, 0);
+
   const item = {
     title: 'Credits',
     amount: `${data?.remaining ?? 0}/${data?.total ?? 0} remain`,
-    description: `${data?.total - data?.remaining} searches today`,
+    description: `${count} searches today`,
     icon: <i className="bi bi-search"></i>,
   };
 
