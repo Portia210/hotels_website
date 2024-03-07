@@ -69,7 +69,9 @@
     "rating": "דירוג",
     "stars": "כוכבים",
     "hotelName": "שם מלון",
-    "bHotelGap": "ההפרש הכי גבוה"
+    "bHotelGap": "ההפרש הכי גבוה",
+    "matches": "התאמות עם בוקינג",
+    "restOfResults": "שאר המלונות בטרוולאור"
   },
   "Hotel": {
     "hotel": "שם המלון",
@@ -77,7 +79,7 @@
     "guestReviewsUpper": "ביקורות אורחים",
     "distance": "מרחק מהמרכז",
     "numberOfGuests": "מספר אורחים",
-    "price": "מחיר:",
+    "price": "מחירים:",
     "toTravelor": "אל טרוולאור",
     "toBooking": "אל בוקינג",
     "tooltipCopy": "העתק טקסט",

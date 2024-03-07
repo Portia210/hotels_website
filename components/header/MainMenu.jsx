@@ -14,7 +14,7 @@ const MainMenu = ({ style = '' }) => {
         </a>
 
         <li className={pathname === '/user-guide' ? 'current' : ''}>
-          <Link target="_blank" href="https://docs.agent-space.com">
+          <Link target="_blank" href="https://docs.agent-space.com/user-guide">
             {t('Header.userGuide')}
           </Link>
         </li>

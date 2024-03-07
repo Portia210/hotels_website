@@ -65,7 +65,9 @@
     "rating": "Rating",
     "stars": "Stars",
     "hotelName": "Hotel name",
-    "bHotelGap": "Biggest hotel gap"
+    "bHotelGap": "Biggest hotel gap",
+    "matches": "Matches",
+    "restOfResults": "Rest of the results"
   },
   "ResultHeader": {
     "loading": "Searching for hotels",
