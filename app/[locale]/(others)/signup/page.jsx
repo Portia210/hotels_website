@@ -1,20 +1,22 @@
-import dynamic from "next/dynamic";
-import CallToActions from "@/components/common/CallToActions";
-import DefaultHeader from "@/components/header/default-header";
-import DefaultFooter from "@/components/footer/default";
-import LoginWithSocial from "@/components/common/LoginWithSocial";
-import SignUpForm from "@/components/common/SignUpForm";
-import { redirect } from "next/navigation";
-import { currentUser } from "@clerk/nextjs";
+import dynamic from 'next/dynamic';
+import CallToActions from '@/components/common/CallToActions';
+import DefaultHeader from '@/components/header/default-header';
+import DefaultFooter from '@/components/footer/default';
+import LoginWithSocial from '@/components/common/LoginWithSocial';
+import SignUpForm from '@/components/common/SignUpForm';
+import { redirect } from 'next/navigation';
+import { currentUser } from '@clerk/nextjs';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata = {
-  title: "Sign Up || Agent-Space - Travel & Tour React NextJS Template",
-  description: "Agent-Space - Travel & Tour React NextJS Template",
+  title: 'Sign Up || Agent-Space - Travel & Tour React NextJS Template',
+  description: 'Agent-Space - Travel & Tour React NextJS Template',
 };
 
 const SignUp = async () => {
   const user = await currentUser();
-  if (user) return redirect("/");
+  if (user) return redirect('/');
+  const t = await getTranslations();
   return (
     <>
       {/* End Page Title */}
@@ -40,8 +42,7 @@ const SignUp = async () => {
                   <LoginWithSocial /> */}
                   <div className="col-12">
                     <div className="text-center px-30">
-                      By creating an account, you agree to our Terms of Service
-                      and Privacy Statement.
+                      {t('LoginForm.terms')}
                     </div>
                   </div>
                 </div>

@@ -9,6 +9,7 @@ export default getRequestConfig(async ({ locale }) => {
     ...(await import(`./messages/${locale}/filterbar.json`)).default,
     ...(await import(`./messages/${locale}/dashboard-card.json`)).default,
     ...(await import(`./messages/${locale}/shortlink-table.json`)).default,
+    ...(await import(`./messages/${locale}/login-form.json`)).default,
   };
   return { messages };
 });

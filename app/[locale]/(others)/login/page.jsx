@@ -1,20 +1,20 @@
-import dynamic from "next/dynamic";
-import CallToActions from "@/components/common/CallToActions";
-import DefaultHeader from "@/components/header/default-header";
-import DefaultFooter from "@/components/footer/default";
-import LoginWithSocial from "@/components/common/LoginWithSocial";
-import LoginForm from "@/components/common/LoginForm";
-import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import CallToActions from '@/components/common/CallToActions';
+import LoginForm from '@/components/common/LoginForm';
+import DefaultFooter from '@/components/footer/default';
+import DefaultHeader from '@/components/header/default-header';
+import { currentUser } from '@clerk/nextjs';
+import dynamic from 'next/dynamic';
+import { redirect } from 'next/navigation';
 
 export const metadata = {
-  title: "Login || Agent-Space - Travel & Tour React NextJS Template",
-  description: "Agent-Space - Travel & Tour React NextJS Template",
+  title: 'Login || Agent-Space - Travel & Tour React NextJS Template',
+  description: 'Agent-Space - Travel & Tour React NextJS Template',
 };
 
 const LogIn = async () => {
   const user = await currentUser();
-  if (user) return redirect("/");
+  if (user) return redirect('/');
+
   return (
     <>
       {/* End Page Title */}
@@ -38,12 +38,6 @@ const LogIn = async () => {
                     <div className="text-center">or sign in with</div>
                   </div>
                   <LoginWithSocial /> */}
-                  <div className="col-12">
-                    <div className="text-center px-30">
-                      By creating an account, you agree to our Terms of Service
-                      and Privacy Statement.
-                    </div>
-                  </div>
                 </div>
                 {/* End .row */}
               </div>
