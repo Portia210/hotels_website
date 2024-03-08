@@ -1,0 +1,39 @@
+{
+  "SearchBox": {
+    "search": "חיפוש",
+    "location": "יעד",
+    "checkin": "צ'ק אין",
+    "checkout": "צ'ק אאוט",
+    "selectLocation": "אנא בחר אחת מהתוצאות",
+    "locationPlaceholder": "לאן אתה נוסע?",
+    "enterLocation": "הכנס יעד",
+    "guests": "אורחים",
+    "rooms": "חדרים",
+    "room": "חדר",
+    "adult": "מבוגר",
+    "adults": "מבוגרים",
+    "childrens": "ילדים",
+    "child": "ילד",
+    "childAges": "גילאי הילד",
+    "dates": "תאריכים"
+  },
+  "FilterBar": {
+    "filter": "מסננים",
+    "reset": "אתחול",
+    "htl": "מהמחיר הגבוה לנמוך",
+    "lth": "מהמחיר הנמוך לגבוה",
+    "rating": "דירוג",
+    "stars": "כוכבים",
+    "hotelName": "שם מלון",
+    "bHotelGap": "ההפרש הכי גבוה",
+    "matches": "התאמות עם בוקינג",
+    "restOfResults": "שאר המלונות בטרוולאור"
+  },
+  "NoPlan": {
+    "part1": "You are currently not subscribed to any of our plans. To access the full functionality of the website, please ",
+    "part2": "create an account",
+    "part3": "if you don't have one already. You can then visit our ",
+    "part4": "pricing page",
+    "part5": "and choose the plan that best suits your needs."
+  }
+}

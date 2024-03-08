@@ -1,0 +1,25 @@
+{
+  "FilterBar": {
+    "filter": "Filters",
+    "reset": "Reset",
+    "htl": "Highest to lowest",
+    "lth": "Lowest to highest",
+    "rating": "Rating",
+    "stars": "Stars",
+    "hotelName": "Hotel name",
+    "bHotelGap": "Biggest hotel gap",
+    "matches": "Matches",
+    "restOfResults": "Rest of the results"
+  },
+  "ResultHeader": {
+    "loading": "Searching for hotels",
+    "hotelsFound": "x Hotels found"
+  },
+  "NoPlan": {
+    "part1": "You are currently not subscribed to any of our plans. To access the full functionality of the website, please ",
+    "part2": "create an account",
+    "part3": "if you don't have one already. You can then visit our ",
+    "part4": "pricing page",
+    "part5": "and choose the plan that best suits your needs."
+  }
+}

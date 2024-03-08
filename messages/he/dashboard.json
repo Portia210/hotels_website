@@ -1,0 +1,43 @@
+{
+  "Dashboard": {
+    "General": {
+      "saveChanges": "שמור שינויים",
+      "cancel": "בטל",
+      "changePassword": "שנה סיסמה"
+    },
+    "Sidebar": {
+      "dashboard": "דשבורד",
+      "account": "חשבון",
+      "userManagement": "User Management",
+      "setting": "הגדרות",
+      "logout": "התנתק",
+      "hello": "שלום"
+    },
+    "PersonalInfo": {
+      "personalInfoLabel": "מידע אישי",
+      "profilePicture": "תמונת פרופיל",
+      "browser": "העלה",
+      "firstName": "שם פרטי",
+      "lastName": "שם משפחה",
+      "email": "אימייל",
+      "phoneNumber": "מס' טלפון",
+      "agentNumber": "מס' סוכן",
+      "country": "מדינה",
+      "userBilling": "Billing"
+    },
+    "SetPassword": {
+      "setPasswordLabel": "הגדר סיסמה",
+      "changePassword": "שנה סיסמה",
+      "currentPassword": "סיסמא נוכחית",
+      "newPassword": "סיסמה חדשה",
+      "newPasswordAgain": "סיסמה חדשה שוב",
+      "passwordNotMatch": "הסיסמאות אינן תואמות",
+      "invalid": "הסיסמה שהוזנה אינה תואמת את הדרישות, בבקשה צור סיסמה חדשה",
+      "instruct1": "הסיסמה צריכה להכיל לפחות 8 תווים",
+      "instruct2": "הסיסמה חייבת לכלול לפחות אות אחת מספר אחד ותו מיוחד אחד"
+    },
+    "UsersTable": {
+      "title": "Users"
+    }
+  }
+}

@@ -57,77 +57,6 @@
     "childAges": "Child Ages",
     "dates": "Dates"
   },
-  "FilterBar": {
-    "filter": "Filters",
-    "reset": "Reset",
-    "htl": "Highest to lowest",
-    "lth": "Lowest to highest",
-    "rating": "Rating",
-    "stars": "Stars",
-    "hotelName": "Hotel name",
-    "bHotelGap": "Biggest hotel gap",
-    "matches": "Matches",
-    "restOfResults": "Rest of the results"
-  },
-  "ResultHeader": {
-    "loading": "Searching for hotels",
-    "hotelsFound": "x Hotels found"
-  },
-  "Hotel": {
-    "hotel": "Hotel",
-    "guestReviews": "guest reviews",
-    "guestReviewsUpper": "Guest reviews",
-    "distance": "from center",
-    "numberOfGuests": "Number of guests",
-    "price": "Price:",
-    "toTravelor": "To Travelor",
-    "toBooking": "To Booking",
-    "tooltipCopy": "Copy text",
-    "link": "Link:",
-    "shortLink": "Short link",
-    "youSave": "You Save"
-  },
-  "Dashboard": {
-    "General": {
-      "saveChanges": "Save Changes",
-      "cancel": "Cancel",
-      "changePassword": "Change Password"
-    },
-    "Sidebar": {
-      "dashboard": "Dashboard",
-      "account": "Account",
-      "userManagement": "User Management",
-      "setting": "Setting",
-      "logout": "Logout",
-      "hello": "Hello"
-    },
-    "PersonalInfo": {
-      "personalInfoLabel": "Personal Information",
-      "profilePicture": "Profile Picture",
-      "browser": "Browser",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "email": "Email",
-      "phoneNumber": "Phone Number",
-      "agentNumber": "Agent Number",
-      "country": "Country",
-      "userBilling": "Billing"
-    },
-    "SetPassword": {
-      "setPasswordLabel": "Set Password",
-      "changePassword": "Change Password",
-      "currentPassword": "Current Password",
-      "newPassword": "New Password",
-      "newPasswordAgain": "New Password Again",
-      "passwordNotMatch": "The passwords provided do not match.",
-      "invalid": "The entered password does not meet the specified requirements. Please provide a new password.",
-      "instruct1": "Password should consist of at least 8 characters. password must:",
-      "instruct2": "Include a minimum of 1 number, 1 letter, and 1 special character."
-    },
-    "UsersTable": {
-      "title": "Users"
-    }
-  },
   "DestinationWeLove": {
     "title": "Destinations we love",
     "citiesIn": "Cities in ",
@@ -136,35 +65,5 @@
     "less": "Less",
     "info": "Info",
     "sites": "Sites"
-  },
-  "Pricing": {
-    "title": "Fuel Your Touring Business: Plans for Every Agent",
-    "subtitle": "Boost your business with hotel comparisons, generate custom short links for easy marketing, and gain valuable insights.",
-    "permonth": " mo",
-    "searchPerDay": "searches per day",
-    "shortlinkPerMonth": "short links per month",
-    "deeperLinkInsight": "Gain deeper link insights",
-    "generateCustomShortLinks": "Generate custom short links",
-    "analyzeLinkPerformance": "Analyze link performance",
-    "emailSupport": "Email support",
-    "cancelAnytime": "Cancel anytime",
-    "dedicatedSupport": "Dedicated support",
-    "allFeatures": "Full website access",
-    "getStarted": "Get Started",
-    "currentPlan": "Current Plan",
-    "downgradePlan": "Downgrade Plan",
-    "upgradePlan": "Upgrade Plan",
-    "plans": {
-      "standard": "Standard",
-      "advanced": "Advanced",
-      "custom": "Custom"
-    }
-  },
-  "NoPlan": {
-    "part1": "You are currently not subscribed to any of our plans. To access the full functionality of the website, please",
-    "part2": "create an account",
-    "part3": "if you don't have one already. You can then visit our",
-    "part4": "pricing page",
-    "part5": "and choose the plan that best suits your needs."
   }
 }

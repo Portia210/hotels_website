@@ -43,91 +43,6 @@
     "address": "כתובת",
     "businessAddress": "יד בנימין דרך האבות 256"
   },
-  "SearchBox": {
-    "search": "חיפוש",
-    "location": "יעד",
-    "checkin": "צ'ק אין",
-    "checkout": "צ'ק אאוט",
-    "selectLocation": "אנא בחר אחת מהתוצאות",
-    "locationPlaceholder": "לאן אתה נוסע?",
-    "enterLocation": "הכנס יעד",
-    "guests": "אורחים",
-    "rooms": "חדרים",
-    "room": "חדר",
-    "adult": "מבוגר",
-    "adults": "מבוגרים",
-    "childrens": "ילדים",
-    "child": "ילד",
-    "childAges": "גילאי הילד",
-    "dates": "תאריכים"
-  },
-  "FilterBar": {
-    "filter": "מסננים",
-    "reset": "אתחול",
-    "htl": "מהמחיר הגבוה לנמוך",
-    "lth": "מהמחיר הנמוך לגבוה",
-    "rating": "דירוג",
-    "stars": "כוכבים",
-    "hotelName": "שם מלון",
-    "bHotelGap": "ההפרש הכי גבוה",
-    "matches": "התאמות עם בוקינג",
-    "restOfResults": "שאר המלונות בטרוולאור"
-  },
-  "Hotel": {
-    "hotel": "שם המלון",
-    "guestReviews": "ביקורות אורחים",
-    "guestReviewsUpper": "ביקורות אורחים",
-    "distance": "מרחק מהמרכז",
-    "numberOfGuests": "מספר אורחים",
-    "price": "מחירים:",
-    "toTravelor": "אל טרוולאור",
-    "toBooking": "אל בוקינג",
-    "tooltipCopy": "העתק טקסט",
-    "link": "קישור:",
-    "shortLink": "קצר קישור",
-    "youSave": "החיסכון שלך"
-  },
-  "Dashboard": {
-    "General": {
-      "saveChanges": "שמור שינויים",
-      "cancel": "בטל",
-      "changePassword": "שנה סיסמה"
-    },
-    "Sidebar": {
-      "dashboard": "דשבורד",
-      "account": "חשבון",
-      "userManagement": "User Management",
-      "setting": "הגדרות",
-      "logout": "התנתק",
-      "hello": "שלום"
-    },
-    "PersonalInfo": {
-      "personalInfoLabel": "מידע אישי",
-      "profilePicture": "תמונת פרופיל",
-      "browser": "העלה",
-      "firstName": "שם פרטי",
-      "lastName": "שם משפחה",
-      "email": "אימייל",
-      "phoneNumber": "מס' טלפון",
-      "agentNumber": "מס' סוכן",
-      "country": "מדינה",
-      "userBilling": "Billing"
-    },
-    "SetPassword": {
-      "setPasswordLabel": "הגדר סיסמה",
-      "changePassword": "שנה סיסמה",
-      "currentPassword": "סיסמא נוכחית",
-      "newPassword": "סיסמה חדשה",
-      "newPasswordAgain": "סיסמה חדשה שוב",
-      "passwordNotMatch": "הסיסמאות אינן תואמות",
-      "invalid": "הסיסמה שהוזנה אינה תואמת את הדרישות, בבקשה צור סיסמה חדשה",
-      "instruct1": "הסיסמה צריכה להכיל לפחות 8 תווים",
-      "instruct2": "הסיסמה חייבת לכלול לפחות אות אחת מספר אחד ותו מיוחד אחד"
-    },
-    "UsersTable": {
-      "title": "Users"
-    }
-  },
   "DestinationWeLove": {
     "title": "יעדים מומלצים",
     "citiesIn": "ערים ב",
@@ -136,35 +51,5 @@
     "less": "פחות",
     "info": "מידע",
     "sites": "אתרים"
-  },
-  "Pricing": {
-    "title": "שדרגו את עסק התיירות שלכם: תכניות לכל סוכן",
-    "subtitle": "קבלו יתרון תחרותי עם השוואות בתי מלון, צרו קישורים קצרים מותאמים אישית לשיווק קל וקבלו תובנות יקרות ערך.",
-    "permonth": " ש'ח",
-    "searchPerDay": "חיפושים ביום",
-    "shortlinkPerMonth": "קיצורי קישורים בחודש",
-    "deeperLinkInsight": "מעקב קישורים",
-    "generateCustomShortLinks": "קיצור קישורים מותאם אישית.",
-    "analyzeLinkPerformance": "מעקב קישורים",
-    "emailSupport": "תמיכה באימייל, ובוואצפ",
-    "cancelAnytime": "ביטול בכל עת",
-    "dedicatedSupport": "תמיכה ייעודית",
-    "getStarted": "בואו נתחיל!",
-    "allFeatures": "גישה לכל הפיצ'רים",
-    "currentPlan": "התוכנית הנוכחית",
-    "downgradePlan": "להמשיך להרחיב",
-    "upgradePlan": "תוכנית לשיפור",
-    "plans": {
-      "standard": "סטנדרט",
-      "advanced": "מתקדם",
-      "custom": "התאמה אישית"
-    }
-  },
-  "NoPlan": {
-    "part1": "You are currently not subscribed to any of our plans. To access the full functionality of the website, please ",
-    "part2": "create an account",
-    "part3": "if you don't have one already. You can then visit our ",
-    "part4": "pricing page",
-    "part5": "and choose the plan that best suits your needs."
   }
 }

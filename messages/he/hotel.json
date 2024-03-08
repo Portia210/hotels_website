@@ -1,0 +1,16 @@
+{
+  "Hotel": {
+    "hotel": "שם המלון",
+    "guestReviews": "ביקורות אורחים",
+    "guestReviewsUpper": "ביקורות אורחים",
+    "distance": "מרחק מהמרכז",
+    "numberOfGuests": "מספר אורחים",
+    "price": "מחירים:",
+    "toTravelor": "אל טרוולאור",
+    "toBooking": "אל בוקינג",
+    "tooltipCopy": "העתק טקסט",
+    "link": "קישור:",
+    "shortLink": "קצר קישור",
+    "youSave": "החיסכון שלך"
+  }
+}

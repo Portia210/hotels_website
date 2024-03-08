@@ -1,0 +1,25 @@
+{
+  "Pricing": {
+    "title": "שדרגו את עסק התיירות שלכם: תכניות לכל סוכן",
+    "subtitle": "קבלו יתרון תחרותי עם השוואות בתי מלון, צרו קישורים קצרים מותאמים אישית לשיווק קל וקבלו תובנות יקרות ערך.",
+    "permonth": " ש'ח",
+    "searchPerDay": "חיפושים ביום",
+    "shortlinkPerMonth": "קיצורי קישורים בחודש",
+    "deeperLinkInsight": "מעקב קישורים",
+    "generateCustomShortLinks": "קיצור קישורים מותאם אישית.",
+    "analyzeLinkPerformance": "מעקב קישורים",
+    "emailSupport": "תמיכה באימייל, ובוואצפ",
+    "cancelAnytime": "ביטול בכל עת",
+    "dedicatedSupport": "תמיכה ייעודית",
+    "getStarted": "בואו נתחיל!",
+    "allFeatures": "גישה לכל הפיצ'רים",
+    "currentPlan": "התוכנית הנוכחית",
+    "downgradePlan": "להמשיך להרחיב",
+    "upgradePlan": "תוכנית לשיפור",
+    "plans": {
+      "standard": "סטנדרט",
+      "advanced": "מתקדם",
+      "custom": "התאמה אישית"
+    }
+  }
+}
