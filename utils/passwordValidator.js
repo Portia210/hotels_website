@@ -5,13 +5,6 @@ export function validatePassword(password) {
   const letterRegex = /[a-zA-Z]/;
   const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
 
-  console.log('numberRegex.test(password)', numberRegex.test(password));
-  console.log('letterRegex.test(password)', letterRegex.test(password));
-  console.log(
-    'specialCharRegex.test(password)',
-    specialCharRegex.test(password),
-  );
-
   if (
     !numberRegex.test(password) ||
     !letterRegex.test(password) ||
