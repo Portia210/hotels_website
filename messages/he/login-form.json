@@ -1,0 +1,21 @@
+{
+  "LoginForm": {
+    "welcome": "ברוך הבא",
+    "alreadyHaveAccount": "יש לך כבר חשבון?",
+    "dontHaveAccount": "עדיין אין לך חשבון ?",
+    "signUpForFree": "צור חשבון בחינם",
+    "forgotPassword": "?שכחתי סיסמה",
+    "signin": "התחבר",
+    "signup": "צור חשבון",
+    "verifyEmailMessage": "בדוק את האימייל שלך כדי לאשר את יצירת החשבון",
+    "email": "אימייל",
+    "firstname": "שם פרטי",
+    "lastname": "שם משפחה",
+    "password": "סיסמה",
+    "confirmPassword": "אישור סיסמה",
+    "phoneNumber": "מספר טלפון",
+    "agentNumber": "מספר סוכן",
+    "country": "מדינה",
+    "terms": "ביצירת החשבון, אתה מסכים לתנאי השימוש ומדיניות הפרטיות"
+  }
+}

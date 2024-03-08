@@ -1,14 +1,14 @@
 'use client';
 
+import usePasswordValidator from '@/hooks/usePasswordValidator';
 import useSignUpForm from '@/hooks/useSignUpForm';
+import useTrans from '@/hooks/useTrans';
 import { useSignUp } from '@clerk/nextjs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import CountryList from './CountryList/CountryList';
-import useTrans from '@/hooks/useTrans';
-import usePasswordValidator from '@/hooks/usePasswordValidator';
 import PasswordInstruct from '../dashboard/dashboard/db-settings/components/PasswordInstruct';
+import CountryList from './CountryList/CountryList';
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -74,16 +74,16 @@ const SignUpForm = () => {
     return (
       <div className="row y-gap-50">
         <div className="col-12">
-          <h1 className="text-22 fw-500">Welcome back</h1>
+          <h1 className="text-22 fw-500">{t('LoginForm.welcome')}</h1>
           <p className="mt-10">
-            Already have an account yet?{' '}
+            {t('LoginForm.alreadyHaveAccount')}{' '}
             <Link href="/login" className="text-blue-1">
-              Log in
+              {t('LoginForm.signin')}
             </Link>
           </p>
         </div>
         <p className="text-center fs-4 fw-500">
-          Please check your email to verify your account
+          {t('LoginForm.verifyEmailMessage')}
         </p>
       </div>
     );
@@ -96,11 +96,11 @@ const SignUpForm = () => {
       dir={`${isReverse && 'rtl'}`}
     >
       <div className="col-12">
-        <h1 className="text-22 fw-500">Welcome back</h1>
+        <h1 className="text-22 fw-500">{t('LoginForm.welcome')}</h1>
         <p className="mt-10">
-          Already have an account yet?{' '}
+          {t('LoginForm.alreadyHaveAccount')}{' '}
           <Link href="/login" className="text-blue-1">
-            Log in
+            {t('LoginForm.signin')}
           </Link>
         </p>
       </div>
@@ -118,7 +118,9 @@ const SignUpForm = () => {
         )}
         <div className="form-input ">
           <input type="text" required name="email" />
-          <label className="lh-1 text-14 text-light-1">Email</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.email')}
+          </label>
         </div>
       </div>
       {/* End .col */}
@@ -126,7 +128,9 @@ const SignUpForm = () => {
       <div className="col-6">
         <div className="form-input ">
           <input type="text" required name="firstName" />
-          <label className="lh-1 text-14 text-light-1">First Name</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.firstname')}
+          </label>
         </div>
       </div>
       {/* End .col */}
@@ -134,7 +138,9 @@ const SignUpForm = () => {
       <div className="col-6">
         <div className="form-input ">
           <input type="text" required name="lastName" />
-          <label className="lh-1 text-14 text-light-1">Last Name</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.lastname')}
+          </label>
         </div>
       </div>
       {/* End .col */}
@@ -142,7 +148,9 @@ const SignUpForm = () => {
       <div className="col-6">
         <div className="form-input ">
           <input type="password" required name="password" />
-          <label className="lh-1 text-14 text-light-1">Password</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.password')}
+          </label>
         </div>
       </div>
       {/* End .col */}
@@ -150,7 +158,9 @@ const SignUpForm = () => {
       <div className="col-6">
         <div className="form-input ">
           <input type="password" required name="confirmPassword" />
-          <label className="lh-1 text-14 text-light-1">Confirm Password</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.confirmPassword')}
+          </label>
         </div>
       </div>
       {/* End .col */}
@@ -158,7 +168,9 @@ const SignUpForm = () => {
       <div className="col-6">
         <div className="form-input ">
           <input type="text" required name="primaryPhoneNumber" />
-          <label className="lh-1 text-14 text-light-1">Phone number</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.phoneNumber')}
+          </label>
         </div>
       </div>
       {/* End .col */}
@@ -166,7 +178,9 @@ const SignUpForm = () => {
       <div className="col-6">
         <div className="form-input">
           <input type="text" name="agentNumber" />
-          <label className="lh-1 text-14 text-light-1">Agent Number</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.agentNumber')}
+          </label>
         </div>
       </div>
       {/* End .col */}
@@ -177,7 +191,7 @@ const SignUpForm = () => {
             className="lh-1 text-14 text-light-1"
             style={{ marginTop: -8 }}
           >
-            Country
+            {t('LoginForm.country')}
           </label>
           <CountryList
             onCountrySelected={setSelectedCountry}
@@ -193,7 +207,7 @@ const SignUpForm = () => {
           href="#"
           className="button py-20 -dark-1 bg-blue-1 text-white w-100"
         >
-          Sign Up <div className="icon-arrow-top-right ml-15" />
+          {t('LoginForm.signup')} <div className="icon-arrow-top-right ml-15" />
         </button>
       </div>
       {/* End .col */}

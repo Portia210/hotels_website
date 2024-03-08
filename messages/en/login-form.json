@@ -1,0 +1,21 @@
+{
+  "LoginForm": {
+    "welcome": "Welcome",
+    "alreadyHaveAccount": "Already have an acount yet?",
+    "dontHaveAccount": "Dont have an acount yet?",
+    "signUpForFree": "Sign up for free",
+    "forgotPassword": "Forgot password?",
+    "signin": "Sign in",
+    "signup": "Sign Up",
+    "verifyEmailMessage": "Please check your email to verify your account.",
+    "email": "Email",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "phoneNumber": "Phone number",
+    "agentNumber": "Agent number",
+    "country": "Country",
+    "terms": "By creating an account, you agree to our Terms of Service and Privacy Statement."
+  }
+}

@@ -53,11 +53,11 @@ const LoginForm = () => {
       dir={`${isReverse && 'rtl'}`}
     >
       <div className="col-12">
-        <h1 className="text-22 fw-500">Welcome back</h1>
+        <h1 className="text-22 fw-500">{t('LoginForm.welcome')}</h1>
         <p className="mt-10">
-          Don&apos;t have an account yet?{' '}
+          {t('LoginForm.dontHaveAccount')}{' '}
           <Link href="/signup" className="text-blue-1">
-            Sign up for free
+            {t('LoginForm.signUpForFree')}
           </Link>
         </p>
       </div>
@@ -66,7 +66,7 @@ const LoginForm = () => {
       <div className="col-12">
         <div className="form-input ">
           <input type="email" required name="email" />
-          <label className="lh-1 text-14 text-light-1">Email</label>
+          <label className="lh-1 text-14 text-light-1">{t('LoginForm.email')}</label>
         </div>
       </div>
       {/* End .col */}
@@ -74,7 +74,7 @@ const LoginForm = () => {
       <div className="col-12">
         <div className="form-input ">
           <input type="password" required name="password" />
-          <label className="lh-1 text-14 text-light-1">Password</label>
+          <label className="lh-1 text-14 text-light-1">{t('LoginForm.password')}</label>
         </div>
         {errorMsg && (
           <div>
@@ -86,7 +86,7 @@ const LoginForm = () => {
 
       <div className="col-12" onClick={() => setIsForgotPassword(true)}>
         <a href="#" className="text-14 fw-500 text-blue-1 underline">
-          Forgot your password?
+          {(t('LoginForm.forgotPassword'))}
         </a>
       </div>
       {/* End .col */}
@@ -97,7 +97,7 @@ const LoginForm = () => {
           href="#"
           className="button py-20 -dark-1 bg-blue-1 text-white w-100"
         >
-          Sign In <div className="icon-arrow-top-right ml-15" />
+          {t('LoginForm.signin')} <div className="icon-arrow-top-right ml-15" />
         </button>
       </div>
       {/* End .col */}
