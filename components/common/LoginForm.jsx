@@ -91,7 +91,7 @@ const LoginForm = () => {
       </div>
       {/* End .col */}
 
-      <div className="col-12">
+      <div className="col-12" dir='ltr'>
         <button
           type="submit"
           href="#"
