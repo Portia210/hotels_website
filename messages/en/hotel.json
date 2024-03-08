@@ -1,0 +1,16 @@
+{
+  "Hotel": {
+    "hotel": "Hotel",
+    "guestReviews": "guest reviews",
+    "guestReviewsUpper": "Guest reviews",
+    "distance": "from center",
+    "numberOfGuests": "Number of guests",
+    "price": "Price:",
+    "toTravelor": "To Travelor",
+    "toBooking": "To Booking",
+    "tooltipCopy": "Copy text",
+    "link": "Link:",
+    "shortLink": "Short link",
+    "youSave": "You Save"
+  }
+}
