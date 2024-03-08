@@ -1,18 +1,20 @@
-"use client";
-import { useSignIn } from "@clerk/nextjs";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import ResetPasswordForm from "./ResetPasswordForm";
+'use client';
+import useTrans from '@/hooks/useTrans';
+import { useSignIn } from '@clerk/nextjs';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import ResetPasswordForm from './ResetPasswordForm';
 
 const LoginForm = () => {
   const router = useRouter();
+  const { t } = useTrans();
   const [isForgotPassword, setIsForgotPassword] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
 
   const { signIn, setActive } = useSignIn();
 
-  const onSignIn = (e) => {
+  const onSignIn = e => {
     e.preventDefault();
     const data = {};
     for (const key of e.target) {
@@ -23,20 +25,21 @@ const LoginForm = () => {
         identifier: data.email,
         password: data.password,
       })
-      .then((result) => {
-        if (result?.status === "complete") {
+      .then(result => {
+        if (result?.status === 'complete') {
           setActive({ session: result.createdSessionId });
-          router.push("/");
+          router.push('/');
         } else {
           console.log(result);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         let message = err?.message;
         if (err?.errors?.length > 0) {
           message = err?.errors[0]?.longMessage || err;
         }
-        setErrorMsg(message);
+        console.error(message);
+        setErrorMsg(t('Dashboard.SetPassword.passwordNotMatch'));
       });
   };
 
@@ -48,7 +51,7 @@ const LoginForm = () => {
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
-          Don&apos;t have an account yet?{" "}
+          Don&apos;t have an account yet?{' '}
           <Link href="/signup" className="text-blue-1">
             Sign up for free
           </Link>

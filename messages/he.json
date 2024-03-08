@@ -118,7 +118,11 @@
       "changePassword": "שנה סיסמה",
       "currentPassword": "סיסמא נוכחית",
       "newPassword": "סיסמה חדשה",
-      "newPasswordAgain": "סיסמה חדשה שוב"
+      "newPasswordAgain": "סיסמה חדשה שוב",
+      "passwordNotMatch": "הסיסמאות אינן תואמות",
+      "invalid": "הסיסמה שהוזנה אינה תואמת את הדרישות, בבקשה צור סיסמה חדשה",
+      "instruct1": "הסיסמה צריכה להכיל לפחות 8 תווים",
+      "instruct2": "הסיסמה חייבת לכלול לפחות אות אחת מספר אחד ותו מיוחד אחד"
     },
     "UsersTable": {
       "title": "Users"

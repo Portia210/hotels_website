@@ -6,14 +6,18 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import CountryList from './CountryList/CountryList';
+import useTrans from '@/hooks/useTrans';
+import usePasswordValidator from '@/hooks/usePasswordValidator';
 
 const SignUpForm = () => {
+  const router = useRouter();
+  const { t } = useTrans();
+  const { signUp, setActive } = useSignUp();
+  const { checkEmailAgentNumber } = useSignUpForm();
+  const { validate } = usePasswordValidator();
   const [errorMsg, setErrorMsg] = useState('');
   const [pendingForEmailVerified, setPendingForEmailVerified] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState();
-  const router = useRouter();
-  const { signUp, setActive } = useSignUp();
-  const { checkEmailAgentNumber } = useSignUpForm();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -22,10 +26,15 @@ const SignUpForm = () => {
       if (event.target[i].name === '') continue;
       data[event.target[i].name] = event.target[i].value;
     }
+    const { isValid, message } = validate(data.password);
+    if (!isValid) return setErrorMsg(message);
     if (data.password !== data.confirmPassword) {
-      return setErrorMsg('Password is not matched');
+      return setErrorMsg(t('Dashboard.SetPassword.passwordNotMatch'));
     }
-    const invalidMsg = await checkEmailAgentNumber(data.email, data.agentNumber);
+    const invalidMsg = await checkEmailAgentNumber(
+      data.email,
+      data.agentNumber,
+    );
     if (invalidMsg) return setErrorMsg(invalidMsg);
     await signUp
       .create({
