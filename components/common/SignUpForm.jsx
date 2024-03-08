@@ -8,6 +8,7 @@ import { useState } from 'react';
 import CountryList from './CountryList/CountryList';
 import useTrans from '@/hooks/useTrans';
 import usePasswordValidator from '@/hooks/usePasswordValidator';
+import PasswordInstruct from '../dashboard/dashboard/db-settings/components/PasswordInstruct';
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -100,7 +101,11 @@ const SignUpForm = () => {
         </p>
       </div>
       {/* End .col */}
-
+      {errorMsg && (
+        <div className="col-12">
+          <PasswordInstruct />
+        </div>
+      )}
       <div className="col-12">
         {errorMsg && (
           <div>
