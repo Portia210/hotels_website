@@ -1,12 +1,13 @@
-
-import DashboardCard from "./components/DashboardCard";
-import Sidebar from "../common/Sidebar";
-import Header from "@/components/header/dashboard-header";
-import RercentShortenLinks from "./components/RecentShortenLinks/RercentShortenLinks";
-import Footer from "../common/Footer";
-
+import Header from '@/components/header/dashboard-header';
+import useTransServer from '@/hooks/useTransServer';
+import Footer from '../common/Footer';
+import Sidebar from '../common/Sidebar';
+import DashboardCard from './components/DashboardCard';
+import RercentShortenLinks from './components/RecentShortenLinks/RercentShortenLinks';
 
 const index = () => {
+  const { t, isReverse } = useTransServer();
+
   return (
     <>
       {/*  */}
@@ -24,11 +25,13 @@ const index = () => {
         </div>
         {/* End dashboard__sidebar */}
 
-        <div className="dashboard__main">
+        <div className="dashboard__main" dir={`${isReverse && 'rtl'}`}>
           <div className="dashboard__content bg-light-2">
             <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
               <div className="col-12">
-                <h1 className="text-30 lh-14 fw-600">Dashboard</h1>
+                <h1 className="text-30 lh-14 fw-600">
+                  {t('Dashboard.Sidebar.dashboard')}
+                </h1>
               </div>
               {/* End .col-12 */}
             </div>
@@ -40,7 +43,9 @@ const index = () => {
               <div className="col-12">
                 <div className="py-30 px-30 rounded-4 bg-white shadow-3">
                   <div className="d-flex justify-between items-center">
-                    <h2 className="text-18 lh-1 fw-500">Recent shortened links</h2>
+                    <h2 className="text-18 lh-1 fw-500">
+                      {t('DashboardCard.ShortLink.recent')}
+                    </h2>
                   </div>
                   {/* End d-flex */}
 

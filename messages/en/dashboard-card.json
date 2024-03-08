@@ -1,0 +1,26 @@
+{
+  "DashboardCard": {
+    "Plan": {
+      "title": "Your Plan",
+      "standard": "Standard",
+      "advanced": "Advanced",
+      "searchesPerday": "searches per day"
+    },
+    "Credit": {
+      "title": "Credit",
+      "remain": "remain",
+      "count": "searches today"
+    },
+    "ShortLink": {
+      "title": "Short links",
+      "today": "links today",
+      "total": "short links total",
+      "recent": "Recent shortened links"
+    },
+    "LinkClick": {
+      "title": "Link clicks",
+      "today": "clicks today",
+      "total": "clicks total"
+    }
+  }
+}

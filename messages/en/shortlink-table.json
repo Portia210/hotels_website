@@ -1,0 +1,9 @@
+{
+  "ShortLinkTable": {
+    "shortLink": "Short Link",
+    "longLink": "Long Link",
+    "status": "Status",
+    "clicks": "Clicks",
+    "createdAt": "Created At"
+  }
+}

@@ -1,22 +1,27 @@
-import useShortenLink from "@/hooks/useShortenLink";
-import { useQuery } from "@tanstack/react-query";
+import useShortenLink from '@/hooks/useShortenLink';
+import useTrans from '@/hooks/useTrans';
+import { useQuery } from '@tanstack/react-query';
 
 export default function ShortLinkCard() {
+  const { t, isReverse } = useTrans();
   const { getLinkStats } = useShortenLink();
   const { data, isLoading, error } = useQuery({
-    queryKey: ["fetchLinkStats"],
+    queryKey: ['fetchLinkStats'],
     queryFn: () => getLinkStats(),
   });
 
   const item = {
-    title: "Short links",
-    amount: `${data?.total_24 || 0} links today`,
-    description: `${data?.total || 0} short links total`,
+    title: t('DashboardCard.ShortLink.title'),
+    amount: `${data?.total_24 || 0} ${t('DashboardCard.ShortLink.today')}`,
+    description: `${data?.total || 0} ${t('DashboardCard.ShortLink.total')}`,
     icon: <i className="bi bi-link-45deg"></i>,
   };
 
   return (
-    <div className="py-30 px-30 rounded-4 bg-white shadow-3">
+    <div
+      className="py-30 px-30 rounded-4 bg-white shadow-3"
+      dir={`${isReverse && 'rtl'}`}
+    >
       <div className="row y-gap-20 justify-between items-center">
         <div className="col-lg-12 col-md-auto text-nowrap">
           <div className="fw-500 lh-14 text-primary">{item.title}</div>
