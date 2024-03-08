@@ -12,7 +12,7 @@ import PasswordInstruct from '../dashboard/dashboard/db-settings/components/Pass
 
 const SignUpForm = () => {
   const router = useRouter();
-  const { t } = useTrans();
+  const { t, isReverse } = useTrans();
   const { signUp, setActive } = useSignUp();
   const { checkEmailAgentNumber } = useSignUpForm();
   const { validate } = usePasswordValidator();
@@ -90,7 +90,11 @@ const SignUpForm = () => {
   }
 
   return (
-    <form className="row y-gap-15" onSubmit={handleSubmit}>
+    <form
+      className="row y-gap-15"
+      onSubmit={handleSubmit}
+      dir={`${isReverse && 'rtl'}`}
+    >
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
@@ -183,7 +187,7 @@ const SignUpForm = () => {
       </div>
       {/* End .col */}
 
-      <div className="col-12">
+      <div className="col-12" dir={`ltr`}>
         <button
           type="submit"
           href="#"

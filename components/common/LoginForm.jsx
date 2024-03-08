@@ -8,7 +8,7 @@ import ResetPasswordForm from './ResetPasswordForm';
 
 const LoginForm = () => {
   const router = useRouter();
-  const { t } = useTrans();
+  const { t, isReverse } = useTrans();
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -47,7 +47,11 @@ const LoginForm = () => {
     return <ResetPasswordForm />;
   }
   return (
-    <form className="row y-gap-20" onSubmit={onSignIn}>
+    <form
+      className="row y-gap-20"
+      onSubmit={onSignIn}
+      dir={`${isReverse && 'rtl'}`}
+    >
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
