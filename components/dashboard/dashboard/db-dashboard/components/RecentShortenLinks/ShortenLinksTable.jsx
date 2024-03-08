@@ -1,14 +1,15 @@
-import useShortenLink from "@/hooks/useShortenLink";
-import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
-import { useEffect, useState } from "react";
-import Pagination from "./Pagination";
-import { Head } from "next/head";
+import useShortenLink from '@/hooks/useShortenLink';
+import useTrans from '@/hooks/useTrans';
+import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
+import Pagination from './Pagination';
 
-const activeColor = { color: "blue-1-05", text: "blue-1" };
-const deactiveColor = { color: "red-3", text: "red-2" };
+const activeColor = { color: 'blue-1-05', text: 'blue-1' };
+const deactiveColor = { color: 'red-3', text: 'red-2' };
 
 export default function ShortenLinksTable() {
+  const { t, isReverse } = useTrans();
   const [links, setLinks] = useState([]);
   const [pagination, setPagination] = useState({
     skip: 0,
@@ -20,36 +21,36 @@ export default function ShortenLinksTable() {
 
   const { data, isLoading, error, refetch } = useQuery({
     enabled: false,
-    queryKey: ["fetchLinks"],
+    queryKey: ['fetchLinks'],
     queryFn: () => getShortenLinks(pagination.skip, pagination.limit),
   });
 
-  const onChangePage = (page) => {
-    setPagination((prev) => ({ ...prev, skip: page * prev.limit }));
+  const onChangePage = page => {
+    setPagination(prev => ({ ...prev, skip: page * prev.limit }));
   };
 
   const renderTooltip = () => {
-    const Tooltip = require("bootstrap/js/dist/tooltip");
+    const Tooltip = require('bootstrap/js/dist/tooltip');
     const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
+      '[data-bs-toggle="tooltip"]',
     );
     [...tooltipTriggerList].map(
-      (tooltipTriggerEl) =>
+      tooltipTriggerEl =>
         new Tooltip(tooltipTriggerEl, {
-          container: "body",
-          trigger: "hover focus",
-          title: "Copy link",
-        })
+          container: 'body',
+          trigger: 'hover focus',
+          title: 'Copy link',
+        }),
     );
   };
 
   const onCopyLink = (result, id) => {
     if (!result) return;
     navigator.clipboard.writeText(result);
-    const Tooltip = require("bootstrap/js/dist/tooltip");
+    const Tooltip = require('bootstrap/js/dist/tooltip');
     const toolTipElement = document.getElementById(id);
     const toolTip = Tooltip.getInstance(toolTipElement);
-    toolTip.setContent({ ".tooltip-inner": "Copied!" });
+    toolTip.setContent({ '.tooltip-inner': 'Copied!' });
   };
 
   useEffect(() => {
@@ -82,11 +83,13 @@ export default function ShortenLinksTable() {
         <thead>
           <tr className="text-primary">
             <th>#</th>
-            <th className="col-3">Short Link</th>
-            <th className="col-4">Long Link</th>
-            <th className="col-1">Status</th>
-            <th className="col-2 text-center">Clicks</th>
-            <th className="col-2 text-center">Created At</th>
+            <th className="col-3">{t('ShortLinkTable.shortLink')}</th>
+            <th className="col-4">{t('ShortLinkTable.longLink')}</th>
+            <th className="col-1">{t('ShortLinkTable.status')}</th>
+            <th className="col-2 text-center">{t('ShortLinkTable.clicks')}</th>
+            <th className="col-2 text-center">
+              {t('ShortLinkTable.createdAt')}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -123,7 +126,7 @@ export default function ShortenLinksTable() {
                       readOnly
                       style={{ minWidth: 150 }}
                       onClick={() => {
-                        window.open(row?.target, "_blank");
+                        window.open(row?.target, '_blank');
                       }}
                     />
                     <div
@@ -150,7 +153,7 @@ export default function ShortenLinksTable() {
                       row.banned ? deactiveColor.text : activeColor.text
                     }`}
                   >
-                    {row.banned ? "Deactive" : "Active"}
+                    {row.banned ? 'Deactive' : 'Active'}
                   </div>
                 </td>
                 <td>
@@ -162,7 +165,7 @@ export default function ShortenLinksTable() {
                 </td>
                 <td>
                   <span className="text-nowrap">
-                    {dayjs(row?.created_at).format("DD/MM/YYYY HH:mm")}
+                    {dayjs(row?.created_at).format('DD/MM/YYYY HH:mm')}
                   </span>
                 </td>
               </tr>

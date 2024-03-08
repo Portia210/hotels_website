@@ -1,9 +1,11 @@
 'use client';
 
+import useTrans from '@/hooks/useTrans';
 import useUserCredit from '@/hooks/useUserCredit';
 import { useQuery } from '@tanstack/react-query';
 
 export default function CreditCard() {
+  const { t, isReverse } = useTrans();
   const { getUserRemainCredit } = useUserCredit();
 
   const { data, isLoading, error } = useQuery({
@@ -14,14 +16,19 @@ export default function CreditCard() {
   const count = Math.max(data?.total - data?.remaining, 0);
 
   const item = {
-    title: 'Credits',
-    amount: `${data?.remaining ?? 0}/${data?.total ?? 0} remain`,
-    description: `${count} searches today`,
+    title: t('DashboardCard.Credit.title'),
+    amount: `${data?.remaining ?? 0}/${data?.total ?? 0} ${t(
+      'DashboardCard.Credit.remain',
+    )}`,
+    description: `${count} ${t('DashboardCard.Credit.count')}`,
     icon: <i className="bi bi-search"></i>,
   };
 
   return (
-    <div className="py-30 px-30 rounded-4 bg-white shadow-3">
+    <div
+      className="py-30 px-30 rounded-4 bg-white shadow-3"
+      dir={`${isReverse && 'rtl'}`}
+    >
       <div className="row y-gap-20 justify-between items-center">
         <div className="col-lg-12 col-md-auto text-nowrap">
           <div className="fw-500 lh-14 text-primary">{item.title}</div>

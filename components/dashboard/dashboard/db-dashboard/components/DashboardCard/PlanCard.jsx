@@ -1,10 +1,12 @@
 'use client';
 
-import useUserPlans from '@/hooks/useUserPlans';
+import useTrans from '@/hooks/useTrans';
 import useUserCredit from '@/hooks/useUserCredit';
+import useUserPlans from '@/hooks/useUserPlans';
 import { useQuery } from '@tanstack/react-query';
 
 export default function PlanCard() {
+  const { t, isReverse } = useTrans();
   const { getUserRemainCredit } = useUserCredit();
   const { getCurrentPlan } = useUserPlans();
 
@@ -22,15 +24,27 @@ export default function PlanCard() {
     queryFn: () => getCurrentPlan(),
   });
 
+  const getPlanLabel = plan => {
+    return (
+      t(`DashboardCard.Plan.${plan?.toLowerCase()}`) ||
+      t('DashboardCard.Plan.standard')
+    );
+  };
+
   const item = {
-    title: 'Your Plan',
-    label: planData?.label || 'Standard',
-    description: `${data?.total || 0} searches per day`,
+    title: t('DashboardCard.Plan.title'),
+    label: getPlanLabel(planData?.label),
+    description: `${data?.total || 0} ${t(
+      'DashboardCard.Plan.searchesPerday',
+    )}`,
     icon: <i className="bi bi-box"></i>,
   };
 
   return (
-    <div className="py-30 px-30 rounded-4 bg-white shadow-3">
+    <div
+      className="py-30 px-30 rounded-4 bg-white shadow-3"
+      dir={`${isReverse && 'rtl'}`}
+    >
       <div className="row y-gap-20 justify-between items-center">
         <div className="col-lg-12 col-md-auto text-nowrap">
           <div className="fw-500 lh-14 text-primary">{item.title}</div>

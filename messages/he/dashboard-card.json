@@ -1,0 +1,26 @@
+{
+  "DashboardCard": {
+    "Plan": {
+      "title": "התוכנית שלך",
+      "standard": "סטנדרטי",
+      "advanced": "מתקדם",
+      "searchesPerday": "חיפושים ביום"
+    },
+    "Credit": {
+      "title": "קרדיטים",
+      "remain": "נותר",
+      "count": "חיפושים נותרו"
+    },
+    "ShortLink": {
+      "title": "קישורים מקוצרים",
+      "today": "קיצורים היום",
+      "total": "קוצרו סך הכל",
+      "recent": "קישורים שקוצרו לאחרונה"
+    },
+    "LinkClick": {
+      "title": "קליקים על קישורים",
+      "today": "קליקים היום",
+      "total": "קליקים סך הכל"
+    }
+  }
+}

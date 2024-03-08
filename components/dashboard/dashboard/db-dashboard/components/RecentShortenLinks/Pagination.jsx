@@ -34,7 +34,7 @@ export default function Pagination({ pagination, onChangePage }) {
   };
 
   return (
-    <nav>
+    <nav dir="ltr">
       <ul className="pagination pagination-sm justify-content-end">
         <li className={`page-item ${page === 0 && "disabled"}`}>
           <button onClick={() => handlePageChange(0)} className="page-link">
