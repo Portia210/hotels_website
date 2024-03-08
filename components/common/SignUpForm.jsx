@@ -6,14 +6,19 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import CountryList from './CountryList/CountryList';
+import useTrans from '@/hooks/useTrans';
+import usePasswordValidator from '@/hooks/usePasswordValidator';
+import PasswordInstruct from '../dashboard/dashboard/db-settings/components/PasswordInstruct';
 
 const SignUpForm = () => {
+  const router = useRouter();
+  const { t, isReverse } = useTrans();
+  const { signUp, setActive } = useSignUp();
+  const { checkEmailAgentNumber } = useSignUpForm();
+  const { validate } = usePasswordValidator();
   const [errorMsg, setErrorMsg] = useState('');
   const [pendingForEmailVerified, setPendingForEmailVerified] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState();
-  const router = useRouter();
-  const { signUp, setActive } = useSignUp();
-  const { checkEmailAgentNumber } = useSignUpForm();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -22,10 +27,15 @@ const SignUpForm = () => {
       if (event.target[i].name === '') continue;
       data[event.target[i].name] = event.target[i].value;
     }
+    const { isValid, message } = validate(data.password);
+    if (!isValid) return setErrorMsg(message);
     if (data.password !== data.confirmPassword) {
-      return setErrorMsg('Password is not matched');
+      return setErrorMsg(t('Dashboard.SetPassword.passwordNotMatch'));
     }
-    const invalidMsg = await checkEmailAgentNumber(data.email, data.agentNumber);
+    const invalidMsg = await checkEmailAgentNumber(
+      data.email,
+      data.agentNumber,
+    );
     if (invalidMsg) return setErrorMsg(invalidMsg);
     await signUp
       .create({
@@ -80,7 +90,11 @@ const SignUpForm = () => {
   }
 
   return (
-    <form className="row y-gap-15" onSubmit={handleSubmit}>
+    <form
+      className="row y-gap-15"
+      onSubmit={handleSubmit}
+      dir={`${isReverse && 'rtl'}`}
+    >
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
@@ -91,7 +105,11 @@ const SignUpForm = () => {
         </p>
       </div>
       {/* End .col */}
-
+      {errorMsg && (
+        <div className="col-12">
+          <PasswordInstruct />
+        </div>
+      )}
       <div className="col-12">
         {errorMsg && (
           <div>
@@ -169,7 +187,7 @@ const SignUpForm = () => {
       </div>
       {/* End .col */}
 
-      <div className="col-12">
+      <div className="col-12" dir={`ltr`}>
         <button
           type="submit"
           href="#"
