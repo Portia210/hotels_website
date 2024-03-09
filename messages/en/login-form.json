@@ -17,5 +17,14 @@
     "agentNumber": "Agent number",
     "country": "Country",
     "terms": "By creating an account, you agree to our Terms of Service and Privacy Statement."
+  },
+  "ResetPasswordForm": {
+    "resetCodeMessage": "A reset code will be sent to this email",
+    "resetCodeButton": "Send reset code",
+    "couldNotFindAccount": "Couldn't find your account.",
+    "pleaseEnterCode": "Please enter your reset code and new password",
+    "resetCode": "Reset code",
+    "newPassword": "New Password",
+    "resetPasswordButton": "Reset password"
   }
 }

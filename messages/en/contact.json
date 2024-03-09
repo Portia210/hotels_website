@@ -1,0 +1,10 @@
+{
+  "ContactForm": {
+    "sendMessageHeadline": "Send a message",
+    "fullName": "Full Name",
+    "email": "Email",
+    "messageSubject": "Subject",
+    "messageDescription": "Your Message",
+    "sendMessageBtn": "Send Message"
+  }
+}

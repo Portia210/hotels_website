@@ -131,7 +131,7 @@ export default function LoginBtns() {
       } is-menu-opened-hide md:d-none`}
     >
       <Link
-        href="/signup"
+        href="/login"
         className={`d-md-inline-flex d-xxl-none button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ${
           isReverse ? "mr-20" : "ml-20"
         }`}

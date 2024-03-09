@@ -40,126 +40,122 @@ const Header1 = () => {
   }, []);
 
   return (
-    <>
-      <header className={`header ${navbar ? 'bg-dark-1 is-sticky' : ''}`}>
-        <div className="header__container px-30 sm:px-20">
-          <div
-            className={`row justify-between items-center ${
-              isReverse ? 'flex-row-reverse' : ''
-            }`}
-          >
-            <div className="col-auto">
-              <div
-                className={`d-flex items-center ${
-                  isReverse ? 'flex-row-reverse' : ''
-                }`}
+    <header className={`header ${navbar ? 'bg-dark-1 is-sticky' : ''}`}>
+      <div className="header__container px-30 sm:px-20">
+        <div
+          className={`row justify-between items-center ${
+            isReverse ? 'flex-row-reverse' : ''
+          }`}
+        >
+          <div className="col-auto">
+            <div
+              className={`d-flex items-center ${
+                isReverse ? 'flex-row-reverse' : ''
+              }`}
+            >
+              <Link
+                href="/"
+                className={`header-logo ${isReverse ? 'ml-10' : 'mr-10'}`}
               >
-                <Link
-                  href="/"
-                  className={`header-logo ${isReverse ? 'ml-10' : 'mr-10'}`}
-                >
-                  <img
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      maxWidth: 180,
-                      maxHeight: 50,
-                    }}
-                    src="/img/general/home-logo.svg"
-                    alt="logo icon"
+                <img
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    maxWidth: 180,
+                    maxHeight: 50,
+                  }}
+                  src="/img/general/home-logo.svg"
+                  alt="logo icon"
+                />
+              </Link>
+              {/* End logo */}
+
+              <div className="header-menu">
+                <div className="header-menu__content">
+                  <MainMenu
+                    style={`text-white ${isReverse ? 'flex-row-reverse' : ''}`}
                   />
-                </Link>
-                {/* End logo */}
-
-                <div className="header-menu">
-                  <div className="header-menu__content">
-                    <MainMenu
-                      style={`text-white ${
-                        isReverse ? 'flex-row-reverse' : ''
-                      }`}
-                    />
-                  </div>
                 </div>
-                {/* End header-menu */}
               </div>
-              {/* End d-flex */}
+              {/* End header-menu */}
             </div>
-            {/* End col */}
+            {/* End d-flex */}
+          </div>
+          {/* End col */}
 
-            <div className="col-auto">
+          <div className="col-auto">
+            <div
+              className={`d-flex items-center ${
+                isReverse ? 'flex-row-reverse' : ''
+              }`}
+            >
               <div
-                className={`d-flex items-center ${
+                className={`row x-gap-20 items-center ${
                   isReverse ? 'flex-row-reverse' : ''
+                } md:d-none`}
+              >
+                <CurrencyMegaMenu textClass="text-white" />
+                {/* End Megamenu for Currencty */}
+
+                {/* Start vertical devider*/}
+                <div className="col-auto">
+                  <div className="w-1 h-20 bg-white-20" />
+                </div>
+                {/* End vertical devider*/}
+
+                <LanguageMegaMenu textClass="text-white" />
+                {/* End Megamenu for Language */}
+              </div>
+              {/* End language and currency selector */}
+
+              {/* Start btn-group */}
+              <LoginBtns />
+
+              {/* End btn-group */}
+
+              {/* Start mobile menu icon */}
+              <div
+                className={`d-none lg:d-flex x-gap-20 items-center text-white ${
+                  isReverse ? 'flex-row-reverse pr-30' : 'pl-30'
                 }`}
               >
-                <div
-                  className={`row x-gap-20 items-center ${
-                    isReverse ? 'flex-row-reverse' : ''
-                  } md:d-none`}
-                >
-                  <CurrencyMegaMenu textClass="text-white" />
-                  {/* End Megamenu for Currencty */}
-
-                  {/* Start vertical devider*/}
-                  <div className="col-auto">
-                    <div className="w-1 h-20 bg-white-20" />
-                  </div>
-                  {/* End vertical devider*/}
-
-                  <LanguageMegaMenu textClass="text-white" />
-                  {/* End Megamenu for Language */}
-                </div>
-                {/* End language and currency selector */}
-
-                {/* Start btn-group */}
-                <LoginBtns />
-
-                {/* End btn-group */}
-
-                {/* Start mobile menu icon */}
-                <div
-                  className={`d-none lg:d-flex x-gap-20 items-center text-white ${
-                    isReverse ? 'flex-row-reverse pr-30' : 'pl-30'
-                  }`}
-                >
-                  {!isSignedIn && (
-                    <div>
-                      <Link
-                        href="/login"
-                        className="d-flex items-center icon-user text-inherit text-22"
-                      />
-                    </div>
-                  )}
+                {!isSignedIn && (
                   <div>
-                    <button
-                      className="d-flex items-center icon-menu text-inherit text-20"
-                      data-bs-toggle="offcanvas"
-                      aria-controls="mobile-sidebar_menu"
-                      data-bs-target="#mobile-sidebar_menu"
+                    <Link
+                      href="/login"
+                      className="d-flex items-center icon-user text-inherit text-22"
                     />
+                  </div>
+                )}
+                <div>
+                  <button
+                    className="d-flex items-center icon-menu text-inherit text-20"
+                    data-bs-toggle="offcanvas"
+                    aria-controls="mobile-sidebar_menu"
+                    data-bs-target="#mobile-sidebar_menu"
+                  />
 
-                    <div
-                      className="offcanvas offcanvas-start  mobile_menu-contnet "
-                      tabIndex="-1"
-                      id="mobile-sidebar_menu"
-                      aria-labelledby="offcanvasMenuLabel"
-                      data-bs-scroll="true"
-                    >
-                      <MobileMenu isReverse={isReverse} />
-                      {/* End MobileMenu */}
-                    </div>
+                  <div
+                    className="offcanvas offcanvas-start  mobile_menu-contnet "
+                    tabIndex="-1"
+                    id="mobile-sidebar_menu"
+                    aria-labelledby="offcanvasMenuLabel"
+                    data-bs-scroll="true"
+                  >
+                    <MobileMenu isReverse={isReverse} />
+                    {/* End MobileMenu */}
                   </div>
                 </div>
-                {/* End mobile menu icon */}
               </div>
+              {/* End mobile menu icon */}
             </div>
-            {/* End col-auto */}
           </div>
-          {/* End .row */}
+          {/* End col-auto */}
         </div>
-        {/* End header_container */}
-      </header>
-    </>
+        {/* End .row */}
+      </div>
+      {/* End header_container */}
+    </header>
   );
 };
 

@@ -1,0 +1,15 @@
+{
+  "ShortLinkTable": {
+    "shortLink": "קישור מקוצר",
+    "longLink": "קישור ארוך",
+    "status": "סטטוס",
+    "clicks": "קליקים",
+    "createdAt": "נוצר ב"
+  },
+  "ShortLinkPage": {
+    "shortLinkHeadline": "הפוך את הקישורים שלך לקצרים וקלים יותר לשיתוף",
+    "shortLinkSubHeadline": "זה פשוט, מהיר, ועוזר לקישורים שלך לראות טובים ואלגנטיים",
+    "shortLinkInputPlaceholder": "הדבק את הלינק הארוך כאן",
+    "copyLinkTooltip": "העתק קישור"
+  }
+}

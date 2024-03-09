@@ -1,31 +1,33 @@
-"use client";
+'use client';
 
-import useIsMobile from "@/hooks/useIsMobile";
-import useShortenLink from "@/hooks/useShortenLink";
-import { useEffect, useState } from "react";
+import useIsMobile from '@/hooks/useIsMobile';
+import useShortenLink from '@/hooks/useShortenLink';
+import useTrans from '@/hooks/useTrans';
+import { useEffect, useState } from 'react';
 
 export default function ShortLinkInput() {
+  const { t, isReverse } = useTrans();
   const isMobile = useIsMobile();
   const { shortenLink, isValidURL } = useShortenLink();
-  const [linkInput, setLinkInput] = useState("");
-  const [result, setResult] = useState("");
-  const [errorMsg, setErroMsg] = useState("");
+  const [linkInput, setLinkInput] = useState('');
+  const [result, setResult] = useState('');
+  const [errorMsg, setErroMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
   const renderTooltip = () => {
-    const Tooltip = require("bootstrap/js/dist/tooltip");
-    const shortenLinkToolTip = document.getElementById("shortenLinkTooltip2");
+    const Tooltip = require('bootstrap/js/dist/tooltip');
+    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip2');
     new Tooltip(shortenLinkToolTip, {
-      container: "body",
-      trigger: "hover focus",
-      title: "Copy link",
+      container: 'body',
+      trigger: 'hover focus',
+      title: t('ShortLinkPage.copyLinkTooltip') || 'Copy link',
     });
   };
 
   const handleShortenLink = async () => {
     if (!linkInput) return;
     if (!isValidURL(linkInput)) {
-      setErroMsg("Invalid URL");
+      setErroMsg('Invalid URL');
       return;
     } else {
       setErroMsg();
@@ -44,10 +46,10 @@ export default function ShortLinkInput() {
   const onCopyLink = () => {
     if (!result) return;
     navigator.clipboard.writeText(result);
-    const Tooltip = require("bootstrap/js/dist/tooltip");
-    const toolTipElement = document.getElementById("shortenLinkTooltip2");
+    const Tooltip = require('bootstrap/js/dist/tooltip');
+    const toolTipElement = document.getElementById('shortenLinkTooltip2');
     const toolTip = Tooltip.getInstance(toolTipElement);
-    toolTip.setContent({ ".tooltip-inner": "Copied!" });
+    toolTip.setContent({ '.tooltip-inner': 'Copied!' });
   };
 
   useEffect(() => {
@@ -74,7 +76,10 @@ export default function ShortLinkInput() {
         )}
       </div>
       <div className="bg-white px-10 lg:px-20 lg:pt-5 lg:pb-20 rounded-100 lg:mt-30">
-        <div className="d-flex justify-content-between lh-lg lg:mt-10 lg:lh-sm">
+        <div
+          className="d-flex justify-content-between lh-lg lg:mt-10 lg:lh-sm"
+          dir={`${isReverse && 'rtl'}`}
+        >
           <input
             type="text"
             id="linkInput"
@@ -82,8 +87,8 @@ export default function ShortLinkInput() {
             required
             autoComplete="off"
             value={linkInput}
-            placeholder={"Enter long link here"}
-            onInput={(e) => setLinkInput(e.target.value)}
+            placeholder={t('ShortLinkPage.shortLinkInputPlaceholder')}
+            onInput={e => setLinkInput(e.target.value)}
           />
           <div
             onClick={handleShortenLink}
@@ -93,7 +98,11 @@ export default function ShortLinkInput() {
             {loading ? (
               <div className="spinner-border text-primary" role="status" />
             ) : (
-              <i className="bi bi-arrow-right-circle text-40 text-primary"></i>
+              <i
+                className={`bi bi-arrow-${
+                  isReverse ? 'left' : 'right'
+                }-circle text-40 text-primary`}
+              ></i>
             )}
           </div>
         </div>

@@ -1,15 +1,17 @@
-import ContactForm from "@/components/common/ContactForm";
-import LocationTopBar from "@/components/common/LocationTopBar";
-import DefaultFooter from "@/components/footer/default";
-import DefaultHeader from "@/components/header/default-header";
-import dynamic from "next/dynamic";
+import ContactForm from '@/components/common/ContactForm';
+import LocationTopBar from '@/components/common/LocationTopBar';
+import DefaultFooter from '@/components/footer/default';
+import DefaultHeader from '@/components/header/default-header';
+import useTransServer from '@/hooks/useTransServer';
+import dynamic from 'next/dynamic';
 
 export const metadata = {
-  title: "Contact || Agent-Space - Travel & Tour React NextJS Template",
-  description: "Agent-Space - Travel & Tour React NextJS Template",
+  title: 'Contact || Agent-Space - Travel & Tour React NextJS Template',
+  description: 'Agent-Space - Travel & Tour React NextJS Template',
 };
 
 const Contact = () => {
+  const { t, isReverse } = useTransServer();
   return (
     <>
       {/* End Page Title */}
@@ -36,8 +38,13 @@ const Contact = () => {
       <section className="relative container">
         <div className="row justify-end">
           <div className="col-xl-5 col-lg-7">
-            <div className="map-form px-40 pt-40 pb-50 lg:px-30 lg:py-30 md:px-24 md:py-24 bg-white rounded-4 shadow-4">
-              <div className="text-22 fw-500">Send a message</div>
+            <div
+              className="map-form px-40 pt-40 pb-50 lg:px-30 lg:py-30 md:px-24 md:py-24 bg-white rounded-4 shadow-4"
+              dir={`${isReverse && 'rtl'}`}
+            >
+              <div className="text-22 fw-500">
+                {t('ContactForm.sendMessageHeadline')}
+              </div>
               <ContactForm />
             </div>
           </div>

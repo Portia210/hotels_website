@@ -1,15 +1,18 @@
-import DefaultFooter from "@/components/footer/default";
-import DefaultHeader from "@/components/header/default-header";
-import ShortLinkInput from "@/components/shorten-link/ShortLinkInput";
-import dynamic from "next/dynamic";
+import DefaultFooter from '@/components/footer/default';
+import DefaultHeader from '@/components/header/default-header';
+import ShortLinkInput from '@/components/shorten-link/ShortLinkInput';
+import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 
 export const metadata = {
-  title: "Agent-Space: Shorten Your Links Easily!",
+  title: 'Agent-Space: Shorten Your Links Easily!',
   description:
     "Make your web links shorter and easier to share. It's simple, quick, and helps your messages look neat and elegant",
 };
 
 const ShortenLink = () => {
+  const t = useTranslations();
+
   return (
     <>
       {/* End Page Title */}
@@ -22,11 +25,9 @@ const ShortenLink = () => {
 
       <section className="layout-pt-lg layout-pb-lg bg-blue-2">
         <div className="text-center mb-3 mb-md-5">
-          <h2>
-              Make your web links shorter and easier to share.
-          </h2>
+          <h2>{t('ShortLinkPage.shortLinkHeadline')}</h2>
           <h4 className="sm:d-none lg:d-block">
-            It's simple, quick, and helps your messages look neat and elegant
+            {t('ShortLinkPage.shortLinkSubHeadline')}
           </h4>
         </div>
         <div className="container">

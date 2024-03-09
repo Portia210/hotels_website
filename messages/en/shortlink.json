@@ -1,0 +1,15 @@
+{
+  "ShortLinkTable": {
+    "shortLink": "Short Link",
+    "longLink": "Long Link",
+    "status": "Status",
+    "clicks": "Clicks",
+    "createdAt": "Created At"
+  },
+  "ShortLinkPage": {
+    "shortLinkHeadline": "Make your web links shorter and easier to share.",
+    "shortLinkSubHeadline": "It's simple, quick, and helps your messages look neat and elegant",
+    "shortLinkInputPlaceholder": "Enter long link here",
+    "copyLinkTooltip": "Copy link"
+  }
+}
