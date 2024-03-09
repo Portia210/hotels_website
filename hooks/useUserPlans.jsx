@@ -7,10 +7,7 @@ const useUserPlans = () => {
   const { getToken } = useAuth();
 
   const fetchPlans = async () => {
-    const response = await axios
-      .get(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan`)
-      .then(res => res.data);
-    return response;
+    return await subscriptionPlanService.fetchPlans();
   };
 
   const getPlan = async id => {

@@ -4,22 +4,22 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  flexRender,
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
 import { getColumns } from './columns';
 
-export default function BillingTable() {
-  const [data, setData] = useState([]);
+export default function BillingTable({ data }) {
   const [pagination, setPagination] = useState({
     skip: 0,
     limit: 10,
     page: 0,
-    total: data?.total || 0,
+    total: data?.results?.length || 0,
   });
 
   const table = useReactTable({
     columns: getColumns(),
-    data: data?.results || [],
+    data: data || [],
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

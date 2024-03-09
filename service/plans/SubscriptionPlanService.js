@@ -4,7 +4,14 @@ import axios from 'axios';
 class SubscriptionPlanService {
   constructor() {}
 
-  getCurrentPlan = async (token) => {
+  fetchPlans = async () => {
+    const response = await axios
+      .get(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan`)
+      .then(res => res.data);
+    return response;
+  };
+
+  getCurrentPlan = async token => {
     const response = await axios
       .get(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/user/plan`, {
         headers: {
