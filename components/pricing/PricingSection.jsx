@@ -1,6 +1,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import Plan from './Plan';
 import { planContents } from './plans';
+import DowngradeModal from './DowngradeModal';
 
 const PricingSection = ({ currentPlan }) => {
   const t = useTranslations();
@@ -24,9 +25,12 @@ const PricingSection = ({ currentPlan }) => {
   });
 
   return (
-    <div className="d-flex flex-wrap justify-content-center text-center g-5">
-      {plans}
-    </div>
+    <>
+      <div className="d-flex flex-wrap justify-content-center text-center g-5">
+        {plans}
+      </div>
+      <DowngradeModal />
+    </>
   );
 };
 

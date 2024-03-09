@@ -25,35 +25,47 @@ const Plan = props => {
     }
   };
 
-  const handleDowngradePlan = async () => {
-    if (!isSignedIn) return router.push('/login');
-    const plan = await getPlanByLabel(value);
-    if (plan._id) {
-      console.log('Downgrade plan');
-    }
-  };
-
-  const renderGetStartedBtn = async () => {
+  const renderGetStartedBtn = () => {
     let btnText = t('Pricing.getStarted');
     let btnDisabled = false;
+    let isDowngrade = false;
 
-    if (currentPlan && currentPlan.label === value) {
-      btnText = t('Pricing.currentPlan');
-      btnDisabled = true;
-    } else if (currentPlan && currentPlan.label === 'Advanced') {
-      btnText = t('Pricing.downgradePlan');
-    } else if (currentPlan && currentPlan.label === 'Standard') {
-      btnText = t('Pricing.upgradePlan');
+    if (currentPlan) {
+      if (currentPlan.label === value) {
+        btnText = t('Pricing.currentPlan');
+        btnDisabled = true;
+      } else if (currentPlan.label === 'Advanced') {
+        btnText = t('Pricing.getStarted');
+        isDowngrade = true;
+      } else if (currentPlan.label === 'Standard') {
+        btnText = t('Pricing.upgradePlan');
+      }
+    }
+
+    const commonButtonProps = {
+      className: `btn btn-lg btn-block ${
+        props.outline ? 'btn-outline-primary' : 'btn-primary'
+      }`,
+      type: 'button',
+    };
+
+    if (isDowngrade) {
+      return (
+        <button
+          {...commonButtonProps}
+          data-bs-toggle="modal"
+          data-bs-target="#downgradePlanModal"
+        >
+          {btnText}
+        </button>
+      );
     }
 
     return (
       <button
-        onClick={!btnDisabled ? handleDowngradePlan : handleGetStarted}
-        className={`btn btn-lg btn-block ${
-          props.outline ? 'btn-outline-primary' : 'btn-primary'
-        }`}
+        {...commonButtonProps}
+        onClick={handleGetStarted}
         disabled={btnDisabled}
-        type="button"
       >
         {btnText}
       </button>
