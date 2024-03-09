@@ -32,6 +32,7 @@
       "newPassword": "New Password",
       "newPasswordAgain": "New Password Again",
       "passwordNotMatch": "The passwords provided do not match.",
+      "passwordNotCorrect": "The entered password is not correct.",
       "invalid": "The entered password does not meet the specified requirements. Please provide a new password.",
       "instruct1": "Password should consist of at least 8 characters. password must:",
       "instruct2": "Include a minimum of 1 number, 1 letter, and 1 special character."
