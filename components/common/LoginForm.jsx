@@ -36,10 +36,12 @@ const LoginForm = () => {
       .catch(err => {
         let message = err?.message;
         if (err?.errors?.length > 0) {
+          const errorCode = err?.errors[0]?.code;
+          if (errorCode === 'session_exists') return window.location.reload();
           message = err?.errors[0]?.longMessage || err;
         }
         console.error(message);
-        setErrorMsg(t('Dashboard.SetPassword.passwordNotMatch'));
+        setErrorMsg(t('Dashboard.SetPassword.passwordNotCorrect'));
       });
   };
 
@@ -66,7 +68,9 @@ const LoginForm = () => {
       <div className="col-12">
         <div className="form-input ">
           <input type="email" required name="email" />
-          <label className="lh-1 text-14 text-light-1">{t('LoginForm.email')}</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.email')}
+          </label>
         </div>
       </div>
       {/* End .col */}
@@ -74,7 +78,9 @@ const LoginForm = () => {
       <div className="col-12">
         <div className="form-input ">
           <input type="password" required name="password" />
-          <label className="lh-1 text-14 text-light-1">{t('LoginForm.password')}</label>
+          <label className="lh-1 text-14 text-light-1">
+            {t('LoginForm.password')}
+          </label>
         </div>
         {errorMsg && (
           <div>
@@ -86,12 +92,12 @@ const LoginForm = () => {
 
       <div className="col-12" onClick={() => setIsForgotPassword(true)}>
         <a href="#" className="text-14 fw-500 text-blue-1 underline">
-          {(t('LoginForm.forgotPassword'))}
+          {t('LoginForm.forgotPassword')}
         </a>
       </div>
       {/* End .col */}
 
-      <div className="col-12" dir='ltr'>
+      <div className="col-12" dir="ltr">
         <button
           type="submit"
           href="#"

@@ -44,27 +44,36 @@ export default function ResetPasswordForm() {
         identifier: data.email,
       })
       .then(_ => {
+        setErrorMsg(null)
         setSuccessfulCreation(true);
       })
       .catch(err => {
         let message = err?.message;
         if (err?.errors?.length > 0) {
+          const errorCode = err?.errors[0]?.code;
           if (
             err?.errors[0]?.message ===
             'reset_password_email_code is not allowed'
           ) {
             message =
               "We can't reset your password if you use a login method like Google";
+          } else if (errorCode === 'form_identifier_not_found') {
+            message = t('ResetPasswordForm.couldNotFindAccount');
           } else {
             message = err?.errors[0]?.longMessage || err;
           }
         }
+        console.error('message --->', message);
         setErrorMsg(message);
       });
   };
 
   return (
-    <form className="row y-gap-20" onSubmit={onResetPassword} dir={`${isReverse && 'rtl'}`}>
+    <form
+      className="row y-gap-20"
+      onSubmit={onResetPassword}
+      dir={`${isReverse && 'rtl'}`}
+    >
       <div className="col-12">
         <h1 className="text-22 fw-500">
           {successfulCreation
@@ -113,7 +122,7 @@ export default function ResetPasswordForm() {
           type="submit"
           href="#"
           className="button py-20 -dark-1 bg-blue-1 text-white w-100"
-          dir='ltr'
+          dir="ltr"
         >
           {successfulCreation
             ? t('ResetPasswordForm.resetPasswordButton')
