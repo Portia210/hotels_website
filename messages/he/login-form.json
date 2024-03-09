@@ -17,5 +17,14 @@
     "agentNumber": "מספר סוכן",
     "country": "מדינה",
     "terms": "ביצירת החשבון, אתה מסכים לתנאי השימוש ומדיניות הפרטיות"
+  },
+  "ResetPasswordForm": {
+    "resetCodeMessage": "קוד איפוס סיסמה יישלח לאימייל שלך",
+    "resetCodeButton": "שלח קוד איפוס",
+    "couldNotFindAccount": "לא נמצא חשבון המקושר לאימייל זה",
+    "pleaseEnterCode": "בבקשה הכנס את קוד האיפוס וסיסמה חדשה",
+    "resetCode": "קוד איפוס",
+    "newPassword": "סיסמה חדשה",
+    "resetPasswordButton": "שמור סיסמה חדשה"
   }
 }

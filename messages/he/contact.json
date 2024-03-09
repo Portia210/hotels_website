@@ -1,0 +1,10 @@
+{
+  "ContactForm": {
+    "sendMessageHeadline": "שלח פנייה",
+    "fullName": "שם מלא",
+    "email": "אימייל",
+    "messageSubject": "נושא",
+    "messageDescription": "תוכן הפנייה",
+    "sendMessageBtn": "שלח פנייה"
+  }
+}
