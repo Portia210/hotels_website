@@ -23,10 +23,13 @@ export default function BillingCard() {
 
   const renderNextMonthPlan = () => {
     if (isLoadingCurrentPlan || isLoading) return null;
-    if (currentPlan._id === data?.recurring?.nextMonthPlan?._id) {
+    const recurring = data?.recurring;
+    if (currentPlan._id === recurring?.nextMonthPlan?._id) {
       return null;
     }
-    return `Next Month Plan: ${data?.recurring?.nextMonthPlan?.name}`;
+    return `Next Month Plan: ${
+      recurring?.nextMonthPlan?.label || recurring?.nextMonthPlan?.name
+    }`;
   };
 
   const item = {

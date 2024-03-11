@@ -3,6 +3,7 @@ import useTrans from '@/hooks/useTrans';
 import useUserBilling from '@/hooks/useUserBilling';
 import { useQuery } from '@tanstack/react-query';
 import BillingCard from './BillingCard/BillingCard';
+import DowngradePlanCard from './BillingCard/DowngradePlanCard';
 import BillingTable from './BillingTable/BillingTable';
 
 const UserBilling = () => {
@@ -15,13 +16,16 @@ const UserBilling = () => {
   });
 
   return (
-    <div id='userBilling'>
+    <div id="userBilling">
       <div className="row y-gap-30 mb-5">
         <div className="col-xl-3 col-md-6">
           <PlanCard />
         </div>
         <div className="col-xl-5 col-md-6">
           <BillingCard />
+        </div>
+        <div className='col-xl-4 col-md-12'>
+          <DowngradePlanCard />
         </div>
       </div>
       <BillingTable data={data} />
