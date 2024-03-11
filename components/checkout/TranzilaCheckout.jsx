@@ -62,18 +62,54 @@ export default function TranzilaCheckout() {
 
   const iframeUrl = createIframeUrl(plan, additionalInfo, locale);
 
-  if (isLoading) return null;
+  const openCheckoutWindow = () => {
+    const popupWidth = 400;
+    const popupHeight = 500;
+    const left = window.innerWidth / 2 - popupWidth / 2;
+    const top = window.innerHeight / 2 - popupHeight / 2;
+    window.open(
+      iframeUrl,
+      '',
+      `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`,
+    );
+  };
+
+  if (isLoading)
+    return (
+      <div className="d-flex justify-content-center align-items-center x-gap-10">
+        <div className="spinner-border spinner-border-lg" role="status">
+          <span className="visually-hidden">
+            Loading...
+          </span>
+        </div>
+      </div>
+    );
 
   return (
-    <div>
-      <iframe
-        id="tranzila-frame"
-        allowpaymentrequest="true"
-        name="tranzila"
-        src={iframeUrl}
-        width="100%"
-        height="500px"
-      ></iframe>
+    <div className="row">
+      <div className="col-8 border border-black pr-10">
+        <h2 className="border-bottom border-primary">Order summary</h2>
+        <div className="pt-10">
+          <div className="fw-500 fs-3">
+            <span className="text-primary">
+              <i className="bi bi-box"></i>
+              <span> {plan.name}</span>
+            </span>
+            {' - '}
+            <span>{plan.duration} months</span>
+          </div>
+        </div>
+      </div>
+      <div className="col-4 border border-black border-start-0 text-center ">
+        <h4>Total: {plan.sum}</h4>
+        <button
+          onClick={openCheckoutWindow}
+          type="button"
+          className="btn btn-primary"
+        >
+          Checkout now <i className="bi bi-cart3"></i>
+        </button>
+      </div>
     </div>
   );
 }
