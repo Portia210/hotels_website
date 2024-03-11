@@ -96,8 +96,6 @@ export default function TranzilaCheckout() {
               <i className="bi bi-box"></i>
               <span> {plan.name}</span>
             </span>
-            {' - '}
-            <span>{plan.duration} months</span>
           </div>
         </div>
       </div>
