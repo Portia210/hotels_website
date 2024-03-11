@@ -7,12 +7,14 @@ import { useUser } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 
 export default function TranzilaCheckout() {
   const { id } = useParams();
   const { user, isLoaded } = useUser();
   const { fetchCheckoutSession } = useCheckout();
   const { getPlan } = useUserPlans();
+  const [popupWindow, setPopupWindow] = useState(null);
 
   const locale = useLocale();
 
@@ -31,7 +33,7 @@ export default function TranzilaCheckout() {
     queryFn: () => {
       const urlParams = new URLSearchParams(window.location.search);
       const checkoutSessionId = urlParams.get('checkoutSessionId');
-      return fetchCheckoutSession(checkoutSessionId);
+      return fetchCheckoutSession(checkoutSessionId, popupWindow);
     },
     refetchInterval: 1000,
   });
@@ -67,20 +69,19 @@ export default function TranzilaCheckout() {
     const popupHeight = 500;
     const left = window.innerWidth / 2 - popupWidth / 2;
     const top = window.innerHeight / 2 - popupHeight / 2;
-    window.open(
+    const popupWindow = window.open(
       iframeUrl,
       '',
       `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`,
     );
+    setPopupWindow(popupWindow);
   };
 
   if (isLoading)
     return (
       <div className="d-flex justify-content-center align-items-center x-gap-10">
         <div className="spinner-border spinner-border-lg" role="status">
-          <span className="visually-hidden">
-            Loading...
-          </span>
+          <span className="visually-hidden">Loading...</span>
         </div>
       </div>
     );
@@ -100,14 +101,14 @@ export default function TranzilaCheckout() {
           </div>
         </div>
       </div>
-      <div className="col-4 border border-black border-start-0 text-center ">
-        <h4>Total: {plan.sum}</h4>
+      <div className="col-4 border border-black border-start-0 text-center d-flex justify-content-center flex-column">
+        <h4>Total: {plan.sum} ₪</h4>
         <button
           onClick={openCheckoutWindow}
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary bottom-0 px-10"
         >
-          Checkout now <i className="bi bi-cart3"></i>
+          Checkout <i className="bi bi-cart3"></i>
         </button>
       </div>
     </div>

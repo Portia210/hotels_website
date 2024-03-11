@@ -15,7 +15,13 @@ const useCheckout = () => {
   const router = useRouter();
   const { getToken } = useAuth();
 
-  const fetchCheckoutSession = async checkoutSessionId => {
+  /**
+   * Fetch checkout session
+   * @param {*} checkoutSessionId
+   * @param {*} window - Tranzila checkout popup window
+   * @returns
+   */
+  const fetchCheckoutSession = async (checkoutSessionId, window) => {
     try {
       if (!checkoutSessionId) throw Error('Checkout session id is required');
       const token = await getToken();
@@ -31,6 +37,7 @@ const useCheckout = () => {
         )
         .then(res => res.data);
       if (res.status === PaymentStatus.SUCCESS) {
+        if (window) window.close();
         router.push('/dashboard/db-dashboard');
       } else if (res.status === PaymentStatus.FAILURE) {
         alert('Payment failed please contact support');
