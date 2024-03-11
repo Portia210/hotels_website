@@ -72,6 +72,37 @@ const useUserPlans = () => {
     return response;
   };
 
+  const downgradeUserPlan = async () => {
+    const response = await axios
+      .post(
+        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/user/downgrade`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+          withCredentials: true,
+        },
+      )
+      .then(res => res.data);
+    return response;
+  };
+  const cancelUserPlan = async () => {
+    const response = await axios
+      .post(
+        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/user/cancel`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+          withCredentials: true,
+        },
+      )
+      .then(res => res.data);
+    return response;
+  };
+
   return {
     getPlan,
     getCurrentPlan,
@@ -79,6 +110,8 @@ const useUserPlans = () => {
     fetchPlans,
     selfUpgradePlan,
     upgradeUserPlan,
+    downgradeUserPlan,
+    cancelUserPlan,
   };
 };
 

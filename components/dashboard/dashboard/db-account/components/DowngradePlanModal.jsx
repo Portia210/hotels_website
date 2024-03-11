@@ -1,7 +1,19 @@
 'use client';
 
+import useUserPlans from '@/hooks/useUserPlans';
+
 export default function DowngradePlanModal() {
-  const onDowngrade = () => {};
+  const { downgradeUserPlan } = useUserPlans();
+
+  const onDowngrade = async () => {
+    try {
+      const res = await downgradeUserPlan();
+      console.log('res--->', res);
+      window.location.reload();
+    } catch (error) {
+      console.log('error--->', error);
+    }
+  };
 
   return (
     <div

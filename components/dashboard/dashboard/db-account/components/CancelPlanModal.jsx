@@ -1,8 +1,18 @@
 'use client';
 
+import useUserPlans from '@/hooks/useUserPlans';
+
 export default function CancelPlanModal() {
-  const onCancel = () => {
-    
+  const { cancelUserPlan } = useUserPlans();
+
+  const onCancel = async () => {
+    try {
+      const res = await cancelUserPlan();
+      console.log('res--->', res);
+      window.location.reload();
+    } catch (error) {
+      console.log('error--->', error);
+    }
   };
 
   return (
@@ -17,7 +27,7 @@ export default function CancelPlanModal() {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="cancelPlanModalBillingLabel">
-              Are you sure you want to downgrade your plan?
+              Are you sure you want to cancel your plan?
             </h1>
             <button
               type="button"
@@ -28,7 +38,7 @@ export default function CancelPlanModal() {
           </div>
           <div className="modal-body">
             <p>
-              Your plan is scheduled to be canceled. <br/>
+              Your plan is scheduled to be <strong>canceled</strong>. <br />
               This change will take effect in the next billing cycle.
             </p>
           </div>
