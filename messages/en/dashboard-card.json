@@ -7,8 +7,8 @@
       "searchesPerday": "searches per day"
     },
     "Credit": {
-      "title": "Credit",
-      "remain": "remain",
+      "title": "Search Credits",
+      "remain": "searches left",
       "count": "searches today"
     },
     "ShortLink": {

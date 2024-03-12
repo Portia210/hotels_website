@@ -17,10 +17,8 @@ export default function CreditCard() {
 
   const item = {
     title: t('DashboardCard.Credit.title'),
-    amount: `${data?.remaining ?? 0}/${data?.total ?? 0} ${t(
-      'DashboardCard.Credit.remain',
-    )}`,
-    description: `${count} ${t('DashboardCard.Credit.count')}`,
+    amount: `${count} ${t('DashboardCard.Credit.count')}`,
+    description: `${data?.remaining ?? 0} ${t('DashboardCard.Credit.remain')}`,
     icon: <i className="bi bi-search"></i>,
   };
 
