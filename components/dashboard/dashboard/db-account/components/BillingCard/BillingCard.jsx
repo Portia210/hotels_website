@@ -27,9 +27,10 @@ export default function BillingCard() {
     if (currentPlan._id === recurring?.nextMonthPlan?._id) {
       return null;
     }
-    return `Next Month Plan: ${
-      recurring?.nextMonthPlan?.label || recurring?.nextMonthPlan?.name
-    }`;
+    const nextPlan =
+      recurring?.nextMonthPlan?.label || recurring?.nextMonthPlan?.name;
+    if (!nextPlan) return null;
+    return `Next Month Plan: ${nextPlan}`;
   };
 
   const item = {
@@ -41,6 +42,7 @@ export default function BillingCard() {
     nextChargeDate: `Next Payment Date: ${dayjs(
       data?.recurring?.nextChargeDate,
     ).format('DD/MM/YYYY')}`,
+    billingCycle: data?.billingCycle,
   };
 
   return (
@@ -51,15 +53,16 @@ export default function BillingCard() {
     >
       <div className="row y-gap-20 justify-between items-center">
         <div className="col-lg-12 col-md-auto text-nowrap ">
-          <div className="fw-500 lh-14 text-primary">{item.title}</div>
-          <div className="text-20 lh-16 fw-600 mt-5" style={{ minHeight: 32 }}>
-            {item.nextMonthPlan}{' '}
+          <div className="fw-500 lh-14 text-primary">{item?.title}</div>
+          <div className="text-20 lh-16 fw-600 mt-5">{item?.nextMonthPlan}</div>
+          <div className="text-16 lh-14 text-black mt-5">
+            {`Billing Cycle: `} <strong>{item?.billingCycle}</strong>
           </div>
           <div className="text-16 lh-14 text-black mt-5">
-            {item.lastChargeDate}
+            {item?.lastChargeDate}
           </div>
           <div className="text-16 lh-14 text-black mt-5">
-            {item.nextChargeDate}
+            {item?.nextChargeDate}
           </div>
         </div>
       </div>

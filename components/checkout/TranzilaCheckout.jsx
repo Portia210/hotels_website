@@ -43,7 +43,8 @@ export default function TranzilaCheckout() {
     id,
     price: planData?.price,
     currency: 1,
-    duration: planData?.quantity,
+    // duration: planData?.quantity,
+    duration: 1,
     sum: planData?.sum,
   };
 
