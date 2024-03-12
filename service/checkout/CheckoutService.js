@@ -11,7 +11,7 @@ class CheckoutService {
       const payload = await CreateCheckoutSessionZSchema.parseAsync({
         planId,
         currency: true ? 'ILS' : 'USD',
-        quantity: 12,
+        quantity: 1,
       });
       const res = await axios
         .post(

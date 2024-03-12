@@ -15,7 +15,7 @@ export const getColumns = () => [
   },
   {
     accessorKey: 'items',
-    header: 'Product',
+    header: 'Item',
     size: 100,
     meta: {
       headerAlign: 'center',
@@ -83,15 +83,6 @@ export const getColumns = () => [
       const isActive = props.getValue();
       if (isActive) return <i className="bi bi-check-lg text-success"></i>;
       return <i className="bi bi-x-lg text-danger"></i>;
-    },
-  },
-  {
-    accessorKey: 'billingCycle',
-    header: 'Billing Cycle',
-    size: 50,
-    meta: {
-      headerAlign: 'center',
-      align: 'center',
     },
   },
   {
