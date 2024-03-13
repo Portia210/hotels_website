@@ -14,7 +14,7 @@ export const planContents = t => {
         `${t('Pricing.dedicatedSupport')}`,
         `${t('Pricing.cancelAnytime')}`,
       ],
-      outline: true,
+      outline: false,
     },
     {
       header: `${t('Pricing.plans.advanced')}`,

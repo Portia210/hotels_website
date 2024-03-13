@@ -9,7 +9,7 @@ const convertCurrency = (amount, currencyInput) => {
   return `${formattedNumber} ${symbol}`;
 };
 
-const loadDefaultCurrency = (currencies) => {
+const loadDefaultCurrency = (currencies, defaultCode) => {
   const params = new URLSearchParams(window.location.search);
   const currencyParam = params.get("currency");
   let currency = currencies.find((item) => item.currency === currencyParam);
@@ -19,7 +19,8 @@ const loadDefaultCurrency = (currencies) => {
   }
   currency = Cookies.get("currency");
   if (currency) return JSON.parse(currency);
-  return currencies[0];
+  currency = currencies.find((item) => item.currency === defaultCode);
+  return currency|| currencies[0];
 };
 
 export { convertCurrency, loadDefaultCurrency };

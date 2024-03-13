@@ -29,7 +29,7 @@ const useCurrency = (currencies) => {
   };
 
   const onLoadCurrency = () => {
-    const currency = loadDefaultCurrency(currencies);
+    const currency = loadDefaultCurrency(currencies, 'ILS');
     if (!currency) return;
     currencyStore.setCurrency(currency);
   };
