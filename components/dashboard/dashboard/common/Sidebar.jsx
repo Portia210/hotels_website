@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { isActiveLink } from "@/utils/linkActiveChecker";
-import { useClerk } from "@clerk/nextjs";
-import { usePathname, useRouter } from "next/navigation";
-import useTrans from "@/hooks/useTrans";
-import { checkUserRoleClient, UserRoles } from "@/utils/roleCheck";
+import { isActiveLink } from '@/utils/linkActiveChecker';
+import { useClerk } from '@clerk/nextjs';
+import { usePathname, useRouter } from 'next/navigation';
+import useTrans from '@/hooks/useTrans';
+import { checkUserRoleClient, UserRoles } from '@/utils/roleCheck';
 
 const Sidebar = () => {
   const { t } = useTrans();
@@ -23,36 +23,36 @@ const Sidebar = () => {
   const sidebarContentUser = [
     {
       id: 0,
-      icon: "/img/dashboard/sidebar/compass.svg",
-      name: t("Dashboard.Sidebar.dashboard"),
-      routePath: "/dashboard/db-dashboard",
+      imgPath: '/img/dashboard/sidebar/compass.svg',
+      name: t('Dashboard.Sidebar.dashboard'),
+      routePath: '/dashboard/db-dashboard',
     },
     {
       id: 1,
-      icon: "/img/dashboard/sidebar/account.svg",
-      name: t("Dashboard.Sidebar.account"),
-      routePath: "/dashboard/db-account",
+      icon: <i className="bi bi-person"></i>,
+      name: t('Dashboard.Sidebar.account'),
+      routePath: '/dashboard/db-account',
     },
     {
       id: 3,
-      icon: "/img/dashboard/sidebar/gear.svg",
-      name: t("Dashboard.General.changePassword"),
-      routePath: "/dashboard/db-settings",
+      imgPath: '/img/dashboard/sidebar/gear.svg',
+      name: t('Dashboard.General.changePassword'),
+      routePath: '/dashboard/db-settings',
     },
     {
       id: 4,
-      icon: "/img/dashboard/sidebar/log-out.svg",
-      name: t("Dashboard.Sidebar.logout"),
-      routePath: "#",
+      imgPath: '/img/dashboard/sidebar/log-out.svg',
+      name: t('Dashboard.Sidebar.logout'),
+      routePath: '#',
     },
   ];
 
   const sidebarContentManager = [
     {
       id: 2,
-      icon: "/img/dashboard/sidebar/user_management.svg",
-      name: t("Dashboard.Sidebar.userManagement"),
-      routePath: "/dashboard/db-user-management",
+      icon: <i className="bi bi-people"></i>,
+      name: t('Dashboard.Sidebar.userManagement'),
+      routePath: '/dashboard/db-user-management',
     },
   ];
 
@@ -62,10 +62,10 @@ const Sidebar = () => {
         .sort((a, b) => a.id - b.id)
     : sidebarContentUser;
 
-  const onLogout = (routePath) => {
-    if (routePath !== "#") return;
+  const onLogout = routePath => {
+    if (routePath !== '#') return;
     signOut().then(() => {
-      router.push("/login");
+      router.push('/login');
     });
   };
 
@@ -75,7 +75,7 @@ const Sidebar = () => {
         <div className="sidebar__item" key={index}>
           <div
             className={`${
-              isActiveLink(item.routePath, pathname) ? "-is-active" : ""
+              isActiveLink(item.routePath, pathname) ? '-is-active' : ''
             } sidebar__button `}
           >
             <Link
@@ -83,13 +83,17 @@ const Sidebar = () => {
               onClick={() => onLogout(item.routePath)}
               className="d-flex items-center text-15 lh-1 fw-500"
             >
-              <Image
-                width={20}
-                height={20}
-                src={item.icon}
-                alt="image"
-                className="mr-15"
-              />
+              {item?.imgPath ? (
+                <Image
+                  width={20}
+                  height={20}
+                  src={item.imgPath}
+                  alt="image"
+                  className="mr-15"
+                />
+              ) : (
+                <span className="text-24 text-primary mr-5 pr-5">{item.icon}</span>
+              )}
               {item.name}
             </Link>
           </div>
