@@ -4,6 +4,7 @@ import useIsMobile from '@/hooks/useIsMobile';
 import useShortenLink from '@/hooks/useShortenLink';
 import useTrans from '@/hooks/useTrans';
 import { useEffect, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
 export default function ShortLinkInput() {
   const { t, isReverse } = useTrans();
@@ -24,6 +25,19 @@ export default function ShortLinkInput() {
     });
   };
 
+  const shortenLinkMutation = useMutation({
+    mutationFn: () => {
+      return shortenLink(linkInput);
+    },
+    onSuccess: async data => {
+      if (data.code === '0012') {
+        setErroMsg(data.message);
+      } else {
+        setResult(data);
+      }
+    },
+  });
+
   const handleShortenLink = async () => {
     if (!linkInput) return;
     if (!isValidURL(linkInput)) {
@@ -34,10 +48,9 @@ export default function ShortLinkInput() {
     }
     try {
       setLoading(true);
-      const link = await shortenLink(linkInput);
-      setResult(link);
+      await shortenLinkMutation.mutateAsync();
     } catch (error) {
-      console.error(error);
+      console.error('error --->');
     } finally {
       setLoading(false);
     }

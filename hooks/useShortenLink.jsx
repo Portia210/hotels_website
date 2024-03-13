@@ -7,7 +7,6 @@ const useShortenLink = () => {
 
   const shortenLink = async (target) => {
     if (!target) return;
-    try {
       const token = await getToken();
       return await axios
         .post(
@@ -21,10 +20,6 @@ const useShortenLink = () => {
           }
         )
         .then((res) => res.data);
-    } catch (error) {
-      console.error(error);
-      return "";
-    }
   };
 
   const isValidURL = (url) => {
