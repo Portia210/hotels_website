@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import useTrans from "@/hooks/useTrans";
 
 export default function LoginBtns() {
-  const { t, isReverse } = useTrans();
+  const { t, isReverse, messages } = useTrans();
   const router = useRouter();
   const { isSignedIn, isLoaded, user } = useUser();
   const { signOut } = useClerk();
@@ -95,7 +95,7 @@ export default function LoginBtns() {
 
   useEffect(() => {
     renderPopover();
-  }, [isLoaded, isSignedIn]);
+  }, [isLoaded, isSignedIn, messages]);
 
   if (isLoaded && isSignedIn) {
     return (

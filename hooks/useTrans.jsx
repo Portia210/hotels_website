@@ -49,7 +49,7 @@ const useTrans = (transData) => {
     if (transData) setMessages(transData);
   }, [transData]);
   
-  return { t, t2, isReverse, locale };
+  return { t, t2, isReverse, locale, messages };
 };
 
 export default useTrans;

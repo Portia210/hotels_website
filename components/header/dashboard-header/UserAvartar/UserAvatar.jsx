@@ -7,7 +7,7 @@ import UserPopoverContent from "./UserPopoverContent";
 import useTrans from "@/hooks/useTrans";
 
 export default function UserAvatar({ user }) {
-  const { t, isReverse } = useTrans();
+  const { t, isReverse, messages } = useTrans();
   const router = useRouter();
   const { signOut } = useClerk();
 
@@ -54,7 +54,7 @@ export default function UserAvatar({ user }) {
 
   useEffect(() => {
     renderPopover();
-  }, [user]);
+  }, [user, messages]);
 
   return (
     <button
