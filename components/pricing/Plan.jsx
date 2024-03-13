@@ -53,6 +53,7 @@ const Plan = props => {
       return (
         <button
           {...commonButtonProps}
+          disabled={true}
           data-bs-toggle="modal"
           data-bs-target="#downgradePlanModal"
         >
