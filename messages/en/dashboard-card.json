@@ -4,6 +4,9 @@
       "title": "Your Plan",
       "standard": "Standard",
       "advanced": "Advanced",
+      "limited": "Limited",
+      "trial": "Trial",
+      "unlimited": "Unlimited",
       "searchesPerday": "searches per day"
     },
     "Credit": {

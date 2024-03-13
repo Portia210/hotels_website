@@ -27,7 +27,7 @@ export default function PlanCard() {
   const getPlanLabel = plan => {
     return (
       t(`DashboardCard.Plan.${plan?.toLowerCase()}`) ||
-      t('DashboardCard.Plan.standard')
+      plan
     );
   };
 

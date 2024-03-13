@@ -4,6 +4,9 @@
       "title": "התוכנית שלך",
       "standard": "סטנדרטי",
       "advanced": "מתקדם",
+      "limited": "קצר",
+      "trial": "ניסוי",
+      "unlimited": "בלתי מוגבל",
       "searchesPerday": "חיפושים ביום"
     },
     "Credit": {
