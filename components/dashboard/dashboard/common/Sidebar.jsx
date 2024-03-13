@@ -92,7 +92,9 @@ const Sidebar = () => {
                   className="mr-15"
                 />
               ) : (
-                <span className="text-24 text-primary mr-5 pr-5">{item.icon}</span>
+                <span className="text-24 mr-5 pr-5" style={{
+                  color: '#375bd4'
+                }}>{item.icon}</span>
               )}
               {item.name}
             </Link>
