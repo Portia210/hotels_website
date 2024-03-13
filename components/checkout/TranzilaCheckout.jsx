@@ -88,7 +88,7 @@ export default function TranzilaCheckout() {
     );
 
   return (
-    <div className="row">
+    <div className="row pr-120 pl-120">
       <div className="col-8 border border-black pr-10">
         <h2 className="border-bottom border-primary">Order summary</h2>
         <div className="pt-10">
@@ -105,10 +105,17 @@ export default function TranzilaCheckout() {
         <button
           onClick={openCheckoutWindow}
           type="button"
-          className="btn btn-primary bottom-0 px-10"
+          className="btn btn-primary bottom-0 px-5"
         >
           Checkout <i className="bi bi-cart3"></i>
         </button>
+      </div>
+      <div className='col-12 text-center mt-10'>
+        <strong className='text-22'>
+          One-time payment of {plan?.price} ₪ for the
+          remaining days of this month until the 28th. <br/> For subsequent months,
+          you'll be charged {'80'} ₪.
+        </strong>
       </div>
     </div>
   );
