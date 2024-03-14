@@ -113,7 +113,7 @@ const HotelProperties = ({ hotels }) => {
               </div>
               <div className="mt-5">
                 <div className="d-flex justify-between fw-500">
-                  <span>{convertCurrency(item?.travelorPrice, currency)}</span>
+                  <span>{convertCurrency(item?.travelorPrice, currency, item?.travelorCurrency)}</span>
                   <span className="text-blue-1">
                     <span
                       className="d-inline cursor-pointer"
@@ -130,7 +130,7 @@ const HotelProperties = ({ hotels }) => {
                 </div>
                 <div className="d-flex justify-between fw-500">
                   <span className="">
-                    {convertCurrency(item?.bookingPrice, currency)}
+                    {convertCurrency(item?.bookingPrice, currency, item?.bookingCurrency)}
                   </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.bookingLink}>
@@ -141,7 +141,7 @@ const HotelProperties = ({ hotels }) => {
                 {item?.price_difference > 0 && (
                   <div className={`d-flex x-gap-5 text-success fw-500`}>
                     <span>
-                      {convertCurrency(item?.price_difference, currency)}
+                      {convertCurrency(item?.price_difference, currency, item?.travelorCurrency)}
                     </span>
                     <span>{t('Hotel.youSave')}</span>
                   </div>

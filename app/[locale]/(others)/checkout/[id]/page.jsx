@@ -23,7 +23,7 @@ const CheckoutPage = async ({ params }) => {
 
       <section className="layout-pt-md layout-pb-md bg-blue-2">
         <div className="text-center mb-3 mb-md-5">
-          <h2>Checkout Page</h2>
+          <h2>Checkout</h2>
         </div>
         <div className="container">
           <TranzilaCheckout />
