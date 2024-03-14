@@ -113,7 +113,7 @@ const TravelorHotelProperties = ({ hotels }) => {
               </div>
               <div className="mt-5">
                 <div className="d-flex justify-between fw-500">
-                  <span>{convertCurrency(item?.travelorPrice, currency)}</span>
+                  <span>{convertCurrency(item?.travelorPrice, currency, item?.travelorCurrency)}</span>
                   <span className="text-blue-1">
                     <span
                       className="d-inline cursor-pointer"

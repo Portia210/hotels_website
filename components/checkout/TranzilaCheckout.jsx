@@ -1,6 +1,7 @@
 'use client';
 
 import useCheckout from '@/hooks/useCheckout';
+import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
 import { createIframeUrl } from '@/utils/payment';
 import { useUser } from '@clerk/nextjs';
@@ -10,6 +11,7 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 export default function TranzilaCheckout() {
+  const { t, isReverse } = useTrans();
   const { id } = useParams();
   const { user, isLoaded } = useUser();
   const { fetchCheckoutSession } = useCheckout();
@@ -78,6 +80,22 @@ export default function TranzilaCheckout() {
     setPopupWindow(popupWindow);
   };
 
+  const renderOneTimeInfo = () => {
+    const priceInfo = t('Pricing.priceInfo').replace(
+      '{price_currency}',
+      `${plan.price} ₪`,
+    );
+    return priceInfo;
+  };
+
+  const renderFullPriceInfo = () => {
+    const priceInfo = t('Pricing.priceInfo2').replace(
+      '{price_currency}',
+      `${plan.price} ₪`,
+    );
+    return priceInfo;
+  };
+
   if (isLoading)
     return (
       <div className="d-flex justify-content-center align-items-center x-gap-10">
@@ -88,7 +106,7 @@ export default function TranzilaCheckout() {
     );
 
   return (
-    <div className="row pr-120 pl-120">
+    <div className="row pr-120 pl-120" dir={`${isReverse && 'rtl'}`}>
       <div className="col-8 border border-black pr-10">
         <h2 className="border-bottom border-primary">Order summary</h2>
         <div className="pt-10">
@@ -100,7 +118,7 @@ export default function TranzilaCheckout() {
           </div>
         </div>
       </div>
-      <div className="col-4 border border-black border-start-0 text-center d-flex justify-content-center flex-column">
+      <div className="col-4 border border-black text-center d-flex justify-content-center flex-column">
         <h4>Total: {plan.sum} ₪</h4>
         <button
           onClick={openCheckoutWindow}
@@ -110,11 +128,13 @@ export default function TranzilaCheckout() {
           Checkout <i className="bi bi-cart3"></i>
         </button>
       </div>
-      <div className='col-12 text-center mt-10'>
-        <strong className='text-22'>
-          One-time payment of {plan?.price} ₪ for the
-          remaining days of this month until the 28th. <br/> For subsequent months,
-          you'll be charged {'80'} ₪.
+      <div className="col-12 text-22 text-center mt-10">
+        <strong>
+          {renderOneTimeInfo()}
+        </strong>
+        <br/>
+        <strong>
+          {renderFullPriceInfo()}
         </strong>
       </div>
     </div>
