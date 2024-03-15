@@ -4,21 +4,62 @@ import useTrans from '@/hooks/useTrans';
 import { useRouter } from 'next/navigation';
 import DowngradePlanModal from '../DowngradePlanModal';
 import CancelPlanModal from '../CancelPlanModal';
+import useUserPlans from '@/hooks/useUserPlans';
+import { useQuery } from '@tanstack/react-query';
 
 export default function DowngradePlanCard() {
   const router = useRouter();
+  const { getCurrentPlan } = useUserPlans();
   const { t, isReverse } = useTrans();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['fetchCurrentPlan'],
+    queryFn: () => getCurrentPlan(),
+  });
 
   const onUpgrade = () => {
     router.push('/pricing');
   };
 
-  const onDowngrade = () => {
-    console.log('Downgrade Plan');
+  const renderUpgrade = () => {
+    if (data?.label === 'Advanced') return null;
+    return (
+      <button
+        onClick={onUpgrade}
+        type="button"
+        className="d-flex btn btn-success"
+      >
+        <i className="bi bi-chevron-double-up mr-10"></i> Upgrade Plan
+      </button>
+    );
   };
 
-  const onCancel = () => {
-    console.log('Cancel Plan');
+  const renderDowngrade = () => {
+    if (data?.label !== 'Advanced') return null;
+    return (
+      <button
+        type="button"
+        className="d-flex btn btn-secondary"
+        data-bs-toggle="modal"
+        data-bs-target="#downgradePlanModalBilling"
+      >
+        <i className="bi bi-chevron-double-down mr-10"></i> Downgrade Plan
+      </button>
+    );
+  };
+
+  const renderCancel = () => {
+    if (data?.label !== 'Advanced' && data?.label !== 'Standard') return null;
+    return (
+      <button
+        type="button"
+        className="d-flex btn btn-danger"
+        data-bs-toggle="modal"
+        data-bs-target="#cancelPlanModalBilling"
+      >
+        <i className="bi bi-x-circle mr-10"></i> Cancel Plan
+      </button>
+    );
   };
 
   return (
@@ -30,31 +71,9 @@ export default function DowngradePlanCard() {
       >
         <div className="row y-gap-20 justify-between items-center">
           <div className="d-grid gap-2 d-flex flex-column">
-            <button
-              onClick={onUpgrade}
-              type="button"
-              className="d-flex btn btn-success"
-            >
-              <i className="bi bi-chevron-double-up mr-10"></i> Upgrade Plan
-            </button>
-            <button
-              onClick={onDowngrade}
-              type="button"
-              className="d-flex btn btn-secondary"
-              data-bs-toggle="modal"
-              data-bs-target="#downgradePlanModalBilling"
-            >
-              <i className="bi bi-chevron-double-down mr-10"></i> Downgrade Plan
-            </button>
-            <button
-              onClick={onCancel}
-              type="button"
-              className="d-flex btn btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#cancelPlanModalBilling"
-            >
-              <i className="bi bi-x-circle mr-10"></i> Cancel Plan
-            </button>
+            {renderUpgrade()}
+            {renderDowngrade()}
+            {renderCancel()}
           </div>
         </div>
       </div>
