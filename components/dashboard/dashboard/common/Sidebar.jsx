@@ -54,6 +54,12 @@ const Sidebar = () => {
       name: t('Dashboard.Sidebar.userManagement'),
       routePath: '/dashboard/db-user-management',
     },
+    {
+      id: 5,
+      icon: <i className="bi bi-people"></i>,
+      name: 'Payment Test',
+      routePath: '/dashboard/db-payment-test',
+    },
   ];
 
   const sidebarContent = allowed

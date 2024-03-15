@@ -45,9 +45,9 @@ export default function TranzilaCheckout() {
     id,
     price: planData?.price,
     currency: 1,
-    // duration: planData?.quantity,
     duration: 1,
     sum: planData?.sum,
+    fullPrice: planData?.fullPrice,
   };
 
   if (!isLoaded) return null;
@@ -91,7 +91,7 @@ export default function TranzilaCheckout() {
   const renderFullPriceInfo = () => {
     const priceInfo = t('Pricing.priceInfo2').replace(
       '{price_currency}',
-      `${plan.price} ₪`,
+      `${plan?.fullPrice} ₪`,
     );
     return priceInfo;
   };
