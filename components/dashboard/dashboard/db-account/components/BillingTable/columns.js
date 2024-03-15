@@ -47,6 +47,11 @@ export const getColumns = () => [
       headerAlign: 'center',
       align: 'center',
     },
+    cell: props => {
+      const row = props.row.original;
+      const firstItemPrice = row?.items?.product_price || 0;
+      return <span>{firstItemPrice} ₪</span>;
+    },
   },
   {
     accessorKey: 'status',
