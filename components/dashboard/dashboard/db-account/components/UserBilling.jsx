@@ -5,10 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import BillingCard from './BillingCard/BillingCard';
 import DowngradePlanCard from './BillingCard/DowngradePlanCard';
 import BillingTable from './BillingTable/BillingTable';
+import { useState } from 'react';
 
 const UserBilling = () => {
   const { t, isReverse } = useTrans();
   const { getUserBilling } = useUserBilling();
+  const [showBillingCard, setShowBillingCard] = useState(true);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['getUserBilling'],
@@ -21,10 +23,12 @@ const UserBilling = () => {
         <div className="col-xl-3 col-md-6">
           <PlanCard />
         </div>
-        <div className="col-xl-5 col-md-6">
-          <BillingCard />
-        </div>
-        <div className='col-xl-4 col-md-12'>
+        {showBillingCard && (
+          <div className="col-xl-5 col-md-6">
+            <BillingCard setShowBillingCard={setShowBillingCard}/>
+          </div>
+        )}
+        <div className="col-xl-4 col-md-12">
           <DowngradePlanCard />
         </div>
       </div>

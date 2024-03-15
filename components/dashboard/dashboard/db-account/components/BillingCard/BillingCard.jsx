@@ -5,8 +5,9 @@ import useUserBilling from '@/hooks/useUserBilling';
 import useUserPlans from '@/hooks/useUserPlans';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+import { useEffect } from 'react';
 
-export default function BillingCard() {
+export default function BillingCard({ setShowBillingCard }) {
   const { t, isReverse } = useTrans();
   const { getCurrentPlan } = useUserPlans();
   const { getUserRecurringBilling } = useUserBilling();
@@ -44,6 +45,14 @@ export default function BillingCard() {
     ).format('DD/MM/YYYY')}`,
     billingCycle: data?.billingCycle,
   };
+
+  useEffect(() => {
+    if (!data?.billingCycle) {
+      setShowBillingCard(false);
+    } else {
+      setShowBillingCard(true);
+    }
+  }, [data?.billingCycle]);
 
   return (
     <div

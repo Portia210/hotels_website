@@ -8,7 +8,7 @@ const useUsers = () => {
 
   const fetchUsers = async params => {
     const token = await getToken();
-    userService.fetchUserList(params, token);
+    return await userService.fetchUserList(params, token);
   };
 
   const getUserById = async id => {
