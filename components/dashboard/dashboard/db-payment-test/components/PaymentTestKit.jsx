@@ -16,6 +16,15 @@ const PaymentTestKit = () => {
     chargeNow,
   } = usePaymentTestKit(email);
 
+  const resetForm = () => {
+    setEmail(null);
+    setSelectedPlan(null);
+    document.getElementById('nextChargeDate').value = '';
+    document.getElementById('lastChargeDate').value = '';
+    document.getElementById('nextChargeAmount').value = '';
+    document.getElementById('billingCycle').value = 'MONTHLY';
+  };
+
   return (
     <div className="row y-gap-20">
       <div className="border col-4">
@@ -31,7 +40,7 @@ const PaymentTestKit = () => {
       </div>
       <div className="border col-4">
         <label htmlFor="nextMonthPlan">Next Month Plan</label>
-         <UserPlansDropdown
+        <UserPlansDropdown
           value={selectedPlan}
           onChange={value => setSelectedPlan(value)}
         />
@@ -106,9 +115,22 @@ const PaymentTestKit = () => {
           Save
         </button>
       </div>
-      <div className="col-4">
-        <button onClick={() => chargeNow()} type="btn" className="btn btn-primary">
+      <div className="col-2">
+        <button
+          onClick={() => chargeNow()}
+          type="btn"
+          className="btn btn-primary"
+        >
           Charge Now
+        </button>
+      </div>
+      <div className="col-auto">
+        <button
+          onClick={() => resetForm()}
+          type="btn"
+          className="btn btn-secondary"
+        >
+          Reset Form
         </button>
       </div>
     </div>

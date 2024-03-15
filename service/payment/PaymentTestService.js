@@ -23,7 +23,7 @@ class PaymentTestService {
     return response;
   };
 
-  setNextChargeDate = async date => {
+  setNextChargeDate = async ({ clerkId, date }, token) => {
     const url = `${TOURCOMPARE_BE_URL}/api/v1/payment-test/set-next-charge-date`;
     const response = await axios
       .post(
@@ -43,7 +43,7 @@ class PaymentTestService {
     return response;
   };
 
-  setLastChargeDate = async date => {
+  setLastChargeDate = async ({ clerkId, date }, token) => {
     const url = `${TOURCOMPARE_BE_URL}/api/v1/payment-test/set-last-charge-date`;
     const response = await axios
       .post(
@@ -63,14 +63,14 @@ class PaymentTestService {
     return response;
   };
 
-  setNextChargeAmount = async amount => {
+  setNextChargeAmount = async ({ clerkId, amount }, token) => {
     const url = `${TOURCOMPARE_BE_URL}/api/v1/payment-test/set-next-charge-amount`;
     const response = await axios
       .post(
         url,
         {
           userId: clerkId,
-          amount,
+          amount: parseFloat(amount),
         },
         {
           headers: {
@@ -83,7 +83,7 @@ class PaymentTestService {
     return response;
   };
 
-  setBillingCycle = async billingCycle => {
+  setBillingCycle = async ({ clerkId, billingCycle }, token) => {
     const url = `${TOURCOMPARE_BE_URL}/api/v1/payment-test/set-billing-cycle`;
     const response = await axios
       .post(
@@ -103,7 +103,7 @@ class PaymentTestService {
     return response;
   };
 
-  chargeNow = async () => {
+  chargeNow = async ({ clerkId }, token) => {
     const url = `${TOURCOMPARE_BE_URL}/api/v1/payment-test/charge-now`;
     const response = await axios
       .post(

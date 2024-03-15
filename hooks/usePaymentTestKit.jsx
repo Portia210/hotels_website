@@ -1,44 +1,25 @@
 import paymentTestService from '@/service/payment/PaymentTestService';
 import userService from '@/service/user/UserService';
+import { toastError, toastLoading, toastSuccess } from '@/utils/toastUtils';
 import { useAuth } from '@clerk/nextjs';
-import { toast } from 'react-toastify';
 
 const usePaymentTestKit = email => {
   const { getToken } = useAuth();
 
-  const toastSuccess = message => {
-    toast.success(message, {
-      position: 'bottom-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
-  const toastError = message => {
-    toast.error(message, {
-      position: 'bottom-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
   const getUserByEmail = async token => {
+    toastLoading('Fetching user...');
     const { results } = await userService.fetchUserList({ email }, token);
-    if (!results.length) return null;
+    if (!results.length) {
+      toastError('User not found');
+      return null;
+    }
     const user = results[0];
     return user;
   };
 
   const setNextMonthPlan = async planId => {
     if (!email) return;
+    toastLoading('setting next month plan...');
     const token = await getToken();
     const user = await getUserByEmail(token);
     if (!user) return;
@@ -54,6 +35,7 @@ const usePaymentTestKit = email => {
 
   const setNextChargeDate = async date => {
     if (!email) return;
+    toastLoading('setting next charge date...');
     const token = await getToken();
     const user = await getUserByEmail(token);
     if (!user) return;
@@ -69,6 +51,7 @@ const usePaymentTestKit = email => {
 
   const setLastChargeDate = async date => {
     if (!email) return;
+    toastLoading('setting last charge date...');
     const token = await getToken();
     const user = await getUserByEmail(token);
     if (!user) return;
@@ -84,6 +67,7 @@ const usePaymentTestKit = email => {
 
   const setNextChargeAmount = async amount => {
     if (!email) return;
+    toastLoading('setting next charge amount...');
     const token = await getToken();
     const user = await getUserByEmail(token);
     if (!user) return;
@@ -99,6 +83,7 @@ const usePaymentTestKit = email => {
 
   const setBillingCycle = async billingCycle => {
     if (!email) return;
+    toastLoading('setting billing cycle...');
     const token = await getToken();
     const user = await getUserByEmail(token);
     if (!user) return;
@@ -117,6 +102,7 @@ const usePaymentTestKit = email => {
 
   const chargeNow = async () => {
     if (!email) return;
+    toastLoading('charging now...');
     const token = await getToken();
     const user = await getUserByEmail(token);
     if (!user) return;
