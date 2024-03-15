@@ -47,12 +47,13 @@ export default function BillingCard({ setShowBillingCard }) {
   };
 
   useEffect(() => {
+    if (isLoading) return;
     if (!data?.billingCycle) {
       setShowBillingCard(false);
     } else {
       setShowBillingCard(true);
     }
-  }, [data?.billingCycle]);
+  }, [data?.billingCycle, isLoading]);
 
   return (
     <div
