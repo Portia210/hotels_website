@@ -17,6 +17,7 @@ export default function UserPlansDropdown({ value, onChange }) {
 
   return (
     <select
+      id="userPlansDropdown"
       className="form-select"
       value={value}
       onChange={e => onChange(e.target.value)}
