@@ -12,10 +12,10 @@ const toastSuccess = message => {
   });
 };
 
-const toastError = message => {
-  toast.error(message, {
+const toastError = (message, error) => {
+  toast.error(`${message}: ${error || ''}`, {
     position: 'bottom-right',
-    autoClose: 3000,
+    autoClose: 3500,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
