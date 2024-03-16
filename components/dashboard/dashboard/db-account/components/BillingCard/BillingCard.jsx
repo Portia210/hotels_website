@@ -43,6 +43,7 @@ export default function BillingCard({ setShowBillingCard }) {
     nextChargeDate: `Next Payment Date: ${dayjs(
       data?.recurring?.nextChargeDate,
     ).format('DD/MM/YYYY')}`,
+    nextChargeAmount: `Next Payment Amount: ${data?.recurring?.nextChargeAmount} ₪`,
     billingCycle: data?.billingCycle,
   };
 
@@ -73,6 +74,9 @@ export default function BillingCard({ setShowBillingCard }) {
           </div>
           <div className="text-16 lh-14 text-black mt-5">
             {item?.nextChargeDate}
+          </div>
+          <div className="text-16 lh-14 text-black mt-5">
+            {item?.nextChargeAmount}
           </div>
         </div>
       </div>

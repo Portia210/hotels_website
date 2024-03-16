@@ -35,7 +35,7 @@ export const getColumns = () => [
       align: 'center',
     },
     cell: props => {
-      const date = dayjs(props.getValue()).format('DD/MM/YYYY');
+      const date = dayjs(props.getValue()).format('DD/MM/YYYY HH:mm:ss');
       return <span>{date}</span>;
     },
   },
@@ -74,20 +74,6 @@ export const getColumns = () => [
           Fail
         </button>
       );
-    },
-  },
-  {
-    accessorKey: 'isActive',
-    header: 'Active',
-    size: 50,
-    meta: {
-      headerAlign: 'center',
-      align: 'center',
-    },
-    cell: props => {
-      const isActive = props.getValue();
-      if (isActive) return <i className="bi bi-check-lg text-success"></i>;
-      return <i className="bi bi-x-lg text-danger"></i>;
     },
   },
   {
