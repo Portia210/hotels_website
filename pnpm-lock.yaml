@@ -66,6 +66,9 @@ dependencies:
   he:
     specifier: link:dayjs/locale/he
     version: link:dayjs/locale/he
+  https-proxy-agent:
+    specifier: ^7.0.2
+    version: 7.0.4
   js-cookie:
     specifier: ^3.0.5
     version: 3.0.5
@@ -78,6 +81,9 @@ dependencies:
   next-intl:
     specifier: ^3.5.1
     version: 3.5.1(next@13.5.2)(react@18.2.0)
+  node-fetch:
+    specifier: '2'
+    version: 2.7.0
   photoswipe:
     specifier: ^5.4.2
     version: 5.4.3
@@ -1023,6 +1029,15 @@ packages:
     hasBin: true
     dev: false
 
+  /agent-base@7.1.0:
+    resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}
+    engines: {node: '>= 14'}
+    dependencies:
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
     engines: {node: '>=4'}
@@ -1546,6 +1561,16 @@ packages:
       param-case: 2.1.1
       relateurl: 0.2.7
       uglify-js: 3.0.28
+    dev: false
+
+  /https-proxy-agent@7.0.4:
+    resolution: {integrity: sha512-wlwpilI7YdjSkWaQ/7omYBMTliDcmCN8OLihO6I9B86g06lMyAoqgoDpV0XqoaPOKj+0DIdAvnsWfyAAhmimcg==}
+    engines: {node: '>= 14'}
+    dependencies:
+      agent-base: 7.1.0
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /immer@9.0.21:

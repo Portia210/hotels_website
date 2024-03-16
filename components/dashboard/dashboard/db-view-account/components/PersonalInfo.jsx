@@ -82,7 +82,7 @@ const PersonalInfo = ({ clerkId, currentRole }) => {
   });
 
   const onUpdateUserInfo = async () => {
-    if (updateUserInfoMutation.isLoading || updateUserRoleMutation.isLoading)
+    if (updateUserInfoMutation.isPending || updateUserRoleMutation.isPending)
       return;
     try {
       const agentNumber = document.querySelector(
@@ -112,12 +112,12 @@ const PersonalInfo = ({ clerkId, currentRole }) => {
   };
 
   const upgradePlan = async () => {
-    if (!newPlan || upgradePlanMutation.isLoading) return;
+    if (!newPlan || upgradePlanMutation.isPending) return;
     upgradePlanMutation.mutate();
   };
 
   const deleteUser = async () => {
-    if (deleteAccountMutation.isLoading) return;
+    if (deleteAccountMutation.isPending) return;
     deleteAccountMutation.mutate();
   };
 
@@ -269,7 +269,7 @@ const PersonalInfo = ({ clerkId, currentRole }) => {
         <div className="d-inline-block pt-30 mr-10">
           <button
             onClick={upgradePlan}
-            disabled={upgradePlanMutation.isLoading}
+            disabled={upgradePlanMutation.isPending}
             className="button h-50 px-24 -dark-1 bg-green-2 text-white"
           >
             Upgrade Plan
@@ -279,7 +279,7 @@ const PersonalInfo = ({ clerkId, currentRole }) => {
         <div className="d-inline-block pt-30">
           <button
             onClick={deleteUser}
-            disabled={deleteAccountMutation.isLoading}
+            disabled={deleteAccountMutation.isPending}
             className="button h-50 px-24 -dark-1 bg-red-1 text-white"
           >
             Delete Account
