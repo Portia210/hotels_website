@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import usePaymentTestKit from '@/hooks/usePaymentTestKit';
+import { useState } from 'react';
 import UserPlansDropdown from '../../db-user-management/components/UsersTable/UserPlansDropdown';
 
 const PaymentTestKit = () => {
@@ -11,18 +11,14 @@ const PaymentTestKit = () => {
     setNextMonthPlan,
     setNextChargeDate,
     setLastChargeDate,
-    setNextChargeAmount,
-    setBillingCycle,
     chargeNow,
   } = usePaymentTestKit(email);
 
   const resetForm = () => {
     setEmail(null);
     setSelectedPlan(null);
-    document.getElementById('nextChargeDate').value = '';
     document.getElementById('lastChargeDate').value = '';
     document.getElementById('nextChargeAmount').value = '';
-    document.getElementById('billingCycle').value = 'MONTHLY';
   };
 
   return (
@@ -65,7 +61,7 @@ const PaymentTestKit = () => {
           Save
         </button>
       </div>
-      <div className="border col-4">
+      <div className="border col-auto">
         <label htmlFor="lastChargeDate">Last Charge Date</label>
         <input id="lastChargeDate" name="lastChargeDate" type="date" />
         <button
@@ -78,44 +74,7 @@ const PaymentTestKit = () => {
           Save
         </button>
       </div>
-      <div className="border col-4">
-        <label htmlFor="nextChargeAmount">Next Charge Amount</label>
-        <input
-          id="nextChargeAmount"
-          name="nextChargeAmount"
-          type="number"
-          step="0.01"
-          placeholder="Next Charge Amount"
-        />
-        <button
-          onClick={() =>
-            setNextChargeAmount(
-              document.getElementById('nextChargeAmount').value,
-            )
-          }
-          type="btn"
-          className="btn btn-primary"
-        >
-          Save
-        </button>
-      </div>
-      <div className="border col-4">
-        <label htmlFor="billingCycle">Billing Cycle</label>
-        <select id="billingCycle" name="billingCycle">
-          <option value="MONTHLY">Monthly</option>
-          <option value="ANNUALLY">Annually</option>
-        </select>
-        <button
-          onClick={() =>
-            setBillingCycle(document.getElementById('billingCycle').value)
-          }
-          type="btn"
-          className="btn btn-primary"
-        >
-          Save
-        </button>
-      </div>
-      <div className="col-2">
+      <div className="col-8">
         <button
           onClick={() => chargeNow()}
           type="btn"
