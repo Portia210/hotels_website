@@ -49,7 +49,7 @@ export default function BillingCard({ setShowBillingCard }) {
     nextChargeAmount: `${t('Billing.nextChargeAmount')}: ${
       data?.recurring?.nextChargeAmount
     } ₪`,
-    billingCycle: data?.billingCycle,
+    billingCycle: t(`Billing.bliingCycle.${data?.billingCycle?.toLowerCase()}`),
   };
 
   useEffect(() => {

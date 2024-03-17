@@ -8,8 +8,10 @@ import {
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
 import { getColumns } from './columns';
+import useTrans from '@/hooks/useTrans';
 
 export default function BillingTable({ data }) {
+  const { t, isReverse } = useTrans();
   const [pagination, setPagination] = useState({
     skip: 0,
     limit: 10,
@@ -18,7 +20,7 @@ export default function BillingTable({ data }) {
   });
 
   const table = useReactTable({
-    columns: getColumns(),
+    columns: getColumns(t),
     data: data || [],
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
