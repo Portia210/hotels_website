@@ -1,6 +1,7 @@
 import TranzilaCheckout from '@/components/checkout/TranzilaCheckout';
 import DefaultFooter from '@/components/footer/default';
 import DefaultHeader from '@/components/header/default-header';
+import { getTranslations } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 
 export const metadata = {
@@ -10,6 +11,7 @@ export const metadata = {
 
 const CheckoutPage = async ({ params }) => {
   const checkoutSessionId = params.id
+  const t = await getTranslations('Checkout')
 
   return (
     <>
@@ -23,7 +25,7 @@ const CheckoutPage = async ({ params }) => {
 
       <section className="layout-pt-md layout-pb-md bg-blue-2">
         <div className="text-center mb-3 mb-md-5">
-          <h2>Checkout</h2>
+          <h2>{t('checkoutHeadline')}</h2>
         </div>
         <div className="container">
           <TranzilaCheckout />

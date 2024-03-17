@@ -29,7 +29,10 @@ export default function DowngradePlanCard() {
         type="button"
         className="d-flex btn btn-success"
       >
-        <i className="bi bi-chevron-double-up mr-10"></i> Upgrade Plan
+        <i
+          className={`bi bi-chevron-double-up ${isReverse ? 'ml-10' : 'mr-10'}`}
+        ></i>{' '}
+        {t('Billing.upgradeBtn')}
       </button>
     );
   };
@@ -43,7 +46,12 @@ export default function DowngradePlanCard() {
         data-bs-toggle="modal"
         data-bs-target="#downgradePlanModalBilling"
       >
-        <i className="bi bi-chevron-double-down mr-10"></i> Downgrade Plan
+        <i
+          className={`bi bi-chevron-double-down ${
+            isReverse ? 'ml-10' : 'mr-10'
+          }`}
+        ></i>{' '}
+        {t('Billing.downgradeBtn')}
       </button>
     );
   };
@@ -57,7 +65,8 @@ export default function DowngradePlanCard() {
         data-bs-toggle="modal"
         data-bs-target="#cancelPlanModalBilling"
       >
-        <i className="bi bi-x-circle mr-10"></i> Cancel Plan
+        <i className={`bi bi-x-circle ${isReverse ? 'ml-10' : 'mr-10'}`}></i>{' '}
+        {t('Billing.cancleBtn')}
       </button>
     );
   };
