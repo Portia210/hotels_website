@@ -22,13 +22,11 @@ export default function PlanCard() {
   } = useQuery({
     queryKey: ['fetchCurrentPlan'],
     queryFn: () => getCurrentPlan(),
+    refetchInterval: 4000,
   });
 
   const getPlanLabel = plan => {
-    return (
-      t(`DashboardCard.Plan.${plan?.toLowerCase()}`) ||
-      plan
-    );
+    return t(`DashboardCard.Plan.${plan?.toLowerCase()}`) || plan;
   };
 
   const item = {
