@@ -3,7 +3,11 @@
     "billingTab": "חיובים",
     "billingInfo": "מידע על חיובים",
     "billingCycle": "חיוב חוזר",
-    "bliingCycleMonthly": "חודשי",
+    "bliingCycle": {
+      "monthly": "חודשי",
+      "annually": "שנתי"
+    },
+    "loading": "טוען...",
     "lastPaymentDate": "תאריך החיוב האחרון",
     "nextPaymentDate": "תאריך החיוב הבא",
     "nextChargeAmount": "סכום תשלום הבא",
@@ -15,7 +19,8 @@
     "paymentDateLbl": "תאריך החיוב",
     "paymentSumLbl": "סכום",
     "paymentStatusLbl": "סטטוס תשלום",
-    "paymentStatus": "שולם",
+    "paymentStatusPaid": "שולם",
+    "paymentStatusFail": "תשלום נדחה",
     "subscriptionActiveLbl": "פעיל?",
     "invoiceInfoLbl": "פרטים",
     "invoiceInfo": "קבלה"

@@ -2,7 +2,7 @@ import { TRANZILA_INVOICE_URL } from '@/constants/invoice';
 import useInvoice from '@/hooks/useInvoice';
 import { useMutation } from '@tanstack/react-query';
 
-export default function BillingTableActions({ row }) {
+export default function BillingTableActions({ row, t }) {
   const { getInvoice } = useInvoice();
 
   const viewInvoiceMutation = useMutation({
@@ -23,14 +23,16 @@ export default function BillingTableActions({ row }) {
     return (
       <div className="text-center">
         <span className="btn badge rounded-pill text-bg-primary">
-          Loading...
+          {t('Billing.loading')}
         </span>
       </div>
     );
   }
   return (
     <div className="text-center" onClick={() => onViewInvoice()}>
-      <span className="btn badge rounded-pill text-bg-primary">Invoice</span>
+      <span className="btn badge rounded-pill text-bg-primary">
+        {t('Billing.invoiceInfo')}
+      </span>
     </div>
   );
 }

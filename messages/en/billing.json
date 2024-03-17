@@ -3,7 +3,11 @@
     "billingTab": "Biling",
     "billingInfo": "Billing Info",
     "billingCycle": "Billing Cycle",
-    "bliingCycleMonthly": "MONTHLY",
+    "bliingCycle": {
+      "monthly": "MONTHLY",
+      "annually": "ANNUALLY"
+    },
+    "loading": "Loading...",
     "lastPaymentDate": "Last Payment Date",
     "nextPaymentDate": "Next Payment Date",
     "nextChargeAmount": "Next Charge Amount",
@@ -15,7 +19,8 @@
     "paymentDateLbl": "Created At",
     "paymentSumLbl": "Sum",
     "paymentStatusLbl": "Payment Status",
-    "paymentStatus": "Paid",
+    "paymentStatusPaid": "Paid",
+    "paymentStatusFail": "Failed",
     "subscriptionActiveLbl": "Active",
     "invoiceInfoLbl": "Action",
     "invoiceInfo": "Invoice"
