@@ -1,0 +1,23 @@
+{
+  "Billing": {
+    "billingTab": "חיובים",
+    "billingInfo": "מידע על חיובים",
+    "billingCycle": "חיוב חוזר",
+    "bliingCycleMonthly": "חודשי",
+    "lastPaymentDate": "תאריך החיוב האחרון",
+    "nextPaymentDate": "תאריך החיוב הבא",
+    "nextChargeAmount": "סכום תשלום הבא",
+    "nextMonthPlan": "תוכנית לחודש הבא",
+    "upgradeBtn": "שדרוג תוכנית",
+    "downgradeBtn": "תוכנית נמוכה יותר",
+    "cancleBtn": "ביטול תוכנית",
+    "kindOfPlanLbl": "סוג התוכנית",
+    "paymentDateLbl": "תאריך החיוב",
+    "paymentSumLbl": "סכום",
+    "paymentStatusLbl": "סטטוס תשלום",
+    "paymentStatus": "שולם",
+    "subscriptionActiveLbl": "פעיל?",
+    "invoiceInfoLbl": "פרטים",
+    "invoiceInfo": "קבלה"
+  }
+}

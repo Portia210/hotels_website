@@ -31,19 +31,24 @@ export default function BillingCard({ setShowBillingCard }) {
     const nextPlan =
       recurring?.nextMonthPlan?.label || recurring?.nextMonthPlan?.name;
     if (!nextPlan) return null;
-    return `Next Month Plan: ${nextPlan}`;
+    return (
+      `${t('Billing.nextMonthPlan')}: ` +
+      t(`DashboardCard.Plan.${nextPlan?.toLowerCase()}`)
+    );
   };
 
   const item = {
-    title: 'Billing Info',
+    title: t('Billing.billingInfo'),
     nextMonthPlan: renderNextMonthPlan(),
-    lastChargeDate: `Last Payment Date: ${dayjs(
+    lastChargeDate: `${t('Billing.lastPaymentDate')}: ${dayjs(
       data?.recurring?.lastChargeDate,
     ).format('DD/MM/YYYY')}`,
-    nextChargeDate: `Next Payment Date: ${dayjs(
+    nextChargeDate: `${t('Billing.nextPaymentDate')}: ${dayjs(
       data?.recurring?.nextChargeDate,
     ).format('DD/MM/YYYY')}`,
-    nextChargeAmount: `Next Payment Amount: ${data?.recurring?.nextChargeAmount} ₪`,
+    nextChargeAmount: `${t('Billing.nextChargeAmount')}: ${
+      data?.recurring?.nextChargeAmount
+    } ₪`,
     billingCycle: data?.billingCycle,
   };
 
@@ -67,7 +72,8 @@ export default function BillingCard({ setShowBillingCard }) {
           <div className="fw-500 lh-14 text-primary">{item?.title}</div>
           <div className="text-20 lh-16 fw-600 mt-5">{item?.nextMonthPlan}</div>
           <div className="text-16 lh-14 text-black mt-5">
-            {`Billing Cycle: `} <strong>{item?.billingCycle}</strong>
+            {`${t('Billing.billingCycle')}: `}{' '}
+            <strong>{item?.billingCycle}</strong>
           </div>
           <div className="text-16 lh-14 text-black mt-5">
             {item?.lastChargeDate}

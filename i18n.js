@@ -11,6 +11,8 @@ export default getRequestConfig(async ({ locale }) => {
     ...(await import(`./messages/${locale}/shortlink.json`)).default,
     ...(await import(`./messages/${locale}/login-form.json`)).default,
     ...(await import(`./messages/${locale}/contact.json`)).default,
+    ...(await import(`./messages/${locale}/checkout.json`)).default,
+    ...(await import(`./messages/${locale}/billing.json`)).default,
   };
   return { messages };
 });

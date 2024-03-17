@@ -108,7 +108,7 @@ export default function TranzilaCheckout() {
   return (
     <div className="row pr-120 pl-120" dir={`${isReverse && 'rtl'}`}>
       <div className="col-8 border border-black pr-10">
-        <h2 className="border-bottom border-primary">Order summary</h2>
+        <h2 className="border-bottom border-primary">{t('Checkout.orderSum')}</h2>
         <div className="pt-10">
           <div className="fw-500 fs-3">
             <span className="text-primary">
@@ -119,13 +119,13 @@ export default function TranzilaCheckout() {
         </div>
       </div>
       <div className="col-4 border border-black text-center d-flex justify-content-center flex-column">
-        <h4>Total: {plan.sum} ₪</h4>
+        <h4>{t('Checkout.total')}: {plan.sum} ₪</h4>
         <button
           onClick={openCheckoutWindow}
           type="button"
           className="btn btn-primary bottom-0 px-5"
         >
-          Checkout <i className="bi bi-cart3"></i>
+          {t('Checkout.checkoutHeadline')} <i className="bi bi-cart3"></i>
         </button>
       </div>
       <div className="col-12 text-22 text-center mt-10">

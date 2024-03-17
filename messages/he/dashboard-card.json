@@ -3,10 +3,10 @@
     "Plan": {
       "title": "התוכנית שלך",
       "standard": "סטנדרטי",
-      "advanced": "מתקדם",
-      "limited": "קצר",
+      "advanced": "מקצועי",
+      "limited": "מוגבל",
       "trial": "ניסוי",
-      "unlimited": "בלתי מוגבל",
+      "unlimited": "ללא הגבלה",
       "searchesPerday": "חיפושים ביום"
     },
     "Credit": {

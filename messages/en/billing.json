@@ -1,0 +1,23 @@
+{
+  "Billing": {
+    "billingTab": "Biling",
+    "billingInfo": "Billing Info",
+    "billingCycle": "Billing Cycle",
+    "bliingCycleMonthly": "MONTHLY",
+    "lastPaymentDate": "Last Payment Date",
+    "nextPaymentDate": "Next Payment Date",
+    "nextChargeAmount": "Next Charge Amount",
+    "nextMonthPlan": "Next Month Plan",
+    "upgradeBtn": " Upgrade Plan",
+    "downgradeBtn": " Downgrade Plan",
+    "cancleBtn": "Cancel Plan",
+    "kindOfPlanLbl": "Item",
+    "paymentDateLbl": "Created At",
+    "paymentSumLbl": "Sum",
+    "paymentStatusLbl": "Payment Status",
+    "paymentStatus": "Paid",
+    "subscriptionActiveLbl": "Active",
+    "invoiceInfoLbl": "Action",
+    "invoiceInfo": "Invoice"
+  }
+}
