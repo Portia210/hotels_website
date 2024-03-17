@@ -14,7 +14,7 @@ const Index = () => {
       content: <PersonalInfo />,
     },
     {
-      label: t('Dashboard.PersonalInfo.userBilling'),
+      label: t('Billing.billingTab'),
       content: <UserBilling />,
     },
   ];
