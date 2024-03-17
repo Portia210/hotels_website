@@ -1,15 +1,17 @@
 'use client';
 
+import useCheckout from '@/hooks/useCheckout';
 import useTrans from '@/hooks/useTrans';
-import { useRouter } from 'next/navigation';
-import DowngradePlanModal from '../DowngradePlanModal';
-import CancelPlanModal from '../CancelPlanModal';
 import useUserPlans from '@/hooks/useUserPlans';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import CancelPlanModal from '../CancelPlanModal';
+import DowngradePlanModal from '../DowngradePlanModal';
 
 export default function DowngradePlanCard() {
   const router = useRouter();
-  const { getCurrentPlan } = useUserPlans();
+  const { getCurrentPlan, getPlanByLabel } = useUserPlans();
+  const { createCheckoutSession } = useCheckout();
   const { t, isReverse } = useTrans();
 
   const { data, isLoading, error } = useQuery({
@@ -17,8 +19,22 @@ export default function DowngradePlanCard() {
     queryFn: () => getCurrentPlan(),
   });
 
-  const onUpgrade = () => {
-    router.push('/pricing');
+  const upgradeMutation = useMutation({
+    mutationFn: async () => {
+      const plan = await getPlanByLabel('Advanced')
+      const checkoutSessionId = await createCheckoutSession(plan._id)
+      return { plan, checkoutSessionId }
+    },
+    onSuccess: async data => {
+      const planId = data?.plan?._id;
+      const checkoutSessionId = data?.checkoutSessionId;
+      router.push(`/checkout/${planId}?checkoutSessionId=${checkoutSessionId}`);
+    },
+  });
+
+  const onUpgrade = async () => {
+    if (upgradeMutation.isPending) return;
+    upgradeMutation.mutate();
   };
 
   const renderUpgrade = () => {
