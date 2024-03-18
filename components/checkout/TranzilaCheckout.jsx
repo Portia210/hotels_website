@@ -6,17 +6,14 @@ import useUserPlans from '@/hooks/useUserPlans';
 import { createIframeUrl } from '@/utils/payment';
 import { useUser } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
-import { useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
 
 export default function TranzilaCheckout() {
-  const { t, isReverse } = useTrans();
+  const { t, locale, isReverse } = useTrans();
   const { id } = useParams();
   const { user, isLoaded } = useUser();
   const { fetchCheckoutSession } = useCheckout();
   const { getPlan } = useUserPlans();
-
-  const locale = useLocale();
 
   const fetchPlan = async () => {
     const plan = await getPlan(id);
@@ -33,7 +30,7 @@ export default function TranzilaCheckout() {
     queryFn: () => {
       const urlParams = new URLSearchParams(window.location.search);
       const checkoutSessionId = urlParams.get('checkoutSessionId');
-      return fetchCheckoutSession(checkoutSessionId, popupWindow);
+      return fetchCheckoutSession(checkoutSessionId);
     },
     refetchInterval: 1000,
   });
@@ -63,8 +60,6 @@ export default function TranzilaCheckout() {
     email: user.emailAddresses[0].emailAddress,
   };
 
-  const iframeUrl = createIframeUrl(plan, additionalInfo, locale);
-
   const renderOneTimeInfo = () => {
     const priceInfo = t('Pricing.priceInfo').replace(
       '{price_currency}',
@@ -82,12 +77,14 @@ export default function TranzilaCheckout() {
   };
 
   const renderPlan = () => {
-    const planName = t(`DashboardCard.Plan.${plan?.name?.toLowerCase()}`)
+    const planName = t(`DashboardCard.Plan.${plan?.name?.toLowerCase()}`);
     const planInfo = t('Checkout.plan_plan')?.replace('{plan}', planName);
     return planInfo;
   };
 
-  if (isLoading)
+  const iframeUrl = createIframeUrl(plan, additionalInfo, locale);
+
+  if (isLoading || !iframeUrl) {
     return (
       <div className="d-flex justify-content-center align-items-center x-gap-10">
         <div className="spinner-border spinner-border-lg" role="status">
@@ -95,12 +92,12 @@ export default function TranzilaCheckout() {
         </div>
       </div>
     );
+  }
 
   return (
     <section id="checkout" className="bg-white" dir={`${isReverse && 'rlt'}`}>
       <div
-        className="d-flex justify-content-center align-items-center m-sm-5"
-        style={{ height: '100vh' }}
+        className="h-100 d-flex justify-content-center align-items-center m-sm-5"
       >
         <div className="container">
           <div className="row">
@@ -109,7 +106,7 @@ export default function TranzilaCheckout() {
                 <div className="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3"></div>
                 <div>
                   <h2 className="fs-md-2 text-body-emphasis mb-3">
-                  {t('Checkout.orderSum')}
+                    {t('Checkout.orderSum')}
                   </h2>
                 </div>
                 <div className="position-sticky mt-4">
@@ -132,7 +129,7 @@ export default function TranzilaCheckout() {
                     <hr />
                     <div>
                       <label htmlFor="tnc">
-                        {t('Checkout.agree_to')} {" "}
+                        {t('Checkout.agree_to')}{' '}
                         <a
                           href="https://docs.agent-space.com/terms-of-use"
                           target="_blank"
@@ -153,7 +150,7 @@ export default function TranzilaCheckout() {
               </div>
             </div>
 
-            <div className="col-lg-6 mt-5 p-0">
+            <div className="col-lg-6 mt-5 p-0 sm:mt-40">
               <iframe
                 src={iframeUrl}
                 title="tranzlia_checkout"
