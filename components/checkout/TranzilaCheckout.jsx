@@ -5,8 +5,7 @@ import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
 import { createIframeUrl } from '@/utils/payment';
 import { useUser } from '@clerk/nextjs';
-import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 
 export default function TranzilaCheckout() {
@@ -14,7 +13,8 @@ export default function TranzilaCheckout() {
   const { id } = useParams();
   const { user, isLoaded } = useUser();
   const { fetchCheckoutSession } = useCheckout();
-  const { getPlan } = useUserPlans();
+  const { getPlan, selfUpgradePlan } = useUserPlans();
+  const type = new URLSearchParams(window.location.search).get('type');
 
   const fetchPlan = async () => {
     const plan = await getPlan(id);
@@ -34,6 +34,13 @@ export default function TranzilaCheckout() {
       return fetchCheckoutSession(checkoutSessionId);
     },
     refetchInterval: 1000,
+  });
+
+  const upgradeMutation = useMutation({
+    mutationFn: () => selfUpgradePlan(),
+    onSuccess: () => {
+      router.push(`/thankyou`);
+    },
   });
 
   const plan = {
@@ -84,6 +91,39 @@ export default function TranzilaCheckout() {
   };
 
   const iframeUrl = createIframeUrl(plan, additionalInfo, locale);
+
+  const renderIframe = () => {
+    return (
+      <div className="text-center">
+        <iframe
+          src={iframeUrl}
+          title="tranzlia_checkout"
+          width="100%"
+          height="500px"
+        ></iframe>
+      </div>
+    );
+  };
+
+  const renderSelfUpgrade = () => {
+    return (
+      <div className="text-center">
+        <div className="alert alert-warning" role="alert">
+          Upgrade your plan to {plan?.name} for ₪ {plan?.price}
+        </div>
+        <button
+          onClick={() => {
+            upgradeMutation.mutate();
+          }}
+          disabled={upgradeMutation.isPending}
+          type="button"
+          className="btn btn-success btn-lg"
+        >
+          {upgradeMutation.isPending ? 'Upgrading...' : `Confirm Upgrade`}
+        </button>
+      </div>
+    );
+  };
 
   if (isLoading || !iframeUrl) {
     return (
@@ -149,22 +189,8 @@ export default function TranzilaCheckout() {
               </div>
             </div>
 
-            <div className="col-lg-6 mt-5 p-0 sm:mt-40">
-              <div className='text-center mb-40 mt-30'>
-                <Image
-                  src={'/img/general/logo-dark.svg'}
-                  width={250}
-                  height={250}
-                />
-              </div>
-              <iframe
-                src={iframeUrl}
-                title="tranzlia_checkout"
-                width="100%"
-                height="500px"
-                frameBorder="0"
-                scrolling="auto"
-              ></iframe>
+            <div className="col-lg-6 mt-5 p-0 mt-40">
+              {type === 'upgrade' ? renderSelfUpgrade() : renderIframe()}
             </div>
           </div>
         </div>

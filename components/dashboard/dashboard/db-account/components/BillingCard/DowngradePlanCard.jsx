@@ -28,7 +28,7 @@ export default function DowngradePlanCard() {
     onSuccess: async data => {
       const planId = data?.plan?._id;
       const checkoutSessionId = data?.checkoutSessionId;
-      router.push(`/checkout/${planId}?checkoutSessionId=${checkoutSessionId}`);
+      router.push(`/checkout/${planId}?checkoutSessionId=${checkoutSessionId}&type=upgrade`);
     },
   });
 
@@ -38,7 +38,7 @@ export default function DowngradePlanCard() {
   };
 
   const renderUpgrade = () => {
-    if (data?.label === 'Advanced') return null;
+    if (!data?.label || data?.label === 'Advanced') return null;
     return (
       <button
         onClick={onUpgrade}

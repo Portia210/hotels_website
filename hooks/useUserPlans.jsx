@@ -32,14 +32,11 @@ const useUserPlans = () => {
     return subscriptionPlanService.getCurrentPlan(token);
   };
 
-  const selfUpgradePlan = async planId => {
-    if (!planId) throw Error('Planid is required!');
+  const selfUpgradePlan = async () => {
     const response = await axios
       .post(
-        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/upgrade`,
-        {
-          planId,
-        },
+        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/user/upgrade`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${await getToken()}`,

@@ -23,10 +23,7 @@ const CheckoutPage = async ({ params }) => {
       <DefaultHeader />
       {/* End Header 1 */}
 
-      <section className="layout-pt-md layout-pb-md bg-blue-2">
-        <div className="text-center mb-3 mb-md-5">
-          <h2>{t('checkoutHeadline')}</h2>
-        </div>
+      <section className="layout-pt-sm layout-pb-md bg-blue-2">
         <div className="container">
           <TranzilaCheckout />
         </div>
