@@ -7,6 +7,8 @@ export const createIframeUrl = (plan, additionalInfo, locale) => {
   const recur_start_date = dayjs().format('YYYY-MM-DD').toString();
 
   const params = new URLSearchParams({
+    nologo: 1,
+    trButtonColor: '0D6EFD',
     cred_type: 1,
     tranmode: 'A',
     lang: locale === 'he' ? 'il' : 'us',

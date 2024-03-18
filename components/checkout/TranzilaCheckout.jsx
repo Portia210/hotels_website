@@ -6,6 +6,7 @@ import useUserPlans from '@/hooks/useUserPlans';
 import { createIframeUrl } from '@/utils/payment';
 import { useUser } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
 export default function TranzilaCheckout() {
@@ -96,9 +97,7 @@ export default function TranzilaCheckout() {
 
   return (
     <section id="checkout" className="bg-white" dir={`${isReverse && 'rlt'}`}>
-      <div
-        className="h-100 d-flex justify-content-center align-items-center m-sm-5"
-      >
+      <div className="h-100 d-flex justify-content-center align-items-center m-sm-5">
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
@@ -151,6 +150,13 @@ export default function TranzilaCheckout() {
             </div>
 
             <div className="col-lg-6 mt-5 p-0 sm:mt-40">
+              <div className='text-center mb-40 mt-30'>
+                <Image
+                  src={'/img/general/logo-dark.svg'}
+                  width={250}
+                  height={250}
+                />
+              </div>
               <iframe
                 src={iframeUrl}
                 title="tranzlia_checkout"
