@@ -1,0 +1,11 @@
+{
+  "ThankYou": {
+    "thank_you_purchase": "Thank you for your purchase!",
+    "invoice_sent_email": "The invoice will be sent to your email.",
+    "view_payment_details": "You can view the payment details in your dashboard by navigating to Dashboard > Account > Billing.",
+    "need_explanation_user_guide": "If you need further explanation on how to use the website, please click the button that leads to the User Guide.",
+    "home_page": "Home Page",
+    "dashboard": "Dashboard",
+    "user_guide": "User Guide"
+  }
+}
