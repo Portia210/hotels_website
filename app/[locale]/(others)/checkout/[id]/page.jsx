@@ -1,7 +1,6 @@
 import TranzilaCheckout from '@/components/checkout/TranzilaCheckout';
 import DefaultFooter from '@/components/footer/default';
 import DefaultHeader from '@/components/header/default-header';
-import { getTranslations } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 
 export const metadata = {
@@ -9,9 +8,7 @@ export const metadata = {
   description: 'Checkout now',
 };
 
-const CheckoutPage = async ({ params }) => {
-  const checkoutSessionId = params.id
-  const t = await getTranslations('Checkout')
+const CheckoutPage = async () => {
 
   return (
     <>
