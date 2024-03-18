@@ -8,6 +8,7 @@ export default function ShortLinkOverviewCard() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['fetchLinkStats'],
     queryFn: () => getLinkStats(),
+    refetchInterval: 4000,
   });
 
   const item = {

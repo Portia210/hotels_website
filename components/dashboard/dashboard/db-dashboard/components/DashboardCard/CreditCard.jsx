@@ -11,6 +11,7 @@ export default function CreditCard() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['fetchHotelSearchCredit'],
     queryFn: () => getUserRemainCredit('HOTEL_SEARCH'),
+    refetchInterval: 4000,
   });
 
   const count = Math.max(data?.total - data?.remaining, 0);
