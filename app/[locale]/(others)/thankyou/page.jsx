@@ -1,7 +1,9 @@
 import DefaultFooter from '@/components/footer/default';
 import DefaultHeader from '@/components/header/default-header';
+import ThankYouSection from '@/components/thankyou/ThankYouSection';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
+import { redirect } from 'next/navigation';
 
 export const metadata = {
   title: 'Agent-Space: Thank you!',
@@ -11,7 +13,6 @@ export const metadata = {
 
 const ThankYou = () => {
   const t = useTranslations();
-
   return (
     <>
       {/* End Page Title */}
@@ -22,16 +23,9 @@ const ThankYou = () => {
       <DefaultHeader />
       {/* End Header 1 */}
 
-      <section className="layout-pt-lg layout-pb-lg bg-blue-2">
-        <div className="text-center mb-3 mb-md-5">
-          <h2>Thank you !</h2>
-        </div>
+      <section className="bg-blue-2">
         <div className="container">
-          <div className="d-flex justify-content-center">
-            <p>
-              Thank you for your purchase! We're excited to have you on board. You can now start using our services.
-            </p>
-          </div>
+          <ThankYouSection />
         </div>
       </section>
 

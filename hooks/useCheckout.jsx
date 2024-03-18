@@ -38,7 +38,7 @@ const useCheckout = () => {
         .then(res => res.data);
       if (res.status === PaymentStatus.SUCCESS) {
         if (window) window.close();
-        router.push('/dashboard/db-dashboard');
+        router.push('/thankyou');
       } else if (res.status === PaymentStatus.FAILURE) {
         alert('Payment failed please contact support');
         router.push('/pricing');

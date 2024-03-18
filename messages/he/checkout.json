@@ -2,6 +2,11 @@
   "Checkout": {
     "checkoutHeadline": "תשלום",
     "orderSum": "סיכום הזמנה",
-    "total": "סך הכל"
+    "total": "סך הכל",
+    "plan_plan": "תוכנית {plan}",
+    "subscription_details": "פרטי המנוי",
+    "agree_to": "על ידי שימוש בשירות שלנו אתה גם מסכים שלנו",
+    "terms_of_use": "תנאי השימוש",
+    "subscription_renews_monthly": "מנוי זה מתחדש מדי חודש. החשבון שלך יחויב על בסיס חודשי. ניתן לבטלו בכל עת דרך לוח הבקרה."
   }
 }
