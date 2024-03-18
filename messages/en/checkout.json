@@ -2,6 +2,11 @@
   "Checkout": {
     "checkoutHeadline": "Checkout",
     "orderSum": "Order summary",
-    "total": "Total"
+    "total": "TOTAL",
+    "plan_plan": "{plan} Plan",
+    "subscription_details": "Subscription Details",
+    "agree_to": "By using our service you also I agree to our",
+    "terms_of_use": "terms of use",
+    "subscription_renews_monthly": "This subscription plan renews monthly. Your account will be billed on a monthly basis. You can cancel at any time."
   }
 }

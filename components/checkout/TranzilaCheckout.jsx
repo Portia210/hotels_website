@@ -8,7 +8,6 @@ import { useUser } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
 
 export default function TranzilaCheckout() {
   const { t, isReverse } = useTrans();
@@ -16,7 +15,6 @@ export default function TranzilaCheckout() {
   const { user, isLoaded } = useUser();
   const { fetchCheckoutSession } = useCheckout();
   const { getPlan } = useUserPlans();
-  const [popupWindow, setPopupWindow] = useState(null);
 
   const locale = useLocale();
 
@@ -67,23 +65,10 @@ export default function TranzilaCheckout() {
 
   const iframeUrl = createIframeUrl(plan, additionalInfo, locale);
 
-  const openCheckoutWindow = () => {
-    const popupWidth = 400;
-    const popupHeight = 500;
-    const left = window.innerWidth / 2 - popupWidth / 2;
-    const top = window.innerHeight / 2 - popupHeight / 2;
-    const popupWindow = window.open(
-      iframeUrl,
-      '',
-      `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`,
-    );
-    setPopupWindow(popupWindow);
-  };
-
   const renderOneTimeInfo = () => {
     const priceInfo = t('Pricing.priceInfo').replace(
       '{price_currency}',
-      `${plan.price} ₪`,
+      `₪ ${plan.price}`,
     );
     return priceInfo;
   };
@@ -91,9 +76,15 @@ export default function TranzilaCheckout() {
   const renderFullPriceInfo = () => {
     const priceInfo = t('Pricing.priceInfo2').replace(
       '{price_currency}',
-      `${plan?.fullPrice} ₪`,
+      `₪ ${plan?.fullPrice}`,
     );
     return priceInfo;
+  };
+
+  const renderPlan = () => {
+    const planName = t(`DashboardCard.Plan.${plan?.name?.toLowerCase()}`)
+    const planInfo = t('Checkout.plan_plan')?.replace('{plan}', planName);
+    return planInfo;
   };
 
   if (isLoading)
@@ -106,37 +97,75 @@ export default function TranzilaCheckout() {
     );
 
   return (
-    <div className="row pr-120 pl-120" dir={`${isReverse && 'rtl'}`}>
-      <div className="col-8 border border-black pr-10">
-        <h2 className="border-bottom border-primary">{t('Checkout.orderSum')}</h2>
-        <div className="pt-10">
-          <div className="fw-500 fs-3">
-            <span className="text-primary">
-              <i className="bi bi-box"></i>
-              <span> {plan.name}</span>
-            </span>
+    <section id="checkout" className="bg-white" dir={`${isReverse && 'rlt'}`}>
+      <div
+        className="d-flex justify-content-center align-items-center m-sm-5"
+        style={{ height: '100vh' }}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="col align-items-start">
+                <div className="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3"></div>
+                <div>
+                  <h2 className="fs-md-2 text-body-emphasis mb-3">
+                  {t('Checkout.orderSum')}
+                  </h2>
+                </div>
+                <div className="position-sticky mt-4">
+                  <div className="p-3 bg-light bg-opacity-10">
+                    <h6 className="card-title mb-3">
+                      {t('Checkout.subscription_details')}
+                    </h6>
+                    <div className="d-flex justify-content-between mb-1 small fs-6 ">
+                      <span>
+                        <i className="bi bi-box text-primary me-2"></i>
+                        {renderPlan()}
+                      </span>
+                      <span>₪ {plan?.price}</span>
+                    </div>
+                    <hr />
+                    <div className="d-flex justify-content-between mb-4 small">
+                      <span>{t('Checkout.total')}</span>{' '}
+                      <strong className="text-dark">₪ {plan?.price}</strong>
+                    </div>
+                    <hr />
+                    <div>
+                      <label htmlFor="tnc">
+                        {t('Checkout.agree_to')} {" "}
+                        <a
+                          href="https://docs.agent-space.com/terms-of-use"
+                          target="_blank"
+                          className="text-primary"
+                        >
+                          {t('Checkout.terms_of_use')}
+                        </a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <p className="fs-6 fw-semibold mt-3">
+                  {t('Checkout.subscription_renews_monthly')}
+                </p>
+                <p className="fs-6 mt-3">
+                  {renderOneTimeInfo()} {renderFullPriceInfo()}
+                </p>
+              </div>
+            </div>
+
+            <div className="col-lg-6 mt-5 p-0">
+              <iframe
+                src={iframeUrl}
+                title="tranzlia_checkout"
+                width="100%"
+                height="500px"
+                frameBorder="0"
+                scrolling="auto"
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
-      <div className="col-4 border border-black text-center d-flex justify-content-center flex-column">
-        <h4>{t('Checkout.total')}: {plan.sum} ₪</h4>
-        <button
-          onClick={openCheckoutWindow}
-          type="button"
-          className="btn btn-primary bottom-0 px-5"
-        >
-          {t('Checkout.checkoutHeadline')} <i className="bi bi-cart3"></i>
-        </button>
-      </div>
-      <div className="col-12 text-22 text-center mt-10">
-        <strong>
-          {renderOneTimeInfo()}
-        </strong>
-        <br/>
-        <strong>
-          {renderFullPriceInfo()}
-        </strong>
-      </div>
-    </div>
+    </section>
   );
 }
