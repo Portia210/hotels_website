@@ -6,19 +6,30 @@ import useTrans from '@/hooks/useTrans';
 
 const Locations = ({ isReverse, gallery, showSites }) => {
   const { t } = useTrans();
-  const { selectedCountry, selectedCity, setSelectedCity } = useDestinationGalleryStore();
+  const { selectedCountry, selectedCity, setSelectedCity } =
+    useDestinationGalleryStore();
   const { setDestination, setLocationInput } = useSearchStore();
   const handleCityClick = city => {
     if (!city.name) return;
-    destinationAutoTyping(city.name);
-    setLocationInput(city.name);
+    const locationName = getLocationName(city);
+    destinationAutoTyping(locationName);
+    setLocationInput(locationName);
     const { placeId, name: destination, geoLocation } = city;
     setDestination({
       placeId,
-      destination,
+      destination: locationName,
       lat: geoLocation.lat,
       lng: geoLocation.lng,
     });
+  };
+
+  const getLocationName = (city) => {
+    let locationName = `${city.name}, ${selectedCountry.label}`;
+    if (!showSites) {
+      locationName = `${city.name}, ${selectedCity.name}, ${selectedCountry.label}`;
+    }
+    console.log('locationName --->', locationName)
+    return locationName;
   };
 
   const googleSearch = city => {
