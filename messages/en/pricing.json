@@ -21,7 +21,7 @@
       "advanced": "Advanced",
       "custom": "Custom"
     },
-    "priceInfo": "One-time payment of {price_currency} for the remaining days of this month until the 28th.",
+    "priceInfo": "One-time payment of {price_currency} for this month",
     "priceInfo2": "For subsequent months, you'll be charged {price_currency}."
   }
 }

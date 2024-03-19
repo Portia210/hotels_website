@@ -69,6 +69,7 @@ export default function TranzilaCheckout() {
   };
 
   const renderOneTimeInfo = () => {
+    if (type !== 'upgrade') return null;
     const priceInfo = t('Pricing.priceInfo').replace(
       '{price_currency}',
       `₪ ${plan.price}`,
@@ -77,6 +78,7 @@ export default function TranzilaCheckout() {
   };
 
   const renderFullPriceInfo = () => {
+    if (type !== 'upgrade') return null;
     const priceInfo = t('Pricing.priceInfo2').replace(
       '{price_currency}',
       `₪ ${plan?.fullPrice}`,
