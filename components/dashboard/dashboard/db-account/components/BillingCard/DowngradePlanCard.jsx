@@ -7,6 +7,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import CancelPlanModal from '../CancelPlanModal';
 import DowngradePlanModal from '../DowngradePlanModal';
+import RevertCancelModal from '../RevertCancelModal';
 
 export default function DowngradePlanCard() {
   const router = useRouter();
@@ -19,16 +20,23 @@ export default function DowngradePlanCard() {
     queryFn: () => getCurrentPlan(),
   });
 
+  const { data: recurringData, isLoading: recurringLoading } = useQuery({
+    queryKey: ['getUserRecurringBilling'],
+    queryFn: () => getUserRecurringBilling(),
+  });
+
   const upgradeMutation = useMutation({
     mutationFn: async () => {
-      const plan = await getPlanByLabel('Advanced')
-      const checkoutSessionId = await createCheckoutSession(plan._id)
-      return { plan, checkoutSessionId }
+      const plan = await getPlanByLabel('Advanced');
+      const checkoutSessionId = await createCheckoutSession(plan._id);
+      return { plan, checkoutSessionId };
     },
     onSuccess: async data => {
       const planId = data?.plan?._id;
       const checkoutSessionId = data?.checkoutSessionId;
-      router.push(`/checkout/${planId}?checkoutSessionId=${checkoutSessionId}&type=upgrade`);
+      router.push(
+        `/checkout/${planId}?checkoutSessionId=${checkoutSessionId}&type=upgrade`,
+      );
     },
   });
 
@@ -87,6 +95,34 @@ export default function DowngradePlanCard() {
     );
   };
 
+  const renderRevertCancel = () => {
+    if (recurringLoading || isLoading) return null;
+    const { _id: currentPlanId, price: currentPlanPrice } = data;
+    const { nextMonthPlan } = recurringData?.recurring;
+    if (currentPlanId === nextMonthPlan?._id) return null;
+
+    let btnText =
+      nextMonthPlan?.label === 'Limited' ? 'Revert Cancel' : 'Revert Downgrade';
+
+    if (currentPlanPrice > nextMonthPlan?.nextChargeAmount) {
+      btnText = 'Revert Downgrade';
+    }
+
+    return (
+      <button
+        type="button"
+        className="d-flex btn btn-warning"
+        data-bs-toggle="modal"
+        data-bs-target="#revertCancelModalBilling"
+      >
+        <i
+          className={`bi bi-arrow-clockwise ${isReverse ? 'ml-10' : 'mr-10'}`}
+        ></i>
+        {btnText}
+      </button>
+    );
+  };
+
   return (
     <>
       <div
@@ -99,11 +135,13 @@ export default function DowngradePlanCard() {
             {renderUpgrade()}
             {renderDowngrade()}
             {renderCancel()}
+            {renderRevertCancel()}
           </div>
         </div>
       </div>
       <DowngradePlanModal />
       <CancelPlanModal />
+      <RevertCancelModal />
     </>
   );
 }

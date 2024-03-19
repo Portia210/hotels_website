@@ -48,6 +48,22 @@ const useUserPlans = () => {
     return response;
   };
 
+  const revertCancelDowngrade = async () => {
+    const response = await axios
+      .post(
+        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/user/revert-cancel`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+          withCredentials: true,
+        },
+      )
+      .then(res => res.data);
+    return response;
+  };
+
   const upgradeUserPlan = async (planId, userId) => {
     if (!planId) throw Error('Plan name is required!');
     if (!userId) throw Error('User Id is required!');
@@ -109,6 +125,7 @@ const useUserPlans = () => {
     upgradeUserPlan,
     downgradeUserPlan,
     cancelUserPlan,
+    revertCancelDowngrade,
   };
 };
 
