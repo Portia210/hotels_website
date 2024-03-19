@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
-import TablePagination from './UsersTable/TablePagination';
+import TablePagination from '../../common/table/TablePagination';
 import UserTableFilter from './UsersTable/UserTableFilter';
 import { getColumns } from './UsersTable/columns';
 import { getUserRoleClient } from '@/utils/roleCheck';
