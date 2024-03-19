@@ -2,17 +2,12 @@
 
 import usePaymentTestKit from '@/hooks/usePaymentTestKit';
 import { useState } from 'react';
-import UserPlansDropdown from '../../db-user-management/components/UsersTable/UserPlansDropdown';
 
 const PaymentTestKit = () => {
   const [email, setEmail] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState();
-  const {
-    setNextMonthPlan,
-    setNextChargeDate,
-    setLastChargeDate,
-    chargeNow,
-  } = usePaymentTestKit(email);
+  const { setNextChargeDate, setLastChargeDate, chargeNow } =
+    usePaymentTestKit(email);
 
   const resetForm = () => {
     setEmail(null);
@@ -35,20 +30,6 @@ const PaymentTestKit = () => {
         />
       </div>
       <div className="border col-4">
-        <label htmlFor="nextMonthPlan">Next Month Plan</label>
-        <UserPlansDropdown
-          value={selectedPlan}
-          onChange={value => setSelectedPlan(value)}
-        />
-        <button
-          onClick={() => setNextMonthPlan(selectedPlan)}
-          type="btn"
-          className="btn btn-primary"
-        >
-          Save
-        </button>
-      </div>
-      <div className="border col-4">
         <label htmlFor="nextChargeDate">Next Charge Date</label>
         <input id="nextChargeDate" name="nextChargeDate" type="date" />
         <button
@@ -61,7 +42,7 @@ const PaymentTestKit = () => {
           Save
         </button>
       </div>
-      <div className="border col-auto">
+      <div className="border col-4">
         <label htmlFor="lastChargeDate">Last Charge Date</label>
         <input id="lastChargeDate" name="lastChargeDate" type="date" />
         <button
@@ -74,7 +55,7 @@ const PaymentTestKit = () => {
           Save
         </button>
       </div>
-      <div className="col-8">
+      <div className="col-auto">
         <button
           onClick={() => chargeNow()}
           type="btn"
