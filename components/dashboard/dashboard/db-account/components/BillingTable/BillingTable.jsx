@@ -1,22 +1,24 @@
+import TablePagination from '@/components/dashboard/dashboard/common/table/TablePagination';
+import useTrans from '@/hooks/useTrans';
 import {
+  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  flexRender,
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
 import { getColumns } from './columns';
-import useTrans from '@/hooks/useTrans';
 
 export default function BillingTable({ data }) {
   const { t, isReverse } = useTrans();
+
   const [pagination, setPagination] = useState({
     skip: 0,
     limit: 10,
     page: 0,
-    total: data?.results?.length || 0,
+    total: data?.length || 0,
   });
 
   const table = useReactTable({
@@ -71,6 +73,13 @@ export default function BillingTable({ data }) {
             ))}
           </tbody>
         </table>
+        <TablePagination
+          pagination={{
+            ...pagination,
+            total: data?.length
+          }}
+          setPagination={setPagination}
+        />
       </div>
     </div>
   );
