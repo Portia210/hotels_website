@@ -5,6 +5,7 @@ import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 import CancelPlanModal from '../CancelPlanModal';
 import DowngradePlanModal from '../DowngradePlanModal';
 import RevertCancelModal from '../RevertCancelModal';
@@ -14,6 +15,7 @@ export default function DowngradePlanCard() {
   const { getCurrentPlan, getPlanByLabel } = useUserPlans();
   const { createCheckoutSession } = useCheckout();
   const { t, isReverse } = useTrans();
+  const planStatus = useRef('');
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['fetchCurrentPlan'],
@@ -98,14 +100,16 @@ export default function DowngradePlanCard() {
   const renderRevertCancel = () => {
     if (recurringLoading || isLoading) return null;
     const { _id: currentPlanId, price: currentPlanPrice } = data;
-    const { nextMonthPlan } = recurringData?.recurring;
+    const { nextMonthPlan, nextChargeAmount } = recurringData?.recurring;
     if (currentPlanId === nextMonthPlan?._id) return null;
 
     let btnText =
       nextMonthPlan?.label === 'Limited' ? 'Revert Cancel' : 'Revert Downgrade';
-
-    if (currentPlanPrice > nextMonthPlan?.nextChargeAmount) {
-      btnText = 'Revert Downgrade';
+      
+    if (nextChargeAmount === 0) {
+      planStatus.current = 'Cancel';
+    } else if (currentPlanPrice > nextChargeAmount) {
+      planStatus.current = 'Downgrade';
     }
 
     return (
@@ -141,7 +145,7 @@ export default function DowngradePlanCard() {
       </div>
       <DowngradePlanModal />
       <CancelPlanModal />
-      <RevertCancelModal />
+      <RevertCancelModal planStatus={planStatus?.current} />
     </>
   );
 }

@@ -3,9 +3,8 @@
 import useUserPlans from '@/hooks/useUserPlans';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-export default function RevertCancelModal() {
-  const { cancelUserPlan, getCurrentPlan, revertCancelDowngrade } =
-    useUserPlans();
+export default function RevertCancelModal({ planStatus }) {
+  const { getCurrentPlan, revertCancelDowngrade } = useUserPlans();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['getCurrentPlan'],
@@ -20,7 +19,7 @@ export default function RevertCancelModal() {
   });
 
   if (isLoading) return null;
-  
+
   return (
     <div
       className="modal fade"
@@ -33,7 +32,7 @@ export default function RevertCancelModal() {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-6" id="revertCancelModalBillingLabel">
-              Are you sure you want to revert the Cancel / Downgrade action?
+              Are you sure you want to revert the {planStatus} action?
             </h1>
             <button
               type="button"
