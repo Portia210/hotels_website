@@ -15,6 +15,7 @@ import SrollTop from '../../components/common/ScrollTop';
 import '../../styles/index.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import TanstackProvider from '@/providers/TanstackProvider';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 if (typeof window !== 'undefined') {
   require('bootstrap/dist/js/bootstrap');
@@ -56,11 +57,6 @@ export default function RootLayout({ children, params }) {
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-1RSZ3561QM"
         ></script>
-        <script>
-          window?.dataLayer = window?.dataLayer || []; function gtag()
-          {dataLayer?.push(arguments)}
-          gtag('js', new Date()); gtag('config', 'G-1RSZ3561QM');
-        </script>
         <link rel="icon" href="./favicon.ico" />
       </head>
       <ClerkProvider
@@ -76,6 +72,7 @@ export default function RootLayout({ children, params }) {
           </TanstackProvider>
         </body>
       </ClerkProvider>
+      <GoogleAnalytics gaId="G-1RSZ3561QM" />
     </html>
   );
 }

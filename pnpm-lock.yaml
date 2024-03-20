@@ -15,6 +15,9 @@ dependencies:
   '@faker-js/faker':
     specifier: ^8.1.0
     version: 8.3.1
+  '@next/third-parties':
+    specifier: ^14.1.4
+    version: 14.1.4(next@13.5.2)(react@18.2.0)
   '@popperjs/core':
     specifier: 2.11.8
     version: 2.11.8
@@ -764,6 +767,17 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@next/third-parties@14.1.4(next@13.5.2)(react@18.2.0):
+    resolution: {integrity: sha512-e/kpEFq5/ZPhHkxpJkvhMfLp3OC6KCBou0/BV8BvgjXAPgEo6sa0ZXe0l4ZEb3wcA7NIEHIpqCmjU5Z7QAHcKQ==}
+    peerDependencies:
+      next: ^13.0.0 || ^14.0.0
+      react: ^18.2.0
+    dependencies:
+      next: 13.5.2(react-dom@18.2.0)(react@18.2.0)(sass@1.69.7)
+      react: 18.2.0
+      third-party-capital: 1.0.20
+    dev: false
 
   /@peculiar/asn1-schema@2.3.8:
     resolution: {integrity: sha512-ULB1XqHKx1WBU/tTFIA+uARuRoBVZ4pNdOA878RDrRbBfBGcSzi5HBkdScC6ZbHn8z7L8gmKCgPC1LHRrP46tA==}
@@ -2747,6 +2761,10 @@ packages:
     dependencies:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  /third-party-capital@1.0.20:
+    resolution: {integrity: sha512-oB7yIimd8SuGptespDAZnNkzIz+NWaJCu2RMsbs4Wmp9zSDUM8Nhi3s2OOcqYuv3mN4hitXc8DVx+LyUmbUDiA==}
     dev: false
 
   /through@2.3.8:
