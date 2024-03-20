@@ -1,21 +1,21 @@
 'use client';
+import TanstackProvider from '@/providers/TanstackProvider';
 import { ClerkProvider } from '@clerk/nextjs';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { useLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { ToastContainer } from 'react-toastify';
 import SrollTop from '../../components/common/ScrollTop';
 import '../../styles/index.scss';
-import 'react-toastify/dist/ReactToastify.css';
-import TanstackProvider from '@/providers/TanstackProvider';
-import { GoogleAnalytics } from '@next/third-parties/google';
 
 if (typeof window !== 'undefined') {
   require('bootstrap/dist/js/bootstrap');
@@ -73,6 +73,7 @@ export default function RootLayout({ children, params }) {
         </body>
       </ClerkProvider>
       <GoogleAnalytics gaId="G-1RSZ3561QM" />
+      <GoogleTagManager gtmId="G-1RSZ3561QM" />
     </html>
   );
 }
