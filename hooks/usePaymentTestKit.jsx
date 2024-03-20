@@ -3,6 +3,7 @@ import userService from '@/service/user/UserService';
 import { toastError, toastLoading, toastSuccess } from '@/utils/toastUtils';
 import { useAuth } from '@clerk/nextjs';
 import { isAxiosError } from 'axios';
+import * as Sentry from '@sentry/nextjs';
 
 const usePaymentTestKit = email => {
   const { getToken } = useAuth();
@@ -61,6 +62,7 @@ const usePaymentTestKit = email => {
   };
 
   const setLastChargeDate = async date => {
+    console.log('setLastChargeDate vaooo');
     if (!email) return;
     toastLoading('setting last charge date...');
     const token = await getToken();
@@ -68,10 +70,13 @@ const usePaymentTestKit = email => {
     if (!user) return;
     const { clerkId } = user;
     try {
-      await paymentTestService.setLastChargeDate({ clerkId, date }, token);
-      toastSuccess('Last charge date set successfully');
+      console.log('setLastChargeDate vaooo 2');
+      // await paymentTestService.setLastChargeDate({ clerkId, date }, token);
+      throw new Error('Not implemented');
+      // toastSuccess('Last charge date set successfully');
     } catch (error) {
-      console.error(error);
+      console.error('setLastChargeDate error: --> ', error);
+      Sentry.captureException(error);
       if (isAxiosError(error)) {
         const message = error.response.data.message;
         toastError('Failed to set next charge date', message);
