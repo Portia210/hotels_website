@@ -1,13 +1,13 @@
-import Wrapper from "@/components/layout/Wrapper";
-import { TOURCOMPARE_BE_URL } from "@/constants/environment";
-import { checkUserStatus } from "@/utils/roleCheck";
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
-import MainHome from "./(homes)/home_1/page";
+import Wrapper from '@/components/layout/Wrapper';
+import { TOURCOMPARE_BE_URL } from '@/constants/environment';
+import { checkUserStatus } from '@/utils/roleCheck';
+import { auth } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
+import MainHome from './(homes)/home_1/page';
 
 export const metadata = {
-  title: "Agent-Space: Home",
-  description: "Agent-Space - Travel & Tour",
+  title: 'Agent-Space: Home',
+  description: 'Agent-Space - Travel & Tour',
 };
 
 export default async function Home() {
@@ -18,21 +18,19 @@ export default async function Home() {
     const token = await getToken();
 
     const res = await fetch(`${TOURCOMPARE_BE_URL}/api/v1/auth/force-logout`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({}),
     });
-    if (res.ok) redirect("/404");
+    if (res.ok) redirect('/404');
   }
 
   return (
-    <>
-      <Wrapper>
-        <MainHome />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <MainHome />
+    </Wrapper>
   );
 }

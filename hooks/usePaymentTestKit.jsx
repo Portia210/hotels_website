@@ -2,6 +2,7 @@ import paymentTestService from '@/service/payment/PaymentTestService';
 import userService from '@/service/user/UserService';
 import { toastError, toastLoading, toastSuccess } from '@/utils/toastUtils';
 import { useAuth } from '@clerk/nextjs';
+import * as Sentry from '@sentry/nextjs';
 import { isAxiosError } from 'axios';
 
 const usePaymentTestKit = email => {
@@ -72,6 +73,7 @@ const usePaymentTestKit = email => {
       toastSuccess('Last charge date set successfully');
     } catch (error) {
       console.error(error);
+      Sentry.captureException(error);
       if (isAxiosError(error)) {
         const message = error.response.data.message;
         toastError('Failed to set next charge date', message);

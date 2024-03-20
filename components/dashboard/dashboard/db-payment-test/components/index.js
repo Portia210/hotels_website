@@ -1,12 +1,10 @@
 'use client';
 
-import useTrans from '@/hooks/useTrans';
 import { useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import PaymentTestKit from './PaymentTestKit';
 
 const Index = () => {
-  const { t } = useTrans();
   const tabs = [
     {
       label: 'Payment Test Kit',
