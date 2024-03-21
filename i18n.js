@@ -14,6 +14,7 @@ export default getRequestConfig(async ({ locale }) => {
     ...(await import(`./messages/${locale}/checkout.json`)).default,
     ...(await import(`./messages/${locale}/billing.json`)).default,
     ...(await import(`./messages/${locale}/thankyou.json`)).default,
+    ...(await import(`./messages/${locale}/banned.json`)).default,
   };
   return { messages };
 });
