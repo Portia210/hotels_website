@@ -23,6 +23,7 @@
     "paymentStatusFail": "תשלום נדחה",
     "subscriptionActiveLbl": "פעיל?",
     "invoiceInfoLbl": "פרטים",
-    "invoiceInfo": "קבלה"
+    "invoiceInfo": "קבלה",
+    "revertBtn": "חזור לתוכניתך בחינם"
   }
 }

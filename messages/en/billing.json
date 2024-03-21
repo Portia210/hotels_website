@@ -23,6 +23,7 @@
     "paymentStatusFail": "Failed",
     "subscriptionActiveLbl": "Active",
     "invoiceInfoLbl": "Action",
-    "invoiceInfo": "Invoice"
+    "invoiceInfo": "Invoice",
+    "revertBtn": "Back to your plan for free"
   }
 }

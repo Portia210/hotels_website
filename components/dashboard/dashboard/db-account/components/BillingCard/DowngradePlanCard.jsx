@@ -103,9 +103,8 @@ export default function DowngradePlanCard() {
     const { nextMonthPlan, nextChargeAmount } = recurringData?.recurring;
     if (currentPlanId === nextMonthPlan?._id) return null;
 
-    let btnText =
-      nextMonthPlan?.label === 'Limited' ? 'Revert Cancel' : 'Revert Downgrade';
-      
+    const btnText = t('Billing.revertBtn');
+
     if (nextChargeAmount === 0) {
       planStatus.current = 'Cancel';
     } else if (currentPlanPrice > nextChargeAmount) {
@@ -115,7 +114,7 @@ export default function DowngradePlanCard() {
     return (
       <button
         type="button"
-        className="d-flex btn btn-warning"
+        className="d-flex btn btn-success text-nowrap"
         data-bs-toggle="modal"
         data-bs-target="#revertCancelModalBilling"
       >
