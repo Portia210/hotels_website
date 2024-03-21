@@ -2,9 +2,6 @@ import { authMiddleware } from "@clerk/nextjs";
 import createMiddleware from "next-intl/middleware";
 
 const publicRoutes = [
-  "/",
-  "/en",
-  "/he",
   "/:locale/pricing",
   "/:locale/contact",
   "/:locale/sso-callback",
