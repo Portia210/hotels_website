@@ -11,6 +11,7 @@
 
 ## User Guide- מדריך למשתמש
 
+* [שמירת האתר בדף הבית](user-guide/undefined.md)
 * [יצירת חשבון](<README (1).md>)
 * [תפריט](user-guide/menu.md)
 * [דף הבית](user-guide/home-page.md)
