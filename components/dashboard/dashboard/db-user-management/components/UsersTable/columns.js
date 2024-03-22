@@ -75,6 +75,10 @@ export const getColumns = (myRole) => [
         return (
           <span className="badge bg-danger text-white text-14">Deleted</span>
         );
+      } else if (props.getValue() === UserStatus.PENDING) {
+        return (
+          <span className="badge bg-info text-white text-14">PENDING</span>
+        );
       }
       return (
         <span className="badge bg-secondary text-white text-14">Unknown</span>

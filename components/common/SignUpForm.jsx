@@ -14,7 +14,7 @@ const SignUpForm = () => {
   const router = useRouter();
   const { t, isReverse } = useTrans();
   const { signUp, setActive } = useSignUp();
-  const { checkEmailAgentNumber } = useSignUpForm();
+  const { checkEmailAgentNumber, createUser } = useSignUpForm();
   const { validate } = usePasswordValidator();
   const [errorMsg, setErrorMsg] = useState('');
   const [pendingForEmailVerified, setPendingForEmailVerified] = useState(false);
@@ -37,18 +37,19 @@ const SignUpForm = () => {
       data.agentNumber,
     );
     if (invalidMsg) return setErrorMsg(invalidMsg);
+    const signUpPayload = {
+      emailAddress: data.email,
+      password: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      unsafeMetadata: {
+        primaryPhoneNumber: data?.primaryPhoneNumber,
+        agentNumber: data?.agentNumber,
+        country: selectedCountry,
+      },
+    };
     await signUp
-      .create({
-        emailAddress: data.email,
-        password: data.password,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        unsafeMetadata: {
-          primaryPhoneNumber: data?.primaryPhoneNumber,
-          agentNumber: data?.agentNumber,
-          country: selectedCountry,
-        },
-      })
+      .create(data)
       .then(async result => {
         if (result.status === 'complete') {
           setActive({ session: result.createdSessionId });
@@ -59,6 +60,7 @@ const SignUpForm = () => {
             redirectUrl: `${window.location.origin}`,
           });
           setPendingForEmailVerified(true);
+          createUser(signUpPayload);
         }
       })
       .catch(err => {
