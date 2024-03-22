@@ -25,5 +25,16 @@
     "invoiceInfoLbl": "Action",
     "invoiceInfo": "Invoice",
     "revertBtn": "Back to your plan for free"
+  },
+  "BillingModal": {
+    "confirmCancel": "Are you sure you want to cancel your plan?",
+    "alertCancel": "Your plan is scheduled to be canceled",
+    "confirmDowngrade": "Are you sure you want to downgrade your plan?",
+    "alertDowngrade": "Your new plan will be Standard",
+    "confirmRevertCancel": "Are you sure you want to revert the Cancel action",
+    "confirmRevertDowngrade": "Are you sure you want to revert the Downgrade action",
+    "takeAffectionNextBill": "This change will take effect in the next billing cycle",
+    "takeAffectionNow": "This change will take effect inmediately",
+    "backToPlan": "Your plan will be back to x."
   }
 }
