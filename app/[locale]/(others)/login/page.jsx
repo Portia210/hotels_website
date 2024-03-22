@@ -1,4 +1,3 @@
-import CallToActions from '@/components/common/CallToActions';
 import LoginForm from '@/components/common/LoginForm';
 import DefaultFooter from '@/components/footer/default';
 import DefaultHeader from '@/components/header/default-header';
@@ -46,10 +45,7 @@ const LogIn = async () => {
         </div>
       </section>
       {/* End login section */}
-
-      <CallToActions />
-      {/* End Call To Actions Section */}
-
+      
       <DefaultFooter />
       {/* End Call To Actions Section */}
     </>

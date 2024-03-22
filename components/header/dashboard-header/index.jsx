@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import MainMenu from "../MainMenu";
-import MobileMenu from "../MobileMenu/MobileMenu";
-import { useUser } from "@clerk/nextjs";
-import UserAvatar from "./UserAvartar/UserAvatar";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import MainMenu from '../MainMenu';
+import MobileMenu from '../MobileMenu/MobileMenu';
+import { useUser } from '@clerk/nextjs';
+import UserAvatar from './UserAvartar/UserAvatar';
+import LanguageMegaMenu from '../LanguageMegaMenu';
 
 const HeaderDashBoard = () => {
   const { user } = useUser();
@@ -25,24 +26,28 @@ const HeaderDashBoard = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", changeBackground);
-    const body = document.querySelector("body");
+    window.addEventListener('scroll', changeBackground);
+    const body = document.querySelector('body');
     if (isOpen) {
-      body.classList.add("-is-sidebar-open");
+      body.classList.add('-is-sidebar-open');
     } else {
-      body.classList.remove("-is-sidebar-open");
+      body.classList.remove('-is-sidebar-open');
     }
   }, [isOpen]);
 
   return (
     <>
       <header
-        className={`header -dashboard ${navbar ? "is-sticky bg-white" : ""}`}
+        className={`header -dashboard ${navbar ? 'is-sticky bg-white' : ''}`}
       >
         <div className="header__container px-30 sm:px-20">
           <div className="-left-side">
             <Link href="/" className="header-logo">
-              <img style={{ minWidth: 180, minHeight: 50 }} src="/img/general/logo-dark.svg" alt="logo icon" />
+              <img
+                style={{ minWidth: 180, minHeight: 50 }}
+                src="/img/general/logo-dark.svg"
+                alt="logo icon"
+              />
             </Link>
             {/* End logo */}
           </div>
@@ -54,17 +59,6 @@ const HeaderDashBoard = () => {
                 <button className="d-flex" onClick={handleToggle}>
                   <i className="icon-menu-2 text-20"></i>
                 </button>
-
-                <div className="single-field relative d-flex items-center md:d-none ml-30">
-                  <input
-                    className="pl-50 border-light text-dark-1 h-50 rounded-8"
-                    type="email"
-                    placeholder="Search"
-                  />
-                  <button className="absolute d-flex items-center h-full">
-                    <i className="icon-search text-20 px-15 text-dark-1"></i>
-                  </button>
-                </div>
               </div>
             </div>
             {/* End .col-auto */}
@@ -80,18 +74,8 @@ const HeaderDashBoard = () => {
 
                 <div className="row items-center x-gap-5 y-gap-20 pl-20 lg:d-none">
                   <div className="col-auto">
-                    <button className="button -blue-1-05 size-50 rounded-22 flex-center">
-                      <i className="icon-email-2 text-20"></i>
-                    </button>
+                    <LanguageMegaMenu textClass="text-black" />
                   </div>
-                  {/* End col-auto */}
-
-                  <div className="col-auto">
-                    <button className="button -blue-1-05 size-50 rounded-22 flex-center">
-                      <i className="icon-notification text-20"></i>
-                    </button>
-                  </div>
-                  {/* End col-auto */}
                 </div>
                 {/* End .row */}
 

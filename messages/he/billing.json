@@ -25,5 +25,16 @@
     "invoiceInfoLbl": "פרטים",
     "invoiceInfo": "קבלה",
     "revertBtn": "חזור לתוכניתך בחינם"
+  },
+  "BillingModal": {
+    "confirmCancel": "האם אתה בטוח שברצונך לבטל את התוכנית?",
+    "alertCancel": "התוכנית שלך תבוטל בחודש הבא",
+    "confirmDowngrade": "האם אתה בטוח שברצונך לעבור לתוכנית נמוכה יותר?",
+    "alertDowngrade": "תוכניתך החדשה תהיה סטנדרט",
+    "confirmRevertCancel": "האם ברצונך לחזור לתוכניתך המקורית?",
+    "confirmRevertDowngrade": "האם ברצונך לחזור לתוכניתך המקורית?",
+    "takeAffectionNextBill": "תוכל להשתמש בתוכנית הנוכחית שלך עד תאריך הביטול",
+    "takeAffectionNow": "השינויים יחולו מעכשיו",
+    "backToPlan": "תוכניתך תחזור להיות x"
   }
 }

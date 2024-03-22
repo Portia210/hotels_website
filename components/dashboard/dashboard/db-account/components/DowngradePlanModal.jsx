@@ -1,8 +1,10 @@
 'use client';
 
+import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
 
 export default function DowngradePlanModal() {
+  const { t, isReverse } = useTrans();
   const { downgradeUserPlan } = useUserPlans();
 
   const onDowngrade = async () => {
@@ -15,6 +17,12 @@ export default function DowngradePlanModal() {
     }
   };
 
+  const renderNewPlan = () => {
+    const text = t('BillingModal.confirmDowngrade');
+    const plan = t('DashboardCard.Plan.standard');
+    return text.replace('x', plan);
+  };
+
   return (
     <div
       className="modal fade"
@@ -22,6 +30,7 @@ export default function DowngradePlanModal() {
       tabIndex="-1"
       aria-labelledby="downgradePlanModalBillingLabel"
       aria-hidden="true"
+      dir={`${isReverse && 'rtl'}`}
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -30,7 +39,7 @@ export default function DowngradePlanModal() {
               className="modal-title fs-5"
               id="downgradePlanModalBillingLabel"
             >
-              Are you sure you want to downgrade your plan?
+              {t('BillingModal.confirmDowngrade')}
             </h1>
             <button
               type="button"
@@ -41,24 +50,25 @@ export default function DowngradePlanModal() {
           </div>
           <div className="modal-body">
             <p>
-              Your new plan will be <strong>Standard.</strong> <br />
-              This change will take effect in the next billing cycle.
+              {renderNewPlan()}
+              <br />
+              {t('BillingModal.takeAffectionNextBill')}
             </p>
           </div>
-          <div className="modal-footer">
+          <div className="modal-footer" dir='ltr'>
             <button
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              No
+              {t('Common.no')}
             </button>
             <button
               onClick={() => onDowngrade()}
               type="button"
               className="btn btn-primary"
             >
-              Yes
+              {t('Common.yes')}
             </button>
           </div>
         </div>

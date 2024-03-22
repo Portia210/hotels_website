@@ -4,11 +4,9 @@ import useLanguageStore, { languageContent } from "@/store/useLanguageStore";
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const LanguageMegaMenu = ({ textClass }) => {
-  const router = useRouter();
   const locale = useLocale();
   const [click, setClick] = useState(false);
   const { language, setLanguage } = useLanguageStore();
