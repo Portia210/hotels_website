@@ -1,31 +1,44 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import PersonalInfo from "./PersonalInfo";
-import useTrans from "@/hooks/useTrans";
-import UserBilling from "./UserBilling";
+import React, { useEffect, useState } from 'react';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import PersonalInfo from './PersonalInfo';
+import useTrans from '@/hooks/useTrans';
+import UserBilling from './UserBilling';
+import { useRouter } from 'next/navigation';
 
 const Index = () => {
+  const router = useRouter();
   const { t } = useTrans();
   const tabs = [
     {
       label: t('Dashboard.PersonalInfo.personalInfoLabel'),
       content: <PersonalInfo />,
+      value: 'personalInfo',
     },
     {
       label: t('Billing.billingTab'),
       content: <UserBilling />,
+      value: 'billing',
     },
   ];
 
   const [tabIndex, setTabIndex] = useState(0);
 
+  useEffect(() => {
+    const hash = window?.location?.hash;
+    const tab = tabs.findIndex(tab => tab?.value === hash.replace('#', ''));
+    if (tab > -1) setTabIndex(tab);
+  }, []);
+
   return (
     <Tabs
       className="tabs -underline-2 js-tabs"
       selectedIndex={tabIndex}
-      onSelect={(index) => setTabIndex(index)}
+      onSelect={index => {
+        router.push(`#${tabs[index].value}`);
+        setTabIndex(index);
+      }}
     >
       <TabList className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20">
         {tabs.map((tab, index) => (
@@ -42,7 +55,7 @@ const Index = () => {
           <TabPanel
             key={index}
             className={`-tab-item-${index + 1} ${
-              tabIndex === index ? "is-tab-el-active" : ""
+              tabIndex === index ? 'is-tab-el-active' : ''
             }`}
           >
             {tab.content}
