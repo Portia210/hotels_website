@@ -4,6 +4,7 @@ export const UserStatus = {
   BANNED: 'BANNED',
   DELETED: 'DELETED',
   ACTIVE: 'ACTIVE',
+  PENDING: 'PENDING',
 };
 
 export const UserRoles = {
