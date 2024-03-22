@@ -25,7 +25,7 @@ export default async function Home() {
       },
       body: JSON.stringify({}),
     });
-    if (res.ok) redirect('/404');
+    if (res.ok) redirect('/banned');
   }
 
   return (
