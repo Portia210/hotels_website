@@ -1,6 +1,6 @@
 export default function Intergration() {
   return (
-    <section id="integration" className="demo-wrap">
+    <section id="integration" className="demo-wrap w-100 h-100 mb-60">
       <img
         className="demo-bg"
         src="/img/landing/bg/bg-2.png"
@@ -21,13 +21,14 @@ export default function Intergration() {
             </div>
           </div>
           <div className="col-md-9 col-lg-8 mx-auto">
-            <h1 className="display-5 fw-bold">אינטגרציה מלאה</h1>
-            <p className="lead mb-4">
-              כל הפיצ'רים באתר עובדות ביחד בשילוב מלא כדי לאפשר לכל סוכן להיות
-              יעיל ככל האפשר.
-              <br /> אין לך יותר צורך להשתמש בשירותים חיצוניים כדי לקצר את
-              הקישורים שלך או להעתיק את פרטי המלון אחד אחד באופן ידני.
-              <br /> האתר יכול לטפל בכל הדברים הללו עבורך
+            <h1 className="display-5 fw-bold">Full integration</h1>
+            <p className="lead mb-4 text-dark fs-5 fw-normal">
+              All the website features work together with full integration to
+              allow each agent to be the most effective they can be. You no
+              longer need to use external services to shorten your links or to
+              copy the hotel details one by one. All our features work together
+              to allow you to find deals and publish them in the most effective
+              way.
             </p>
           </div>
         </div>
