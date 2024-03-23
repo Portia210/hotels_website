@@ -65,6 +65,7 @@ export default function DowngradePlanCard() {
 
   const renderDowngrade = () => {
     if (recurringLoading || isLoading) return null;
+    if (!recurringData?.recurring) return null;
     const nextMonthPlan = recurringData?.recurring?.nextMonthPlan;
     if (
       nextMonthPlan?.label === 'Standard' ||
@@ -91,6 +92,7 @@ export default function DowngradePlanCard() {
 
   const renderCancel = () => {
     if (recurringLoading || isLoading) return null;
+    if (!recurringData?.recurring) return null;
     const nextMonthPlan = recurringData?.recurring?.nextMonthPlan;
     if (nextMonthPlan?.label === 'Limited') return null;
     if (data?.label !== 'Advanced' && data?.label !== 'Standard') return null;
