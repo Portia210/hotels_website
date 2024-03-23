@@ -65,7 +65,7 @@ export default function DowngradePlanCard() {
 
   const renderDowngrade = () => {
     if (recurringLoading || isLoading) return null;
-    const { nextMonthPlan } = recurringData?.recurring;
+    const nextMonthPlan = recurringData?.recurring?.nextMonthPlan;
     if (
       nextMonthPlan?.label === 'Standard' ||
       nextMonthPlan?.label === 'Limited'
@@ -91,7 +91,7 @@ export default function DowngradePlanCard() {
 
   const renderCancel = () => {
     if (recurringLoading || isLoading) return null;
-    const { nextMonthPlan } = recurringData?.recurring;
+    const nextMonthPlan = recurringData?.recurring?.nextMonthPlan;
     if (nextMonthPlan?.label === 'Limited') return null;
     if (data?.label !== 'Advanced' && data?.label !== 'Standard') return null;
     return (
@@ -110,8 +110,9 @@ export default function DowngradePlanCard() {
   const renderRevertCancel = () => {
     if (recurringLoading || isLoading) return null;
     const { _id: currentPlanId, price: currentPlanPrice } = data;
-    const { nextMonthPlan, nextChargeAmount } = recurringData?.recurring;
-    if (currentPlanId === nextMonthPlan?._id) return null;
+    const nextMonthPlan = recurringData?.recurring?.nextMonthPlan;
+    const nextChargeAmount = recurringData?.recurring?.nextChargeAmount;
+    if (!nextMonthPlan?._id || currentPlanId === nextMonthPlan?._id) return null;
 
     const btnText = t('Billing.revertBtn');
 

@@ -49,7 +49,7 @@ const SignUpForm = () => {
       },
     };
     await signUp
-      .create(data)
+      .create(signUpPayload)
       .then(async result => {
         if (result.status === 'complete') {
           setActive({ session: result.createdSessionId });
