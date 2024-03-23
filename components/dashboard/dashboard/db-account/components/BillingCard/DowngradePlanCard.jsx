@@ -36,9 +36,9 @@ export default function DowngradePlanCard() {
     onSuccess: async data => {
       const planId = data?.plan?._id;
       const checkoutSessionId = data?.checkoutSessionId;
-      router.push(
-        `/checkout/${planId}?checkoutSessionId=${checkoutSessionId}&type=upgrade`,
-      );
+      let url = `/checkout/${planId}?checkoutSessionId=${checkoutSessionId}`;
+      if (recurringData?.recurring) url += `&type=upgrade`;
+      router.push(url);
     },
   });
 
@@ -112,7 +112,8 @@ export default function DowngradePlanCard() {
     const { _id: currentPlanId, price: currentPlanPrice } = data;
     const nextMonthPlan = recurringData?.recurring?.nextMonthPlan;
     const nextChargeAmount = recurringData?.recurring?.nextChargeAmount;
-    if (!nextMonthPlan?._id || currentPlanId === nextMonthPlan?._id) return null;
+    if (!nextMonthPlan?._id || currentPlanId === nextMonthPlan?._id)
+      return null;
 
     const btnText = t('Billing.revertBtn');
 
