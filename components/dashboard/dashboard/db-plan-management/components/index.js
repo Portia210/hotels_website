@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import PaymentTestKit from './PaymentTestKit';
+import PlanManagement from './PlanManagement';
 
 const Index = () => {
   const tabs = [
     {
-      label: 'Payment Test Kit',
-      content: <PaymentTestKit />,
+      label: 'Plan Management',
+      content: <PlanManagement />,
     },
   ];
 

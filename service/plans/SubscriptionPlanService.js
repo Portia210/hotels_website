@@ -11,6 +11,13 @@ class SubscriptionPlanService {
     return response;
   };
 
+  fetchDefaultPlans = async () => {
+    const response = await axios
+      .get(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/default`)
+      .then(res => res.data);
+    return response;
+  };
+
   getCurrentPlan = async token => {
     const response = await axios
       .get(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/user/plan`, {
@@ -21,6 +28,7 @@ class SubscriptionPlanService {
       .then(res => res.data);
     return response;
   };
+
 }
 
 const subscriptionPlanService = new SubscriptionPlanService();
