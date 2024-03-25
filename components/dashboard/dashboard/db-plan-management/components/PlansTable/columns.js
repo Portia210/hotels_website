@@ -107,7 +107,7 @@ export const getColumns = () => [
       align: 'center',
     },
     cell: props => {
-      return <TableActions />;
+      return <TableActions row={props?.row?.original}/>;
     },
   },
 ];

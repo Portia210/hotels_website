@@ -1,4 +1,5 @@
 import AddPlanModal from './AddPlanModal';
+import DeletePlanModal from './DeletePlanModal';
 
 export default function PlanHeader() {
   return (
@@ -18,6 +19,7 @@ export default function PlanHeader() {
         </div>
       </div>
       <AddPlanModal />
+      <DeletePlanModal />
     </>
   );
 }

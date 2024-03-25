@@ -1,21 +1,19 @@
-import AddUpdatePlanForm from './AddUpdatePlanForm';
-
-export default function AddPlanModal() {
+export default function DeletePlanModal() {
   return (
     <div
       className="modal fade"
-      id="createPlanModal"
+      id="deletePlanModal"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabIndex="-1"
-      aria-labelledby="createPlanModalLabel"
+      aria-labelledby="deletePlanModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="createPlanModalLabel">
-              Create Plan
+            <h5 className="modal-title" id="deletePlanModalLabel">
+              Delete Plan
             </h5>
             <button
               type="button"
@@ -25,7 +23,7 @@ export default function AddPlanModal() {
             ></button>
           </div>
           <div className="modal-body">
-            <AddUpdatePlanForm />
+            Are you sure you want to delete this plan?
           </div>
           <div className="modal-footer">
             <button
@@ -35,8 +33,8 @@ export default function AddPlanModal() {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary">
-              Create
+            <button type="button" className="btn btn-danger">
+              Yes
             </button>
           </div>
         </div>
