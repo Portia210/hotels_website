@@ -20,6 +20,8 @@ const Sidebar = () => {
     UserRoles.ADMIN,
   ]);
 
+  const allowedAdmin = checkUserRoleClient([UserRoles.ADMIN]);
+
   const sidebarContentUser = [
     {
       id: 0,
@@ -62,9 +64,19 @@ const Sidebar = () => {
     },
   ];
 
+  const sidebarContentAdmin = [
+    {
+      id: 6,
+      icon: <i className="bi bi-box"></i>,
+      name: 'Plan Management',
+      routePath: '/dashboard/db-plan-management',
+    },
+  ];
+
   const sidebarContent = allowed
     ? sidebarContentUser
         .concat(sidebarContentManager)
+        .concat(allowedAdmin ? sidebarContentAdmin : [])
         .sort((a, b) => a.id - b.id)
     : sidebarContentUser;
 
@@ -98,9 +110,14 @@ const Sidebar = () => {
                   className="mr-15"
                 />
               ) : (
-                <span className="text-24 mr-5 pr-5" style={{
-                  color: '#375bd4'
-                }}>{item.icon}</span>
+                <span
+                  className="text-24 mr-5 pr-5"
+                  style={{
+                    color: '#375bd4',
+                  }}
+                >
+                  {item.icon}
+                </span>
               )}
               {item.name}
             </Link>
