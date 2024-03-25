@@ -77,11 +77,15 @@ class ManagePlanService {
   deletePlan = async (planId, token) => {
     if (!planId) return Promise.reject('Plan ID is required');
     const response = await axios
-      .post(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/delete/${planId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .post(
+        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/delete/${planId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then(res => res.data);
     return response;
   };
@@ -92,6 +96,7 @@ class ManagePlanService {
     const response = await axios
       .post(
         `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/delete/feature/${planId}?featureId=${featureId}`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${token}`,

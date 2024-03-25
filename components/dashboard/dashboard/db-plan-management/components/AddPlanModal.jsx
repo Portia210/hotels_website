@@ -20,6 +20,7 @@ export default function AddPlanModal() {
       return managePlanService.createPlan(selectedPlan, await getToken());
     },
     onSuccess: () => {
+      document.getElementById('addUpdatePlanModalDismiss').click();
       const message =
         action == 'CREATE'
           ? 'Plan created successfully'
@@ -30,6 +31,7 @@ export default function AddPlanModal() {
       });
     },
     onError: () => {
+      document.getElementById('addUpdatePlanModalDismiss').click();
       toast.error('An error occurred', {
         position: 'bottom-right',
         autoClose: 3000,
@@ -88,6 +90,7 @@ export default function AddPlanModal() {
           </div>
           <div className="modal-footer">
             <button
+              id="addUpdatePlanModalDismiss"
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
