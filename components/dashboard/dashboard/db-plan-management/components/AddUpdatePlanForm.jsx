@@ -1,17 +1,27 @@
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-multi-date-picker';
-import { useState } from 'react';
-import dayjs from 'dayjs';
-import TimePicker from "react-multi-date-picker/plugins/time_picker";
+import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 
-export default function AddUpdatePlanForm() {
-  const [dates, setDates] = useState([
-    new Date(),
-    dayjs().add(3, 'day').toDate(),
-  ]);
+export default function AddUpdatePlanForm({ action, plan, setPlan }) {
+  const [dates, setDates] = useState([]);
+
+  const onFormChange = (key, value) => {
+    setPlan({ ...plan, [key]: value });
+  };
 
   const onDateChange = dates => {
-    console.log('dates::', dates);
+    onFormChange('date', {
+      startDate: dates[0]?.toDate(),
+      endDate: dates[1]?.toDate(),
+    });
+    setDates(dates);
   };
+
+  useEffect(() => {
+    if (plan.startDate && plan.endDate) {
+      setDates([new Date(plan.startDate), new Date(plan.endDate)]);
+    }
+  }, [plan]);
 
   return (
     <div className="row">
@@ -24,6 +34,8 @@ export default function AddUpdatePlanForm() {
           className="form-control border"
           id="planName"
           placeholder="Enter Plan Name"
+          value={plan?.label}
+          onChange={e => onFormChange('label', e.target.value)}
         />
       </div>
       <div>
@@ -31,10 +43,12 @@ export default function AddUpdatePlanForm() {
           Plan Price
         </label>
         <input
-          type="text"
+          type="number"
           className="form-control border"
           id="price"
           placeholder="Enter Price"
+          value={plan?.price}
+          onChange={e => onFormChange('price', e.target.value)}
         />
       </div>
       <div>
@@ -42,10 +56,14 @@ export default function AddUpdatePlanForm() {
           Duration
         </label>
         <input
-          type="text"
+          type="number"
+          min={0}
+          max={31}
           className="form-control border"
-          id="price"
+          id="duration"
           placeholder="Enter Plan Duration"
+          value={plan?.duration}
+          onChange={e => onFormChange('duration', e.target.value)}
         />
       </div>
       <div>
@@ -53,10 +71,14 @@ export default function AddUpdatePlanForm() {
           Position
         </label>
         <input
-          type="text"
+          type="number"
+          min={0}
+          max={3}
           className="form-control border"
           id="position"
           placeholder="Enter Plan Position"
+          value={plan?.position}
+          onChange={e => onFormChange('position', e.target.value)}
         />
       </div>
       <div className="col-12">
@@ -69,16 +91,14 @@ export default function AddUpdatePlanForm() {
             containerClassName="w-full custom_container-picker date-input bg-white text-dark-1 h-50 rounded-8 pl-30 border"
             value={dates}
             minDate={new Date()}
-            onChange={setDates}
+            onChange={onDateChange}
             numberOfMonths={1}
             highlightToday={false}
             offsetY={10}
             range
             rangeHover
             format="YYYY-MM-DD HH:mm:ss"
-            plugins={[
-              <TimePicker key={1} position="bottom" />
-            ]}           
+            plugins={[<TimePicker key={1} position="bottom" />]}
           />
 
           <button className="absolute d-flex items-center h-full pointer-events-none">
@@ -89,15 +109,33 @@ export default function AddUpdatePlanForm() {
       <div className="row py-20">
         <div className="col-auto form-check d-flex align-items-center x-gap-20">
           <label htmlFor="isPromo">Promo Plan</label>
-          <input type="checkbox" className="border w-auto" id="isPromo" />
+          <input
+            type="checkbox"
+            className="border w-auto"
+            id="isPromo"
+            value={plan?.isPromo}
+            onChange={e => onFormChange('isPromo', e.target.checked)}
+          />
         </div>
         <div className="col-auto form-check d-flex align-items-center x-gap-20">
           <label htmlFor="isCustomOffer">Custom Offer</label>
-          <input type="checkbox" className="border w-auto" id="isCustomOffer" />
+          <input
+            type="checkbox"
+            className="border w-auto"
+            id="isCustomOffer"
+            value={plan?.isCustomOffer}
+            onChange={e => onFormChange('isCustomOffer', e.target.checked)}
+          />
         </div>
         <div className="col-auto form-check d-flex align-items-center x-gap-20">
           <label htmlFor="isDefault">Default</label>
-          <input type="checkbox" className="border w-auto" id="isDefault" />
+          <input
+            type="checkbox"
+            className="border w-auto"
+            id="isDefault"
+            value={plan?.isDefault}
+            onChange={e => onFormChange('isDefault', e.target.checked)}
+          />
         </div>
       </div>
     </div>
