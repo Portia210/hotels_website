@@ -1,32 +1,39 @@
-import AddUpdatePlanForm from './AddUpdatePlanForm';
-import { useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import managePlanService from '@/service/plans/ManagePlanService';
 import usePlanManageStore from '@/store/usePlanManageStore';
 import { useAuth } from '@clerk/nextjs';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import AddUpdatePlanForm from './AddUpdatePlanForm';
 
 export default function AddPlanModal() {
-  const { action, selectedPlan } = usePlanManageStore();
+  const { action, selectedPlan, setSelectedPlan } = usePlanManageStore();
   const { getToken } = useAuth();
-
-  const [plan, setPlan] = useState({});
-
-  const { data: nameSuggests, isLoading: suggestLoading } = useQuery({
-    queryKey: ['featureNameSuggestion'],
-    queryFn: async () =>
-      managePlanService.featureNameSuggestion(await getToken()),
-  });
 
   const planMutation = useMutation({
     mutationFn: async () => {
+      selectedPlan.startDate = selectedPlan?.date?.startDate;
+      selectedPlan.endDate = selectedPlan?.date?.endDate;
+
       if (action === 'UPDATE') {
-        return managePlanService.updatePlan(plan, await getToken());
-      } else if (action == null || action === 'CREATE') {
-        return managePlanService.createPlan(plan, await getToken());
+        return managePlanService.updatePlan(selectedPlan, await getToken());
       }
+      return managePlanService.createPlan(selectedPlan, await getToken());
     },
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: () => {
+      const message =
+        action == 'CREATE'
+          ? 'Plan created successfully'
+          : 'Plan updated successfully';
+      toast.success(message, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    },
+    onError: () => {
+      toast.error('An error occurred', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
     },
   });
 
@@ -47,14 +54,9 @@ export default function AddPlanModal() {
   };
 
   const onSubmit = () => {
-    console.log('plan', plan);
+    console.log('submitting');
+    planMutation.mutate();
   };
-
-  useEffect(() => {
-    if (selectedPlan && action === 'UPDATE') {
-      setPlan(selectedPlan);
-    }
-  }, [selectedPlan]);
 
   return (
     <div
@@ -77,8 +79,12 @@ export default function AddPlanModal() {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
-            <AddUpdatePlanForm action={action} plan={plan} setPlan={setPlan} />
+          <div className="modal-body" key={action}>
+            <AddUpdatePlanForm
+              action={action}
+              plan={selectedPlan}
+              setPlan={setSelectedPlan}
+            />
           </div>
           <div className="modal-footer">
             <button

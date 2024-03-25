@@ -1,4 +1,36 @@
-export default function DeletePlanModal() {
+import { useAuth } from '@clerk/nextjs';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import managePlanService from '@/service/plans/ManagePlanService';
+
+export default function DeletePlanModal({selectedPlan}) {
+  console.log('selectedPlan::', selectedPlan)
+
+  const { getToken } = useAuth();
+
+  const planMutation = useMutation({
+    mutationFn: async () => {
+      return managePlanService.deletePlan(selectedPlan?._id, await getToken());
+    },
+    onSuccess: () => {
+      toast.success('Plan delete successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    },
+    onError: (error) => {
+      console.error(`Error while delete plan`, error)
+      toast.error('An error occurred', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    },
+  });
+
+  const onDelete = () => {
+    planMutation.mutate()
+  };
+
   return (
     <div
       className="modal fade"
@@ -33,7 +65,7 @@ export default function DeletePlanModal() {
             >
               Close
             </button>
-            <button type="button" className="btn btn-danger">
+            <button disabled={planMutation.isPending} onClick={() => onDelete()} type="button" className="btn btn-danger">
               Yes
             </button>
           </div>

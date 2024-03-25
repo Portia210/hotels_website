@@ -12,10 +12,6 @@ const PlanManagement = () => {
     queryFn: () => subscriptionPlanService.fetchPlans(),
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <div className="row y-gap-20">
       <PlanHeader />

@@ -1,7 +1,9 @@
+import usePlanManageStore from '@/store/usePlanManageStore';
 import AddPlanModal from './AddPlanModal';
 import DeletePlanModal from './DeletePlanModal';
 
 export default function PlanHeader() {
+  const { setAction, selectedPlan } = usePlanManageStore();
   return (
     <>
       <div className="row y-gap-20">
@@ -9,6 +11,7 @@ export default function PlanHeader() {
         <div className="col-12">
           <div className="d-flex justify-content-between">
             <button
+              onClick={() => setAction('CREATE')}
               className="btn btn-primary"
               data-bs-toggle="modal"
               data-bs-target="#createPlanModal"
@@ -19,7 +22,7 @@ export default function PlanHeader() {
         </div>
       </div>
       <AddPlanModal />
-      <DeletePlanModal />
+      <DeletePlanModal selectedPlan={selectedPlan}/>
     </>
   );
 }

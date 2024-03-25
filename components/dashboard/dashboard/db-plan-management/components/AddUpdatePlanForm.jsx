@@ -18,10 +18,16 @@ export default function AddUpdatePlanForm({ action, plan, setPlan }) {
   };
 
   useEffect(() => {
-    if (plan.startDate && plan.endDate) {
+    if (plan?.startDate && plan?.endDate) {
       setDates([new Date(plan.startDate), new Date(plan.endDate)]);
     }
   }, [plan]);
+
+  useEffect(() => {
+    if (action !== 'DELETE') {
+      setPlan(null);
+    }
+  }, [action]);
 
   return (
     <div className="row">
@@ -48,7 +54,7 @@ export default function AddUpdatePlanForm({ action, plan, setPlan }) {
           id="price"
           placeholder="Enter Price"
           value={plan?.price}
-          onChange={e => onFormChange('price', e.target.value)}
+          onChange={e => onFormChange('price', parseFloat(e.target.value))}
         />
       </div>
       <div>
@@ -63,7 +69,7 @@ export default function AddUpdatePlanForm({ action, plan, setPlan }) {
           id="duration"
           placeholder="Enter Plan Duration"
           value={plan?.duration}
-          onChange={e => onFormChange('duration', e.target.value)}
+          onChange={e => onFormChange('duration', parseFloat(e.target.value))}
         />
       </div>
       <div>
@@ -78,7 +84,7 @@ export default function AddUpdatePlanForm({ action, plan, setPlan }) {
           id="position"
           placeholder="Enter Plan Position"
           value={plan?.position}
-          onChange={e => onFormChange('position', e.target.value)}
+          onChange={e => onFormChange('position', parseFloat(e.target.value))}
         />
       </div>
       <div className="col-12">

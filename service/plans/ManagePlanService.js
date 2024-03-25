@@ -73,6 +73,34 @@ class ManagePlanService {
       .then(res => res.data);
     return response;
   };
+
+  deletePlan = async (planId, token) => {
+    if (!planId) return Promise.reject('Plan ID is required');
+    const response = await axios
+      .post(`${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/delete/${planId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(res => res.data);
+    return response;
+  };
+
+  deleteFeature = async (planId, featureId, token) => {
+    if (!planId) return Promise.reject('Plan ID is required');
+    if (!featureId) return Promise.reject('Feature ID is required');
+    const response = await axios
+      .post(
+        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/delete/feature/${planId}?featureId=${featureId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then(res => res.data);
+    return response;
+  };
 }
 
 const managePlanService = new ManagePlanService();
