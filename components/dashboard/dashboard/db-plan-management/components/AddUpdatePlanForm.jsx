@@ -120,6 +120,7 @@ export default function AddUpdatePlanForm({ action, plan, setPlan }) {
             className="border w-auto"
             id="isPromo"
             value={plan?.isPromo}
+            defaultChecked={plan?.isPromo}
             onChange={e => onFormChange('isPromo', e.target.checked)}
           />
         </div>
@@ -130,6 +131,7 @@ export default function AddUpdatePlanForm({ action, plan, setPlan }) {
             className="border w-auto"
             id="isCustomOffer"
             value={plan?.isCustomOffer}
+            defaultChecked={plan?.isCustomOffer}
             onChange={e => onFormChange('isCustomOffer', e.target.checked)}
           />
         </div>
@@ -140,6 +142,7 @@ export default function AddUpdatePlanForm({ action, plan, setPlan }) {
             className="border w-auto"
             id="isDefault"
             value={plan?.isDefault}
+            defaultChecked={plan?.isDefault}
             onChange={e => onFormChange('isDefault', e.target.checked)}
           />
         </div>

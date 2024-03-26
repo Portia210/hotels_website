@@ -45,6 +45,8 @@ class ManagePlanService {
   };
 
   createFeature = async (planId, feature, token) => {
+    if (!planId) return Promise.reject('Plan ID is required');
+    if (!feature) return Promise.reject('Feature is required');
     const response = await axios
       .post(
         `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/create/feature/${planId}`,

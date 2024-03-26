@@ -1,10 +1,23 @@
 import managePlanService from '@/service/plans/ManagePlanService';
+import subscriptionPlanService from '@/service/plans/SubscriptionPlanService';
 import { useAuth } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
-
-export default function AddUpdateFeatureForm({ currentFeatures, feature, setFeature }) {
+import usePlanManageStore from '@/store/usePlanManageStore';
+import { useEffect } from 'react';
+export default function AddUpdateFeatureForm({ feature, setFeature }) {
+  const { selectedPlan } = usePlanManageStore();
   const { getToken } = useAuth();
-  
+
+  const { data: currentPlan, refetch } = useQuery({
+    queryKey: ['fetchPlanByLabel'],
+    enabled: false,
+    queryFn: async () =>
+      subscriptionPlanService.fetchPlanByLabel(
+        selectedPlan?.label,
+        await getToken(),
+      ),
+  });
+
   const { data, isLoading } = useQuery({
     queryKey: ['featureNameSuggestions'],
     queryFn: async () =>
@@ -14,6 +27,10 @@ export default function AddUpdateFeatureForm({ currentFeatures, feature, setFeat
   const onFormChange = (key, value) => {
     setFeature({ ...feature, [key]: value });
   };
+
+  useEffect(() => {
+    if (selectedPlan) refetch();
+  }, [selectedPlan]);
 
   const renderFeatureList = () => {
     return (
@@ -25,7 +42,7 @@ export default function AddUpdateFeatureForm({ currentFeatures, feature, setFeat
           className="form-select border"
           placeholder="Limit will be calculated in"
         >
-          {currentFeatures?.map((feature, index) => (
+          {currentPlan?.features?.map((feature, index) => (
             <option key={index} value={feature?.name}>
               {feature.name}
             </option>

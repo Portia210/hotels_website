@@ -1,19 +1,21 @@
-import { useAuth } from '@clerk/nextjs';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
 import managePlanService from '@/service/plans/ManagePlanService';
+import { useAuth } from '@clerk/nextjs';
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 import AddUpdateFeatureForm from './AddUpdateFeatureForm';
-import { useEffect, useState } from 'react';
-import subscriptionPlanService from '@/service/plans/SubscriptionPlanService';
+import usePlanManageStore from '@/store/usePlanManageStore';
 
-export default function AddFeatureModal({ selectedPlan }) {
+export default function AddFeatureModal() {
+  const { selectedPlan } = usePlanManageStore();
+
   const { getToken } = useAuth();
   const [feature, setFeature] = useState({});
 
   const planMutation = useMutation({
     mutationFn: async () => {
       return managePlanService.createFeature(
-        selectedPlan?._id,
+        selectedPlan,
         feature,
         await getToken(),
       );
@@ -33,27 +35,10 @@ export default function AddFeatureModal({ selectedPlan }) {
     },
   });
 
-  const { data, refetch } = useQuery({
-    queryKey: ['fetchPlanByLabel'],
-    refetchInterval: 2000,
-    queryFn: async () =>
-      subscriptionPlanService.fetchPlanByLabel(
-        selectedPlan?.label,
-        await getToken(),
-      ),
-  });
-
   const onSubmit = () => {
-    // planMutation.mutate();
-    console.log('Feature added successfully', feature);
+    planMutation.mutate();
   };
 
-  useEffect(() => {
-    if (selectedPlan?.label) {
-      refetch();
-    }
-  }, [selectedPlan?.label]);
-  
   return (
     <div
       className="modal fade"
@@ -79,8 +64,6 @@ export default function AddFeatureModal({ selectedPlan }) {
           </div>
           <div className="modal-body">
             <AddUpdateFeatureForm
-              currentFeatures={data?.features}
-              plan={selectedPlan}
               feature={feature}
               setFeature={setFeature}
             />
