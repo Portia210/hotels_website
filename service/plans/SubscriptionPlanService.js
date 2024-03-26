@@ -4,8 +4,7 @@ import axios from 'axios';
 class SubscriptionPlanService {
   constructor() {}
 
-  fetchPlanByLabel = async (label, token) => {
-    if (!label) return;
+  fetchPlanByLabel = async (label) => {
     const response = await axios
       .get(
         `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/label?label=${label}`,

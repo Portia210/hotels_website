@@ -8,25 +8,26 @@ import usePlanManageStore from '@/store/usePlanManageStore';
 
 export default function AddFeatureModal() {
   const { selectedPlan } = usePlanManageStore();
-
   const { getToken } = useAuth();
   const [feature, setFeature] = useState({});
 
   const planMutation = useMutation({
     mutationFn: async () => {
       return managePlanService.createFeature(
-        selectedPlan,
+        selectedPlan._id,
         feature,
         await getToken(),
       );
     },
     onSuccess: () => {
+      document.getElementById('addFeatureModalDismiss').click();
       toast.success('Feature added successfully', {
         position: 'bottom-right',
         autoClose: 3000,
       });
     },
     onError: error => {
+      document.getElementById('addFeatureModalDismiss').click();
       console.error(`Error while adding feature`, error);
       toast.error('An error occurred', {
         position: 'bottom-right',
@@ -63,14 +64,11 @@ export default function AddFeatureModal() {
             ></button>
           </div>
           <div className="modal-body">
-            <AddUpdateFeatureForm
-              feature={feature}
-              setFeature={setFeature}
-            />
+            <AddUpdateFeatureForm feature={feature} setFeature={setFeature} />
           </div>
           <div className="modal-footer">
             <button
-              id="deletePlanModalDismiss"
+              id="addFeatureModalDismiss"
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"

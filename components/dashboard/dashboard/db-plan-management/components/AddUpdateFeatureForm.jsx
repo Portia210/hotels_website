@@ -4,24 +4,30 @@ import { useAuth } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
 import usePlanManageStore from '@/store/usePlanManageStore';
 import { useEffect } from 'react';
+
 export default function AddUpdateFeatureForm({ feature, setFeature }) {
   const { selectedPlan } = usePlanManageStore();
   const { getToken } = useAuth();
 
   const { data: currentPlan, refetch } = useQuery({
     queryKey: ['fetchPlanByLabel'],
-    enabled: false,
+    enabled: selectedPlan?.label !== null,
     queryFn: async () =>
-      subscriptionPlanService.fetchPlanByLabel(
+      subscriptionPlanService.fetchPlanByLabel(selectedPlan?.label),
+  });
+
+  const {
+    data,
+    isLoading,
+    refetch: suggestRefetch,
+  } = useQuery({
+    queryKey: ['featureNameSuggestions'],
+    enabled: selectedPlan?.label !== null,
+    queryFn: async () =>
+      managePlanService.featureNameSuggestion(
         selectedPlan?.label,
         await getToken(),
       ),
-  });
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['featureNameSuggestions'],
-    queryFn: async () =>
-      managePlanService.featureNameSuggestion(await getToken()),
   });
 
   const onFormChange = (key, value) => {
@@ -29,9 +35,13 @@ export default function AddUpdateFeatureForm({ feature, setFeature }) {
   };
 
   useEffect(() => {
-    if (selectedPlan) refetch();
+    if (selectedPlan) {
+      refetch();
+      suggestRefetch();
+    }
   }, [selectedPlan]);
 
+  useEffect(() => {});
   const renderFeatureList = () => {
     return (
       <div>
@@ -61,14 +71,17 @@ export default function AddUpdateFeatureForm({ feature, setFeature }) {
         <select
           className="form-select border"
           disabled={isLoading}
-          id="unit"
-          value={feature?.unit}
+          id="name"
+          value={feature?.name || feature?.label}
           placeholder="Limit will be calculated in"
-          onChange={e => onFormChange('unit', e.target.value)}
+          onChange={e => onFormChange('name', e.target.value)}
         >
+          <option value="" hidden>
+            Select a feature
+          </option>
           {data?.map((feature, index) => (
             <option key={index} value={feature?.name}>
-              {feature.name}
+              {feature?.name}
             </option>
           ))}
         </select>
