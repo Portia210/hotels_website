@@ -3,22 +3,26 @@ import Plan from './Plan';
 import { planContents } from './plans';
 import DowngradeModal from './DowngradeModal';
 
-const PricingSection = ({ currentPlan }) => {
+const planMapping = plans => {
+  return plans;
+};
+
+const PricingSection = ({ defaultPlans, currentPlan }) => {
   const t = useTranslations();
   const locale = useLocale();
   const isReverse = locale === 'he';
-  const plans = planContents(t).map((obj, i) => {
+  const plans = planMapping(defaultPlans).map((obj, i) => {
+    console.log('obj -->', obj)
     return (
-      <div key={obj.header} className="px-20 py-20">
+      <div key={obj._id} className="px-20 py-20">
         <Plan
           currentPlan={currentPlan}
-          value={obj.value}
+          label={obj.label}
           isReverse={isReverse}
-          header={obj.header}
           price={obj.price}
-          currency={obj.currency}
+          currency={'₪'}
           features={obj.features}
-          outline={obj.outline}
+          outline={false}
         />
       </div>
     );

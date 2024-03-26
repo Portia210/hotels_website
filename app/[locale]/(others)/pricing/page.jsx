@@ -21,10 +21,16 @@ const fetchCurrentPlan = async () => {
   return currentPlan;
 };
 
+const fetchDefaultPlan = async () => {
+  const defaultPlan = await subscriptionPlanService.fetchDefaultPlans();
+  return defaultPlan;
+};
+
 const PricingPage = async () => {
   const t = await getTranslations('Pricing');
   const messages = await getMessages();
   const currentPlan = await fetchCurrentPlan();
+  const defaultPlans = await fetchDefaultPlan();
   return (
     <>
       <TransConfig messages={messages} />
@@ -52,7 +58,10 @@ const PricingPage = async () => {
             </div>
             {/* End text-center */}
             <div className="col-12">
-              <PricingSection currentPlan={currentPlan} />
+              <PricingSection
+                defaultPlans={defaultPlans}
+                currentPlan={currentPlan}
+              />
             </div>
           </div>
         </div>
