@@ -1,18 +1,15 @@
-import { useLocale, useTranslations } from 'next-intl';
-import Plan from './Plan';
-import { planContents } from './plans';
+import { useLocale } from 'next-intl';
 import DowngradeModal from './DowngradeModal';
+import Plan from './Plan';
 
 const planMapping = plans => {
   return plans;
 };
 
 const PricingSection = ({ defaultPlans, currentPlan }) => {
-  const t = useTranslations();
   const locale = useLocale();
   const isReverse = locale === 'he';
   const plans = planMapping(defaultPlans).map((obj, i) => {
-    console.log('obj -->', obj)
     return (
       <div key={obj._id} className="px-20 py-20">
         <Plan
