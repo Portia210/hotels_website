@@ -89,6 +89,17 @@ export default function AddPlanModal() {
             />
           </div>
           <div className="modal-footer">
+          {action == 'UPDATE' && 
+            <button
+              id="addFeaturePlanModal"
+              type="button"
+              className="btn btn-secondary"
+              data-bs-toggle="modal"
+              data-bs-target="#featurePlanModal"
+            >
+              Update Features
+            </button>
+            }
             <button
               id="addUpdatePlanModalDismiss"
               type="button"
@@ -105,6 +116,8 @@ export default function AddPlanModal() {
             >
               Submit
             </button>
+         
+            
           </div>
         </div>
       </div>

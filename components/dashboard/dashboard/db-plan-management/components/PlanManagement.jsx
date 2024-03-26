@@ -3,7 +3,6 @@
 import subscriptionPlanService from '@/service/plans/SubscriptionPlanService';
 import PlanTables from './PlansTable/PlansTable';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import PlanHeader from './PlanHeader';
 
 const PlanManagement = () => {

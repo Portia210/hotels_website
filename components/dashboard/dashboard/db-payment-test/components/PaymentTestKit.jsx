@@ -5,13 +5,11 @@ import { useState } from 'react';
 
 const PaymentTestKit = () => {
   const [email, setEmail] = useState(null);
-  const [selectedPlan, setSelectedPlan] = useState();
   const { setNextChargeDate, setLastChargeDate, chargeNow } =
     usePaymentTestKit(email);
 
   const resetForm = () => {
     setEmail(null);
-    setSelectedPlan(null);
     document.getElementById('lastChargeDate').value = '';
     document.getElementById('nextChargeAmount').value = '';
   };

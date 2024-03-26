@@ -4,16 +4,15 @@ import axios from 'axios';
 class ManagePlanService {
   constructor() {}
 
-  featureNameSuggestion = async token => {
+  featureNameSuggestion = async (label, token) => {
+    let url = `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/feature/suggestions`;
+    if (label) url += `?label=${label}`;
     const response = await axios
-      .get(
-        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/feature/suggestions`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then(res => res.data);
     return response;
   };
@@ -45,6 +44,8 @@ class ManagePlanService {
   };
 
   createFeature = async (planId, feature, token) => {
+    if (!planId) return Promise.reject('Plan ID is required');
+    if (!feature) return Promise.reject('Feature is required');
     const response = await axios
       .post(
         `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/create/feature/${planId}`,
