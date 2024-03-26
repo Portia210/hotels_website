@@ -2,6 +2,7 @@ import { useAuth } from '@clerk/nextjs';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import managePlanService from '@/service/plans/ManagePlanService';
+import eventEmitter from '@/utils/eventEmitter';
 
 export default function DeletePlanModal({ selectedPlan }) {
   const { getToken } = useAuth();
@@ -16,10 +17,11 @@ export default function DeletePlanModal({ selectedPlan }) {
         position: 'bottom-right',
         autoClose: 3000,
       });
+      eventEmitter.emit('planUpdated');
     },
-    onError: (error) => {
+    onError: error => {
       document.getElementById('deletePlanModalDismiss').click();
-      console.error(`Error while delete plan`, error)
+      console.error(`Error while delete plan`, error);
       toast.error('An error occurred', {
         position: 'bottom-right',
         autoClose: 3000,
@@ -28,7 +30,7 @@ export default function DeletePlanModal({ selectedPlan }) {
   });
 
   const onDelete = () => {
-    planMutation.mutate()
+    planMutation.mutate();
   };
 
   return (
@@ -66,7 +68,12 @@ export default function DeletePlanModal({ selectedPlan }) {
             >
               Close
             </button>
-            <button disabled={planMutation.isPending} onClick={() => onDelete()} type="button" className="btn btn-danger">
+            <button
+              disabled={planMutation.isPending}
+              onClick={() => onDelete()}
+              type="button"
+              className="btn btn-danger"
+            >
               Yes
             </button>
           </div>

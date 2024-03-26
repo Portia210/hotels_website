@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import AddUpdateFeatureForm from './AddUpdateFeatureForm';
 import usePlanManageStore from '@/store/usePlanManageStore';
+import eventEmitter from '@/utils/eventEmitter';
 
 export default function AddFeatureModal() {
   const { selectedPlan } = usePlanManageStore();
@@ -25,6 +26,7 @@ export default function AddFeatureModal() {
         position: 'bottom-right',
         autoClose: 3000,
       });
+      eventEmitter.emit('planUpdated');
     },
     onError: error => {
       console.error(`Error while adding feature`, error);

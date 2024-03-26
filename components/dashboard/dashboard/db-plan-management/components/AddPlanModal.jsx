@@ -4,6 +4,7 @@ import { useAuth } from '@clerk/nextjs';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import AddUpdatePlanForm from './AddUpdatePlanForm';
+import eventEmitter from '@/utils/eventEmitter';
 
 export default function AddPlanModal() {
   const { action, selectedPlan, setSelectedPlan } = usePlanManageStore();
@@ -29,6 +30,7 @@ export default function AddPlanModal() {
         position: 'bottom-right',
         autoClose: 3000,
       });
+      eventEmitter.emit('planUpdated');
     },
     onError: () => {
       document.getElementById('addUpdatePlanModalDismiss').click();
@@ -89,17 +91,17 @@ export default function AddPlanModal() {
             />
           </div>
           <div className="modal-footer">
-          {action == 'UPDATE' && 
-            <button
-              id="addFeaturePlanModal"
-              type="button"
-              className="btn btn-secondary"
-              data-bs-toggle="modal"
-              data-bs-target="#featurePlanModal"
-            >
-              Update Features
-            </button>
-            }
+            {action == 'UPDATE' && (
+              <button
+                id="addFeaturePlanModal"
+                type="button"
+                className="btn btn-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#featurePlanModal"
+              >
+                Update Features
+              </button>
+            )}
             <button
               id="addUpdatePlanModalDismiss"
               type="button"
@@ -116,8 +118,6 @@ export default function AddPlanModal() {
             >
               Submit
             </button>
-         
-            
           </div>
         </div>
       </div>

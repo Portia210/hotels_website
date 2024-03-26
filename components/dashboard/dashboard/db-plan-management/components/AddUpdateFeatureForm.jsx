@@ -54,7 +54,7 @@ export default function AddUpdateFeatureForm({ feature, setFeature }) {
         >
           {currentPlan?.features?.map((feature, index) => (
             <option key={index} value={feature?.name}>
-              {feature.name}
+              {feature.name} - Limit: {feature?.limit} /  {feature?.unit}
             </option>
           ))}
         </select>
@@ -118,7 +118,7 @@ export default function AddUpdateFeatureForm({ feature, setFeature }) {
           placeholder="Limit will be calculated in"
           onChange={e => onFormChange('unit', e.target.value)}
         >
-          <option value="" hidden/>
+          <option value="" hidden />
           <option value="days">Day</option>
           <option value="month">Month</option>
         </select>
