@@ -5,9 +5,10 @@ import useTrans from '@/hooks/useTrans';
 import useUserPlans from '@/hooks/useUserPlans';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
+import { getFeature } from './plans';
 
 const Plan = props => {
-  const { isReverse, value, currentPlan } = props;
+  const { isReverse, label, currentPlan } = props;
   const router = useRouter();
   const { isSignedIn } = useUser();
   const { getPlanByLabel } = useUserPlans();
@@ -16,7 +17,7 @@ const Plan = props => {
 
   const handleGetStarted = async () => {
     if (!isSignedIn) return router.push('/login');
-    const plan = await getPlanByLabel(value);
+    const plan = await getPlanByLabel(label);
     if (plan._id) {
       const checkoutSessionId = await createCheckoutSession(plan._id);
       router.push(
@@ -31,7 +32,7 @@ const Plan = props => {
     let isDowngrade = false;
 
     if (currentPlan) {
-      if (currentPlan.label === value) {
+      if (currentPlan.label === label) {
         btnText = t('Pricing.currentPlan');
         btnDisabled = true;
       } else if (currentPlan.label === 'Advanced') {
@@ -76,7 +77,7 @@ const Plan = props => {
   return (
     <div className="card shadow-sm" style={{ minWidth: 370 }}>
       <div className="card-header">
-        <h4 className="my-0 font-weight-normal">{props.header}</h4>
+        <h4 className="my-0 font-weight-normal">{label}</h4>
       </div>
       <div className="card-body" dir={isReverse ? 'rtl' : 'ltr'}>
         <h1 className="card-title pricing-card-title">
@@ -90,7 +91,7 @@ const Plan = props => {
           )}
         </h1>
         <ul className="list-unstyled mt-3 mb-10">
-          {props.features.map((feature, i) => (
+          {getFeature(label, t).map((feature, i) => (
             <li key={i} className="text-20">
               <i
                 className={`bi bi-check-circle-fill text-success ${
