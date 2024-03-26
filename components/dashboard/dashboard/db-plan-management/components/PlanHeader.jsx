@@ -1,6 +1,7 @@
 import usePlanManageStore from '@/store/usePlanManageStore';
 import AddPlanModal from './AddPlanModal';
 import DeletePlanModal from './DeletePlanModal';
+import AddFeatureModal from './AddFeatureModal';
 
 export default function PlanHeader() {
   const { setAction, selectedPlan } = usePlanManageStore();
@@ -22,7 +23,8 @@ export default function PlanHeader() {
         </div>
       </div>
       <AddPlanModal />
-      <DeletePlanModal selectedPlan={selectedPlan}/>
+      <DeletePlanModal selectedPlan={selectedPlan} />
+      <AddFeatureModal selectedPlan={selectedPlan} />
     </>
   );
 }
