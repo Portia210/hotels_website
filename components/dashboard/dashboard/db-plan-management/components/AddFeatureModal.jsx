@@ -27,7 +27,6 @@ export default function AddFeatureModal() {
       });
     },
     onError: error => {
-      document.getElementById('addFeatureModalDismiss').click();
       console.error(`Error while adding feature`, error);
       toast.error('An error occurred', {
         position: 'bottom-right',

@@ -118,6 +118,7 @@ export default function AddUpdateFeatureForm({ feature, setFeature }) {
           placeholder="Limit will be calculated in"
           onChange={e => onFormChange('unit', e.target.value)}
         >
+          <option value="" hidden/>
           <option value="days">Day</option>
           <option value="month">Month</option>
         </select>
