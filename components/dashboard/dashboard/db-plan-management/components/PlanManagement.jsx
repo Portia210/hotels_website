@@ -5,6 +5,7 @@ import PlanTables from './PlansTable/PlansTable';
 import { useQuery } from '@tanstack/react-query';
 import PlanHeader from './PlanHeader';
 import { useEffect } from 'react'
+import eventEmitter from '@/utils/eventEmitter';
 
 const PlanManagement = () => {
   const { data, isLoading, error, refetch } = useQuery({
