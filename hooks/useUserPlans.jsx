@@ -18,13 +18,8 @@ const useUserPlans = () => {
   };
 
   const getPlanByLabel = async label => {
-    if (!label) throw Error('Label is required!');
-    const response = await axios
-      .get(
-        `${TOURCOMPARE_BE_URL}/api/v1/subscription-plan/label?label=${label}`,
-      )
-      .then(res => res.data);
-    return response;
+    const token = await getToken();
+    return subscriptionPlanService.fetchPlanByLabel(label, token);
   };
 
   const getCurrentPlan = async () => {

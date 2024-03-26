@@ -1,9 +1,10 @@
 import { useAuth } from '@clerk/nextjs';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import managePlanService from '@/service/plans/ManagePlanService';
 import AddUpdateFeatureForm from './AddUpdateFeatureForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import subscriptionPlanService from '@/service/plans/SubscriptionPlanService';
 
 export default function AddFeatureModal({ selectedPlan }) {
   const { getToken } = useAuth();
@@ -32,11 +33,27 @@ export default function AddFeatureModal({ selectedPlan }) {
     },
   });
 
+  const { data, refetch } = useQuery({
+    queryKey: ['fetchPlanByLabel'],
+    refetchInterval: 2000,
+    queryFn: async () =>
+      subscriptionPlanService.fetchPlanByLabel(
+        selectedPlan?.label,
+        await getToken(),
+      ),
+  });
+
   const onSubmit = () => {
     // planMutation.mutate();
     console.log('Feature added successfully', feature);
   };
 
+  useEffect(() => {
+    if (selectedPlan?.label) {
+      refetch();
+    }
+  }, [selectedPlan?.label]);
+  
   return (
     <div
       className="modal fade"
@@ -61,7 +78,12 @@ export default function AddFeatureModal({ selectedPlan }) {
             ></button>
           </div>
           <div className="modal-body">
-            <AddUpdateFeatureForm feature={feature} setFeature={setFeature} />
+            <AddUpdateFeatureForm
+              currentFeatures={data?.features}
+              plan={selectedPlan}
+              feature={feature}
+              setFeature={setFeature}
+            />
           </div>
           <div className="modal-footer">
             <button
