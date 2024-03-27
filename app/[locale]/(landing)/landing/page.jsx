@@ -1,5 +1,5 @@
 import DefaultFooter from '@/components/footer/default';
-import Header1 from '@/components/header/header-1';
+import DefaultHeader from '@/components/header/default-header';
 import Landing from '@/components/landing';
 import useTransServer from '@/hooks/useTransServer';
 
@@ -14,7 +14,7 @@ export default function LandingPage() {
   return (
     <>
       <div className="header-margin"></div>
-      <Header1 />
+      <DefaultHeader />
       <section dir={`${isReverse && 'rtl'}`} className="mb-40">
         <Landing t={t} />;
       </section>
