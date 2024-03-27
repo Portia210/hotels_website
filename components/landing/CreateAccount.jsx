@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function CreateAccount({ t }) {
   return (
     <section id="create-account" className="demo-wrap w-100 h-100">
@@ -5,7 +7,7 @@ export default function CreateAccount({ t }) {
         className="demo-bg"
         src="/img/landing/bg/bg-3.png"
         alt=""
-        style={{ opacity: 0.1 }}
+        style={{ opacity: 0.1, zIndex: -20 }}
       />
       <div className="px-2 py-5 my-5 text-center">
         <h2 className="display-5 fw-bold text-body-emphasis">
@@ -20,19 +22,26 @@ export default function CreateAccount({ t }) {
               type="button"
               className="btn btn-primary btn-lg mr-3 mb-2 rounded-1"
             >
-              {t('Landing.Hero.createAnAccountFree')}
+              <Link href="/signup">
+                {t('Landing.Hero.createAnAccountFree')}
+              </Link>
             </button>
             <button
               type="button"
               className="btn btn-outline-primary btn-lg mr-3 mb-2 rounded-1"
             >
-              {t('Landing.Hero.readGuide')}
+              <Link
+                href="https://docs.agent-space.com/user-guide"
+                target="_blank"
+              >
+                {t('Landing.Hero.readGuide')}
+              </Link>
             </button>
             <button
               type="button"
               className="btn btn-outline-primary btn-lg mb-2 rounded-1"
             >
-              {t('Landing.Hero.seePricing')}
+              <Link href="/pricing">{t('Landing.Hero.seePricing')}</Link>
             </button>
           </div>
         </div>

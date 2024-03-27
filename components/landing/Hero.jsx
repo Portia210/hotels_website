@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Hero({ t }) {
   return (
     <section
@@ -34,13 +36,20 @@ export default function Hero({ t }) {
                   type="button"
                   className="btn btn-primary btn-lg px-20 mr-3 mb-3 rounded-1 text-20"
                 >
-                  {t('Landing.Hero.createAnAccount')}
+                  <Link href="/signup">
+                    {t('Landing.Hero.createAnAccount')}
+                  </Link>
                 </button>
                 <button
                   type="button"
                   className="btn btn-outline-light btn-lg px-20 mb-3 rounded-1 text-20"
                 >
-                  {t('Landing.Hero.readGuide')}
+                  <Link
+                    href="https://docs.agent-space.com/user-guide"
+                    target="_blank"
+                  >
+                    {t('Landing.Hero.readGuide')}
+                  </Link>
                 </button>
               </div>
             </div>
