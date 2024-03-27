@@ -17,18 +17,18 @@ export default function CreateAccount() {
             gaining with the help of all our special features.
           </p>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-20">
-            <button type="button" className="btn btn-primary btn-lg mr-3 mb-2">
+            <button type="button" className="btn btn-primary btn-lg mr-3 mb-2 rounded-1">
               Create account for free
             </button>
             <button
               type="button"
-              className="btn btn-outline-primary btn-lg mr-3 mb-2"
+              className="btn btn-outline-primary btn-lg mr-3 mb-2 rounded-1"
             >
               Read the guide
             </button>
             <button
               type="button"
-              className="btn btn-outline-primary btn-lg mb-2"
+              className="btn btn-outline-primary btn-lg mb-2 rounded-1"
             >
               See pricing
             </button>

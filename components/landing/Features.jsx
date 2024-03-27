@@ -2,10 +2,10 @@ export default function Features() {
   return (
     <section className="features demo-wrap w-100 h-100">
       <div className="container px-4 pt-40">
-        <h2 className="pb-2 border-bottom fw-bolder">Special Features</h2>
-        <div className="row g-4 pt-5 row-cols-1 row-cols-lg-3">
+        <h2 className="pb-2 border-bottom fw-600">Special Features</h2>
+        <div className="row g-4 pt-50 row-cols-1 row-cols-lg-3">
           <div className="feature col-12 col-sm-6 col-lg-4 mb-2 mb-md-4">
-            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3 rounded-1">
               <i className="bi bi-search text-white bg-primary rounded p-2 bi-lg"></i>
             </div>
             <h3 className="fs-2 text-body-emphasis">Compare Prices</h3>
@@ -14,7 +14,7 @@ export default function Features() {
             </p>
           </div>
           <div className="feature col-12 col-sm-6 col-lg-4 mb-2 mb-md-4">
-            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3 rounded-1">
               <i className="bi bi-clipboard text-white bg-primary rounded p-2 bi-lg"></i>
             </div>
             <h3 className="fs-2 text-body-emphasis">Copy Hotel Details</h3>
@@ -24,7 +24,7 @@ export default function Features() {
             </p>
           </div>
           <div className="feature col-12 col-sm-6 col-lg-4 mb-2 mb-md-4">
-            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3 rounded-1">
               <i className="bi bi-link-45deg text-white bg-primary rounded p-2 bi-lg"></i>
             </div>
             <h3 className="fs-2 text-body-emphasis">Shorten Hotel Links</h3>
@@ -36,7 +36,7 @@ export default function Features() {
           </div>
 
           <div className="feature col-12 col-sm-6 col-lg-4 mb-2 mb-md-4">
-            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3 rounded-1">
               <i className="bi bi-geo text-white bg-primary rounded p-2 bi-lg"></i>
             </div>
             <h3 className="fs-2 text-body-emphasis">Find Attractions</h3>
@@ -46,8 +46,8 @@ export default function Features() {
             </p>
           </div>
           <div className="feature col-12 col-sm-6 col-lg-4 mb-2 mb-md-4">
-            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-              <i className="bi bi-sign-turn-right text-white bg-primary rounded p-2 bi-lg"></i>
+            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3 rounded-1">
+              <i className="bi bi-arrow-up-right-circle text-white bg-primary rounded p-2 bi-lg"></i>
             </div>
             <h3 className="fs-2 text-body-emphasis">Search Proxy</h3>
             <p>
@@ -56,8 +56,8 @@ export default function Features() {
             </p>
           </div>
           <div className="feature col-12 col-sm-6 col-lg-4 mb-2 mb-md-4">
-            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-              <i className="bi bi-braces-asterisk text-white bg-primary rounded p-2 bi-lg"></i>
+            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3 rounded-1">
+              <i className="bi bi-currency-dollar text-white bg-primary rounded p-2 bi-lg"></i>
             </div>
             <h3 className="fs-2 text-body-emphasis">Session Price Lowering</h3>
             <p>

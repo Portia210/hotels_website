@@ -17,7 +17,7 @@ export default function FiveMins() {
             />
           </div>
           <div className="col-lg-6 text-dark fs-6 fw-normal">
-            <p className="lead">
+            <p className="lead text-dark">
               Your time is valuable, which is why our website is designed to
               help you achieve more in less time.
             </p>

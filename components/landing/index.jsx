@@ -7,18 +7,22 @@ import WhoWeAre from './WhoWeAre';
 
 export default function Landing() {
   return (
-    <div className="w-100 h-100 y-gap-20">
+    <>
       <Hero />
 
-      <WhoWeAre />
+      <div className="mx-50">
+        <WhoWeAre />
+      </div>
 
       <Features />
 
-      <Intergration />
+      <div className="mt-50">
+        <Intergration />
+      </div>
 
       <FiveMins />
 
       <CreateAccount />
-    </div>
+    </>
   );
 }

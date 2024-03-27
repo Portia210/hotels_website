@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function WhoWeAre() {
   return (
-    <section id="about" className="demo-wrap w-100 h-100">
+    <section id="about" className="demo-wrap w-100 h-100 py-90">
       <img
         className="demo-bg"
         src="/img/landing/bg/bg-1.png"
