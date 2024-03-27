@@ -5,20 +5,24 @@ import Hero from './Hero';
 import Intergration from './Integration';
 import WhoWeAre from './WhoWeAre';
 
-export default function Landing() {
+export default function Landing({ t }) {
   return (
-    <div className="w-100 h-100 y-gap-20">
-      <Hero />
+    <>
+      <Hero t={t} />
 
-      <WhoWeAre />
+      <div className="mx-50">
+        <WhoWeAre t={t} />
+      </div>
 
-      <Features />
+      <Features t={t} />
 
-      <Intergration />
+      <div className="mt-50">
+        <Intergration t={t} />
+      </div>
 
-      <FiveMins />
+      <FiveMins t={t} />
 
-      <CreateAccount />
-    </div>
+      <CreateAccount t={t} />
+    </>
   );
 }

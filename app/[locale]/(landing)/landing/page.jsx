@@ -1,5 +1,5 @@
 import Landing from '@/components/landing';
-import Head from 'next/head';
+import useTransServer from '@/hooks/useTransServer';
 
 export const metadata = {
   title: 'Agent-Space: Landing Page',
@@ -7,15 +7,11 @@ export const metadata = {
 };
 
 export default function LandingPage() {
+  const { t, isReverse } = useTransServer();
+
   return (
-    <>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-        />
-      </Head>
-      <Landing />
-    </>
+    <div dir={`${isReverse && 'rtl'}`}>
+      <Landing t={t} />;
+    </div>
   );
 }
