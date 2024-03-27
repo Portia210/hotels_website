@@ -10,7 +10,14 @@ export const metadata = {
   description: 'Agent-Space - Travel & Tour',
 };
 
-export default async function Home() {
+const justSignUp = searchParams => {
+  return !!(
+    searchParams?.__clerk_created_session &&
+    searchParams?.__clerk_status === 'verified'
+  );
+};
+
+export default async function Home({ searchParams }) {
   const isVaildStatus = await checkUserStatus();
 
   if (isVaildStatus) {
@@ -27,6 +34,8 @@ export default async function Home() {
     });
     if (res.ok) redirect('/banned');
   }
+
+  if (justSignUp(searchParams)) redirect('/pricing');
 
   return (
     <Wrapper>

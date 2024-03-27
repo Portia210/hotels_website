@@ -47,6 +47,7 @@ const SignUpForm = () => {
         agentNumber: data?.agentNumber,
         country: selectedCountry,
       },
+      redirectUrl: `${window.location.origin}/pricing`,
     };
     await signUp
       .create(signUpPayload)
