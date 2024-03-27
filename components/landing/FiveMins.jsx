@@ -1,9 +1,9 @@
-export default function FiveMins() {
+export default function FiveMin({ t }) {
   return (
     <section id="5-minutes" className="px-2 px-sm-4 pt-5 w-100 h-100">
       <div className="container col-xl-8">
         <h2 className="display-5 fw-bold text-body-emphasis lh-1 mb-3 text-center mb-3 pb-3 border-bottom">
-          5 minutes per day
+          {t('FiveMin.title')}
         </h2>
         <div className="row flex-lg-row-reverse align-items-center g-5">
           <div className="col-12 col-lg-6 mb-3 d-flex justify-content-center">
@@ -17,34 +17,29 @@ export default function FiveMins() {
             />
           </div>
           <div className="col-lg-6 text-dark fs-6 fw-normal">
-            <p className="lead text-dark">
-              Your time is valuable, which is why our website is designed to
-              help you achieve more in less time.
-            </p>
-            <h4 className="mb-3">
-              Here is what you can do in 5 minutes per day:
-            </h4>
+            <p className="lead text-dark">{t('FiveMin.description1')}</p>
+            <h4 className="mb-3">{t('FiveMin.description2')}</h4>
             <ul className="list-group mb-2 list-inline">
               <li className="list-group-item opacity-2 list-group-item-success">
-                1. Select a Location
+                {t('FiveMin.task1')}
               </li>
               <li className="list-group-item opacity-1">
-                2. Explore popular tourist attractions
+                {t('FiveMin.task2')}
               </li>
               <li className="list-group-item opacity-2 list-group-item-success">
-                3. Search for cheap hotels in this location
+                {t('FiveMin.task3')}
               </li>
               <li className="list-group-item opacity-1">
-                4. Find hotels with the biggest advantage for Travelor
+                {t('FiveMin.task4')}
               </li>
               <li className="list-group-item opacity-2 list-group-item-success">
-                5. Create a custom short link for each one of the hotels
+                {t('FiveMin.task5')}
               </li>
               <li className="list-group-item opacity-1">
-                6. Copy the Hotel Details, with the link, in ONE CLICK
+                {t('FiveMin.task6')}
               </li>
               <li className="list-group-item opacity-2 list-group-item-success">
-                7. Share 10 hotels with the best prices on social media
+                {t('FiveMin.task7')}
               </li>
             </ul>
           </div>

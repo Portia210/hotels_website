@@ -7,11 +7,11 @@ export const metadata = {
 };
 
 export default function LandingPage() {
-  const { isReverse } = useTransServer();
-  
+  const { t, isReverse } = useTransServer();
+
   return (
     <div dir={`${isReverse && 'rtl'}`}>
-      <Landing />;
+      <Landing t={t} />;
     </div>
   );
 }

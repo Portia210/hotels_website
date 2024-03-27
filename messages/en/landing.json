@@ -5,6 +5,7 @@
       "heading2": "Agent Space allows Travlor agents to discover price gaps between Travelor and Booking, earning high commissions.",
       "heading3": "With our new tools, gain in unprecedented ways.",
       "createAnAccount": "Create An Account",
+      "createAnAccountFree": "Create an account for free",
       "readGuide": "Read The Guide",
       "seePricing": "See Pricing",
       "createAccountDescription": "Create an account for FREE and use all our tools to start gaining with the help of all our special features"
@@ -46,7 +47,7 @@
   "Integration": {
     "title": "Integration",
     "description1": "All the website features work together with full integration to allow each agent to be the most effective they can be. You no longer need to use external services to shorten your links or to copy the hotel details one by one. All our features work together to allow you to find deals and publish them in the most effective way.",
-    "desctipion2": "",
+    "description2": "",
     "description3": ""
   },
   "FiveMin": {

@@ -1,4 +1,4 @@
-export default function Hero() {
+export default function Hero({ t }) {
   return (
     <section
       className="shadow-lg w-100 h-100"
@@ -18,30 +18,29 @@ export default function Hero() {
             </div>
             <div className="col-lg-6 lh-base">
               <h2 className="landing-font display-6 fw-bold text-light lh-1 mb-3">
-                Meet Agent-Space
+                {t('Landing.Hero.heading')}
               </h2>
 
               <p className="landing-font lead text-light fw-normal">
-                Agent Space allows Travlor agents to discover price gaps between
-                Travelor and Booking, earning high commissions.
+                {t('Landing.Hero.heading2')}
               </p>
-              <br/>
+              <br />
               <p className="landing-font lead text-light fw-normal">
-                With our new tools, gain in unprecedented ways.
+                {t('Landing.Hero.heading3')}
               </p>
-              <br/>
+              <br />
               <div className="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
                 <button
                   type="button"
                   className="btn btn-primary btn-lg px-20 mr-3 mb-3 rounded-1 text-20"
                 >
-                  Create An Account
+                  {t('Landing.Hero.createAnAccount')}
                 </button>
                 <button
                   type="button"
                   className="btn btn-outline-light btn-lg px-20 mb-3 rounded-1 text-20"
                 >
-                  Read The Guide
+                  {t('Landing.Hero.readGuide')}
                 </button>
               </div>
             </div>
