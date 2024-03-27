@@ -1,0 +1,64 @@
+{
+  "Landing": {
+    "Hero": {
+      "heading": "Meet Agent-Space",
+      "heading2": "Agent Space allows Travlor agents to discover price gaps between Travelor and Booking, earning high commissions.",
+      "heading3": "With our new tools, gain in unprecedented ways.",
+      "createAnAccount": "Create An Account",
+      "readGuide": "Read The Guide",
+      "seePricing": "See Pricing",
+      "createAccountDescription": "Create an account for FREE and use all our tools to start gaining with the help of all our special features"
+    }
+  },
+  "WhoWeAre": {
+    "title": "Who We Are",
+    "paragraph1": "Agent Space is an initiative aimed at assisting travel agents in maximizing revenue through innovative tools. These tools enable agents to efficiently locate hotels offering the best prices for travelers and effectively market them to clients. Additionally, new features help agents further reduce prices and rapidly promote their personal links.",
+    "paragraph2": "",
+    "paragraph3": ""
+  },
+  "Features": {
+    "title": "Special Features",
+    "comparePrices": {
+      "title": "Compare Prices",
+      "description": "Compare prices between Booking and Travelor, anywhere, anytime."
+    },
+    "copyHotelDetail": {
+      "title": "Copy Hotel Details",
+      "description": "Copy the desired hotel details in one click and share them on social media."
+    },
+    "shortenLink": {
+      "title": "Shorten Hotel Links",
+      "description": "Shorten the link in one click with our built-in system and copy it with the hotel details."
+    },
+    "findAttractions": {
+      "title": "Find Attractions",
+      "description": "Find the most popular tourist destinations in a city in just one click."
+    },
+    "searchProxy": {
+      "title": "Search Proxy",
+      "description": "Search for deals through different locations in the world and lower the price."
+    },
+    "sessionPrice": {
+      "title": "Session Price Lowering",
+      "description": "Lower the price on the Travlor website by using our tool to opt for Travelor in a new session."
+    }
+  },
+  "Integration": {
+    "title": "Integration",
+    "description1": "All the website features work together with full integration to allow each agent to be the most effective they can be. You no longer need to use external services to shorten your links or to copy the hotel details one by one. All our features work together to allow you to find deals and publish them in the most effective way.",
+    "desctipion2": "",
+    "description3": ""
+  },
+  "FiveMin": {
+    "title": "5 minutes per day",
+    "description1": "Your time is valuable, which is why our website is designed to help you achieve more in less time.",
+    "description2": "Here is what you can do in 5 minutes per day:",
+    "task1": "1. Select a Location",
+    "task2": "2. Explore popular tourist attractions",
+    "task3": "3. Search for cheap hotels in this location",
+    "task4": "4. Find hotels with the biggest advantage for Travelor",
+    "task5": "5. Create a custom short link for each one of the hotels",
+    "task6": "6. Copy the Hotel Details, with the link, in ONE CLICK",
+    "task7": "7. Share 10 hotels with the best prices on social media"
+  }
+}
