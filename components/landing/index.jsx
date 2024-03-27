@@ -13,16 +13,19 @@ export default function Landing({ t }) {
       <div className="mx-50">
         <WhoWeAre t={t} />
       </div>
-
-      <Features t={t} />
-
+      <div className="mt-50">
+        <Features t={t} />
+      </div>
       <div className="mt-50">
         <Intergration t={t} />
       </div>
 
-      <FiveMins t={t} />
-
-      <CreateAccount t={t} />
+      <div className="mt-50">
+        <FiveMins t={t} />
+      </div>
+      <div className="mt-50">
+        <CreateAccount t={t} />
+      </div>
     </>
   );
 }

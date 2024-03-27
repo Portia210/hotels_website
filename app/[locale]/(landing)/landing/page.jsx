@@ -1,3 +1,5 @@
+import DefaultFooter from '@/components/footer/default';
+import Header1 from '@/components/header/header-1';
 import Landing from '@/components/landing';
 import useTransServer from '@/hooks/useTransServer';
 
@@ -10,8 +12,13 @@ export default function LandingPage() {
   const { t, isReverse } = useTransServer();
 
   return (
-    <div dir={`${isReverse && 'rtl'}`}>
-      <Landing t={t} />;
-    </div>
+    <>
+      <div className="header-margin"></div>
+      <Header1 />
+      <section dir={`${isReverse && 'rtl'}`} className="mb-40">
+        <Landing t={t} />;
+      </section>
+      <DefaultFooter />
+    </>
   );
 }
