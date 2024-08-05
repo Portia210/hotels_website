@@ -4,6 +4,8 @@
     "guestReviews": "guest reviews",
     "guestReviewsUpper": "Guest reviews",
     "distance": "from center",
+    "location": "from location",
+    "distanceFromLocation": "Distance from location",
     "numberOfGuests": "Number of guests",
     "price": "Price:",
     "toTravelor": "To Travelor",

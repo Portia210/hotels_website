@@ -8,13 +8,15 @@ import { useState } from 'react';
 import HotelInfoToast from '../common/HotelInfoToast';
 import HotelStars from '../common/HotelStars';
 import useTrans from '@/hooks/useTrans';
-import { renderText, toTravelorWithoutSession } from '@/utils/hotelRender';
+import { renderText, renderTextLocation, toTravelorWithoutSession } from '@/utils/hotelRender';
+import useDistanceCalc from '@/hooks/useDistanceCalc';
 
 const HotelProperties = ({ hotels }) => {
   const { t, isReverse } = useTrans();
 
   const [selectedHotel, setSelectedHotel] = useState(null);
   const { currency } = useCurrencyStore();
+  const { getDistance } = useDistanceCalc();
 
   const onShowHotelInfo = hotelData => {
     document.getElementById('liveToast_matches')?.classList?.add('show');
@@ -69,7 +71,24 @@ const HotelProperties = ({ hotels }) => {
                   isReverse ? 'text-end' : ''
                 }`}
               >
-                {renderText(t, 'distance', `${Number(item.travelorDistance).toFixed(2)} km from center`)}
+                {renderText(
+                  t,
+                  'distance',
+                  `${Number(item.travelorDistance).toFixed(2)} km from center`,
+                )}
+              </p>
+              <p
+                className={`text-light-1 lh-14 text-14 mt-5 ${
+                  isReverse ? 'text-end' : ''
+                }`}
+              >
+                {renderTextLocation(
+                  t,
+                  `${getDistance(
+                    item.travelorGeo.lat,
+                    item.travelorGeo.lon,
+                  )} km from location`,
+                )}
               </p>
               <div className="d-flex items-center mt-20">
                 <div className="d-flex justify-between align-items-center w-100">
@@ -94,7 +113,13 @@ const HotelProperties = ({ hotels }) => {
               </div>
               <div className="mt-5">
                 <div className="d-flex justify-between fw-500">
-                  <span>{convertCurrency(item?.travelorPrice, currency, item?.travelorCurrency)}</span>
+                  <span>
+                    {convertCurrency(
+                      item?.travelorPrice,
+                      currency,
+                      item?.travelorCurrency,
+                    )}
+                  </span>
                   <span className="text-blue-1">
                     <span
                       className="d-inline cursor-pointer"
@@ -111,7 +136,11 @@ const HotelProperties = ({ hotels }) => {
                 </div>
                 <div className="d-flex justify-between fw-500">
                   <span className="">
-                    {convertCurrency(item?.bookingPrice, currency, item?.bookingCurrency)}
+                    {convertCurrency(
+                      item?.bookingPrice,
+                      currency,
+                      item?.bookingCurrency,
+                    )}
                   </span>
                   <span className="text-blue-1">
                     <Link target="_blank" href={item.bookingLink}>
@@ -122,7 +151,11 @@ const HotelProperties = ({ hotels }) => {
                 {item?.price_difference > 0 && (
                   <div className={`d-flex x-gap-5 text-success fw-500`}>
                     <span>
-                      {convertCurrency(item?.price_difference, currency, item?.travelorCurrency)}
+                      {convertCurrency(
+                        item?.price_difference,
+                        currency,
+                        item?.travelorCurrency,
+                      )}
                     </span>
                     <span>{t('Hotel.youSave')}</span>
                   </div>
