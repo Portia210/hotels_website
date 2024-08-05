@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import HotelNameFilter from './HotelNameFilter';
 import HotelTabs from './HotelTabs';
 import ResultHeader from './ResultHeader';
+import DistanceFilter from './DistanceFilter';
 
 export default function ListHotels() {
   const { t } = useTrans();
@@ -36,8 +37,12 @@ export default function ListHotels() {
   const renderTooltip = () => {
     if (!t('Hotel.tooltipCopy')) return;
     const Tooltip = require('bootstrap/js/dist/tooltip');
-    const copyHotelToolTip = document.getElementById('copyHotelInfoTooltip_matches');
-    const shortenLinkToolTip = document.getElementById('shortenLinkTooltip_matches');
+    const copyHotelToolTip = document.getElementById(
+      'copyHotelInfoTooltip_matches',
+    );
+    const shortenLinkToolTip = document.getElementById(
+      'shortenLinkTooltip_matches',
+    );
     new Tooltip(shortenLinkToolTip, {
       container: 'body',
       trigger: 'hover',
@@ -104,7 +109,7 @@ export default function ListHotels() {
             disabled={loading || isExpired}
           />
         </div>
-        <div className="col-auto ms-auto">
+        <div className="col-auto">
           <button
             onClick={() => {
               setGapActive(!gapActive);
@@ -117,8 +122,10 @@ export default function ListHotels() {
             {t('FilterBar.bHotelGap')}
           </button>
         </div>
+        <div className={`col-6 col-md-5 col-lg-4`}>
+          <DistanceFilter />
+        </div>
         {/* End col-auto */}
-
         <HotelTabs />
 
         <div className="row y-gap-30 sm:pr-0">
