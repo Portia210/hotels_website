@@ -1,15 +1,28 @@
+import useCurrencyStore from '@/store/useCurrencyStore';
 import Cookies from 'js-cookie';
 
-const convertCurrency = (amount, currencyInput, currency) => {
-  let rate = currencyInput?.rate;
-  if (currencyInput?.currency === currency) rate = 1;
-  const symbol = currencyInput?.symbol;
+const convertCurrency = (amount, currencyOutput, currencyInputKey) => {
+  const rate = currencyOutput?.rate;
   if (!amount || !rate) return amount;
-  const convertedPrice = Math.round(amount * rate);
+  const defaultAmount = convertToDefaultCurrency(amount, currencyInputKey);
+  const convertedPrice = Math.round(defaultAmount * rate);
   const formattedNumber = convertedPrice.toLocaleString(undefined, {
     useGrouping: true,
   });
-  return `${formattedNumber} ${symbol}`;
+  return `${formattedNumber} ${currencyOutput.symbol}`;
+};
+
+// Convert amount to default currency (USD)
+const convertToDefaultCurrency = (amount, currencyInputKey) => {
+  const currencies = useCurrencyStore.getState().currencies;
+  const defaultCurrency = currencies.find(item => item.currency === 'USD');
+  const currencyInput = currencies.find(
+    item => item.currency === currencyInputKey,
+  );
+  let rate = currencyInput?.rate ?? 1;
+  if (defaultCurrency.currency === currencyInputKey) rate = 1;
+  if (!amount || !rate) return amount;
+  return amount / rate;
 };
 
 const loadDefaultCurrency = (currencies, defaultCode) => {
