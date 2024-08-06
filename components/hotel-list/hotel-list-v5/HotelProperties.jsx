@@ -8,10 +8,7 @@ import { useState } from 'react';
 import HotelInfoToast from '../common/HotelInfoToast';
 import HotelStars from '../common/HotelStars';
 import useTrans from '@/hooks/useTrans';
-import {
-  renderText,
-  toTravelorWithoutSession,
-} from '@/utils/hotelRender';
+import { renderText, toTravelorWithoutSession } from '@/utils/hotelRender';
 
 const HotelProperties = ({ hotels }) => {
   const { t, isReverse } = useTrans();
@@ -68,14 +65,16 @@ const HotelProperties = ({ hotels }) => {
                 <span>{item?.title}</span>
               </h4>
               <p
-                className={`text-light-1 lh-14 text-14 mt-5 ${
+                className={`text-light-1 lh-14 text-14 mt-5 text-truncate ${
                   isReverse ? 'text-end' : ''
                 }`}
               >
                 {renderText(
                   t,
                   'distance',
-                  `${Number(item.travelorDistance).toFixed(2)} km from center`,
+                  `${Number(item.travelorDistance).toFixed(2)} km from ${
+                    item?.travelorSearchQuery?.query_text ?? 'center'
+                  }`,
                 )}
               </p>
               <div className="d-flex items-center mt-20">
