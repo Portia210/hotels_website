@@ -65,14 +65,13 @@ const HotelProperties = ({ hotels }) => {
                 <span>{item?.title}</span>
               </h4>
               <p
-                className={`text-light-1 lh-14 text-14 mt-5 text-truncate ${
-                  isReverse ? 'text-end' : ''
-                }`}
+                className={`text-light-1 lh-14 text-14 mt-5 text-truncate`}
+                dir={`${isReverse && 'rtl'}`}
               >
+                {Number(item.travelorDistance).toFixed(2)}
                 {renderText(
                   t,
-                  'distance',
-                  `${Number(item.travelorDistance).toFixed(2)} km from ${
+                  ` km from ${
                     item?.travelorSearchQuery?.query_text ?? 'center'
                   }`,
                 )}
