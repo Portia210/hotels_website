@@ -31,7 +31,6 @@ export default function DistanceFilter() {
   };
 
   const filterAndSortHotels = debounce((distance, sortOrder) => {
-    console.log('filterAndSortHotels', distance, sortOrder);
     if (!distance) return;
     let filteredDistanceHotels = filterHotels.filter(hotel => {
       const hotelDistance = hotel?.travelorDistance ?? 0;

@@ -1,12 +1,12 @@
 'use client';
 
 import useCurrency from '@/hooks/useCurrency';
+import useCurrencyStore from '@/store/useCurrencyStore';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const CurrencyMegaMenu = ({ textClass }) => {
-  const [currencies, setCurrencies] = useState([]);
-
+  const { currencies, setCurrencies } = useCurrencyStore();
   const {
     handleCurrency,
     selectedCurrency,

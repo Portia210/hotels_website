@@ -122,7 +122,7 @@ export default function ListHotels() {
             {t('FilterBar.bHotelGap')}
           </button>
         </div>
-        <div className={`col-6`}>
+        <div className={`col-12 col-md-8 col-lg-6`}>
           <DistanceFilter />
         </div>
         {/* End col-auto */}
