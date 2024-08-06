@@ -1,17 +1,18 @@
 import { EVENT_TYPES } from '@/constants/events';
 import useTrans from '@/hooks/useTrans';
 import useHotelFilterStore from '@/store/useHotelFilterStore';
+import useSearchStore from '@/store/useSearchStore';
 import eventEmitter from '@/utils/eventEmitter';
 import debounce from 'lodash/debounce';
 import { useEffect, useState } from 'react';
 
 export default function DistanceFilter() {
   const { t, isReverse } = useTrans();
+  const { isReady } = useSearchStore();
   const {
     hotels: originHotels,
     filterHotels,
     setFilterHotels,
-    onFilterHotel,
   } = useHotelFilterStore();
 
   const [distance, setDistance] = useState(5000);
@@ -56,7 +57,7 @@ export default function DistanceFilter() {
   const subscribe = () => {
     const token = eventEmitter.addListener(EVENT_TYPES.RESET_FILTER, () => {
       setDistance(5000);
-      setSortOrder('asc');
+      setSortOrder('');
     });
     return token;
   };
@@ -89,6 +90,7 @@ export default function DistanceFilter() {
             max="10000"
             step="1"
             value={distance}
+            disabled={!isReady}
             onChange={handleDistanceChange}
             onMouseUp={handleMouseUp}
           />
@@ -105,10 +107,13 @@ export default function DistanceFilter() {
             id="sortOrder"
             className="form-select"
             value={sortOrder}
+            disabled={!isReady}
             onChange={handleSortOrderChange}
             onBlur={handleMouseUp}
           >
-            <option value="" disabled>{t('Hotel.default')}</option>
+            <option value="" disabled>
+              {t('Hotel.default')}
+            </option>
             <option value="asc">{t('FilterBar.lth')}</option>
             <option value="desc">{t('FilterBar.htl')}</option>
           </select>
