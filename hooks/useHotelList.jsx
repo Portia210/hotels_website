@@ -56,7 +56,6 @@ const useHotelList = () => {
       do {
         if (response.status === 'FINISHED') {
           response = await fetchHotel(sessionId, token);
-          setIsReady(true);
           break;
         }
         await sleep(2000);
@@ -67,6 +66,7 @@ const useHotelList = () => {
       console.error('sendCommand error:::', error);
       throw error;
     } finally {
+      setIsReady(true);
       setLoading(false);
     }
   }, [isSearchFormVaild.success]);

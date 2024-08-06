@@ -65,11 +65,17 @@ const TravelorHotelProperties = ({ hotels }) => {
                 <span>{item?.title}</span>
               </h4>
               <p
-                className={`text-light-1 lh-14 text-14 mt-5 ${
+                className={`text-light-1 lh-14 text-14 mt-5 text-truncate ${
                   isReverse ? 'text-end' : ''
                 }`}
               >
-                {renderText(t, 'distance', `${Number(item.travelorDistance).toFixed(2)} km from center`)}
+                {renderText(
+                  t,
+                  'distance',
+                  `${Number(item.travelorDistance).toFixed(2)} km from ${
+                    item?.travelorSearchQuery?.query_text ?? 'center'
+                  }`,
+                )}{' '}
               </p>
               <div className="d-flex items-center mt-20">
                 <div className="d-flex justify-between align-items-center w-100">
@@ -94,7 +100,13 @@ const TravelorHotelProperties = ({ hotels }) => {
               </div>
               <div className="mt-5">
                 <div className="d-flex justify-between fw-500">
-                  <span>{convertCurrency(item?.travelorPrice, currency, item?.travelorCurrency)}</span>
+                  <span>
+                    {convertCurrency(
+                      item?.travelorPrice,
+                      currency,
+                      item?.travelorCurrency,
+                    )}
+                  </span>
                   <span className="text-blue-1">
                     <span
                       className="d-inline cursor-pointer"
