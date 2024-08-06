@@ -33,6 +33,7 @@ export default function HotelNameFilter({
     }
   }, [hotelName]);
 
+  
   useEffect(() => {
     if (!disabled) setHotels(filterHotels);
   }, [disabled]);

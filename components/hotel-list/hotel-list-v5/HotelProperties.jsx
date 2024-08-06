@@ -8,15 +8,16 @@ import { useState } from 'react';
 import HotelInfoToast from '../common/HotelInfoToast';
 import HotelStars from '../common/HotelStars';
 import useTrans from '@/hooks/useTrans';
-import { renderText, renderTextLocation, toTravelorWithoutSession } from '@/utils/hotelRender';
-import useDistanceCalc from '@/hooks/useDistanceCalc';
+import {
+  renderText,
+  toTravelorWithoutSession,
+} from '@/utils/hotelRender';
 
 const HotelProperties = ({ hotels }) => {
   const { t, isReverse } = useTrans();
 
   const [selectedHotel, setSelectedHotel] = useState(null);
   const { currency } = useCurrencyStore();
-  const { getDistance } = useDistanceCalc();
 
   const onShowHotelInfo = hotelData => {
     document.getElementById('liveToast_matches')?.classList?.add('show');
@@ -75,19 +76,6 @@ const HotelProperties = ({ hotels }) => {
                   t,
                   'distance',
                   `${Number(item.travelorDistance).toFixed(2)} km from center`,
-                )}
-              </p>
-              <p
-                className={`text-light-1 lh-14 text-14 mt-5 ${
-                  isReverse ? 'text-end' : ''
-                }`}
-              >
-                {renderTextLocation(
-                  t,
-                  `${getDistance(
-                    item.travelorGeo.lat,
-                    item.travelorGeo.lon,
-                  )} km from location`,
                 )}
               </p>
               <div className="d-flex items-center mt-20">

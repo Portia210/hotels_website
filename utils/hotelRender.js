@@ -9,13 +9,6 @@ export const renderText = (t, key, value) => {
   return value;
 };
 
-export const renderTextLocation = (t, value) => {
-  if (value && value.includes('from location')) {
-    value = value.replace('from location', t(`Hotel.location`));
-  }
-  return value;
-};
-
 export const toTravelorWithoutSession = url => {
   if (!url) return;
   const searchParams = new URLSearchParams(new URL(url).search);
