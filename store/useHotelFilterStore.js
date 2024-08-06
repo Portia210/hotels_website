@@ -1,7 +1,8 @@
 import { FILTER_TYPE, defaultFilter } from '@/hooks/hotelFilters';
 import {
+  filterAndSortHotels,
   filterHotel,
-  filterHotelByPrice
+  filterHotelByPrice,
 } from '@/utils/hotelFilter';
 import { create } from 'zustand';
 
@@ -25,24 +26,7 @@ const useHotelFilterStore = create((set, get) => ({
   setCondition: (type, condition) =>
     set(state => {
       let filterHotels = [];
-      if (type === FILTER_TYPE.RATING) {
-        state.condition.ratingFilter = condition;
-        filterHotels = filterHotel(state.condition, state.hotels);
-      } else if (type === FILTER_TYPE.STARS) {
-        state.condition.starFilter = condition;
-        filterHotels = filterHotel(state.condition, state.hotels);
-      } else if (type === FILTER_TYPE.PRICE_ORDER) {
-        state.condition.priceFilter = condition;
-        state.condition.priceGapFilter = false;
-        filterHotels = filterHotel(state.condition, state.filterHotels);
-      } else if (type === FILTER_TYPE.PRICE_GAP) {
-        state.condition.priceGapFilter = condition;
-        const filteredHotelPriceOrder = filterHotelByPrice(
-          state.condition.priceFilter,
-          state.filterHotels,
-        );
-        filterHotels = filterHotel(state.condition, filteredHotelPriceOrder);
-      }
+      filterHotels = handleFilterHotels(state, type, condition);
       state.condition.lastAction = {
         type,
         condition,
@@ -50,4 +34,45 @@ const useHotelFilterStore = create((set, get) => ({
       return { filterHotels, condition: state.condition };
     }),
 }));
+
+const handleFilterHotels = (state, type, condition) => {
+  let filterHotels = state.filterHotels;
+  if (type === FILTER_TYPE.RATING) {
+    state.condition.ratingFilter = condition;
+    filterHotels = filterHotel(state.condition, state.hotels);
+  } else if (type === FILTER_TYPE.STARS) {
+    state.condition.starFilter = condition;
+    filterHotels = filterHotel(state.condition, state.hotels);
+  } else if (type === FILTER_TYPE.PRICE_ORDER) {
+    state.condition.priceFilter = condition;
+    state.condition.priceGapFilter = false;
+    filterHotels = filterHotel(state.condition, state.filterHotels);
+  } else if (type === FILTER_TYPE.PRICE_GAP) {
+    state.condition.priceGapFilter = condition;
+    const filteredHotelPriceOrder = filterHotelByPrice(
+      state.condition.priceFilter,
+      state.filterHotels,
+    );
+    filterHotels = filterHotel(state.condition, filteredHotelPriceOrder);
+  } else if (type === FILTER_TYPE.DISTANCE_ORDER) {
+    state.condition.distanceSortOrder = condition;
+    state.condition.priceGapFilter = false;
+    if (condition) {
+      filterHotels = handleFilterDistance(state, state.filterHotels);
+    }
+  } else if (type === FILTER_TYPE.DISTANCE) {
+    state.condition.distanceFilter = condition;
+    filterHotels = handleFilterDistance(state, state.filterHotels);
+  }
+  return filterHotels;
+};
+
+const handleFilterDistance = (state, hotels) => {
+  const results = filterAndSortHotels(
+    hotels,
+    state.condition.distanceFilter,
+    state.condition.distanceSortOrder,
+  );
+  return results;
+};
 export default useHotelFilterStore;

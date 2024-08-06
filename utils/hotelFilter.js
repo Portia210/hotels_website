@@ -44,10 +44,30 @@ const filterHotel = (condition, hotels) => {
   return results;
 };
 
-export {
-    filterByBiggestPriceGap, filterHotel,
-    filterHotelByPrice,
-    filterHotelByRating,
-    filterHotelByStar
+const filterAndSortHotels = (hotels, distance, sortOrder) => {
+  if (!distance) return [];
+  let filteredDistanceHotels = hotels.filter(hotel => {
+    const hotelDistance = hotel?.travelorDistance ?? 0;
+    return hotelDistance * 1000 <= distance;
+  });
+
+  if (sortOrder === 'asc') {
+    filteredDistanceHotels.sort(
+      (a, b) => a.travelorDistance - b.travelorDistance,
+    );
+  } else if (sortOrder === 'desc') {
+    filteredDistanceHotels.sort(
+      (a, b) => b.travelorDistance - a.travelorDistance,
+    );
+  }
+  return filteredDistanceHotels;
 };
 
+export {
+  filterAndSortHotels,
+  filterByBiggestPriceGap,
+  filterHotel,
+  filterHotelByPrice,
+  filterHotelByRating,
+  filterHotelByStar,
+};
