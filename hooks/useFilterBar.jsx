@@ -67,7 +67,7 @@ const useFilterBar = hotels => {
 
   useEffect(() => {
     setFilterHotels(hotels);
-    onFilterHotel();
+    // onFilterHotel();
   }, [hotels.length]);
 
   useEffect(() => {

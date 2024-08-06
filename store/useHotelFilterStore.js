@@ -36,43 +36,39 @@ const useHotelFilterStore = create((set, get) => ({
 }));
 
 const handleFilterHotels = (state, type, condition) => {
-  let filterHotels = state.filterHotels;
-  if (type === FILTER_TYPE.RATING) {
-    state.condition.ratingFilter = condition;
-    filterHotels = filterHotel(state.condition, state.hotels);
-  } else if (type === FILTER_TYPE.STARS) {
-    state.condition.starFilter = condition;
-    filterHotels = filterHotel(state.condition, state.hotels);
-  } else if (type === FILTER_TYPE.PRICE_ORDER) {
-    state.condition.priceFilter = condition;
-    state.condition.priceGapFilter = false;
-    filterHotels = filterHotel(state.condition, state.filterHotels);
-  } else if (type === FILTER_TYPE.PRICE_GAP) {
-    state.condition.priceGapFilter = condition;
-    const filteredHotelPriceOrder = filterHotelByPrice(
-      state.condition.priceFilter,
-      state.filterHotels,
-    );
-    filterHotels = filterHotel(state.condition, filteredHotelPriceOrder);
-  } else if (type === FILTER_TYPE.DISTANCE_ORDER) {
-    state.condition.distanceSortOrder = condition;
-    state.condition.priceGapFilter = false;
-    if (condition) {
-      filterHotels = handleFilterDistance(state, state.filterHotels);
-    }
-  } else if (type === FILTER_TYPE.DISTANCE) {
-    state.condition.distanceFilter = condition;
-    filterHotels = handleFilterDistance(state, state.filterHotels);
-  }
-  return filterHotels;
-};
+  let filterHotels = [];
 
-const handleFilterDistance = (state, hotels) => {
-  const results = filterAndSortHotels(
-    hotels,
-    state.condition.distanceFilter,
-    state.condition.distanceSortOrder,
-  );
-  return results;
+  switch (type) {
+    case FILTER_TYPE.RATING:
+      state.condition.ratingFilter = condition;
+      break;
+    case FILTER_TYPE.STARS:
+      state.condition.starFilter = condition;
+      break;
+    case FILTER_TYPE.PRICE_ORDER:
+      state.condition.priceFilter = condition;
+      state.condition.priceGapFilter = false;
+      break;
+    case FILTER_TYPE.PRICE_GAP:
+      state.condition.priceGapFilter = condition;
+      const filteredHotelPriceOrder = filterHotelByPrice(
+        state.condition.priceFilter,
+        state.hotels,
+      );
+      filterHotels = filterHotel(state.condition, filteredHotelPriceOrder);
+      return filterHotels; // Return early as we already filtered by price order
+    case FILTER_TYPE.DISTANCE_ORDER:
+      state.condition.distanceSortOrder = condition;
+      state.condition.priceGapFilter = false;
+      break;
+    case FILTER_TYPE.DISTANCE:
+      state.condition.distanceFilter = condition;
+      break;
+    default:
+      return state.hotels; // Return original hotels if type is not recognized
+  }
+
+  filterHotels = filterHotel(state.condition, state.hotels);
+  return filterHotels;
 };
 export default useHotelFilterStore;
