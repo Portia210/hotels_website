@@ -71,14 +71,14 @@ export default function ListHotels() {
     <>
       {/* Top SearchBanner */}
       <div className="row y-gap-20 items-center">
-        <div className="col-auto">
+        <div className="col-12">
           <div className="row x-gap-20 y-gap-10 items-center">
             <div className="col-auto">
               <div className="text-18 fw-500">{t('FilterBar.filter')}</div>
             </div>
             {/* End .col-auto */}
 
-            <div className="col-auto">
+            <div className="col-10">
               <div className="row x-gap-15 y-gap-15">
                 <div className="col-auto d-flex align-items-center">
                   <button
@@ -97,6 +97,8 @@ export default function ListHotels() {
                   setRatingFilter={handleRatingFilterChange}
                   starFilter={starFilter}
                   setStarFilter={handleStarFilterChange}
+                  distanceSortOrder={distanceSortOrder}
+                  setDistanceSortOrder={setDistanceSortOrder}
                 />
               </div>
             </div>
@@ -105,12 +107,17 @@ export default function ListHotels() {
           {/* End .row */}
         </div>
         {/* End col-auto */}
-
         <div className={`col-lg-3 col-md-5 col-sm-6`}>
           <HotelNameFilter
             hotelFilterStore={hotelFilterStore}
             hotelNameFilterStore={hotelNameFilterStore}
             disabled={loading || isExpired}
+          />
+        </div>
+        <div className={`col-6 col-md-8 col-lg-4`}>
+          <DistanceFilter
+            distanceFilter={distanceFilter}
+            setDistanceFilter={setDistanceFilter}
           />
         </div>
         <div className="col-auto">
@@ -125,14 +132,6 @@ export default function ListHotels() {
             <i className="icon-up-down text-14 mr-10"></i>
             {t('FilterBar.bHotelGap')}
           </button>
-        </div>
-        <div className={`col-12 col-md-8 col-lg-6`}>
-          <DistanceFilter
-            distanceFilter={distanceFilter}
-            distanceSortOrder={distanceSortOrder}
-            setDistanceFilter={setDistanceFilter}
-            setDistanceSortOrder={setDistanceSortOrder}
-          />
         </div>
         {/* End col-auto */}
         <HotelTabs />

@@ -1,6 +1,5 @@
 import { FILTER_TYPE, defaultFilter } from '@/hooks/hotelFilters';
 import {
-  filterAndSortHotels,
   filterHotel,
   filterHotelByPrice,
 } from '@/utils/hotelFilter';
