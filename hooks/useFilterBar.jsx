@@ -8,6 +8,7 @@ import useHotelPagination from './hotelFilters/useHotelPagination';
 import usePriceFilter from './hotelFilters/usePriceFilter';
 import useRatingFilter from './hotelFilters/useRatingFilter';
 import useStarFilter from './hotelFilters/useStarFilter';
+import useDistanceFilter from './hotelFilters/useDistanceFilter';
 
 // TODO: optimize this hook, reduce the number of re-renders
 const useFilterBar = hotels => {
@@ -38,15 +39,21 @@ const useFilterBar = hotels => {
     return [];
   };
 
+  const {
+    distanceFilter,
+    setDistanceFilter,
+    distanceSortOrder,
+    setDistanceSortOrder,
+  } = useDistanceFilter(hotelFilterStore);
   const { ratingFilter, setRatingFilter, handleRatingFilterChange } =
     useRatingFilter(hotelFilterStore);
   const { starFilter, setStarFilter, handleStarFilterChange } =
     useStarFilter(hotelFilterStore);
   useHotelGapFilter(hotelFilterStore);
-
   const { priceFilter, setPriceFilter } = usePriceFilter(hotelFilterStore);
 
   const resetFilter = () => {
+    // todo add event_handler_to_reset_filter
     setPriceFilter(defaultFilter.priceFilter);
     setRatingFilter(defaultFilter.ratingFilter);
     setStarFilter(defaultFilter.starFilter);
@@ -60,7 +67,7 @@ const useFilterBar = hotels => {
 
   useEffect(() => {
     setFilterHotels(hotels);
-    onFilterHotel();
+    // onFilterHotel();
   }, [hotels.length]);
 
   useEffect(() => {
@@ -75,10 +82,14 @@ const useFilterBar = hotels => {
     starFilter,
     currentPage,
     pagination,
+    distanceFilter,
+    distanceSortOrder,
     setPriceFilter,
     setCurrentPage,
     handleRatingFilterChange,
     handleStarFilterChange,
+    setDistanceFilter,
+    setDistanceSortOrder,
     resetFilter,
   };
 };

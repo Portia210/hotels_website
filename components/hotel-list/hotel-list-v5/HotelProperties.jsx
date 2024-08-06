@@ -155,7 +155,11 @@ const HotelProperties = ({ hotels }) => {
       <HotelInfoToast
         id="matches"
         hotel={selectedHotel}
-        price={convertCurrency(selectedHotel?.travelorPrice, currency)}
+        price={convertCurrency(
+          selectedHotel?.travelorPrice,
+          currency,
+          selectedHotel?.travelorCurrency,
+        )}
       />
     </>
   );

@@ -5,6 +5,8 @@ export const defaultFilter = {
   priceFilter: PriceFilter.HTL,
   ratingFilter: 6,
   starFilter: 0,
+  distanceSortOrder: '',
+  distanceFilter: 20000,
   pagination: {
     page: 1,
     limit: hotelPerPage,
@@ -19,4 +21,6 @@ export const FILTER_TYPE = {
   STARS: "STARS",
   PRICE_ORDER: "PRICE_ORDER",
   PRICE_GAP: "PRICE_GAP",
+  DISTANCE: "DISTANCE",
+  DISTANCE_ORDER: "DISTANCE_ORDER",
 };

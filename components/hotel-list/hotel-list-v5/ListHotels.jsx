@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import HotelNameFilter from './HotelNameFilter';
 import HotelTabs from './HotelTabs';
 import ResultHeader from './ResultHeader';
-import DistanceFilter from './DistanceFilter';
+import DistanceFilter from '../common/DistanceFilter';
 
 export default function ListHotels() {
   const { t } = useTrans();
@@ -31,6 +31,10 @@ export default function ListHotels() {
     handleRatingFilterChange,
     starFilter,
     handleStarFilterChange,
+    distanceFilter,
+    distanceSortOrder,
+    setDistanceFilter,
+    setDistanceSortOrder,
     resetFilter,
   } = useFilterBar(hotels);
 
@@ -123,7 +127,12 @@ export default function ListHotels() {
           </button>
         </div>
         <div className={`col-12 col-md-8 col-lg-6`}>
-          <DistanceFilter />
+          <DistanceFilter
+            distanceFilter={distanceFilter}
+            distanceSortOrder={distanceSortOrder}
+            setDistanceFilter={setDistanceFilter}
+            setDistanceSortOrder={setDistanceSortOrder}
+          />
         </div>
         {/* End col-auto */}
         <HotelTabs />

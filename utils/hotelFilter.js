@@ -1,6 +1,8 @@
 import { PriceFilter } from '@/constants/searchFilter';
 
 const filterHotelByPrice = (filterType = PriceFilter.HTL, hotels) => {
+  console.log('filterType', filterType);
+  console.log('hotels', hotels);
   let results = [];
   if (filterType === PriceFilter.HTL) {
     results = hotels.sort((a, b) => b.travelorPrice - a.travelorPrice);
@@ -27,27 +29,59 @@ const filterHotelByStar = (hotels, starFilter) => {
   return results;
 };
 
-const filterHotel = (condition, hotels) => {
+const filterHotel = (condition, hotels, ignoresKeys = []) => {
   let results = hotels;
-  if (condition.ratingFilter) {
-    results = filterHotelByRating(results, condition.ratingFilter);
+  console.log('results 1 -->', results);
+  
+  const filters = {
+    ratingFilter: filterHotelByRating,
+    starFilter: filterHotelByStar,
+    priceFilter: results => {
+      console.log('results -->', results);
+      return filterHotelByPrice(condition.priceFilter, results);
+    },
+    priceGapFilter: filterByBiggestPriceGap,
+    distanceFilter: (results, filter) =>
+      filterAndSortHotels(results, filter, condition.distanceSortOrder),
+    distanceSortOrder: (results, filter) =>
+      filterAndSortHotels(results, condition.distanceFilter, filter),
+  };
+
+  for (const key in filters) {
+    if (condition[key]) {
+      results = filters[key](results, condition[key]);
+      ignoresKeys.push(key);
+    }
   }
-  if (condition.starFilter) {
-    results = filterHotelByStar(results, condition.starFilter);
-  }
-  if (condition.priceFilter) {
-    results = filterHotelByPrice(condition.priceFilter, results);
-  }
-  if (condition.priceGapFilter) {
-    results = filterByBiggestPriceGap(results);
-  }
+  console.log('results 2 -->', results);
+
   return results;
 };
 
-export {
-    filterByBiggestPriceGap, filterHotel,
-    filterHotelByPrice,
-    filterHotelByRating,
-    filterHotelByStar
+const filterAndSortHotels = (hotels, distance, sortOrder) => {
+  if (!distance) return [];
+  let filteredDistanceHotels = hotels.filter(hotel => {
+    const hotelDistance = hotel?.travelorDistance ?? 0;
+    return hotelDistance * 1000 <= distance;
+  });
+
+  if (sortOrder === 'asc') {
+    filteredDistanceHotels.sort(
+      (a, b) => a.travelorDistance - b.travelorDistance,
+    );
+  } else if (sortOrder === 'desc') {
+    filteredDistanceHotels.sort(
+      (a, b) => b.travelorDistance - a.travelorDistance,
+    );
+  }
+  return filteredDistanceHotels;
 };
 
+export {
+  filterAndSortHotels,
+  filterByBiggestPriceGap,
+  filterHotel,
+  filterHotelByPrice,
+  filterHotelByRating,
+  filterHotelByStar,
+};

@@ -1,62 +1,41 @@
 import { EVENT_TYPES } from '@/constants/events';
+import { defaultFilter } from '@/hooks/hotelFilters';
 import useTrans from '@/hooks/useTrans';
-import useHotelFilterStore from '@/store/useHotelFilterStore';
 import useSearchStore from '@/store/useSearchStore';
 import eventEmitter from '@/utils/eventEmitter';
-import debounce from 'lodash/debounce';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-export default function DistanceFilter() {
+export default function DistanceFilter({
+  distanceFilter,
+  distanceSortOrder,
+  setDistanceFilter,
+  setDistanceSortOrder,
+}) {
   const { t, isReverse } = useTrans();
   const { isReady } = useSearchStore();
-  const {
-    hotels: originHotels,
-    filterHotels,
-    setFilterHotels,
-  } = useHotelFilterStore();
-
-  const [distance, setDistance] = useState(5000);
-  const [sortOrder, setSortOrder] = useState('');
 
   const handleDistanceChange = event => {
-    setDistance(event.target.value);
+    const value = event.target.value;
+    eventEmitter.emit(EVENT_TYPES.DISTANCE_FILTER_CHANGE, value);
+    setDistanceFilter(value);
   };
 
   const handleSortOrderChange = event => {
-    setSortOrder(event.target.value);
+    const value = event.target.value;
+    eventEmitter.emit(EVENT_TYPES.DISTANCE_SORT_FILTER_CHANGE, value);
+    setDistanceSortOrder(value);
   };
 
   const renderText = () => {
     return t('Hotel.distanceFromLocation');
   };
 
-  const filterAndSortHotels = debounce((distance, sortOrder) => {
-    if (!distance) return;
-    let filteredDistanceHotels = filterHotels.filter(hotel => {
-      const hotelDistance = hotel?.travelorDistance ?? 0;
-      return hotelDistance * 1000 <= distance;
-    });
-
-    if (sortOrder === 'asc') {
-      filteredDistanceHotels.sort(
-        (a, b) => a.travelorDistance - b.travelorDistance,
-      );
-    } else if (sortOrder === 'desc') {
-      filteredDistanceHotels.sort(
-        (a, b) => b.travelorDistance - a.travelorDistance,
-      );
-    }
-    setFilterHotels(filteredDistanceHotels);
-  }, 300);
-
-  const handleMouseUp = () => {
-    filterAndSortHotels(distance, sortOrder);
-  };
+  const handleMouseUp = () => {};
 
   const subscribe = () => {
     const token = eventEmitter.addListener(EVENT_TYPES.RESET_FILTER, () => {
-      setDistance(5000);
-      setSortOrder('');
+      setDistanceFilter(defaultFilter.distanceFilter);
+      setDistanceSortOrder('');
     });
     return token;
   };
@@ -65,10 +44,6 @@ export default function DistanceFilter() {
     const token = subscribe();
     return () => token.remove();
   }, []);
-
-  useEffect(() => {
-    handleMouseUp();
-  }, [sortOrder]);
 
   return (
     <div>
@@ -79,16 +54,16 @@ export default function DistanceFilter() {
             className="form-label"
             dir={`${isReverse && 'rtl'}`}
           >
-            {renderText()} {distance} m
+            {renderText()} {distanceFilter} m
           </label>
           <input
             type="range"
             className="form-range"
             id="distanceRange"
             min="0"
-            max="10000"
+            max={defaultFilter.distanceFilter}
             step="1"
-            value={distance}
+            value={distanceFilter}
             disabled={!isReady}
             onChange={handleDistanceChange}
             onMouseUp={handleMouseUp}
@@ -105,7 +80,7 @@ export default function DistanceFilter() {
           <select
             id="sortOrder"
             className="form-select"
-            value={sortOrder}
+            value={distanceSortOrder}
             disabled={!isReady}
             onChange={handleSortOrderChange}
             onBlur={handleMouseUp}
