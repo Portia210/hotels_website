@@ -29,18 +29,15 @@ const filterHotelByStar = (hotels, starFilter) => {
   return results;
 };
 
-const filterHotel = (condition, hotels, ignoresKeys = []) => {
+const filterHotelV2 = (condition, hotels, ignoresKeys = []) => {
   let results = hotels;
-  console.log('results 1 -->', results);
-  
   const filters = {
     ratingFilter: filterHotelByRating,
     starFilter: filterHotelByStar,
     priceFilter: results => {
-      console.log('results -->', results);
       return filterHotelByPrice(condition.priceFilter, results);
     },
-    priceGapFilter: filterByBiggestPriceGap,
+    priceGapFilter: results => filterByBiggestPriceGap(results),
     distanceFilter: (results, filter) =>
       filterAndSortHotels(results, filter, condition.distanceSortOrder),
     distanceSortOrder: (results, filter) =>
@@ -53,8 +50,6 @@ const filterHotel = (condition, hotels, ignoresKeys = []) => {
       ignoresKeys.push(key);
     }
   }
-  console.log('results 2 -->', results);
-
   return results;
 };
 
@@ -80,7 +75,7 @@ const filterAndSortHotels = (hotels, distance, sortOrder) => {
 export {
   filterAndSortHotels,
   filterByBiggestPriceGap,
-  filterHotel,
+  filterHotelV2,
   filterHotelByPrice,
   filterHotelByRating,
   filterHotelByStar,
