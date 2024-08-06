@@ -29,6 +29,7 @@
     "fbemitter": "^3.0.0",
     "flat": "^6.0.1",
     "google-map-react": "^2.2.1",
+    "haversine-distance": "^1.2.3",
     "he": "link:dayjs/locale/he",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",

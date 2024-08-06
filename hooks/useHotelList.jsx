@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from 'react';
 const useHotelList = () => {
   const router = useRouter();
   const { getToken } = useAuth();
-  const { searchInput, isExpired, setIsExpired } = useSearchStore();
+  const { searchInput, isExpired, setIsExpired, setIsReady } = useSearchStore();
   const isSearchFormVaild = SearchInputSchema.safeParse(searchInput);
   const [loading, setLoading] = useState(true);
   const [hotels, setHotels] = useState([]);
@@ -56,6 +56,7 @@ const useHotelList = () => {
       do {
         if (response.status === 'FINISHED') {
           response = await fetchHotel(sessionId, token);
+          setIsReady(true);
           break;
         }
         await sleep(2000);

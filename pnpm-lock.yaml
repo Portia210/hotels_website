@@ -69,6 +69,9 @@ dependencies:
   google-map-react:
     specifier: ^2.2.1
     version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
+  haversine-distance:
+    specifier: ^1.2.3
+    version: 1.2.3
   he:
     specifier: link:dayjs/locale/he
     version: link:dayjs/locale/he
@@ -1814,6 +1817,10 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+    dev: false
+
+  /haversine-distance@1.2.3:
+    resolution: {integrity: sha512-cRKtuukt+/fVprlLueX30mytMNtiQ4tff93FDW9yrBx3BYrq6gujiw1+hEaaxssKlOZTm8R3BPtMbNM+n0+bqQ==}
     dev: false
 
   /he@1.1.1:

@@ -5,6 +5,8 @@ import { create } from "zustand";
 const useSearchStore = create((set) => ({
   isExpired: false,
   setIsExpired: (isExpired) => set(() => ({ isExpired })),
+  isReady: false,
+  setIsReady: (isReady) => set(() => ({ isReady })),
   locationInput: "",
   setLocationInput: (locationInput) => set(() => ({ locationInput })),
   searchInput: {},

@@ -1,4 +1,6 @@
+import { EVENT_TYPES } from '@/constants/events';
 import useHotelFilterStore from '@/store/useHotelFilterStore';
+import eventEmitter from '@/utils/eventEmitter';
 import { useEffect } from 'react';
 import { defaultFilter } from './hotelFilters';
 import useHotelGapFilter from './hotelFilters/useHotelGapFilter';
@@ -38,7 +40,8 @@ const useFilterBar = hotels => {
 
   const { ratingFilter, setRatingFilter, handleRatingFilterChange } =
     useRatingFilter(hotelFilterStore);
-  const { starFilter, setStarFilter, handleStarFilterChange } = useStarFilter(hotelFilterStore);
+  const { starFilter, setStarFilter, handleStarFilterChange } =
+    useStarFilter(hotelFilterStore);
   useHotelGapFilter(hotelFilterStore);
 
   const { priceFilter, setPriceFilter } = usePriceFilter(hotelFilterStore);
@@ -52,6 +55,7 @@ const useFilterBar = hotels => {
     setGapActive(false);
     setPagination(defaultFilter.pagination);
     setCurrentPage(1);
+    eventEmitter.emit(EVENT_TYPES.RESET_FILTER);
   };
 
   useEffect(() => {

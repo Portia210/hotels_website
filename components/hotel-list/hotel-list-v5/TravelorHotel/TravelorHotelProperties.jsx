@@ -8,6 +8,7 @@ import { useState } from 'react';
 import HotelInfoToast from '../../common/HotelInfoToast';
 import HotelStars from '../../common/HotelStars';
 import useTrans from '@/hooks/useTrans';
+import { renderText, toTravelorWithoutSession } from '@/utils/hotelRender';
 
 const TravelorHotelProperties = ({ hotels }) => {
   const { t, isReverse } = useTrans();
@@ -18,26 +19,6 @@ const TravelorHotelProperties = ({ hotels }) => {
   const onShowHotelInfo = hotelData => {
     document.getElementById('liveToast_travelor')?.classList?.add('show');
     setSelectedHotel(hotelData);
-  };
-
-  const renderText = (key, value) => {
-    if (key === 'distance' && value) {
-      if (value.includes('from center')) {
-        value = value.replace('from center', t(`Hotel.${key}`));
-      } else if (value.includes('from map center')) {
-        value = value.replace('from map center', t(`Hotel.${key}`));
-      }
-    }
-    return value;
-  };
-
-  const toTravelorWithoutSession = url => {
-    if (!url) return;
-    const searchParams = new URLSearchParams(new URL(url).search);
-    searchParams.delete('session');
-    const updatedUrl = new URL(url);
-    updatedUrl.search = searchParams.toString();
-    window.open(updatedUrl.toString(), '_blank').focus();
   };
 
   return (
@@ -88,7 +69,7 @@ const TravelorHotelProperties = ({ hotels }) => {
                   isReverse ? 'text-end' : ''
                 }`}
               >
-                {renderText('distance', item?.distance)}
+                {renderText(t, 'distance', `${Number(item.travelorDistance).toFixed(2)} km from center`)}
               </p>
               <div className="d-flex items-center mt-20">
                 <div className="d-flex justify-between align-items-center w-100">
