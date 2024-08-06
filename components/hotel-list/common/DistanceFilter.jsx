@@ -7,9 +7,7 @@ import { useEffect } from 'react';
 
 export default function DistanceFilter({
   distanceFilter,
-  distanceSortOrder,
   setDistanceFilter,
-  setDistanceSortOrder,
 }) {
   const { t, isReverse } = useTrans();
   const { isReady } = useSearchStore();
@@ -18,12 +16,6 @@ export default function DistanceFilter({
     const value = event.target.value;
     eventEmitter.emit(EVENT_TYPES.DISTANCE_FILTER_CHANGE, value);
     setDistanceFilter(value);
-  };
-
-  const handleSortOrderChange = event => {
-    const value = event.target.value;
-    eventEmitter.emit(EVENT_TYPES.DISTANCE_SORT_FILTER_CHANGE, value);
-    setDistanceSortOrder(value);
   };
 
   const renderText = () => {
@@ -35,7 +27,6 @@ export default function DistanceFilter({
   const subscribe = () => {
     const token = eventEmitter.addListener(EVENT_TYPES.RESET_FILTER, () => {
       setDistanceFilter(defaultFilter.distanceFilter);
-      setDistanceSortOrder('');
     });
     return token;
   };
@@ -47,8 +38,6 @@ export default function DistanceFilter({
 
   return (
     <div>
-      <div className="row">
-        <div className="col-6">
           <label
             htmlFor="distanceRange"
             className="form-label"
@@ -68,31 +57,6 @@ export default function DistanceFilter({
             onChange={handleDistanceChange}
             onMouseUp={handleMouseUp}
           />
-        </div>
-        <div className="col-6">
-          <label
-            htmlFor="sortOrder"
-            className="form-label"
-            dir={`${isReverse && 'rtl'}`}
-          >
-            {t('Hotel.sortOrder')}
-          </label>
-          <select
-            id="sortOrder"
-            className="form-select"
-            value={distanceSortOrder}
-            disabled={!isReady}
-            onChange={handleSortOrderChange}
-            onBlur={handleMouseUp}
-          >
-            <option value="" disabled>
-              {t('Hotel.default')}
-            </option>
-            <option value="asc">{t('FilterBar.lth')}</option>
-            <option value="desc">{t('FilterBar.htl')}</option>
-          </select>
-        </div>
-      </div>
     </div>
   );
 }

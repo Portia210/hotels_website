@@ -1,7 +1,6 @@
 import { FILTER_TYPE, defaultFilter } from '@/hooks/hotelFilters';
 import {
-  filterAndSortHotels,
-  filterHotel,
+  filterHotelV2,
   filterHotelByPrice,
 } from '@/utils/hotelFilter';
 import { create } from 'zustand';
@@ -55,7 +54,7 @@ const handleFilterHotels = (state, type, condition) => {
         state.condition.priceFilter,
         state.hotels,
       );
-      filterHotels = filterHotel(state.condition, filteredHotelPriceOrder);
+      filterHotels = filterHotelV2(state.condition, filteredHotelPriceOrder);
       return filterHotels; // Return early as we already filtered by price order
     case FILTER_TYPE.DISTANCE_ORDER:
       state.condition.distanceSortOrder = condition;
@@ -68,7 +67,7 @@ const handleFilterHotels = (state, type, condition) => {
       return state.hotels; // Return original hotels if type is not recognized
   }
 
-  filterHotels = filterHotel(state.condition, state.hotels);
+  filterHotels = filterHotelV2(state.condition, state.hotels);
   return filterHotels;
 };
 export default useHotelFilterStore;

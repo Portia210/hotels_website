@@ -5,6 +5,7 @@ import useHotelPagination from './hotelFilters/useHotelPagination';
 import usePriceFilter from './hotelFilters/usePriceFilter';
 import useRatingFilter from './hotelFilters/useRatingFilter';
 import useStarFilter from './hotelFilters/useStarFilter';
+import useDistanceFilter from './hotelFilters/useDistanceFilter';
 
 // TODO: optimize this hook, reduce the number of re-renders
 const useTravelorFilterBar = hotels => {
@@ -35,6 +36,12 @@ const useTravelorFilterBar = hotels => {
     return [];
   };
 
+  const {
+    distanceFilter,
+    setDistanceFilter,
+    distanceSortOrder,
+    setDistanceSortOrder,
+  } = useDistanceFilter(travelorHotelFilterStore);
   const { ratingFilter, setRatingFilter, handleRatingFilterChange } =
     useRatingFilter(travelorHotelFilterStore);
   const { starFilter, setStarFilter, handleStarFilterChange } = useStarFilter(
@@ -73,6 +80,10 @@ const useTravelorFilterBar = hotels => {
     starFilter,
     currentPage,
     pagination,
+    distanceFilter,
+    distanceSortOrder,
+    setDistanceFilter,
+    setDistanceSortOrder,
     setPriceFilter,
     setCurrentPage,
     handleRatingFilterChange,

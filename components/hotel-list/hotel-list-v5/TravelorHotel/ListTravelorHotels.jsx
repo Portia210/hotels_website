@@ -11,6 +11,7 @@ import HotelNameFilter from '../HotelNameFilter';
 import HotelTabs from '../HotelTabs';
 import ResultHeader from '../ResultHeader';
 import TravelorHotelProperties from './TravelorHotelProperties';
+import DistanceFilter from '../../common/DistanceFilter';
 
 export default function ListTravelorHotels() {
   const { t, isReverse } = useTrans();
@@ -31,6 +32,10 @@ export default function ListTravelorHotels() {
     handleRatingFilterChange,
     starFilter,
     handleStarFilterChange,
+    distanceFilter,
+    distanceSortOrder,
+    setDistanceFilter,
+    setDistanceSortOrder,
     resetFilter,
   } = useTravelorFilterBar(hotels);
 
@@ -67,14 +72,14 @@ export default function ListTravelorHotels() {
     <>
       {/* Top SearchBanner */}
       <div className="row y-gap-20 items-center">
-        <div className="col-auto">
+        <div className="col-12">
           <div className="row x-gap-20 y-gap-10 items-center">
             <div className="col-auto">
               <div className="text-18 fw-500">{t('FilterBar.filter')}</div>
             </div>
             {/* End .col-auto */}
 
-            <div className="col-auto">
+            <div className="col-10">
               <div className="row x-gap-15 y-gap-15">
                 <div className="col-auto d-flex align-items-center">
                   <button
@@ -93,6 +98,8 @@ export default function ListTravelorHotels() {
                   setRatingFilter={handleRatingFilterChange}
                   starFilter={starFilter}
                   setStarFilter={handleStarFilterChange}
+                  distanceSortOrder={distanceSortOrder}
+                  setDistanceSortOrder={setDistanceSortOrder}
                 />
               </div>
             </div>
@@ -110,6 +117,12 @@ export default function ListTravelorHotels() {
           />
         </div>
 
+        <div className={`col-12 col-md-6 col-lg-4`}>
+          <DistanceFilter
+            distanceFilter={distanceFilter}
+            setDistanceFilter={setDistanceFilter}
+          />
+        </div>
         <HotelTabs />
 
         <div className="row y-gap-30 sm:pr-0">

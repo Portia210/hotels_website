@@ -1,12 +1,14 @@
-export const renderText = (t, key, value) => {
-  if (key === 'distance' && value) {
-    if (value.includes('from center')) {
-      value = value.replace('from center', t(`Hotel.${key}`));
-    } else if (value.includes('from map center')) {
-      value = value.replace('from map center', t(`Hotel.${key}`));
+export const renderText = (t, location) => {
+  if (location) {
+    if (location.includes('from center')) {
+      location = location.replace('from center', t(`Hotel.distance`));
+    } else if (location.includes('from map center')) {
+      location = location.replace('from map center', t(`Hotel.distance`));
+    }else if (location.includes('from')) {
+      location = location.replace('from', t(`Hotel.distance`));
     }
   }
-  return value;
+  return location;
 };
 
 export const toTravelorWithoutSession = url => {

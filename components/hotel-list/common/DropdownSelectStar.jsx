@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { PriceFilter } from "@/constants/searchFilter";
-import RatingFilter from "./RatingFilter";
-import useTransStore from "@/store/useTransStore";
+import { PriceFilter } from '@/constants/searchFilter';
+import RatingFilter from './RatingFilter';
+import useTransStore from '@/store/useTransStore';
+import DistanceFilterSelect from './DistanceFilterSelect';
 
 const DropdownSelectStar = ({
   priceFilter,
@@ -11,8 +12,10 @@ const DropdownSelectStar = ({
   setRatingFilter,
   starFilter,
   setStarFilter,
+  distanceSortOrder,
+  setDistanceSortOrder,
 }) => {
-  const messages = useTransStore((state) => state.messages);
+  const messages = useTransStore(state => state.messages);
   const filterTrans = messages?.FilterBar;
   const dropdowns = [
     {
@@ -23,7 +26,7 @@ const DropdownSelectStar = ({
     },
   ];
 
-  const renderText = (key) => {
+  const renderText = key => {
     if (key === PriceFilter.HTL) return filterTrans?.htl;
     return filterTrans?.lth;
   };
@@ -53,7 +56,7 @@ const DropdownSelectStar = ({
                   <div key={index}>
                     <button
                       className={`${
-                        item === dropdown.value ? "text-blue-1 " : ""
+                        item === dropdown.value ? 'text-blue-1 ' : ''
                       }d-block js-dropdown-link`}
                       onClick={() => dropdown.onChange(item)}
                     >
@@ -68,7 +71,10 @@ const DropdownSelectStar = ({
           {/* End dropdown */}
         </div>
       ))}
-
+      <DistanceFilterSelect 
+        distanceSortOrder={distanceSortOrder}
+        setDistanceSortOrder={setDistanceSortOrder}
+      />
       <RatingFilter
         ratingFilter={ratingFilter}
         setRatingFilter={setRatingFilter}
