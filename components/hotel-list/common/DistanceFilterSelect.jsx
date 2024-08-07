@@ -1,5 +1,4 @@
 import { EVENT_TYPES } from '@/constants/events';
-import { defaultFilter } from '@/hooks/hotelFilters';
 import useTrans from '@/hooks/useTrans';
 import useSearchStore from '@/store/useSearchStore';
 import eventEmitter from '@/utils/eventEmitter';
@@ -43,14 +42,10 @@ export default function DistanceFilterSelect({
         onBlur={handleMouseUp}
       >
         <option value="" disabled>
-          {t('Hotel.sortOrder')}
+          {t('Hotel.sortOrderDefault')}
         </option>
-        <option value="asc">
-          {t('Hotel.sortOrder') + ` ` + t('FilterBar.lth')}
-        </option>
-        <option value="desc">
-          {t('Hotel.sortOrder') + ` ` + t('FilterBar.htl')}
-        </option>
+        <option value="asc">{t('Hotel.sortOrderLth')}</option>
+        <option value="desc">{t('Hotel.sortOrderHtl')}</option>
       </select>
     </div>
   );
