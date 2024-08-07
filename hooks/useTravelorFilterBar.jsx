@@ -6,6 +6,8 @@ import usePriceFilter from './hotelFilters/usePriceFilter';
 import useRatingFilter from './hotelFilters/useRatingFilter';
 import useStarFilter from './hotelFilters/useStarFilter';
 import useDistanceFilter from './hotelFilters/useDistanceFilter';
+import eventEmitter from '@/utils/eventEmitter';
+import { EVENT_TYPES } from '@/constants/events';
 
 // TODO: optimize this hook, reduce the number of re-renders
 const useTravelorFilterBar = hotels => {
@@ -16,6 +18,7 @@ const useTravelorFilterBar = hotels => {
     setFilterHotels,
     onFilterHotel,
     setHotels,
+    resetCondition,
   } = travelorHotelFilterStore;
 
   const {
@@ -47,12 +50,13 @@ const useTravelorFilterBar = hotels => {
   const { starFilter, setStarFilter, handleStarFilterChange } = useStarFilter(
     travelorHotelFilterStore,
   );
-  
+
   const { priceFilter, setPriceFilter } = usePriceFilter(
     travelorHotelFilterStore,
   );
 
   const resetFilter = () => {
+    resetCondition();
     setPriceFilter(defaultFilter.priceFilter);
     setRatingFilter(defaultFilter.ratingFilter);
     setStarFilter(defaultFilter.starFilter);
@@ -61,6 +65,7 @@ const useTravelorFilterBar = hotels => {
     setGapActive(false);
     setPagination(defaultFilter.pagination);
     setCurrentPage(1);
+    eventEmitter.emit(EVENT_TYPES.RESET_FILTER);
   };
 
   useEffect(() => {

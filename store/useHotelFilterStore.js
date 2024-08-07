@@ -1,8 +1,5 @@
 import { FILTER_TYPE, defaultFilter } from '@/hooks/hotelFilters';
-import {
-  filterHotelV2,
-  filterHotelByPrice,
-} from '@/utils/hotelFilter';
+import { filterHotelV2 } from '@/utils/hotelFilter';
 import { create } from 'zustand';
 
 const useHotelFilterStore = create((set, get) => ({
@@ -32,6 +29,14 @@ const useHotelFilterStore = create((set, get) => ({
       };
       return { filterHotels, condition: state.condition };
     }),
+  resetCondition: () => {
+    set(state => {
+      state.condition = {
+        ...defaultFilter,
+      };
+      return state;
+    });
+  },
 }));
 
 const handleFilterHotels = (state, type, condition) => {
@@ -47,18 +52,15 @@ const handleFilterHotels = (state, type, condition) => {
     case FILTER_TYPE.PRICE_ORDER:
       state.condition.priceFilter = condition;
       state.condition.priceGapFilter = false;
+      state.gapActive = false;
       break;
     case FILTER_TYPE.PRICE_GAP:
       state.condition.priceGapFilter = condition;
-      const filteredHotelPriceOrder = filterHotelByPrice(
-        state.condition.priceFilter,
-        state.hotels,
-      );
-      filterHotels = filterHotelV2(state.condition, filteredHotelPriceOrder);
-      return filterHotels; // Return early as we already filtered by price order
+      break;
     case FILTER_TYPE.DISTANCE_ORDER:
       state.condition.distanceSortOrder = condition;
       state.condition.priceGapFilter = false;
+      state.gapActive = false;
       break;
     case FILTER_TYPE.DISTANCE:
       state.condition.distanceFilter = condition;

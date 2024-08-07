@@ -1,8 +1,6 @@
 import { PriceFilter } from '@/constants/searchFilter';
 
 const filterHotelByPrice = (filterType = PriceFilter.HTL, hotels) => {
-  console.log('filterType', filterType);
-  console.log('hotels', hotels);
   let results = [];
   if (filterType === PriceFilter.HTL) {
     results = hotels.sort((a, b) => b.travelorPrice - a.travelorPrice);

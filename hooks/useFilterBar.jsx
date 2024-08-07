@@ -17,7 +17,7 @@ const useFilterBar = hotels => {
     setGapActive,
     filterHotels,
     setFilterHotels,
-    onFilterHotel,
+    resetCondition,
     setHotels,
   } = hotelFilterStore;
 
@@ -54,6 +54,7 @@ const useFilterBar = hotels => {
 
   const resetFilter = () => {
     // todo add event_handler_to_reset_filter
+    resetCondition();
     setPriceFilter(defaultFilter.priceFilter);
     setRatingFilter(defaultFilter.ratingFilter);
     setStarFilter(defaultFilter.starFilter);
