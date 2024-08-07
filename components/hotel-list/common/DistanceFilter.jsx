@@ -18,10 +18,6 @@ export default function DistanceFilter({
     setDistanceFilter(value);
   };
 
-  const renderText = () => {
-    return t('Hotel.distanceFromLocation');
-  };
-
   const handleMouseUp = () => {};
 
   const subscribe = () => {
@@ -43,7 +39,7 @@ export default function DistanceFilter({
             className="form-label"
             dir={`${isReverse && 'rtl'}`}
           >
-            {renderText()} {distanceFilter} m
+            {t('Hotel.distanceFromLocation')} {distanceFilter} {t('Hotel.distanceSymbol')}
           </label>
           <input
             type="range"

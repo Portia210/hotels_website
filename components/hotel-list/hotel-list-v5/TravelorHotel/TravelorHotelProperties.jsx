@@ -58,20 +58,20 @@ const TravelorHotelProperties = ({ hotels }) => {
             </div>
             <div className="hotelsCard__content mt-10">
               <h4
-                className={`hotelsCard__title text-dark-1 text-18 lh-16 fw-500 ${
+                className={`text-dark-1 text-18 lh-12 fw-500 ${
                   isReverse ? 'text-end' : ''
                 }`}
               >
                 <span>{item?.title}</span>
               </h4>
               <p
-                className={`text-light-1 lh-14 text-14 mt-5 text-truncate`}
+                className={`text-light-1 lh-12 text-14 mt-5 text-truncate`}
                 dir={`${isReverse && 'rtl'}`}
               >
                 {Number(item.travelorDistance).toFixed(2)}
                 {renderText(
                   t,
-                  ` km from ${
+                  `from ${
                     item?.travelorSearchQuery?.query_text ?? 'center'
                   }`,
                 )}
@@ -89,7 +89,7 @@ const TravelorHotelProperties = ({ hotels }) => {
                         isReverse ? 'mr-10' : 'ml-10'
                       }`}
                     >
-                      {item?.rate}
+                      {item?.rate ?? <i className="bi bi-hand-thumbs-up"></i>}
                     </span>
                   </div>
                   <div className="flex-center">
