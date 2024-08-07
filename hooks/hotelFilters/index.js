@@ -6,7 +6,7 @@ export const defaultFilter = {
   ratingFilter: 6,
   starFilter: 0,
   distanceSortOrder: '',
-  distanceFilter: 20000,
+  distanceFilter: 10000,
   pagination: {
     page: 1,
     limit: hotelPerPage,

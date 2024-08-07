@@ -116,7 +116,7 @@ export default function HotelInfoToast({ id, hotel, price }) {
                 isReverse ? 'mr-10' : 'ml-10'
               }`}
             >
-              {hotel?.rate}
+              {hotel?.rate ?? <i className="bi bi-hand-thumbs-up"></i>}
             </span>
           </div>
           <HotelStars stars={hotel?.stars} />

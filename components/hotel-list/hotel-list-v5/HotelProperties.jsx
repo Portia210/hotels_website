@@ -71,7 +71,7 @@ const HotelProperties = ({ hotels }) => {
                 {Number(item.travelorDistance).toFixed(2)}
                 {renderText(
                   t,
-                  `from ${item?.travelorSearchQuery?.query_text ?? 'center'}`,
+                  ` from${item?.travelorSearchQuery?.query_text ?? 'center'}`,
                 )}
               </p>
               <div className="d-flex items-center mt-20">
